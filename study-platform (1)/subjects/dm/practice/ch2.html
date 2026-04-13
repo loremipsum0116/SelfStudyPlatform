@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script type="module" src="../../../shared/auth-guard.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.2 명제 논리 · 문제풀이</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script defer src="../../../shared/katex-boot.js"></script>
+<script defer src="../../../shared/grader.js"></script>
+<script defer src="../../../shared/practice.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../shared/styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html">← 허브</a>
+    <div class="crumbs"><span>Ch.2</span><span class="sep">/</span><span class="now">문제풀이</span></div>
+    <a href="../concepts/ch2.html">← 개념 정리</a>
+  </div>
+
+  <header class="masthead">
+    <div class="kicker"><span>Discrete Mathematics · Chapter 02</span><span>Practice</span></div>
+    <h1 class="title" id="quiz-title">Ch.2 명제 논리 · <em>문제풀이</em></h1>
+    <p class="deck">객관식·단답형은 즉시 채점되고, 증명형 문제는 Google Gemini가 답안을 검토해 정답 여부와 보완할 점을 알려줍니다.</p>
+  </header>
+
+  <!-- Score bar -->
+  <div class="quiz-header">
+    <div>
+      <div class="meta">Progress</div>
+      <div class="score" id="score-display">— / — <small>맞춤</small></div>
+    </div>
+    <div>
+      <div class="meta">AI 채점</div>
+      <div id="api-status" class="api-status err">API KEY · 미등록</div>
+    </div>
+    <div>
+      <button class="btn-reset" onclick="toggleApiSetup()" style="padding:10px 16px">API 키 관리</button>
+    </div>
+  </div>
+
+  <!-- API key setup panel -->
+  <div class="api-setup" id="api-setup" style="display:none">
+    <h4>Google Gemini API 키 등록</h4>
+    <p>증명형 문제는 Google Gemini 2.5 Flash (thinking 모드)로 채점됩니다. Google AI Studio (<a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--accent)">aistudio.google.com/apikey</a>)에서 무료로 API 키를 발급받을 수 있습니다. 무료 티어만으로도 하루 수백 건의 채점이 가능합니다. API 키는 <strong>이 브라우저에만</strong> 저장되며, 서버로 전송되지 않습니다.</p>
+    <p style="color:var(--warn)">⚠️ 공용 컴퓨터에서는 사용을 권장하지 않습니다.</p>
+    <input type="password" id="api-key-input" placeholder="AIzaSy...">
+    <div class="row">
+      <button onclick="handleSaveApiKey()">저장</button>
+      <button class="secondary" onclick="handleClearApiKey()">저장된 키 삭제</button>
+      <button class="secondary" onclick="toggleApiSetup()">닫기</button>
+    </div>
+  </div>
+
+  <!-- Questions -->
+  <div id="questions-container">
+    <div class="note"><span class="lbl">Loading</span>문제를 불러오는 중...</div>
+  </div>
+
+  <footer class="page-footer">
+    <span>Ch.2 · 문제풀이</span>
+    <span><a href="../concepts/ch2.html" style="color:var(--accent);text-decoration:none">개념 정리로 돌아가기 →</a></span>
+  </footer>
+</div>
+
+<script>
+  window.addEventListener("DOMContentLoaded", () => initPractice("dm","ch2","practice"));
+</script>
+<!-- Load Firebase + Firestore helpers (required for remote progress saving) -->
+<script type="module" src="../../../shared/db.js"></script>
+</body>
+</html>

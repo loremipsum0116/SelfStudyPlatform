@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script type="module" src="../../../shared/auth-guard.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.2 명제 논리 · 개념 정리</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script defer src="../../../shared/katex-boot.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../shared/styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html">← 허브</a>
+    <div class="crumbs"><span>Ch.2</span><span class="sep">/</span><span class="now">개념 정리</span></div>
+    <a href="../practice/ch2.html">문제풀이 →</a>
+  </div>
+
+  <header class="masthead">
+    <div class="kicker"><span>Discrete Mathematics · Chapter 02</span><span>Concepts</span></div>
+    <h1 class="title">명제 논리와<br><em>추론</em></h1>
+    <p class="deck">참과 거짓으로 엮이는 논리의 문법 — 연산자, 진리표, 동치 법칙, 한정자, 그리고 추론 규칙까지.</p>
+  </header>
+
+  <div class="classifier">
+    <h2>이 문서의 분류 기준</h2>
+    <ul>
+      <li><b>§1</b> 명제 — 문제 01~02</li>
+      <li><b>§2</b> 논리 연산자와 합성명제 — 문제 03~08</li>
+      <li><b>§3</b> 조건명제의 변형 (역·이·대우) — 문제 09~10</li>
+      <li><b>§4</b> 논리적 동치 법칙 — 문제 11~14</li>
+      <li><b>§5</b> 명제함수와 한정자 — 문제 15~17</li>
+      <li><b>§6</b> 논리적 추론 — 문제 23~25</li>
+    </ul>
+  </div>
+
+  <nav class="toc">
+    <span class="lbl">Contents</span>
+    <ol>
+      <li><a href="#s1"><span class="n">§1</span>명제</a></li>
+      <li><a href="#s2"><span class="n">§2</span>논리 연산자</a></li>
+      <li><a href="#s3"><span class="n">§3</span>역·이·대우</a></li>
+      <li><a href="#s4"><span class="n">§4</span>논리적 동치 법칙</a></li>
+      <li><a href="#s5"><span class="n">§5</span>명제함수와 한정자</a></li>
+      <li><a href="#s6"><span class="n">§6</span>논리적 추론</a></li>
+    </ol>
+  </nav>
+
+  <!-- §1 -->
+  <section id="s1">
+    <div class="sec-head">
+      <span class="sec-num">§ 01</span>
+      <h2 class="sec-title">명제</h2>
+      <span class="scope">문제 01~02</span>
+    </div>
+    <p><strong>개념.</strong> 참(True, $T$)이거나 거짓(False, $F$)인지를 명확하게 판별할 수 있는 평서문이나 수식을 <strong>명제(Proposition)</strong>라고 합니다.</p>
+
+    <h4>명제가 <em>아닌</em> 것의 예</h4>
+    <ul>
+      <li>"지금 날씨가 어떻습니까?" — 의문문이므로 참/거짓 판별 불가.</li>
+      <li>"책이 두껍고 무겁다." — 주관적 기준이므로 명제가 아님.</li>
+      <li>"$x^2 - 3 = 6$" — $x$의 값에 따라 참/거짓이 달라지므로 이 자체로는 명제가 아닙니다. 단, $x = 3$이라고 주어지면 명제가 됩니다.</li>
+    </ul>
+  </section>
+
+  <!-- §2 -->
+  <section id="s2">
+    <div class="sec-head">
+      <span class="sec-num">§ 02</span>
+      <h2 class="sec-title">논리 연산자와 합성명제</h2>
+      <span class="scope">문제 03~08</span>
+    </div>
+    <p>여러 개의 단순한 명제($p, q, r, \ldots$)를 논리 기호로 연결하여 만든 명제를 <strong>합성명제</strong>라고 합니다.</p>
+
+    <h3>2.1 기본 논리 연산자</h3>
+
+    <h4>부정 (NOT) — $\neg p$ 또는 $\sim p$</h4>
+    <p>$p$가 참이면 $\neg p$는 거짓, $p$가 거짓이면 $\neg p$는 참. ("~가 아니다")</p>
+
+    <h4>논리곱 (AND) — $p \land q$</h4>
+    <p>$p$와 $q$가 <strong>모두 참</strong>일 때만 참. 하나라도 거짓이면 거짓. ("~이고", "~이며")</p>
+
+    <h4>논리합 (OR) — $p \lor q$</h4>
+    <p>$p$와 $q$ 중 <strong>하나라도 참</strong>이면 참. 둘 다 거짓일 때만 거짓. ("~이거나", "~또는")</p>
+
+    <h4>배타적 논리합 (XOR) — $p \oplus q$</h4>
+    <p>$p$와 $q$의 진릿값이 <strong>서로 다를 때만 참</strong>. 같으면 거짓.</p>
+
+    <table class="truth">
+      <tr><th>$p$</th><th>$q$</th><th>$\neg p$</th><th>$p \land q$</th><th>$p \lor q$</th><th>$p \oplus q$</th></tr>
+      <tr><td class="tv-T">T</td><td class="tv-T">T</td><td class="tv-F">F</td><td class="tv-T">T</td><td class="tv-T">T</td><td class="tv-F">F</td></tr>
+      <tr><td class="tv-T">T</td><td class="tv-F">F</td><td class="tv-F">F</td><td class="tv-F">F</td><td class="tv-T">T</td><td class="tv-T">T</td></tr>
+      <tr><td class="tv-F">F</td><td class="tv-T">T</td><td class="tv-T">T</td><td class="tv-F">F</td><td class="tv-T">T</td><td class="tv-T">T</td></tr>
+      <tr><td class="tv-F">F</td><td class="tv-F">F</td><td class="tv-T">T</td><td class="tv-F">F</td><td class="tv-F">F</td><td class="tv-F">F</td></tr>
+    </table>
+
+    <h3>2.2 조건명제와 쌍방조건명제 <span style="font-size:13px;color:var(--accent)">(매우 중요!)</span></h3>
+
+    <h4>조건명제 (Implication) — $p \to q$</h4>
+    <p>"$p$이면 $q$이다"로 읽으며, $p$를 <strong>가정(전제)</strong>, $q$를 <strong>결론</strong>이라고 합니다.</p>
+    <div class="note warn">
+      <span class="lbl">★ 핵심 규칙</span>
+      <strong>가정이 참($T$)인데 결론이 거짓($F$)일 때만</strong> 전체가 거짓($F$)입니다. 가정이 거짓($F$)인 경우는 결론의 참/거짓에 상관없이 무조건 전체 명제가 참($T$)이 됩니다 — 이를 <em>공허한 참 (vacuous truth)</em>이라고 합니다.
+    </div>
+
+    <h4>쌍방조건명제 (Biconditional) — $p \leftrightarrow q$</h4>
+    <p>"$p$일 때, 그리고 <em>그때에만</em> $q$이다"로 읽습니다. $p$와 $q$의 진릿값이 <strong>서로 같을 때 참</strong>이 됩니다.</p>
+
+    <table class="truth">
+      <tr><th>$p$</th><th>$q$</th><th>$p \to q$</th><th>$p \leftrightarrow q$</th></tr>
+      <tr><td class="tv-T">T</td><td class="tv-T">T</td><td class="tv-T">T</td><td class="tv-T">T</td></tr>
+      <tr><td class="tv-T">T</td><td class="tv-F">F</td><td class="tv-F">F</td><td class="tv-F">F</td></tr>
+      <tr><td class="tv-F">F</td><td class="tv-T">T</td><td class="tv-T">T</td><td class="tv-F">F</td></tr>
+      <tr><td class="tv-F">F</td><td class="tv-F">F</td><td class="tv-T">T</td><td class="tv-T">T</td></tr>
+    </table>
+  </section>
+
+  <!-- §3 -->
+  <section id="s3">
+    <div class="sec-head">
+      <span class="sec-num">§ 03</span>
+      <h2 class="sec-title">조건명제의 변형 (역·이·대우)</h2>
+      <span class="scope">문제 09~10</span>
+    </div>
+
+    <table>
+      <tr><th>명칭</th><th>기호</th><th>설명</th></tr>
+      <tr><td>원 명제</td><td class="mono">$p \to q$</td><td>"$p$이면 $q$이다"</td></tr>
+      <tr><td>역 (Converse)</td><td class="mono">$q \to p$</td><td>가정과 결론의 자리를 바꿈</td></tr>
+      <tr><td>이 (Inverse)</td><td class="mono">$\neg p \to \neg q$</td><td>각각을 부정함</td></tr>
+      <tr><td>대우 (Contrapositive)</td><td class="mono">$\neg q \to \neg p$</td><td>자리를 바꾸고 각각 부정함</td></tr>
+    </table>
+
+    <div class="note">
+      <span class="lbl">★ 가장 중요한 성질</span>
+      원 명제와 그 명제의 <strong>대우</strong>는 항상 진릿값이 같습니다. 즉, $p \to q \equiv \neg q \to \neg p$.
+    </div>
+  </section>
+
+  <!-- §4 -->
+  <section id="s4">
+    <div class="sec-head">
+      <span class="sec-num">§ 04</span>
+      <h2 class="sec-title">논리적 동치 법칙</h2>
+      <span class="scope">문제 11~14</span>
+    </div>
+    <p>두 합성명제가 항상 같은 진릿값을 가질 때 두 명제는 <strong>동치($\equiv$)</strong>라고 합니다.</p>
+
+    <h4>교환법칙</h4>
+    $$p \lor q \equiv q \lor p \qquad p \land q \equiv q \land p$$
+
+    <h4>결합법칙</h4>
+    $$(p \lor q) \lor r \equiv p \lor (q \lor r) \qquad (p \land q) \land r \equiv p \land (q \land r)$$
+
+    <h4>분배법칙</h4>
+    $$p \lor (q \land r) \equiv (p \lor q) \land (p \lor r)$$
+    $$p \land (q \lor r) \equiv (p \land q) \lor (p \land r)$$
+
+    <h4>★ 드 모르간의 법칙 <small style="font-family:var(--mono);color:var(--ink-soft);font-weight:400">De Morgan's Laws</small></h4>
+    $$\neg(p \lor q) \equiv \neg p \land \neg q \qquad \text{(OR를 부정하면 AND)}$$
+    $$\neg(p \land q) \equiv \neg p \lor \neg q \qquad \text{(AND를 부정하면 OR)}$$
+
+    <h4>★ 조건 법칙 <small style="font-family:var(--mono);color:var(--ink-soft);font-weight:400">Implication Law</small></h4>
+    $$p \to q \equiv \neg p \lor q$$
+    <div class="note">
+      <span class="lbl">암기</span>
+      매우 자주 쓰이므로 반드시 외워야 합니다. 조건명제가 나오면 일단 이 식으로 풀어 쓰는 게 출발점입니다.
+    </div>
+
+    <h4>흡수법칙</h4>
+    $$p \lor (p \land q) \equiv p \qquad p \land (p \lor q) \equiv p$$
+  </section>
+
+  <!-- §5 -->
+  <section id="s5">
+    <div class="sec-head">
+      <span class="sec-num">§ 05</span>
+      <h2 class="sec-title">명제함수와 한정자</h2>
+      <span class="scope">문제 15~17</span>
+    </div>
+
+    <dl class="terms">
+      <div>
+        <dt>명제함수 <small>Predicate · $P(x)$</small></dt>
+        <dd>변수 $x$에 값이 대입되어야만 참/거짓이 결정되는 문장. 예: $P(x) : x > 3$.</dd>
+      </div>
+      <div>
+        <dt>논의영역 <small>Domain</small></dt>
+        <dd>변수 $x$가 가질 수 있는 값들의 집합 (예: 자연수, 실수 등).</dd>
+      </div>
+    </dl>
+
+    <h3>한정자 (Quantifier)의 종류</h3>
+
+    <h4>전칭 한정자 ($\forall$) — "모든 ~에 대하여"</h4>
+    <p>$\forall x\, P(x)$ : 논의영역에 있는 <strong>모든</strong> $x$에 대해 $P(x)$가 참이어야만 전체가 참($T$)입니다. 단 하나라도 거짓으로 만드는 예시(<em>반례</em>)가 있다면 거짓($F$)입니다.</p>
+
+    <h4>존재 한정자 ($\exists$) — "어떤 ~가 존재한다"</h4>
+    <p>$\exists x\, P(x)$ : 논의영역에 있는 $x$ 중 <strong>적어도 하나</strong>만 $P(x)$를 참으로 만들어도 전체가 참($T$)입니다.</p>
+
+    <div class="example">
+      <div class="example-body">
+        논의영역이 자연수 $\mathbb{N}$이고 $P(x) : x > 3$일 때,<br>
+        $\forall x\, P(x)$ 는 <span class="tv-F">F</span> — 반례: $x = 1$<br>
+        $\exists x\, P(x)$ 는 <span class="tv-T">T</span> — 예시: $x = 4$
+      </div>
+    </div>
+  </section>
+
+  <!-- §6 -->
+  <section id="s6">
+    <div class="sec-head">
+      <span class="sec-num">§ 06</span>
+      <h2 class="sec-title">논리적 추론</h2>
+      <span class="scope">문제 23~25</span>
+    </div>
+    <p>주어진 <strong>전제(Premises)</strong>들이 모두 참이라고 가정했을 때, <strong>결론(Conclusion)</strong>이 반드시 참이 되는지를 증명하는 과정입니다. 결론이 반드시 참이 되면 <strong>유효추론 (Valid)</strong>, 그렇지 않으면 <strong>허위추론 (Invalid)</strong>입니다.</p>
+
+    <h3>자주 쓰이는 추론 규칙</h3>
+
+    <div class="rule">
+      <div class="name">전건 긍정법 <small>Modus Ponens</small></div>
+      <div class="body">
+        <div class="prem">전제 1: &nbsp; $p \to q$</div>
+        <div class="prem">전제 2: &nbsp; $p$</div>
+        <div class="concl">$\therefore\ q$</div>
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="name">후건 부정법 <small>Modus Tollens — 대우 명제 활용</small></div>
+      <div class="body">
+        <div class="prem">전제 1: &nbsp; $p \to q$</div>
+        <div class="prem">전제 2: &nbsp; $\neg q$</div>
+        <div class="concl">$\therefore\ \neg p$</div>
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="name">가언 삼단논법 <small>Hypothetical Syllogism — 꼬리물기</small></div>
+      <div class="body">
+        <div class="prem">전제 1: &nbsp; $p \to q$</div>
+        <div class="prem">전제 2: &nbsp; $q \to r$</div>
+        <div class="concl">$\therefore\ p \to r$</div>
+      </div>
+    </div>
+
+    <div class="rule">
+      <div class="name">선언 삼단논법 <small>Disjunctive Syllogism</small></div>
+      <div class="body">
+        <div class="prem">전제 1: &nbsp; $p \lor q$</div>
+        <div class="prem">전제 2: &nbsp; $\neg p$</div>
+        <div class="concl">$\therefore\ q$</div>
+      </div>
+    </div>
+
+    <h3>문장형 추론 문제 푸는 요령</h3>
+    <ol class="steps">
+      <li>문장 속의 핵심 단위들을 $p, q, r$ 등의 기호로 치환합니다.</li>
+      <li>"A하면 B하다"는 $A \to B$로 씁니다.</li>
+      <li>주어진 모든 전제를 나열하고, 추론 규칙들을 <strong>연쇄적으로</strong> 적용하여 결론 $\therefore$ 을 도출합니다.</li>
+    </ol>
+  </section>
+
+  <footer class="page-footer">
+    <span>Ch.2 · 명제 논리</span>
+    <span><a href="ch2-practice.html" style="color:var(--accent);text-decoration:none">문제풀이로 가기 →</a></span>
+  </footer>
+</div>
+</body>
+</html>

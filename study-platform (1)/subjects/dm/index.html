@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script type="module" src="../../shared/auth-guard.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이산수학 · 과목 허브</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/styles.css" />
+  <style>
+    .subject-hub { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    .topbar { margin-bottom: 24px; }
+    .chapter-list { list-style:none; padding:0; }
+    .chapter-item {
+      border:1px solid #ddd; border-radius:8px; padding:16px; margin:12px 0;
+      display:flex; justify-content:space-between; align-items:center; gap:16px;
+      background:#fff;
+    }
+    .chapter-item .title { font-weight:600; }
+    .chapter-item .recent { font-size:13px; color:#666; margin-top:4px; }
+    .chapter-item .links a { margin-left:12px; text-decoration:none; color:var(--accent); font-weight:600; }
+    .mock-section {
+      border:2px dashed var(--accent); border-radius:10px; padding:20px;
+      margin:32px 0; background:#fff;
+    }
+    .mock-section h2 { margin-top:0; }
+    .mock-recent { font-size:14px; margin-top:12px; }
+    .mock-recent .row { display:flex; justify-content:space-between; padding:3px 0; }
+    .mock-section .start { display:inline-block; margin-top:12px; padding:10px 16px; background:var(--accent); color:#fff; border-radius:4px; text-decoration:none; }
+    .mock-section .history { display:inline-block; margin-left:8px; padding:10px 16px; border:1px solid var(--accent); color:var(--accent); border-radius:4px; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="subject-hub">
+      <div class="topbar">
+        <a href="../../dashboard.html">← 대시보드</a>
+      </div>
+      <h1>이산수학 · 과목 허브</h1>
+      <p>챕터를 선택하여 개념을 복습하거나 문제를 풀어보세요.</p>
+      <ul class="chapter-list" id="chapter-list"></ul>
+      <div class="mock-section">
+        <h2>모의고사</h2>
+        <p>실제 시험과 유사한 환경에서 실력을 점검해보세요. 기록은 최근 5회까지 보관됩니다.</p>
+        <div class="mock-recent" id="mock-recent"><span style="color:#999">최근 기록 로딩 중...</span></div>
+        <a href="mock/index.html" class="start">모의고사 시작</a>
+        <a href="mock/history.html" class="history">최근 기록 전체보기</a>
+      </div>
+    </div>
+  </div>
+  <script type="module">
+    import { onAuthChange } from '../../shared/auth.js';
+    import '../../shared/db.js';
+
+    const SUBJECT_ID = 'dm';
+    const CHAPTERS = [
+      { id: 'ch1', title: 'Ch.1 수의 체계' },
+      { id: 'ch2', title: 'Ch.2 공식과 점화식' },
+      { id: 'ch3', title: 'Ch.3 조합론과 그래프' }
+    ];
+
+    function fmtDate(iso) {
+      if (!iso) return '—';
+      try { return new Date(iso).toLocaleString(); } catch { return iso; }
+    }
+    function fmtDuration(ms) {
+      if (!ms) return '—';
+      const s = Math.floor(ms / 1000);
+      const mm = String(Math.floor(s / 60)).padStart(2, '0');
+      const ss = String(s % 60).padStart(2, '0');
+      return `${mm}:${ss}`;
+    }
+    function fmtPct(score) { return Math.round((score || 0) * 100) + '%'; }
+
+    async function render() {
+      const listEl = document.getElementById('chapter-list');
+      listEl.innerHTML = '';
+      const summaries = window.__db
+        ? await window.__db.getPracticeSessionsForSubject(SUBJECT_ID, CHAPTERS.map(c => c.id))
+        : {};
+      for (const ch of CHAPTERS) {
+        const s = summaries[ch.id];
+        const recent = (s && s.lastDate)
+          ? `최근 풀이: ${fmtDate(s.lastDate)} · ${fmtPct(s.score)} (${s.correct || 0}/${s.total || 0})`
+          : '최근 기록 없음';
+        const li = document.createElement('li');
+        li.className = 'chapter-item';
+        li.innerHTML = `
+          <div>
+            <div class="title">${ch.title}</div>
+            <div class="recent">${recent}</div>
+          </div>
+          <div class="links">
+            <a href="concepts/${ch.id}.html">개념</a>
+            <a href="practice/${ch.id}.html">문제</a>
+          </div>
+        `;
+        listEl.appendChild(li);
+      }
+
+      // 최근 모의고사
+      const mockEl = document.getElementById('mock-recent');
+      if (window.__db) {
+        const mocks = await window.__db.getMockRecent(SUBJECT_ID);
+        if (mocks && mocks.length) {
+          mockEl.innerHTML = '<strong>최근 모의고사</strong>' + mocks.map(m =>
+            `<div class="row"><span>${fmtDate(m.date)}</span><span>${fmtPct(m.score)} (${m.correct}/${m.total}) · ${fmtDuration(m.durationMs)}</span></div>`
+          ).join('');
+        } else {
+          mockEl.innerHTML = '<span style="color:#999">아직 모의고사 기록이 없습니다.</span>';
+        }
+      } else {
+        mockEl.innerHTML = '<span style="color:#999">DB 모듈 로드 실패</span>';
+      }
+    }
+
+    onAuthChange(() => { render(); });
+  </script>
+</body>
+</html>
