@@ -134,6 +134,141 @@ function gradeTruthTable(question, userAnswer) {
   };
 }
 
+
+function stripCodeFences(text) {
+  return String(text || "")
+    .replace(/^```json\s*/i, "")
+    .replace(/^```\s*/i, "")
+    .replace(/```\s*$/i, "")
+    .trim();
+}
+
+function escapeControlCharsInsideJsonStrings(text) {
+  const input = String(text || "");
+  let out = "";
+  let inString = false;
+  let escaping = false;
+
+  for (let i = 0; i < input.length; i += 1) {
+    const ch = input[i];
+
+    if (inString) {
+      if (escaping) {
+        out += ch;
+        escaping = false;
+        continue;
+      }
+      if (ch === "\\") {
+        out += ch;
+        escaping = true;
+        continue;
+      }
+      if (ch === '"') {
+        out += ch;
+        inString = false;
+        continue;
+      }
+      if (ch === "\n") {
+        out += "\\n";
+        continue;
+      }
+      if (ch === "\r") {
+        out += "\\r";
+        continue;
+      }
+      if (ch === "\t") {
+        out += "\\t";
+        continue;
+      }
+      out += ch;
+      continue;
+    }
+
+    out += ch;
+    if (ch === '"') inString = true;
+  }
+
+  return out;
+}
+
+function extractLikelyJsonObject(text) {
+  const input = String(text || "");
+  const start = input.indexOf("{");
+  const end = input.lastIndexOf("}");
+  if (start === -1 || end === -1 || end <= start) return "";
+  return input.slice(start, end + 1).trim();
+}
+
+function parseGeminiJsonResponse(text) {
+  const cleaned = stripCodeFences(text);
+  const candidates = [];
+  const jsonLike = extractLikelyJsonObject(cleaned);
+
+  if (cleaned) candidates.push(cleaned);
+  if (jsonLike && jsonLike !== cleaned) candidates.push(jsonLike);
+
+  const seen = new Set();
+  let lastError = null;
+
+  for (const candidate of candidates) {
+    if (!candidate || seen.has(candidate)) continue;
+    seen.add(candidate);
+
+    try {
+      return JSON.parse(candidate);
+    } catch (err) {
+      lastError = err;
+    }
+
+    const repaired = escapeControlCharsInsideJsonStrings(candidate)
+      .replace(/,\s*([}\]])/g, "$1")
+      .trim();
+
+    if (!repaired || seen.has(repaired)) continue;
+    seen.add(repaired);
+
+    try {
+      return JSON.parse(repaired);
+    } catch (err) {
+      lastError = err;
+    }
+  }
+
+  const preview = cleaned.slice(0, 300);
+  const detail = lastError && lastError.message ? lastError.message : "알 수 없는 파싱 오류";
+  throw new Error(`AI 응답을 파싱할 수 없습니다: ${detail} / 응답 일부: ${preview}`);
+}
+
+function buildShortAnswerFallbackResult(question, userAnswer) {
+  const local = gradeShortAnswer(question, userAnswer);
+  const correctAnswer = question.answer || "";
+  const explanation = question.explanation || "";
+
+  if (local.verdict === "correct") {
+    return {
+      verdict: "correct",
+      score: 1,
+      strengths: "제출한 답이 기준 정답과 일치합니다.",
+      issues: "",
+      suggestions: "",
+      correctAnswer,
+      modelAnswer: question.modelAnswer || "",
+      explanation
+    };
+  }
+
+  return {
+    verdict: "incorrect",
+    score: 0,
+    strengths: "",
+    issues: "제출한 답이 기준 정답과 일치하지 않습니다.",
+    suggestions: "시그마의 적용 범위, 항의 개수, 계산 과정을 다시 확인해 보세요.",
+    correctAnswer,
+    modelAnswer: question.modelAnswer || "",
+    explanation
+  };
+}
+
 // ---------- Proof grading via Gemini API ----------
 async function gradeProofWithGemini(question, userAnswer) {
   const apiKey = getApiKey();
@@ -240,14 +375,7 @@ ${userAnswer}
     throw new Error("Gemini가 빈 응답을 반환했습니다. 답안이 너무 짧거나 모델이 차단한 것일 수 있습니다.");
   }
 
-  const cleaned = text.replace(/^```json\s*/i, "").replace(/^```\s*/, "").replace(/```\s*$/, "").trim();
-
-  let parsed;
-  try {
-    parsed = JSON.parse(cleaned);
-  } catch (e) {
-    throw new Error("AI 응답을 파싱할 수 없습니다: " + text.slice(0, 200));
-  }
+  const parsed = parseGeminiJsonResponse(text);
 
   return {
     verdict: parsed.verdict || "incorrect",
@@ -349,8 +477,13 @@ ${userAnswer}
     throw new Error("Gemini가 빈 응답을 반환했습니다.");
   }
 
-  const cleaned = text.replace(/^```json\s*/i, "").replace(/^```\s*/, "").replace(/```\s*$/, "").trim();
-  const parsed = JSON.parse(cleaned);
+  let parsed;
+  try {
+    parsed = parseGeminiJsonResponse(text);
+  } catch (err) {
+    console.warn("Gemini JSON 파싱 실패, 로컬 단답형 채점으로 대체합니다.", err);
+    return buildShortAnswerFallbackResult(question, userAnswer);
+  }
 
   return {
     verdict: parsed.verdict || "incorrect",
