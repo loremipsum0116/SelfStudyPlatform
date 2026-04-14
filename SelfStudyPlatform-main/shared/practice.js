@@ -471,6 +471,7 @@ function attachQuestionListeners(container) {
       if (idx >= 0 && idx < cells.length - 1) cells[idx + 1].focus();
     });
   });
+  if (typeof initMathAnswerAssists === "function") initMathAnswerAssists(container);
 }
 
 /**
@@ -601,6 +602,7 @@ function handleReset(e) {
   } else {
     const ta = document.querySelector(`textarea[data-qid="${qid}"]`);
     if (ta) ta.value = "";
+    if (typeof resetMathPreview === "function") resetMathPreview(qid);
   }
 
   const fb = document.getElementById("fb-" + qid);
@@ -777,6 +779,7 @@ async function startMock() {
       throwOnError: false
     });
   }
+  if (typeof initMathAnswerAssists === "function") initMathAnswerAssists(container);
 
   mockTimerInt = setInterval(updateMockTimer, 500);
   updateMockTimer();
@@ -827,13 +830,16 @@ async function submitMock() {
 
   // 일괄 채점
   const details = [];
+  const wrongNotes = [];
   let correctCount = 0;
-  for (const q of currentQuestions) {
+  for (const [index, q] of currentQuestions.entries()) {
     const userAnswer = getUserAnswer(q);
     let result;
+    let systemGeneratedWrong = false;
     try {
       // 증명형이면서 API 키 없으면 자동으로 오답 처리(모의고사 중단 방지)
       if ((q.type === "proof" || q.type === "essay") && !getApiKey()) {
+        systemGeneratedWrong = true;
         result = { verdict: "incorrect", score: 0, explanation: "API 키 미등록으로 자동 오답 처리" };
       } else if (isBlankUserAnswer(q, userAnswer)) {
         result = { verdict: "incorrect", score: 0, explanation: "미응답" };
@@ -842,6 +848,7 @@ async function submitMock() {
       }
     } catch (err) {
       console.warn("문항 채점 실패:", q.id, err);
+      systemGeneratedWrong = true;
       result = { verdict: "incorrect", score: 0, explanation: "채점 오류: " + err.message };
     }
 
@@ -866,7 +873,39 @@ async function submitMock() {
     }
 
     if (result.verdict === "correct") correctCount++;
-    details.push({ questionId: q.id, verdict: result.verdict, score: result.score || 0 });
+    details.push({
+      questionId: q.id,
+      verdict: result.verdict,
+      score: result.score || 0,
+      chapterId: q.mockSourceChapterId || currentChapterId,
+      topicTitle: q.mockSourceTopicTitle || ''
+    });
+
+    if (result.verdict !== "correct") {
+      wrongNotes.push({
+        chapterId: q.mockSourceChapterId || currentChapterId,
+        questionId: q.id,
+        questionOrder: index + 1,
+        questionType: q.type,
+        questionText: q.text || '',
+        choices: Array.isArray(q.choices) ? q.choices : [],
+        answer: q.answer ?? null,
+        accepted: Array.isArray(q.accepted) ? q.accepted : [],
+        explanation: result.explanation || q.explanation || '',
+        hint: q.hint || '',
+        modelAnswer: result.modelAnswer || q.modelAnswer || '',
+        headers: Array.isArray(q.headers) ? q.headers : [],
+        data: Array.isArray(q.data) ? q.data : [],
+        answers: Array.isArray(q.answers) ? q.answers : [],
+        classificationChoices: Array.isArray(q.classificationChoices) ? q.classificationChoices : [],
+        classificationAnswer: typeof q.classificationAnswer === 'number' ? q.classificationAnswer : null,
+        userAnswer,
+        verdict: result.verdict,
+        mockSourceTopicKey: q.mockSourceTopicKey || '',
+        mockSourceTopicTitle: q.mockSourceTopicTitle || '',
+        systemGeneratedWrong
+      });
+    }
   }
 
   const total = currentQuestions.length;
@@ -879,7 +918,7 @@ async function submitMock() {
       await window.__db.saveMockRecord({
         subjectId: currentSubjectId,
         score, correct: correctCount, total,
-        durationMs, details,
+        durationMs, details, wrongNotes,
         chapterSelections: Array.isArray(window.__mockChapterSelections) ? window.__mockChapterSelections : [],
         generationSummary: Array.isArray(window.__mockGenerationSummary) ? window.__mockGenerationSummary : [],
         date: new Date().toISOString()
@@ -899,10 +938,12 @@ async function submitMock() {
     const pct = Math.round(score * 100);
     const mm = String(Math.floor(durationMs / 60000)).padStart(2, "0");
     const ss = String(Math.floor((durationMs % 60000) / 1000)).padStart(2, "0");
+    const wrongCount = wrongNotes.filter(item => !item.systemGeneratedWrong).length;
     summary.innerHTML = `<span class="lbl">결과</span>
       점수 <strong>${pct}%</strong> (${correctCount} / ${total}) ·
       소요시간 <strong>${mm}:${ss}</strong> ·
-      기록이 저장되었습니다. <a href="history.html" style="color:var(--accent); text-decoration:none">최근 기록 보기 →</a>`;
+      ${wrongCount > 0 ? `오답노트 ${wrongCount}문항 갱신 · ` : ''}
+      기록이 저장되었습니다. <a href="history.html" style="color:var(--accent); text-decoration:none">최근 기록 보기 →</a>${wrongCount > 0 ? ` · <a href="../wrong-notes/index.html" style="color:var(--accent); text-decoration:none">오답노트 보기 →</a>` : ''}`;
     header.parentNode.insertBefore(summary, header.nextSibling);
   }
 

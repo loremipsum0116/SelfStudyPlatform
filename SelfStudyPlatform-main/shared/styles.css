@@ -188,6 +188,31 @@ nav.toc .n{font-family:var(--mono);font-size:11px;color:var(--accent);margin-rig
 .answer-input{width:100%;min-height:120px;padding:14px 16px;border:1px solid var(--ink);background:var(--bg);font-family:var(--sans);font-size:14.5px;line-height:1.7;resize:vertical}
 .answer-input:focus{outline:none;border-color:var(--accent);background:var(--card)}
 .answer-input.proof{min-height:200px;font-family:var(--mono);font-size:13px}
+.math-preview-box{margin-top:10px;padding:12px 14px;border:1px dashed rgba(26,26,26,.28);background:rgba(255,255,255,.72)}
+.math-preview-empty{color:var(--ink-soft);font-size:13px;line-height:1.6}
+.math-preview-plain{margin:0;white-space:pre-wrap;word-break:break-word;font-family:var(--mono);font-size:13px;color:var(--ink);background:transparent}
+.math-preview-render{min-height:24px}
+.math-preview-box .katex-display{margin:.4em 0}
+
+/* symbol helper for proof/essay */
+.symbol-toolbox{display:flex;justify-content:flex-end;margin-bottom:8px;position:relative}
+.symbol-toggle,.symbol-close,.symbol-apply,.symbol-chip{border:1px solid var(--ink);background:var(--bg);color:var(--ink);font-family:var(--mono);cursor:pointer}
+.symbol-toggle{padding:7px 12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.symbol-toggle:hover,.symbol-close:hover,.symbol-apply:hover,.symbol-chip:hover{background:var(--accent-soft)}
+.symbol-panel{position:relative;width:min(100%,780px);margin-top:10px;padding:16px 18px;border:1px solid var(--ink);background:var(--card);box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.symbol-panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
+.symbol-panel-head strong{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.symbol-close{padding:6px 10px;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.symbol-help{margin:0 0 12px;color:var(--ink-soft);font-size:13px;line-height:1.6}
+.symbol-quick-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.symbol-chip{padding:6px 10px;font-size:14px;line-height:1}
+.symbol-builder-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.symbol-builder-card{padding:12px;border:1px solid rgba(26,26,26,.18);background:var(--bg)}
+.symbol-builder-title{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.symbol-builder-card label{display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--ink-soft);margin-bottom:9px}
+.symbol-builder-card input,.symbol-builder-card select{width:100%;padding:8px 10px;border:1px solid rgba(26,26,26,.28);background:#fff;color:var(--ink);font-family:var(--mono);font-size:12px}
+.symbol-builder-card input:focus,.symbol-builder-card select:focus{outline:none;border-color:var(--accent);background:var(--card)}
+.symbol-apply{width:100%;padding:9px 12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 
 /* action buttons */
 .q-actions{display:flex;gap:10px;margin-top:16px;align-items:center}
@@ -243,6 +268,9 @@ footer.page-footer{border-top:2px solid var(--ink);padding-top:20px;margin-top:4
   nav.toc ol{columns:1}
   .scope{display:none}
   .chap-grid{grid-template-columns:1fr}
+  .symbol-panel{padding:14px}
+  .symbol-builder-grid{grid-template-columns:1fr}
+  .symbol-toolbox{justify-content:stretch}
 }
 
 

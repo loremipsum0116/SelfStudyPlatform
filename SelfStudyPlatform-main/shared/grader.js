@@ -364,6 +364,329 @@ ${userAnswer}
   };
 }
 
+function renderMathSymbolToolbox(qid) {
+  const suffix = String(qid || '').replace(/[^a-zA-Z0-9_-]/g, '_');
+  const quickSymbols = [
+    ['π', 'π'], ['∞', '∞'], ['∅', '∅'], ['∈', '∈'], ['∉', '∉'],
+    ['⊂', '⊂'], ['⊆', '⊆'], ['∪', '∪'], ['∩', '∩'], ['¬', '¬'],
+    ['∧', '∧'], ['∨', '∨'], ['→', '→'], ['↔', '↔'], ['∀', '∀'],
+    ['∃', '∃'], ['≤', '≤'], ['≥', '≥'], ['≠', '≠'], ['×', '×'],
+    ['∴', '∴'], ['∵', '∵'], ['⇒', '⇒'], ['⇔', '⇔']
+  ];
+
+  const quickButtons = quickSymbols.map(([label, value]) => `
+    <button type="button" class="symbol-chip" onclick="quickInsertMathText('${suffix}', '${value}')">${label}</button>
+  `).join('');
+
+  return `
+    <div class="symbol-toolbox" data-qid="${suffix}">
+      <div class="symbol-toolbox-bar">
+        <button type="button" class="symbol-toggle" id="symbol-toggle-${suffix}" aria-expanded="false" onclick="toggleSymbolSelector('${suffix}')">기호</button>
+      </div>
+      <div class="symbol-panel" id="symbol-panel-${suffix}" hidden>
+        <div class="symbol-panel-head">
+          <strong>기호 셀렉터</strong>
+          <button type="button" class="symbol-close" onclick="toggleSymbolSelector('${suffix}', false)">닫기</button>
+        </div>
+        <p class="symbol-help">주관식·단답형 답안을 입력할 때 자주 쓰는 수식 기호를 쉽게 끼워 넣는 보조 도구입니다.</p>
+        <div class="symbol-quick-grid">${quickButtons}</div>
+        <div class="symbol-builder-grid">
+          <div class="symbol-builder-card">
+            <div class="symbol-builder-title">시그마 Σ</div>
+            <label>부호
+              <select id="sigma-sign-${suffix}">
+                <option value="">없음</option>
+                <option value="+">+</option>
+                <option value="-">-</option>
+              </select>
+            </label>
+            <label>인덱스
+              <input id="sigma-index-${suffix}" type="text" value="j" placeholder="j">
+            </label>
+            <label>시작값
+              <input id="sigma-start-${suffix}" type="text" placeholder="-2">
+            </label>
+            <label>종점
+              <input id="sigma-end-${suffix}" type="text" placeholder="3">
+            </label>
+            <label>일반항
+              <input id="sigma-term-${suffix}" type="text" placeholder="3^j">
+            </label>
+            <button type="button" class="symbol-apply" onclick="applyStructuredMathSymbol('${suffix}', 'sigma')">삽입</button>
+          </div>
+
+          <div class="symbol-builder-card">
+            <div class="symbol-builder-title">파이 Π</div>
+            <label>부호
+              <select id="prod-sign-${suffix}">
+                <option value="">없음</option>
+                <option value="+">+</option>
+                <option value="-">-</option>
+              </select>
+            </label>
+            <label>인덱스
+              <input id="prod-index-${suffix}" type="text" value="i" placeholder="i">
+            </label>
+            <label>시작값
+              <input id="prod-start-${suffix}" type="text" placeholder="1">
+            </label>
+            <label>종점
+              <input id="prod-end-${suffix}" type="text" placeholder="n">
+            </label>
+            <label>일반항
+              <input id="prod-term-${suffix}" type="text" placeholder="a_i">
+            </label>
+            <button type="button" class="symbol-apply" onclick="applyStructuredMathSymbol('${suffix}', 'product')">삽입</button>
+          </div>
+
+          <div class="symbol-builder-card">
+            <div class="symbol-builder-title">거듭제곱</div>
+            <label>부호
+              <select id="pow-sign-${suffix}">
+                <option value="">없음</option>
+                <option value="+">+</option>
+                <option value="-">-</option>
+              </select>
+            </label>
+            <label>밑
+              <input id="pow-base-${suffix}" type="text" placeholder="3">
+            </label>
+            <label>지수
+              <input id="pow-exp-${suffix}" type="text" placeholder="j">
+            </label>
+            <button type="button" class="symbol-apply" onclick="applyStructuredMathSymbol('${suffix}', 'power')">삽입</button>
+          </div>
+
+          <div class="symbol-builder-card">
+            <div class="symbol-builder-title">분수</div>
+            <label>부호
+              <select id="frac-sign-${suffix}">
+                <option value="">없음</option>
+                <option value="+">+</option>
+                <option value="-">-</option>
+              </select>
+            </label>
+            <label>분자
+              <input id="frac-num-${suffix}" type="text" placeholder="a+b">
+            </label>
+            <label>분모
+              <input id="frac-den-${suffix}" type="text" placeholder="n">
+            </label>
+            <button type="button" class="symbol-apply" onclick="applyStructuredMathSymbol('${suffix}', 'fraction')">삽입</button>
+          </div>
+
+          <div class="symbol-builder-card">
+            <div class="symbol-builder-title">근호</div>
+            <label>부호
+              <select id="root-sign-${suffix}">
+                <option value="">없음</option>
+                <option value="+">+</option>
+                <option value="-">-</option>
+              </select>
+            </label>
+            <label>차수(비우면 √)
+              <input id="root-degree-${suffix}" type="text" placeholder="3">
+            </label>
+            <label>내용
+              <input id="root-radicand-${suffix}" type="text" placeholder="x+1">
+            </label>
+            <button type="button" class="symbol-apply" onclick="applyStructuredMathSymbol('${suffix}', 'root')">삽입</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function findAnswerTextarea(qid) {
+  return document.querySelector(`textarea[data-qid="${qid}"]`) || document.querySelector(`textarea[data-qid="${String(qid || '').replace(/_/g, '-')}"]`);
+}
+
+function toggleSymbolSelector(qid, forceOpen) {
+  const panel = document.getElementById(`symbol-panel-${qid}`);
+  const toggle = document.getElementById(`symbol-toggle-${qid}`);
+  if (!panel) return;
+  const willOpen = typeof forceOpen === 'boolean' ? forceOpen : panel.hidden;
+  panel.hidden = !willOpen;
+  if (toggle) toggle.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  if (willOpen) {
+    const firstInput = panel.querySelector('input, select, button');
+    if (firstInput) firstInput.focus();
+  }
+}
+
+function insertTextAtCursor(textarea, text) {
+  if (!textarea) return;
+  const start = textarea.selectionStart ?? textarea.value.length;
+  const end = textarea.selectionEnd ?? textarea.value.length;
+  const before = textarea.value.slice(0, start);
+  const after = textarea.value.slice(end);
+  textarea.value = `${before}${text}${after}`;
+  const nextPos = start + text.length;
+  textarea.focus();
+  textarea.setSelectionRange(nextPos, nextPos);
+  textarea.dispatchEvent(new Event('input', { bubbles: true }));
+}
+
+function quickInsertMathText(qid, text) {
+  const textarea = findAnswerTextarea(qid);
+  if (!textarea) return;
+  insertTextAtCursor(textarea, text);
+}
+
+function getBuilderValue(id, fallback = '') {
+  const el = document.getElementById(id);
+  const value = el ? String(el.value || '').trim() : '';
+  return value || fallback;
+}
+
+function withLeadingSign(sign, expr) {
+  if (!expr) return '';
+  return `${sign || ''}${expr}`;
+}
+
+function applyStructuredMathSymbol(qid, kind) {
+  const textarea = findAnswerTextarea(qid);
+  if (!textarea) return;
+
+  let inserted = '';
+  if (kind === 'sigma') {
+    const sign = getBuilderValue(`sigma-sign-${qid}`);
+    const index = getBuilderValue(`sigma-index-${qid}`, 'j');
+    const start = getBuilderValue(`sigma-start-${qid}`, '1');
+    const end = getBuilderValue(`sigma-end-${qid}`, 'n');
+    const term = getBuilderValue(`sigma-term-${qid}`, `${index}`);
+    inserted = withLeadingSign(sign, `∑_{${index}=${start}}^{${end}} ${term}`);
+  } else if (kind === 'product') {
+    const sign = getBuilderValue(`prod-sign-${qid}`);
+    const index = getBuilderValue(`prod-index-${qid}`, 'i');
+    const start = getBuilderValue(`prod-start-${qid}`, '1');
+    const end = getBuilderValue(`prod-end-${qid}`, 'n');
+    const term = getBuilderValue(`prod-term-${qid}`, `${index}`);
+    inserted = withLeadingSign(sign, `∏_{${index}=${start}}^{${end}} ${term}`);
+  } else if (kind === 'power') {
+    const sign = getBuilderValue(`pow-sign-${qid}`);
+    const base = getBuilderValue(`pow-base-${qid}`, 'a');
+    const exp = getBuilderValue(`pow-exp-${qid}`, 'n');
+    inserted = withLeadingSign(sign, `${base}^${exp}`);
+  } else if (kind === 'fraction') {
+    const sign = getBuilderValue(`frac-sign-${qid}`);
+    const num = getBuilderValue(`frac-num-${qid}`, 'a');
+    const den = getBuilderValue(`frac-den-${qid}`, 'b');
+    inserted = withLeadingSign(sign, `(${num})/(${den})`);
+  } else if (kind === 'root') {
+    const sign = getBuilderValue(`root-sign-${qid}`);
+    const degree = getBuilderValue(`root-degree-${qid}`);
+    const radicand = getBuilderValue(`root-radicand-${qid}`, 'x');
+    inserted = withLeadingSign(sign, degree ? `${degree}√(${radicand})` : `√(${radicand})`);
+  }
+
+  if (!inserted) return;
+  insertTextAtCursor(textarea, inserted);
+}
+
+
+function findMathPreview(qid) {
+  return document.getElementById(`math-preview-${String(qid || '').replace(/[^a-zA-Z0-9_-]/g, '_')}`);
+}
+
+function looksMathy(text) {
+  if (!text) return false;
+  const trimmed = String(text).trim();
+  if (!trimmed) return false;
+  if (/\$\$?|\\\(|\\\[/.test(trimmed)) return true;
+  if (/[∑∏√π∞∅∈∉⊂⊆∪∩¬∧∨→↔∀∃≤≥≠×∴∵⇒⇔^_=]/.test(trimmed)) return true;
+  if (/^[0-9a-zA-Z+\-*/=(){}\[\],.\s/]+$/.test(trimmed)) return true;
+  return false;
+}
+
+function normalizeMathForKatex(text) {
+  let expr = String(text || '').trim();
+  if (!expr) return '';
+  if (/\$\$?|\\\(|\\\[/.test(expr)) return expr;
+  expr = expr
+    .replace(/∑/g, '\\sum ')
+    .replace(/∏/g, '\\prod ')
+    .replace(/π/g, '\\pi ')
+    .replace(/∞/g, '\\infty ')
+    .replace(/∅/g, '\\emptyset ')
+    .replace(/∈/g, '\\in ')
+    .replace(/∉/g, '\\notin ')
+    .replace(/⊂/g, '\\subset ')
+    .replace(/⊆/g, '\\subseteq ')
+    .replace(/∪/g, '\\cup ')
+    .replace(/∩/g, '\\cap ')
+    .replace(/¬/g, '\\neg ')
+    .replace(/∧/g, '\\land ')
+    .replace(/∨/g, '\\lor ')
+    .replace(/→/g, '\\to ')
+    .replace(/↔/g, '\\leftrightarrow ')
+    .replace(/∀/g, '\\forall ')
+    .replace(/∃/g, '\\exists ')
+    .replace(/≤/g, '\\le ')
+    .replace(/≥/g, '\\ge ')
+    .replace(/≠/g, '\\ne ')
+    .replace(/×/g, '\\times ')
+    .replace(/∴/g, '\\therefore ')
+    .replace(/∵/g, '\\because ')
+    .replace(/⇒/g, '\\Rightarrow ')
+    .replace(/⇔/g, '\\Leftrightarrow ');
+
+  expr = expr.replace(/(\d*)√\(([^()]+)\)/g, (m, degree, radicand) => degree ? `\\sqrt[${degree}]{${radicand}}` : `\\sqrt{${radicand}}`);
+
+  if (/^\(?[^()]+\)?\s*\/\s*\(?[^()]+\)?$/.test(expr)) {
+    const parts = expr.split('/');
+    if (parts.length === 2) {
+      const num = parts[0].trim().replace(/^\((.*)\)$/,'$1');
+      const den = parts[1].trim().replace(/^\((.*)\)$/,'$1');
+      expr = `\\frac{${num}}{${den}}`;
+    }
+  }
+
+  return `$$${expr}$$`;
+}
+
+function updateMathPreview(qid) {
+  const textarea = findAnswerTextarea(qid);
+  const preview = findMathPreview(qid);
+  if (!preview) return;
+  const raw = textarea ? String(textarea.value || '').trim() : '';
+  if (!raw) {
+    preview.innerHTML = '<div class="math-preview-empty">입력한 수식이 여기에서 미리보기로 표시됩니다.</div>';
+    return;
+  }
+  if (!looksMathy(raw)) {
+    preview.innerHTML = `<pre class="math-preview-plain">${escapeHtml(raw)}</pre>`;
+    return;
+  }
+  preview.innerHTML = `<div class="math-preview-render">${escapeHtml(normalizeMathForKatex(raw))}</div>`;
+  if (typeof renderMathInElement === 'function') {
+    renderMathInElement(preview, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false }
+      ],
+      throwOnError: false
+    });
+  }
+}
+
+function initMathAnswerAssists(container = document) {
+  const textareas = container.querySelectorAll('textarea[data-qid]');
+  textareas.forEach(textarea => {
+    const qid = textarea.dataset.qid;
+    if (!qid || textarea.dataset.mathAssistBound === 'true') return;
+    textarea.dataset.mathAssistBound = 'true';
+    textarea.addEventListener('input', () => updateMathPreview(qid));
+    updateMathPreview(qid);
+  });
+}
+
+function resetMathPreview(qid) {
+  const textarea = findAnswerTextarea(qid);
+  if (textarea) textarea.dispatchEvent(new Event('input', { bubbles: true }));
+  else updateMathPreview(qid);
+}
+
 // ---------- Question rendering ----------
 function renderQuestion(q, index) {
   const tagHtml = q.type === "proof"
@@ -384,9 +707,9 @@ function renderQuestion(q, index) {
         </label></li>`).join("") +
       `</ul>`;
   } else if (q.type === "short-answer") {
-    inputHtml = `<textarea class="answer-input" data-qid="${q.id}" placeholder="답을 입력하세요..."></textarea>`;
+    inputHtml = `${renderMathSymbolToolbox(q.id)}<textarea class="answer-input" data-qid="${q.id}" placeholder="답을 입력하세요... 수식은 $...$ 또는 $$...$$로 감쌀 수 있습니다."></textarea><div class="math-preview-box" id="math-preview-${String(q.id).replace(/[^a-zA-Z0-9_-]/g, '_')}"><div class="math-preview-empty">입력한 수식이 여기에서 미리보기로 표시됩니다.</div></div>`;
   } else if (q.type === "proof" || q.type === "essay") {
-    inputHtml = `<textarea class="answer-input proof" data-qid="${q.id}" placeholder="증명을 단계별로 서술하세요. 수식은 $...$ 또는 $$...$$로 감쌀 수 있습니다."></textarea>`;
+    inputHtml = `${renderMathSymbolToolbox(q.id)}<textarea class="answer-input proof" data-qid="${q.id}" placeholder="증명을 단계별로 서술하세요. 수식은 $...$ 또는 $$...$$로 감쌀 수 있습니다."></textarea><div class="math-preview-box" id="math-preview-${String(q.id).replace(/[^a-zA-Z0-9_-]/g, '_')}"><div class="math-preview-empty">입력한 수식이 여기에서 미리보기로 표시됩니다.</div></div>`;
   } else if (q.type === "truth-table") {
     const headers = Array.isArray(q.headers) ? q.headers : [];
     const rows = Array.isArray(q.data) ? q.data : [];

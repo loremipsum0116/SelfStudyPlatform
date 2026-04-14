@@ -29,6 +29,11 @@
     .mock-recent .row { display:flex; justify-content:space-between; padding:3px 0; }
     .mock-section .start { display:inline-block; margin-top:12px; padding:10px 16px; background:var(--accent); color:#fff; border-radius:4px; text-decoration:none; }
     .mock-section .history { display:inline-block; margin-left:8px; padding:10px 16px; border:1px solid var(--accent); color:var(--accent); border-radius:4px; text-decoration:none; }
+    .wrongnote-link { display:inline-flex; align-items:center; gap:10px; margin-left:8px; padding:10px 16px; border:1px solid #666; color:#444; border-radius:4px; text-decoration:none; background:#fff; }
+    .badge-pair { display:inline-flex; gap:6px; margin-left:6px; }
+    .mini-badge { min-width:22px; height:22px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#fff; }
+    .mini-badge.waiting { background:#7b7b7b; }
+    .mini-badge.due { background:#c62828; }
   </style>
 </head>
 <body>
@@ -42,10 +47,16 @@
       <ul class="chapter-list" id="chapter-list"></ul>
       <div class="mock-section">
         <h2>모의고사</h2>
-        <p>실제 시험과 유사한 환경에서 실력을 점검해보세요. 기록은 최근 5회까지 보관됩니다.</p>
+        <p>실제 시험과 유사한 환경에서 실력을 점검해보세요. 기록은 최근 5회까지 보관되며, 틀린 문제는 과목별 오답노트로 누적됩니다.</p>
         <div class="mock-recent" id="mock-recent"><span style="color:#999">최근 기록 로딩 중...</span></div>
         <a href="mock/index.html" class="start">모의고사 시작</a>
         <a href="mock/history.html" class="history">최근 기록 전체보기</a>
+        <a href="wrong-notes/index.html" class="wrongnote-link">오답노트
+          <span class="badge-pair">
+            <span class="mini-badge waiting" id="wrongnote-waiting">0</span>
+            <span class="mini-badge due" id="wrongnote-due">0</span>
+          </span>
+        </a>
       </div>
     </div>
   </div>
@@ -104,7 +115,12 @@
       // 최근 모의고사
       const mockEl = document.getElementById('mock-recent');
       if (window.__db) {
-        const mocks = await window.__db.getMockRecent(SUBJECT_ID);
+        const [mocks, wrongSummary] = await Promise.all([
+          window.__db.getMockRecent(SUBJECT_ID),
+          window.__db.getWrongNoteSummary(SUBJECT_ID)
+        ]);
+        document.getElementById('wrongnote-waiting').textContent = wrongSummary.waiting || 0;
+        document.getElementById('wrongnote-due').textContent = wrongSummary.due || 0;
         if (mocks && mocks.length) {
           mockEl.innerHTML = '<strong>최근 모의고사</strong>' + mocks.map(m =>
             `<div class="row"><span>${fmtDate(m.date)}</span><span>${fmtPct(m.score)} (${m.correct}/${m.total}) · ${fmtDuration(m.durationMs)}</span></div>`

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script type="module" src="../../../shared/auth-guard.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이산수학 · 오답노트</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+  <script defer src="../../../shared/katex-boot.js"></script>
+  <script defer src="../../../shared/grader.js"></script>
+  <script type="module" src="../../../shared/db.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../shared/styles.css" />
+  <style>
+    .wrong-wrap { max-width: 980px; margin: 40px auto; padding: 0 20px; }
+    .overview-card, .section-card { background:#fff; border:1px solid #ddd; border-radius:14px; padding:20px; margin:18px 0; }
+    .badge-row { display:flex; gap:10px; flex-wrap:wrap; margin:14px 0; }
+    .count-badge { display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:999px; font-family:var(--mono); font-size:12px; letter-spacing:.06em; }
+    .count-badge.waiting { background:#7b7b7b; color:#fff; }
+    .count-badge.due { background:#c62828; color:#fff; }
+    .count-badge.mastered { background:#1f6b45; color:#fff; }
+    .section-head { display:flex; justify-content:space-between; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:10px; }
+    .section-head h2 { margin:0; }
+    .tiny { font-size:13px; color:#666; }
+    .wrong-card { background:#fff; border:1px solid #ddd; border-radius:12px; padding:18px; margin:16px 0; }
+    .wrong-card.due { border-left:6px solid #c62828; }
+    .wrong-card.waiting { border-left:6px solid #7b7b7b; }
+    .wrong-card.mastered { border-left:6px solid #1f6b45; }
+    .wrong-meta { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:10px; }
+    .pill { display:inline-block; padding:4px 10px; border-radius:999px; font-size:12px; font-weight:600; }
+    .pill.due { background:#fdeaea; color:#c62828; }
+    .pill.waiting { background:#ededed; color:#555; }
+    .pill.mastered { background:#e5f3eb; color:#1f6b45; }
+    .wrong-card .question { margin:14px 0 0; }
+    .wrong-card .q-actions { display:none; }
+    .wrong-card .feedback { display:block; }
+    .info-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:10px; margin-top:12px; }
+    .info-item { background:#faf7f2; border:1px solid #e2dbcf; border-radius:10px; padding:10px 12px; }
+    .info-item .k { font-size:11px; text-transform:uppercase; letter-spacing:.12em; color:#666; display:block; margin-bottom:4px; }
+    .review-bar { display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:14px; }
+    .review-msg { font-size:14px; }
+    .empty { text-align:center; padding:50px 20px; color:#888; }
+    .api-compact { margin-top:14px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="wrong-wrap">
+      <div class="topbar">
+        <a href="../index.html">← 과목 허브</a>
+        <div class="crumbs"><span>이산수학</span><span class="sep">/</span><span class="now">오답노트</span></div>
+        <a href="../mock/index.html">모의고사로 →</a>
+      </div>
+
+      <header class="masthead">
+        <div class="kicker"><span>Discrete Mathematics</span><span>Wrong Notes</span></div>
+        <h1 class="title">이산수학 오답노트</h1>
+        <p class="deck">모의고사에서 틀린 문제를 과목별로 분리해 저장하고, 복습 시점이 되면 먼저 다시 풀 수 있도록 구성했습니다.</p>
+      </header>
+
+      <div class="overview-card">
+        <h2 style="margin-top:0">복습 현황</h2>
+        <p class="tiny">회색 배지는 아직 복습 시점이 오지 않은 문제 수, 빨간 배지는 지금 복습할 때가 된 문제 수입니다.</p>
+        <div class="badge-row" id="badge-row">
+          <span class="count-badge waiting">대기 0</span>
+          <span class="count-badge due">지금 복습 0</span>
+          <span class="count-badge mastered">숙달 0</span>
+        </div>
+        <div class="quiz-header api-compact">
+          <div>
+            <div class="meta">AI 채점</div>
+            <div id="api-status" class="api-status err">API KEY · 미등록</div>
+          </div>
+          <div>
+            <button class="btn-reset" onclick="toggleApiSetup()" style="padding:10px 16px">API 키 관리</button>
+          </div>
+        </div>
+        <div class="api-setup" id="api-setup" style="display:none">
+          <h4>Google Gemini API 키 등록</h4>
+          <p>증명형 오답 복습은 Gemini 2.5 Flash 채점을 사용합니다.</p>
+          <input type="password" id="api-key-input" placeholder="AIzaSy...">
+          <div class="row">
+            <button onclick="handleSaveApiKey()">저장</button>
+            <button class="secondary" onclick="handleClearApiKey()">저장된 키 삭제</button>
+            <button class="secondary" onclick="toggleApiSetup()">닫기</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-head">
+          <h2>지금 복습할 문제</h2>
+          <div class="tiny">nextReviewAt이 지난 문제만 위에 표시됩니다.</div>
+        </div>
+        <div id="due-list"><div class="note"><span class="lbl">Loading</span>오답노트를 불러오는 중...</div></div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-head">
+          <h2>대기 중인 문제</h2>
+          <div class="tiny">시점이 오면 자동으로 빨간 배지 영역으로 올라옵니다.</div>
+        </div>
+        <div id="waiting-list"></div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-head">
+          <h2>숙달 완료</h2>
+          <div class="tiny">복습 성공 3회 이상인 문제입니다.</div>
+        </div>
+        <div id="mastered-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SUBJECT_ID = 'dm';
+
+    function updateApiStatus() {
+      const el = document.getElementById('api-status');
+      if (!el) return;
+      const hasKey = !!getApiKey();
+      el.textContent = hasKey ? 'API KEY · 등록됨' : 'API KEY · 미등록';
+      el.className = 'api-status ' + (hasKey ? 'ok' : 'err');
+    }
+    function handleSaveApiKey() {
+      const input = document.getElementById('api-key-input');
+      const key = input.value.trim();
+      if (!key.startsWith('AIza')) {
+        alert("Google API 키는 보통 'AIza'로 시작합니다.");
+        return;
+      }
+      setApiKey(key);
+      input.value = '';
+      updateApiStatus();
+      document.getElementById('api-setup').style.display = 'none';
+      alert('API 키가 브라우저에 저장되었습니다.');
+    }
+    function handleClearApiKey() {
+      if (!confirm('저장된 API 키를 삭제하시겠습니까?')) return;
+      clearApiKey();
+      updateApiStatus();
+      alert('API 키가 삭제되었습니다.');
+    }
+    function toggleApiSetup() {
+      const el = document.getElementById('api-setup');
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function fmtDate(iso) {
+      if (!iso) return '—';
+      try { return new Date(iso).toLocaleString(); } catch { return iso; }
+    }
+    function fmtRelative(targetIso) {
+      if (!targetIso) return '—';
+      const diff = Date.parse(targetIso) - Date.now();
+      const abs = Math.abs(diff);
+      const minutes = Math.round(abs / 60000);
+      if (minutes < 60) return diff >= 0 ? `${minutes}분 후` : `${minutes}분 지남`;
+      const hours = Math.round(minutes / 60);
+      if (hours < 48) return diff >= 0 ? `${hours}시간 후` : `${hours}시간 지남`;
+      const days = Math.round(hours / 24);
+      return diff >= 0 ? `${days}일 후` : `${days}일 지남`;
+    }
+
+    function noteStatus(note) {
+      if (note.status === 'mastered') return 'mastered';
+      const nextMs = Date.parse(note.nextReviewAt || '') || 0;
+      return nextMs && nextMs <= Date.now() ? 'due' : 'waiting';
+    }
+
+    function buildQuestionFromNote(note) {
+      return {
+        id: note.questionId,
+        type: note.questionType,
+        text: note.questionText,
+        choices: Array.isArray(note.choices) ? note.choices : [],
+        answer: note.answer,
+        accepted: Array.isArray(note.accepted) && note.accepted.length ? note.accepted : (note.answer != null ? [note.answer] : []),
+        explanation: note.explanation || '',
+        hint: note.hint || '',
+        modelAnswer: note.modelAnswer || '',
+        headers: Array.isArray(note.headers) ? note.headers : [],
+        data: Array.isArray(note.data) ? note.data : [],
+        answers: Array.isArray(note.answers) ? note.answers : [],
+        classificationChoices: Array.isArray(note.classificationChoices) ? note.classificationChoices : [],
+        classificationAnswer: typeof note.classificationAnswer === 'number' ? note.classificationAnswer : null
+      };
+    }
+
+    function infoBox(title, value) {
+      return `<div class="info-item"><span class="k">${title}</span><strong>${value}</strong></div>`;
+    }
+
+    function renderCounts(summary) {
+      document.getElementById('badge-row').innerHTML = `
+        <span class="count-badge waiting">대기 ${summary.waiting}</span>
+        <span class="count-badge due">지금 복습 ${summary.due}</span>
+        <span class="count-badge mastered">숙달 ${summary.mastered}</span>
+      `;
+    }
+
+    async function handleReviewSubmit(noteId) {
+      const notes = window.__wrongNotesCache || [];
+      const note = notes.find(n => n.id === noteId);
+      if (!note) return;
+      const q = buildQuestionFromNote(note);
+      const userAnswer = getUserAnswer(q);
+      const msgEl = document.getElementById(`review-msg-${noteId}`);
+      const isBlank = q.type === 'truth-table'
+        ? (!userAnswer || userAnswer.filledCount === 0) && userAnswer?.classification == null
+        : userAnswer == null || userAnswer === '' || (typeof userAnswer === 'string' && !userAnswer.trim());
+      if (isBlank) {
+        alert('답안을 먼저 입력해주세요.');
+        return;
+      }
+      msgEl.textContent = '채점 중...';
+      try {
+        const result = await gradeQuestion(q, userAnswer);
+        renderFeedback(q.id, result);
+        await window.__db.updateWrongNoteReview(SUBJECT_ID, noteId, { verdict: result.verdict, userAnswer });
+        msgEl.textContent = result.verdict === 'correct'
+          ? '정답 처리되었습니다. 다음 복습 시점이 갱신되었습니다.'
+          : '아직 오답입니다. 복습 주기가 다시 시작되었습니다.';
+        await renderAll();
+      } catch (err) {
+        console.error(err);
+        msgEl.textContent = '채점 중 오류가 발생했습니다.';
+        alert('채점 중 오류: ' + err.message);
+      }
+    }
+
+    function attachReviewHandlers(list) {
+      list.forEach(note => {
+        const btn = document.getElementById(`review-submit-${note.id}`);
+        const resetBtn = document.getElementById(`review-reset-${note.id}`);
+        if (btn) btn.addEventListener('click', () => handleReviewSubmit(note.id));
+        if (resetBtn) {
+          resetBtn.addEventListener('click', () => {
+            const q = buildQuestionFromNote(note);
+            if (q.type === 'multiple-choice') {
+              document.querySelectorAll(`input[name="q-${q.id}"]`).forEach(r => r.checked = false);
+            } else if (q.type === 'truth-table') {
+              document.querySelectorAll(`.tt-cell[data-qid="${q.id}"]`).forEach(input => { input.value = ''; input.classList.remove('cell-correct', 'cell-incorrect'); });
+              document.querySelectorAll(`input[name="q-${q.id}-classification"]`).forEach(input => { input.checked = false; });
+            } else {
+              const ta = document.querySelector(`textarea[data-qid="${q.id}"]`);
+              if (ta) ta.value = '';
+              if (typeof resetMathPreview === 'function') resetMathPreview(q.id);
+            }
+            const fb = document.getElementById(`fb-${q.id}`);
+            if (fb) { fb.className = 'feedback'; fb.innerHTML = ''; }
+            const msgEl = document.getElementById(`review-msg-${note.id}`);
+            if (msgEl) msgEl.textContent = '';
+          });
+        }
+      });
+    }
+
+    function renderNoteCard(note, index) {
+      const status = noteStatus(note);
+      const q = buildQuestionFromNote(note);
+      return `
+        <div class="wrong-card ${status}" id="wrong-${note.id}">
+          <div class="wrong-meta">
+            <span class="pill ${status}">${status === 'due' ? '지금 복습' : status === 'waiting' ? '대기 중' : '숙달 완료'}</span>
+            <span class="pill waiting">${note.chapterId.toUpperCase()}</span>
+            <span class="pill waiting">오답 ${note.wrongCount || 0}회</span>
+            <span class="pill waiting">복습 성공 ${note.reviewSuccessCount || 0}회</span>
+          </div>
+          <div class="tiny">최근 오답: ${fmtDate(note.lastWrongAt)} · 다음 복습: ${note.nextReviewAt ? `${fmtDate(note.nextReviewAt)} (${fmtRelative(note.nextReviewAt)})` : '완료'}</div>
+          <div class="info-grid">
+            ${infoBox('출제 위치', `${note.chapterId.toUpperCase()} · ${note.mockSourceTopicTitle || '모의고사'}`)}
+            ${infoBox('최근 입력 답안', note.lastUserAnswer || '—')}
+            ${infoBox('문항 유형', note.questionType || '—')}
+            ${infoBox('문항 번호', note.questionOrder || index + 1)}
+          </div>
+          ${renderQuestion(q, index)}
+          <div class="review-bar">
+            <button class="btn-submit" id="review-submit-${note.id}">다시 채점하기</button>
+            <button class="btn-reset" id="review-reset-${note.id}">입력 초기화</button>
+            <div class="review-msg" id="review-msg-${note.id}"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    async function renderAll() {
+      updateApiStatus();
+      if (!window.__db) return;
+      const [summary, notes] = await Promise.all([
+        window.__db.getWrongNoteSummary(SUBJECT_ID),
+        window.__db.getWrongNotes(SUBJECT_ID)
+      ]);
+      window.__wrongNotesCache = notes;
+      renderCounts(summary);
+
+      const due = [];
+      const waiting = [];
+      const mastered = [];
+      notes.forEach(note => {
+        const status = noteStatus(note);
+        if (status === 'due') due.push(note);
+        else if (status === 'mastered') mastered.push(note);
+        else waiting.push(note);
+      });
+      due.sort((a, b) => Date.parse(a.nextReviewAt || 0) - Date.parse(b.nextReviewAt || 0));
+      waiting.sort((a, b) => Date.parse(a.nextReviewAt || 0) - Date.parse(b.nextReviewAt || 0));
+      mastered.sort((a, b) => Date.parse(b.lastReviewedAt || 0) - Date.parse(a.lastReviewedAt || 0));
+
+      const dueEl = document.getElementById('due-list');
+      const waitingEl = document.getElementById('waiting-list');
+      const masteredEl = document.getElementById('mastered-list');
+      dueEl.innerHTML = due.length ? due.map(renderNoteCard).join('') : '<div class="empty">지금 바로 풀어야 할 문제가 없습니다.</div>';
+      waitingEl.innerHTML = waiting.length ? waiting.map(renderNoteCard).join('') : '<div class="empty">대기 중인 문제가 없습니다.</div>';
+      masteredEl.innerHTML = mastered.length ? mastered.map(renderNoteCard).join('') : '<div class="empty">아직 숙달 완료된 문제가 없습니다.</div>';
+
+      if (typeof renderMathInElement === 'function') {
+        [dueEl, waitingEl, masteredEl].forEach(el => renderMathInElement(el, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false }
+          ],
+          throwOnError: false
+        }));
+      }
+      if (typeof initMathAnswerAssists === 'function') {
+        [dueEl, waitingEl, masteredEl].forEach(el => initMathAnswerAssists(el));
+      }
+      attachReviewHandlers([...due, ...waiting, ...mastered]);
+    }
+
+    updateApiStatus();
+  </script>
+  <script type="module">
+    import { onAuthChange } from '../../../shared/auth.js';
+    onAuthChange(() => { renderAll(); });
+  </script>
+</body>
+</html>

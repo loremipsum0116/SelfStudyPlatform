@@ -34,6 +34,20 @@
 - 제출 후 점수, 정답 수, 총 문항 수, 소요 시간, 문항별 판정, 선택 챕터, 생성 요약을 저장해야 한다.
 - 최근 기록 화면에는 최근 5회 결과를 표시해야 한다.
 
+### 2.6 오답노트
+- 오답노트는 과목별로 완전히 분리되어야 한다.
+- 모의고사에서 틀린 문제만 오답노트에 저장되어야 한다.
+- 같은 과목에서 같은 문제를 다시 틀리면 중복 문서를 만들지 않고 기존 오답노트 카드에 누적 갱신해야 한다.
+- 각 오답 카드에는 다음 복습 시각(`nextReviewAt`)이 있어야 하며, 시점 도래 여부에 따라 대기/지금 복습 상태를 구분해야 한다.
+- 과목 허브와 오답노트 화면에는 회색(대기) / 빨간색(지금 복습) 배지로 문제 수를 표시해야 한다.
+- 복습 성공 누적 횟수에 따라 숙달 상태를 관리해야 한다.
+
+### 2.7 서술형 입력 보조
+- proof/essay 타입 문항에는 서술형 입력 옆에 작은 기호 버튼이 있어야 한다.
+- 버튼을 누르면 시그마, 파이, 거듭제곱, 분수, 근호와 주요 논리/집합 기호를 선택할 수 있는 셀렉터가 열려야 한다.
+- 시그마·파이 등 구조화된 기호는 부호, 인덱스, 시작값, 종점, 일반항 같은 세부 값을 입력해 답안 입력창에 자동 삽입할 수 있어야 한다.
+- 마이너스 부호가 가능한 구조화 기호는 부호를 선택할 수 있어야 한다.
+
 ## 3. 데이터 저장 요구사항
 
 ### 3.1 일반 연습
@@ -43,6 +57,10 @@
 ### 3.2 모의고사
 - 경로: `users/{uid}/subjects/{subjectId}/mockHistory/{autoId}`
 - 저장 필드: `score`, `correct`, `total`, `durationMs`, `details`, `chapterSelections`, `generationSummary`, `date`, `createdAt`
+
+### 3.3 오답노트
+- 경로: `users/{uid}/subjects/{subjectId}/wrongNotes/{noteId}`
+- 저장 필드: `questionId`, `chapterId`, `questionType`, `questionText`, `choices`, `answer`, `explanation`, `wrongCount`, `reviewSuccessCount`, `nextReviewAt`, `status`, `lastUserAnswer`, `lastWrongAt`, `lastReviewedAt`, `updatedAt`
 
 ## 4. 문서화 요구사항
 - README는 실제 현재 구조와 동작을 반영해야 한다.

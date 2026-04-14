@@ -207,6 +207,12 @@ export async function saveMockRecord(record) {
       date: record.date || new Date().toISOString(),
       createdAt: serverTimestamp()
     });
+
+    const wrongEntries = Array.isArray(record.wrongNotes) ? record.wrongNotes : [];
+    for (const entry of wrongEntries) {
+      if (entry?.systemGeneratedWrong) continue;
+      await saveWrongNoteFromMock({ ...entry, subjectId, sourceAttemptAt: record.date || new Date().toISOString() });
+    }
   } catch (err) { console.warn('[db] saveMockRecord fail:', err); throw err; }
 }
 
@@ -227,6 +233,165 @@ export async function getMockRecent(subjectId) {
   } catch (err) { console.warn('[db] getMockRecent fail:', err); return []; }
 }
 
+
+// ==================== WRONG NOTES ====================
+
+const WRONG_NOTE_REVIEW_MS = Object.freeze([
+  24 * 60 * 60 * 1000,
+  3 * 24 * 60 * 60 * 1000,
+  7 * 24 * 60 * 60 * 1000
+]);
+
+function wrongNoteIdFromEntry(entry) {
+  const chapterId = String(entry?.chapterId || 'unknown');
+  const questionId = String(entry?.questionId || 'unknown').replace(/\//g, '_');
+  return `${chapterId}__${questionId}`;
+}
+
+function normalizeWrongNoteStatus(note, nowMs = Date.now()) {
+  const nextReviewMs = Date.parse(note?.nextReviewAt || '') || 0;
+  if (note?.status === 'mastered') return 'mastered';
+  return nextReviewMs && nextReviewMs <= nowMs ? 'due' : 'waiting';
+}
+
+function serializeAnswer(answer) {
+  if (answer == null) return '';
+  if (typeof answer === 'number' || typeof answer === 'string') return answer;
+  return JSON.stringify(answer);
+}
+
+function buildWrongNotePayload(subjectId, entry, existing = null) {
+  const now = new Date();
+  const nowIso = now.toISOString();
+  const wrongCount = (existing?.wrongCount || 0) + 1;
+  return {
+    subjectId,
+    chapterId: entry.chapterId || '',
+    questionId: entry.questionId || '',
+    questionKey: wrongNoteIdFromEntry(entry),
+    questionOrder: Number.isFinite(entry.questionOrder) ? entry.questionOrder : null,
+    questionType: entry.questionType || 'unknown',
+    questionText: entry.questionText || '',
+    choices: Array.isArray(entry.choices) ? entry.choices : [],
+    answer: entry.answer ?? null,
+    accepted: Array.isArray(entry.accepted) ? entry.accepted : [],
+    explanation: entry.explanation || '',
+    hint: entry.hint || '',
+    modelAnswer: entry.modelAnswer || '',
+    headers: Array.isArray(entry.headers) ? entry.headers : [],
+    data: Array.isArray(entry.data) ? entry.data : [],
+    answers: Array.isArray(entry.answers) ? entry.answers : [],
+    classificationChoices: Array.isArray(entry.classificationChoices) ? entry.classificationChoices : [],
+    classificationAnswer: typeof entry.classificationAnswer === 'number' ? entry.classificationAnswer : null,
+    mockSourceTopicKey: entry.mockSourceTopicKey || '',
+    mockSourceTopicTitle: entry.mockSourceTopicTitle || '',
+    firstWrongAt: existing?.firstWrongAt || nowIso,
+    lastWrongAt: nowIso,
+    wrongCount,
+    reviewSuccessCount: 0,
+    reviewAttemptCount: existing?.reviewAttemptCount || 0,
+    status: 'waiting',
+    nextReviewAt: new Date(now.getTime() + WRONG_NOTE_REVIEW_MS[0]).toISOString(),
+    lastUserAnswer: serializeAnswer(entry.userAnswer),
+    lastUserAnswerRaw: entry.userAnswer ?? null,
+    lastVerdict: entry.verdict || 'incorrect',
+    systemGeneratedWrong: !!entry.systemGeneratedWrong,
+    sourceAttemptAt: entry.sourceAttemptAt || nowIso
+  };
+}
+
+async function saveWrongNoteFromMock(entry) {
+  const uid = currentUid();
+  if (!uid || !db) return;
+  const subjectId = entry?.subjectId;
+  if (!subjectId || !entry?.questionId || !entry?.chapterId) return;
+  const noteId = wrongNoteIdFromEntry(entry);
+  const ref = doc(db, 'users', uid, 'subjects', subjectId, 'wrongNotes', noteId);
+  const snap = await getDoc(ref);
+  const payload = buildWrongNotePayload(subjectId, entry, snap.exists() ? snap.data() : null);
+  await setDoc(ref, {
+    ...payload,
+    updatedAt: serverTimestamp()
+  }, { merge: true });
+}
+
+export async function getWrongNotes(subjectId) {
+  const uid = currentUid();
+  if (!uid || !db || !subjectId) return [];
+  try {
+    const snap = await getDocs(collection(db, 'users', uid, 'subjects', subjectId, 'wrongNotes'));
+    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+  } catch (err) { console.warn('[db] getWrongNotes fail:', err); return []; }
+}
+
+export async function getWrongNoteSummary(subjectId) {
+  const notes = await getWrongNotes(subjectId);
+  const nowMs = Date.now();
+  return notes.reduce((acc, note) => {
+    const status = normalizeWrongNoteStatus(note, nowMs);
+    if (status === 'mastered') acc.mastered += 1;
+    else if (status === 'due') acc.due += 1;
+    else acc.waiting += 1;
+    acc.total += 1;
+    return acc;
+  }, { total: 0, due: 0, waiting: 0, mastered: 0 });
+}
+
+export async function updateWrongNoteReview(subjectId, wrongNoteId, outcome = {}) {
+  const uid = currentUid();
+  if (!uid || !db || !subjectId || !wrongNoteId) return;
+  const ref = doc(db, 'users', uid, 'subjects', subjectId, 'wrongNotes', wrongNoteId);
+  const snap = await getDoc(ref);
+  if (!snap.exists()) throw new Error('오답노트 문서를 찾을 수 없습니다.');
+  const current = snap.data();
+  const now = new Date();
+  const nowIso = now.toISOString();
+  const wasCorrect = outcome.verdict === 'correct';
+  const reviewAttemptCount = (current.reviewAttemptCount || 0) + 1;
+
+  if (wasCorrect) {
+    const reviewSuccessCount = (current.reviewSuccessCount || 0) + 1;
+    const stageIndex = Math.min(reviewSuccessCount - 1, WRONG_NOTE_REVIEW_MS.length - 1);
+    const isMastered = reviewSuccessCount >= WRONG_NOTE_REVIEW_MS.length;
+    await setDoc(ref, {
+      reviewAttemptCount,
+      reviewSuccessCount,
+      lastReviewedAt: nowIso,
+      lastReviewVerdict: outcome.verdict,
+      lastReviewAnswer: serializeAnswer(outcome.userAnswer),
+      lastReviewAnswerRaw: outcome.userAnswer ?? null,
+      status: isMastered ? 'mastered' : 'waiting',
+      nextReviewAt: isMastered ? null : new Date(now.getTime() + WRONG_NOTE_REVIEW_MS[stageIndex]).toISOString(),
+      updatedAt: serverTimestamp()
+    }, { merge: true });
+    return;
+  }
+
+  await setDoc(ref, {
+    reviewAttemptCount,
+    reviewSuccessCount: 0,
+    lastReviewedAt: nowIso,
+    lastReviewVerdict: outcome.verdict || 'incorrect',
+    lastReviewAnswer: serializeAnswer(outcome.userAnswer),
+    lastReviewAnswerRaw: outcome.userAnswer ?? null,
+    lastWrongAt: nowIso,
+    wrongCount: (current.wrongCount || 0) + 1,
+    lastUserAnswer: serializeAnswer(outcome.userAnswer),
+    lastUserAnswerRaw: outcome.userAnswer ?? null,
+    status: 'waiting',
+    nextReviewAt: new Date(now.getTime() + WRONG_NOTE_REVIEW_MS[0]).toISOString(),
+    updatedAt: serverTimestamp()
+  }, { merge: true });
+}
+
+export async function deleteWrongNote(subjectId, wrongNoteId) {
+  const uid = currentUid();
+  if (!uid || !db || !subjectId || !wrongNoteId) return;
+  try {
+    await deleteDoc(doc(db, 'users', uid, 'subjects', subjectId, 'wrongNotes', wrongNoteId));
+  } catch (err) { console.warn('[db] deleteWrongNote fail:', err); throw err; }
+}
+
 // ---------- 전역 노출 ----------
 if (typeof window !== 'undefined') {
   window.__db = {
@@ -235,6 +400,7 @@ if (typeof window !== 'undefined') {
     getAllUsers, setUserStatus, deleteUserProfile, isSuperAdmin,
     saveGeminiApiKey, getGeminiApiKey,
     savePracticeSession, getPracticeSession, getPracticeSessionsForSubject,
-    saveMockRecord, getMockRecent
+    saveMockRecord, getMockRecent,
+    getWrongNotes, getWrongNoteSummary, updateWrongNoteReview, deleteWrongNote
   };
 }
