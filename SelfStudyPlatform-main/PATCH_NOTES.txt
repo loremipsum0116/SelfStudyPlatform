@@ -1,0 +1,26 @@
+수정 내역 요약
+
+1. shared/grader.js
+- truth-table 신규 문제 유형 렌더링 지원
+- 진리표 입력값 정규화(T/F, 참/거짓 등)
+- truth-table 부분점수 채점 추가
+- 완성된 정답 진리표/분류 표시 추가
+- feedback 영역에서 truth-table 정답표 HTML 렌더링 지원
+
+2. shared/practice.js
+- truth-table 입력 공란 판정 추가
+- 제출 후 truth-table 입력 잠금/초기화 지원
+- 진리표 셀 자동 대문자화 및 다음 셀 포커스 이동
+- mock 제출 시 truth-table 미응답/채점/잠금 지원
+- mock details에 score 포함
+
+3. shared/styles.css
+- truth-table 전용 UI 스타일 추가
+- 셀 정오답 색상, 모바일 가로 스크롤 등 추가
+
+4. subjects/dm/questions/ch2.json
+- 사용자 제공 ch2 신규 문제 세트 반영 (총 123문항)
+- 기존 분석에서 지적된 수식 닫힘 오류 일부 수정
+- 16(a), 16(b), 16(c), 17(c), 25(c), 25(d) 등 모범답안 정리/수정
+
+- Added subjects/dm/questions/ch3.json with 53 proof-type Chapter 3 practice problems.

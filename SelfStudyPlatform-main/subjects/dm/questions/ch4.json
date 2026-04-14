@@ -1,0 +1,222 @@
+{
+  "title": "Chapter 4 · 집합론과 집합의 연산",
+  "questions": [
+    {
+      "id": "ch4-q001",
+      "type": "proof",
+      "text": "<strong>[문제 01]</strong> 다음 설명을 집합 표기로 나타내고, 기수를 구하여 유한집합인지 무한집합인지 판단하라.<br><br>\n(a) $-5$보다 크거나 같고 $10$보다 작은 정수<br>\n(b) $-5$보다 크거나 같고 $10$보다 작은 실수<br>\n(c) 총 150명으로 구성된 한빛대학교 컴퓨터과학과 21학번 학생<br>\n(d) 2020년 6월에서 8월 사이에 눈이 내린 날짜",
+      "hint": "조건제시법 또는 원소나열법으로 집합을 나타내고, 원소 개수를 셀 수 있는지 판단",
+      "modelAnswer": "(a) $A=\\{x\\mid -5\\le x<10,\\ x\\in\\mathbb{Z}\\}=\\{-5,-4,\\dots,9\\}$, $|A|=15$, 유한집합.<br>\n(b) $B=\\{x\\mid -5\\le x<10,\\ x\\in\\mathbb{R}\\}$, 실수 구간이므로 원소가 무한히 많아 무한집합.<br>\n(c) $C=\\{x\\mid x\\text{는 한빛대학교 컴퓨터과학과 21학번 학생}\\}$, $|C|=150$, 유한집합.<br>\n(d) $D=\\{x\\mid x\\text{는 2020년 6월~8월 사이에 눈이 내린 날짜}\\}$, 날짜 수는 최대 유한개이므로 유한집합."
+    },
+    {
+      "id": "ch4-q002",
+      "type": "proof",
+      "text": "<strong>[문제 02]</strong> 주어진 집합을 보고 다음 물음에 답하라.<br><br>\n$A = \\{x \\mid x < 5,\\ x \\in \\mathbb{N}\\}$<br>\n$B = \\{2, 3, 5, 7, 11, 13, 17, 19\\}$<br>\n$C = \\{c \\mid c = 3k + 2,\\ k \\le 10,\\ k \\in \\mathbb{N}\\}$<br>\n$D = \\{\\text{일, 월, 화, 수, 목, 금, 토}\\}$<br>\n$E = \\{e \\mid e = \\text{계절이름}\\}$<br>\n$F = \\{\\dots, -16, -12, -8, -4, 0, 4, 8, 12, 16, \\dots\\}$<br>\n$G = \\{g \\mid g = k/3,\\ -10 \\le k \\le 10,\\ k \\in \\mathbb{R}\\}$<br>\n$H = \\{\\text{a, e, i, o, u, A, E, I, O, U}\\}$<br>\n$I = \\{i \\mid i < 100,\\ i \\in \\mathbb{Z}\\}$<br>\n$J = \\{1, \\sqrt{2}, \\sqrt{3}, 2, \\sqrt{5}, \\dots\\}$<br><br>\n(a) 주어진 집합은 유한집합인가, 무한집합인가?<br>\n(b) 원소나열법으로 표기된 집합은 조건제시법으로, 조건제시법으로 표기된 집합은 원소나열법으로 표기하라.<br>\n(c) 주어진 집합의 기수를 구하라.",
+      "hint": "각 집합의 생성 규칙을 먼저 파악하고, 원소 개수가 끝나는지 여부를 확인",
+      "modelAnswer": "(a) 유한집합: $A,B,C,D,E,H$. 무한집합: $F,G,I,J$.<br>\n(b) 예시 변환:<br>\n$A=\\{1,2,3,4\\}$, $C=\\{5,8,11,14,17,20,23,26,29,32\\}$, $E=\\{\\text{봄, 여름, 가을, 겨울}\\}$.<br>\n$B=\\{x\\mid x\\text{는 }20\\text{ 이하의 소수 중 }2\\text{ 이상}\\}$, $D=\\{x\\mid x\\text{는 요일 이름}\\}$, $F=\\{x\\mid x=4k,\\ k\\in\\mathbb{Z}\\}$,<br>\n$H=\\{x\\mid x\\text{는 영문 모음 대소문자}\\}$, $J=\\{x\\mid x=\\sqrt{n},\\ n\\in\\mathbb{N}\\}$처럼 나타낼 수 있다.<br>\n(c) $|A|=4$, $|B|=8$, $|C|=10$, $|D|=7$, $|E|=4$, $|H|=10$. 나머지 $F,G,I,J$는 무한집합이므로 기수가 무한이다."
+    },
+    {
+      "id": "ch4-q003",
+      "type": "proof",
+      "text": "<strong>[문제 03]</strong> 다음 집합을 보고 제시된 원소들의 포함관계를 표기하라.<br><br>\n$X = \\{x \\mid x\\text{는 영문 대소문자}\\},\\quad Y = \\{y \\mid y\\text{는 영문 대문자}\\},\\quad Z = \\{z \\mid z\\text{는 영문 소문자}\\}$<br><br>\n(a) a<br>(b) B<br>(c) 가<br>(d) C<br>(e) 4.21<br>(f) 10<br>(g) e",
+      "hint": "각 대상이 영문 대문자, 영문 소문자, 또는 영문자가 아닌지 구분",
+      "modelAnswer": "(a) $a\\in X$, $a\\notin Y$, $a\\in Z$<br>\n(b) $B\\in X$, $B\\in Y$, $B\\notin Z$<br>\n(c) $\\text{가}\\notin X$, $\\text{가}\\notin Y$, $\\text{가}\\notin Z$<br>\n(d) $C\\in X$, $C\\in Y$, $C\\notin Z$<br>\n(e) $4.21\\notin X$, $4.21\\notin Y$, $4.21\\notin Z$<br>\n(f) $10\\notin X$, $10\\notin Y$, $10\\notin Z$<br>\n(g) $e\\in X$, $e\\notin Y$, $e\\in Z$"
+    },
+    {
+      "id": "ch4-q004",
+      "type": "proof",
+      "text": "<strong>[문제 04]</strong> 집합 $X = \\{x \\mid 1 \\le x \\le 10,\\ x \\in \\mathbb{R}\\}$에 대하여, 다음 집합이나 원소의 포함관계를 작성하라.<br><br>\n(a) $A = \\{5.55, 6.66, 7.77\\}$<br>\n(b) $B = \\{b \\mid 1 \\le b \\le 10,\\ b \\in \\mathbb{Z}\\}$<br>\n(c) $C = \\{c \\mid 1 \\le c \\le 100,\\ c \\in \\mathbb{R}\\}$<br>\n(d) $D = \\{d \\mid 1 \\le d \\le 100,\\ \\sqrt{d} \\in \\mathbb{R}\\}$<br>\n(e) $E = \\{e \\mid -10 \\le e \\le 10,\\ e \\in \\mathbb{Z}\\}$<br>\n(f) $F = \\{f \\mid -10 \\le f \\le 10,\\ f \\in \\mathbb{R}\\}$",
+      "hint": "기준 집합 $X$는 실수 구간 $[1,10]$임에 주의",
+      "modelAnswer": "(a) $A\\subseteq X$<br>\n(b) $B\\subseteq X$<br>\n(c) $X\\subset C$<br>\n(d) $X\\subset D$<br>\n(e) $E\\not\\subseteq X$ 이고 $X\\not\\subseteq E$<br>\n(f) $X\\subset F$"
+    },
+    {
+      "id": "ch4-q005",
+      "type": "proof",
+      "text": "<strong>[문제 05]</strong> 다음 집합을 보고 괄호 안을 채워라.<br><br>\n$A = \\{a \\mid a \\in \\mathbb{R}\\}$,<br>\n$B = \\{\\dots, -12, -8, -4, 0, 4, 8, 12, \\dots\\}$,<br>\n$C = \\{c \\mid c = \\sqrt{k},\\ c \\in \\mathbb{N},\\ k \\in \\mathbb{N}\\}$,<br>\n$D = \\{d \\mid d\\text{는 영문자}\\}$,<br>\n$E = \\{e \\mid e \\in (\\mathbb{Q} \\cup \\mathbb{I})\\}$,<br>\n$F = \\{\\text{A, C, E, F}\\}$,<br>\n$G = \\{g \\mid g\\text{는 홀수 번째 영문 대문자}\\}$,<br>\n$H = \\{h \\mid h \\in \\mathbb{N}\\}$,<br>\n$I = \\{w, x, y, z\\}$,<br>\n$J = \\{j \\mid j = 4k,\\ k \\in \\mathbb{Z}\\}$<br><br>\n(a) $A(\\quad)E$<br>\n(b) $B(\\quad)J$<br>\n(c) $C(\\quad)H$<br>\n(d) $F(\\quad)D$<br>\n(e) $I(\\quad)D$<br>\n(f) $G(\\quad)D$<br>\n(g) $F(\\quad)G$<br>\n(h) $H(\\quad)A$",
+      "hint": "각 집합이 같은 집합인지, 부분집합인지, 진부분집합인지 비교",
+      "modelAnswer": "(a) $A = E$<br>\n(b) $B = J$<br>\n(c) $C \\subseteq H$<br>\n(d) $F \\subseteq D$<br>\n(e) $I \\subseteq D$<br>\n(f) $G \\subseteq D$<br>\n(g) $F \\not\\subseteq G$<br>\n(h) $H \\subseteq A$"
+    },
+    {
+      "id": "ch4-q006",
+      "type": "proof",
+      "text": "<strong>[문제 06]</strong> 다음 중 상등인 집합을 모두 찾으라.<br><br>\n(a) $A = \\{12, 14, 16, 18, 20, 22, 24, 26, 30\\}$<br>\n(b) $B = \\{b \\mid 10 \\le b \\le 30,\\ b\\text{는 짝수}\\}$<br>\n(c) $C = \\{c \\mid c = 2k + 10,\\ 0 < k \\le 10,\\ k \\in \\mathbb{Z}\\}$<br>\n(d) $D = \\{d \\mid d = 2k,\\ 5 < k \\le 15,\\ k \\in \\mathbb{Z}\\}$<br>\n(e) $E = \\{e \\mid e = 2k + 10,\\ 0 \\le k \\le 10,\\ k \\in \\mathbb{Z}\\}$<br>\n(f) $F = \\{f \\mid f = 2k,\\ 5 \\le k \\le 15,\\ k \\in \\mathbb{Z}\\}$",
+      "hint": "각 집합을 실제 원소로 나열해서 비교",
+      "modelAnswer": "$C=\\{12,14,16,18,20,22,24,26,28,30\\}$, $D=\\{12,14,16,18,20,22,24,26,28,30\\}$ 이므로 $C=D$.<br>\n$B=\\{10,12,14,16,18,20,22,24,26,28,30\\}=E=F$.<br>\n$A$는 $10,28$이 없으므로 나머지와 상등이 아니다.<br>\n따라서 상등인 집합은 $C=D$ 와 $B=E=F$이다."
+    },
+    {
+      "id": "ch4-q007",
+      "type": "proof",
+      "text": "<strong>[문제 07]</strong> 주어진 집합 $A, B, C, D, E, F$에 대하여, 다음 연산을 하라.<br><br>\n$A = \\{a \\mid -3 \\le a \\le 5,\\ a \\in \\mathbb{Z}\\}$,<br>\n$B = \\{b \\mid b < 0,\\ b \\in \\mathbb{Z}\\}$,<br>\n$C = \\{c \\mid -10 \\le c < 5,\\ c \\in \\mathbb{R}\\}$,<br>\n$D = \\{d \\mid d > -3,\\ d \\in \\mathbb{R}\\}$,<br>\n$E = \\{e \\mid (e < -5) \\lor (e > 5),\\ e \\in \\mathbb{Z}\\}$,<br>\n$F = \\{f \\mid (f < -5) \\lor (f > 5),\\ f \\in \\mathbb{R}\\}$<br><br>\n(a) $A \\cap B$<br>(b) $B \\cap D$<br>(c) $A \\cup F$<br>(d) $C \\cup E$<br>(e) $B \\cup D$<br>(f) $A \\cup E$<br>(g) $B \\cup F$<br>(h) $B \\cap F$",
+      "hint": "정수집합인지 실수구간인지 구분해서 계산",
+      "modelAnswer": "(a) $A\\cap B=\\{-3,-2,-1\\}$<br>\n(b) $B\\cap D=\\{-2,-1\\}$<br>\n(c) $A\\cup F=\\{x\\mid x<-5\\text{ 또는 }-3\\le x\\le 5\\text{ 또는 }x>5,\\ x\\in\\mathbb{R}\\}$<br>\n(d) $C\\cup E=\\{x\\mid -10\\le x<5,\\ x\\in\\mathbb{R}\\}\\cup\\{x\\mid x<-5\\text{ 또는 }x>5,\\ x\\in\\mathbb{Z}\\}$<br>\n(e) $B\\cup D=\\mathbb{R}$<br>\n(f) $A\\cup E=\\mathbb{Z}$<br>\n(g) $B\\cup F=\\{x\\mid x<-5\\text{ 또는 }x>5,\\ x\\in\\mathbb{R}\\}\\cup\\{x\\mid x<0,\\ x\\in\\mathbb{Z}\\}$<br>\n(h) $B\\cap F=\\{x\\mid x<-5,\\ x\\in\\mathbb{Z}\\}$"
+    },
+    {
+      "id": "ch4-q008",
+      "type": "proof",
+      "text": "<strong>[문제 08]</strong> 전체집합이 $U = \\{u \\mid u \\in \\text{영문 대소문자}\\}$이고 아래와 같이 집합이 주어질 때, 다음 집합 연산을 하라.<br><br>\n$A = \\{\\text{a, b, c, d, e, f, g}\\}$<br>\n$B = \\{\\text{A, E, I, O, U}\\}$<br>\n$C = \\{c \\mid c \\in \\text{영문 대소문자 중 홀수 번째 문자}\\}$<br><br>\n(a) $U - A$<br>(b) $C - B$<br>(c) $A \\oplus B$<br>(d) $C - (A \\oplus B)$<br>(e) $A - B$<br>(f) $A - C$<br>(g) $B \\oplus C$<br>(h) $(A \\oplus B) - C$",
+      "hint": "영문자 순서를 기준으로 $C$를 먼저 정확히 적은 뒤 계산",
+      "modelAnswer": "$C=\\{\\text{A, C, E, G, I, K, M, O, Q, S, U, W, Y, a, c, e, g, i, k, m, o, q, s, u, w, y}\\}$.<br>\n(a) $U-A$는 $a,b,c,d,e,f,g$를 뺀 나머지 영문 대소문자 전체.<br>\n(b) $C-B=C\\setminus\\{\\text{A,E,I,O,U}\\}$<br>\n(c) $A\\oplus B=A\\cup B$ (공통원소 없음)<br>\n(d) $C-(A\\oplus B)$는 $C$에서 $A$와 $B$에 속한 문자를 뺀 집합<br>\n(e) $A-B=A$<br>\n(f) $A-C=\\{\\text{b,d,f}\\}$<br>\n(g) $B\\oplus C=C-B$ (왜냐하면 $B\\subseteq C$)<br>\n(h) $(A\\oplus B)-C=(A\\cup B)-C=\\{\\text{b,d,f}\\}$"
+    },
+    {
+      "id": "ch4-q009",
+      "type": "proof",
+      "text": "<strong>[문제 09]</strong> 다음 집합의 여집합을 구하라.<br><br>\n(a) $A = \\{a \\mid a > 30,\\ a \\in \\mathbb{N}\\}$<br>\n(b) $U = \\{u \\mid u \\in \\text{영문 소문자}\\}$일 때, $B = \\{\\text{a, c, e, g, i, k, m, o, q, s, u, w, y}\\}$<br>\n(c) $U = \\{u \\mid u \\le 10,\\ u \\in \\mathbb{N}\\}$일 때, $C = \\{c \\mid c = 2k + 1,\\ k \\in \\mathbb{N},\\ c \\in U\\}$<br>\n(d) $D = \\{d \\mid -50 \\le d < 20,\\ d \\in \\mathbb{R}\\}$",
+      "hint": "전체집합이 주어진 경우와 주어지지 않은 경우를 구분",
+      "modelAnswer": "(a) 전체집합을 자연수로 보면 $\\overline{A}=\\{a\\mid a\\le 30,\\ a\\in\\mathbb{N}\\}$.<br>\n(b) $\\overline{B}=\\{\\text{b, d, f, h, j, l, n, p, r, t, v, x, z}\\}$.<br>\n(c) $U=\\{1,2,3,4,5,6,7,8,9,10\\}$라면 $C=\\{1,3,5,7,9\\}$, 따라서 $\\overline{C}=\\{2,4,6,8,10\\}$.<br>\n(d) 전체집합을 $\\mathbb{R}$로 보면 $\\overline{D}=\\{x\\mid x<-50\\text{ 또는 }x\\ge 20,\\ x\\in\\mathbb{R}\\}$."
+    },
+    {
+      "id": "ch4-q010",
+      "type": "proof",
+      "text": "<strong>[문제 10]</strong> 전체집합이 $U = \\mathbb{R}$이고 집합 $A, B, C, D, E$가 다음과 같을 때, 다음을 연산하라.<br><br>\n$A = \\{a \\mid -30 \\le a \\le 0,\\ a \\in \\mathbb{R}\\}$,<br>\n$B = \\{b \\mid -10 < b < 20,\\ b \\in \\mathbb{R}\\}$,<br>\n$C = \\{c \\mid c < 0 \\lor c > 15,\\ c \\in \\mathbb{R}\\}$,<br>\n$D = \\{d \\mid d < -30,\\ d \\in \\mathbb{R}\\}$,<br>\n$E = \\{e \\mid e \\le 20,\\ e \\in \\mathbb{R}\\}$<br><br>\n(a) $A \\cup B$<br>(b) $B \\cup C$<br>(c) $B \\cap E$<br>(d) $C \\cap E$<br>(e) $A \\cup D$<br>(f) $B \\cup D$<br>(g) $A \\cap B$<br>(h) $A \\cap C$",
+      "hint": "구간의 합집합과 교집합을 수직선으로 생각",
+      "modelAnswer": "(a) $[-30,20)$<br>\n(b) $\\mathbb{R}$<br>\n(c) $(-10,20)$<br>\n(d) $(-\\infty,0)\\cup(15,20]$<br>\n(e) $(-\\infty,0]$에서 $-30$만 포함되므로 정확히는 $(-\\infty,0]$<br>\n(f) $(-\\infty,-30)\\cup(-10,20)$<br>\n(g) $(-10,0]$<br>\n(h) $[-30,0)$"
+    },
+    {
+      "id": "ch4-q011",
+      "type": "proof",
+      "text": "<strong>[문제 11]</strong> 전체집합이 $U = \\mathbb{R}$이고 집합 $A, B, C, D, E$가 문제 10과 같을 때, 다음을 연산하라.<br><br>\n(a) $A - B$<br>(b) $D - E$<br>(c) $E - B$<br>(d) $E - C$<br>(e) $A \\oplus B$<br>(f) $B \\oplus D$<br>(g) $C \\oplus D$<br>(h) $C \\oplus E$",
+      "hint": "차집합은 포함되는 쪽에서 겹치는 부분만 빼기",
+      "modelAnswer": "(a) $[-30,-10]$<br>\n(b) $(-\\infty,-30)$<br>\n(c) $(-\\infty,-10]\\cup[20,20]$ 즉 $(-\\infty,-10]\\cup\\{20\\}$<br>\n(d) $[0,15]$<br>\n(e) $[-30,-10]\\cup(0,20)$<br>\n(f) $(-\\infty,-30)\\cup(-10,20)$<br>\n(g) $(-30,0]\\cup(15,\\infty)$<br>\n(h) $[0,15]$"
+    },
+    {
+      "id": "ch4-q012",
+      "type": "proof",
+      "text": "<strong>[문제 12]</strong> 전체집합이 $U = \\mathbb{R}$이고 집합 $A, B, C, D, E$가 문제 10과 같을 때, 다음을 연산하라.<br><br>\n(a) $\\overline{B}$<br>(b) $\\overline{E - D}$<br>(c) $\\overline{B \\oplus C}$<br>(d) $\\overline{A \\cup B \\cup C \\cup D \\cup E}$<br>(e) $\\overline{C}$<br>(f) $\\overline{D}$<br>(g) $\\overline{A \\cup B}$<br>(h) $\\overline{B \\cap C}$",
+      "hint": "먼저 내부 연산을 계산한 뒤 여집합을 취하면 실수가 줄어듦",
+      "modelAnswer": "(a) $(-\\infty,-10]\\cup[20,\\infty)$<br>\n(b) $\\overline{E}= (20,\\infty)$, 왜냐하면 $D\\subseteq \\overline{E}$ 이므로 $E-D=E$<br>\n(c) $B\\oplus C=[0,15]\\cup(-\\infty,-10)\\cup[20,\\infty)$ 이므로 그 여집합은 $[-10,0)\\cup(15,20)$<br>\n(d) $A\\cup B\\cup C\\cup D\\cup E=\\mathbb{R}$ 이므로 여집합은 $\\emptyset$<br>\n(e) $[0,15]$<br>\n(f) $[-30,\\infty)$<br>\n(g) $(-\\infty,-30)\\cup[20,\\infty)$<br>\n(h) $(-\\infty,-30)\\cup[0,\\infty)$"
+    },
+    {
+      "id": "ch4-q013",
+      "type": "proof",
+      "text": "<strong>[문제 13]</strong> 주어진 정보를 이용하여 다음 기수를 구하라.<br><br>\n(a) $|A|=8, |B|=11, |A \\cup B|=14$일 때, $|A \\cap B|$<br>\n(b) $|A \\cup B|=7, |A \\cap B|=2, |B|=5$일 때, $|A|$<br>\n(c) $|A \\cup B|=13, |A|=5$이고 $A$와 $B$가 서로소일 때, $|B|$",
+      "hint": "두 집합 포함-배제 원리 $|A\\cup B|=|A|+|B|-|A\\cap B|$",
+      "modelAnswer": "(a) $|A\\cap B|=8+11-14=5$<br>\n(b) $7=|A|+5-2$ 이므로 $|A|=4$<br>\n(c) 서로소이므로 $|A\\cap B|=0$, 따라서 $13=5+|B|$ 이고 $|B|=8$"
+    },
+    {
+      "id": "ch4-q014",
+      "type": "proof",
+      "text": "<strong>[문제 14]</strong> 주어진 정보를 이용하여 다음 기수를 구하라.<br><br>\n(a) $|A|=4, |B|=9, |C|=9, |A \\cup B|=12, |A \\cup C|=13, |B \\cup C|=10, |A \\cup B \\cup C|=16$일 때, $|A \\cap B \\cap C|$<br>\n(b) $|A|=11, |B|=7, |C|=9, |A \\cap B|=2, |A \\cap C|=3, |B \\cap C|=1, |A \\cup B \\cup C|=21$일 때, $|A \\cap B \\cap C|$<br>\n(c) $|A \\cup B|=14, |A \\cap B|=4, |A \\cup C|=12, |A \\cap C|=6, |B \\cup C|=13, |B \\cap C|=5, |A \\cap B \\cap C|=3$일 때, $|A \\cup B \\cup C|$",
+      "hint": "세 집합 포함-배제 원리를 사용",
+      "modelAnswer": "(a) 먼저 $|A\\cap B|=4+9-12=1$, $|A\\cap C|=4+9-13=0$, $|B\\cap C|=9+9-10=8$.<br>\n$16=4+9+9-1-0-8+|A\\cap B\\cap C|$ 이므로 $|A\\cap B\\cap C|=3$.<br>\n(b) $21=11+7+9-2-3-1+|A\\cap B\\cap C|$ 이므로 $|A\\cap B\\cap C|=0$.<br>\n(c) 먼저 $|A|+|B|=18$, $|A|+|C|=18$, $|B|+|C|=18$ 이므로 $|A|=|B|=|C|=9$.<br>\n따라서 $|A\\cup B\\cup C|=9+9+9-4-6-5+3=15$."
+    },
+    {
+      "id": "ch4-q015",
+      "type": "proof",
+      "text": "<strong>[문제 15]</strong> 주어진 정보를 이용하여 다음 기수를 구하라.<br><br>\n(a) $|A|=8, |A \\cap B|=3$일 때, $|A - B|$<br>\n(b) $|A|=14, |A \\cup B|=21$일 때, $|B - A|$<br>\n(c) $|B|=6, |A \\cup B|=11$일 때, $|A - B|$<br>\n(d) $|B|=5, |A \\cap B|=1$일 때, $|B - A|$",
+      "hint": "차집합의 기수는 겹치는 부분을 빼서 계산",
+      "modelAnswer": "(a) $|A-B|=|A|-|A\\cap B|=8-3=5$<br>\n(b) $|B-A|=|A\\cup B|-|A|=21-14=7$<br>\n(c) $|A-B|=|A\\cup B|-|B|=11-6=5$<br>\n(d) $|B-A|=|B|-|A\\cap B|=5-1=4$"
+    },
+    {
+      "id": "ch4-q016",
+      "type": "proof",
+      "text": "<strong>[문제 16]</strong> 주어진 정보를 이용하여 다음 기수를 구하라.<br><br>\n(a) $|A \\cup B|=24, |A \\cap B|=8$일 때, $|A \\oplus B|$<br>\n(b) $|A|=9, |B|=7, |A \\cap B|=1$일 때, $|A \\oplus B|$<br>\n(c) $|A|=11, |B|=10, |A \\cap B|=4$일 때, $|A \\oplus B|$<br>\n(d) $|A|=16, |B|=9, |A \\cup B|=19$일 때, $|A \\oplus B|$",
+      "hint": "대칭차집합의 기수 공식 $|A\\oplus B|=|A\\cup B|-|A\\cap B|=|A|+|B|-2|A\\cap B|$",
+      "modelAnswer": "(a) $24-8=16$<br>\n(b) $9+7-2\\cdot1=14$<br>\n(c) $11+10-2\\cdot4=13$<br>\n(d) $|A\\cap B|=16+9-19=6$, 따라서 $|A\\oplus B|=19-6=13$"
+    },
+    {
+      "id": "ch4-q017",
+      "type": "proof",
+      "text": "<strong>[문제 17]</strong> 다음 집합의 곱집합과 곱집합의 기수를 구하라.<br><br>\n(a) $A = \\{\\text{a, b, c, d, e}\\},\\ B = \\{\\text{A, B, C, D, E}\\}$<br>\n(b) 학년 $= \\{1, 2, 3, 4\\}$, 전공 $= \\{\\text{컴퓨터과학, 정보보안, AI}\\}$<br>\n(c) $A = \\{1, 2\\},\\ B = \\{a, b, c, d\\},\\ C = \\{v, w, x, y, z\\}$<br>\n(d) 조건1 $= \\{\\text{참, 거짓}\\}$, 조건2 $= \\{\\text{참, 거짓}\\}$, 조건3 $= \\{\\text{참, 거짓}\\}$, 조건4 $= \\{\\text{참, 거짓}\\}$",
+      "hint": "곱집합은 순서쌍(또는 순서튜플) 전체, 기수는 각 기수의 곱",
+      "modelAnswer": "(a) $A\\times B=\\{(a,A),(a,B),\\dots,(e,E)\\}$, $|A\\times B|=5\\times5=25$.<br>\n(b) 학년 $\\times$ 전공의 모든 순서쌍, 기수는 $4\\times3=12$.<br>\n(c) $A\\times B\\times C$의 모든 순서삼중쌍, 기수는 $2\\times4\\times5=40$.<br>\n(d) 네 조건의 진리값 조합 전체, 기수는 $2^4=16$."
+    },
+    {
+      "id": "ch4-q018",
+      "type": "proof",
+      "text": "<strong>[문제 18]</strong> 주어진 집합에 대하여, 다음 물음에 답하라.<br><br>\n학년 $= \\{1, 2, 3, 4\\}$<br>\n전공 $= \\{\\text{컴퓨터과학, 정보과학, 게임}\\}$<br>\n관심분야 $= \\{\\text{프로그래밍, 게임기획, 데이터분석, 네트워크, 인공지능, 보안}\\}$<br><br>\n(a) 학년별 전공에 대한 선택 관계를 모두 나열하라. 모두 몇 개인가?<br>\n(b) 관심분야별 전공에 대해 가능한 연관 관계를 모두 나열하라. 모두 몇 개인가?<br>\n(c) 전공별 관심분야에 대한 학년의 연관 관계를 모두 나열하라. 모두 몇 개인가?",
+      "hint": "각 항목을 곱집합으로 해석",
+      "modelAnswer": "(a) 학년 $\\times$ 전공의 모든 순서쌍. 예: $(1,\\text{컴퓨터과학}), (1,\\text{정보과학}), \\dots, (4,\\text{게임})$. 총 $4\\times3=12$개.<br>\n(b) 관심분야 $\\times$ 전공의 모든 순서쌍. 총 $6\\times3=18$개.<br>\n(c) 전공 $\\times$ 관심분야 $\\times$ 학년의 모든 순서삼중쌍. 총 $3\\times6\\times4=72$개."
+    },
+    {
+      "id": "ch4-q019",
+      "type": "proof",
+      "text": "<strong>[문제 19]</strong> 다음 집합의 멱집합과 멱집합의 기수를 구하라.<br><br>\n(a) $A = \\{a, b, c, d, e\\}$<br>\n(b) $B = \\{x, y, \\{\\emptyset\\}\\}$<br>\n(c) $C = \\{\\emptyset, 1, \\{\\{\\emptyset\\}, 1\\}\\}$",
+      "hint": "멱집합은 모든 부분집합의 집합, 기수는 $2^{|S|}$",
+      "modelAnswer": "(a) $|P(A)|=2^5=32$. 멱집합은 $A$의 모든 부분집합들의 집합.<br>\n(b) $B$의 원소는 $x, y, \\{\\emptyset\\}$ 세 개이므로 $|P(B)|=2^3=8$.<br>\n예: $\\emptyset, \\{x\\}, \\{y\\}, \\{\\{\\emptyset\\}\\}, \\{x,y\\}, \\{x,\\{\\emptyset\\}\\}, \\{y,\\{\\emptyset\\}\\}, \\{x,y,\\{\\emptyset\\}\\}$.<br>\n(c) $C$도 원소가 3개이므로 $|P(C)|=8$. 여기서 $\\emptyset$ 자체와 $\\{\\{\\emptyset\\},1\\}$는 각각 하나의 원소로 취급한다."
+    },
+    {
+      "id": "ch4-q020",
+      "type": "proof",
+      "text": "<strong>[문제 20]</strong> 간식 시간이 되어 학생 50명에게 빵과 우유를 제공하였다. 빵을 먹은 학생은 43명, 우유를 먹은 학생은 41명이었다. 이 중 빵과 우유를 모두 먹은 학생은 몇 명인가?",
+      "hint": "두 집합 포함-배제 원리",
+      "modelAnswer": "전체 50명이 적어도 하나를 먹었다고 보면 $|A\\cap B|=43+41-50=34$. 따라서 빵과 우유를 모두 먹은 학생은 34명이다."
+    },
+    {
+      "id": "ch4-q021",
+      "type": "proof",
+      "text": "<strong>[문제 21]</strong> 연구 분야 관련 논문 300편을 $A, B$ 두 폴더로 구분하여 정리하였다. $A$ 폴더에 정리된 논문은 156편이고 이 중 89편은 $B$ 폴더에도 정리되어 있다. $B$ 폴더에만 정리되어 있고 $A$ 폴더에는 정리되어 있지 않은 논문은 모두 몇 편인가?",
+      "hint": "$B-A$의 기수를 구하는 문제",
+      "modelAnswer": "전체가 $A\\cup B$라면 $|B-A|=|A\\cup B|-|A|=300-156=144$편이다. 또는 $|B|=89+144=233$으로 해석할 수 있다."
+    },
+    {
+      "id": "ch4-q022",
+      "type": "proof",
+      "text": "<strong>[문제 22]</strong> 컴퓨터과학과에서 졸업 프로젝트 수행을 위해 학생 100명을 대상으로 네트워크, 보안, 게임 중 관심 분야를 하나 이상 반드시 선택하도록 하는 설문조사를 진행하였다. 설문조사 결과 네트워크는 49명, 보안은 47명, 게임은 45명이 선택했고, 이 중 네트워크와 보안을 선택한 학생은 19명, 네트워크와 게임을 선택한 학생은 14명, 보안과 게임을 선택한 학생은 13명이었다. 세 분야를 모두 선택한 학생은 몇 명인가?",
+      "hint": "세 집합 포함-배제 원리",
+      "modelAnswer": "$100=49+47+45-19-14-13+x$ 이므로 $100=95+x$, 따라서 세 분야를 모두 선택한 학생 수는 $x=5$명이다."
+    },
+    {
+      "id": "ch4-q023",
+      "type": "proof",
+      "text": "<strong>[문제 23]</strong> 세 가지 신호 $A, B, C$에 반응하는 비트가 128개 있다고 하자. 신호에 반응하는 비트 개수를 정리하면 다음과 같다.<br><br>\n신호 $A$와 $B$ 모두에 반응하는 비트: 21개 / 신호 $A$에 반응하거나 $B$에 반응하는 비트: 99개<br>\n신호 $A$와 $C$ 모두에 반응하는 비트: 20개 / 신호 $A$에 반응하거나 $C$에 반응하는 비트: 98개<br>\n신호 $B$와 $C$ 모두에 반응하는 비트: 21개 / 신호 $B$에 반응하거나 $C$에 반응하는 비트: 105개<br>\n신호 $A, B, C$ 모두에 반응하는 비트: 8개<br><br>\n세 가지 신호 $A, B, C$ 각각에 반응하는 비트는 몇 개인가?",
+      "hint": "두 집합 합집합 정보로 $|A|+|B|$, $|A|+|C|$, $|B|+|C|$를 먼저 구함",
+      "modelAnswer": "$|A|+|B|=99+21=120$, $|A|+|C|=98+20=118$, $|B|+|C|=105+21=126$.<br>\n세 식을 더하면 $2(|A|+|B|+|C|)=364$ 이므로 $|A|+|B|+|C|=182$.<br>\n연립하면 $|A|=56$, $|B|=64$, $|C|=62$이다."
+    },
+    {
+      "id": "ch4-q024",
+      "type": "proof",
+      "text": "<strong>[문제 24]</strong> 프로젝트 수행을 위해 수집한 자료를 $A$ 폴더와 $B$ 폴더에 나누어 저장하였다. $A$ 폴더에 58개, $B$ 폴더에 63개의 자료를 저장하였고, $A$와 $B$ 두 폴더에 동시에 저장한 자료는 14개였다. 프로젝트 수행을 위해 수집한 자료는 총 몇 개인가?",
+      "hint": "합집합의 기수",
+      "modelAnswer": "$|A\\cup B|=58+63-14=107$. 따라서 총 자료 수는 107개이다."
+    },
+    {
+      "id": "ch4-q025",
+      "type": "proof",
+      "text": "<strong>[문제 25]</strong> 시헌이의 옷장에는 30벌의 옷이 있다. 옷장 정리를 하면서 버려야 할 옷 4벌, 빨아야 할 옷 22벌, 수선해야 할 옷 10벌을 구분하였다. 다음 물음에 답하라.<br><br>\n(a) 수선도 하고 빨기도 해야 하는 옷은 모두 몇 벌인가?<br>\n(b) 빨기만 해야 하는 옷은 모두 몇 벌인가?<br>\n(c) 수선만 해야 하는 옷은 모두 몇 벌인가?",
+      "hint": "버릴 옷 4벌은 빨기/수선 대상이 아닌 것으로 보고 전체 30벌 중 나머지 26벌을 이용",
+      "modelAnswer": "빨기 집합을 $W$, 수선 집합을 $R$이라 하면 $|W\\cup R|=30-4=26$.<br>\n(a) $|W\\cap R|=22+10-26=6$벌<br>\n(b) 빨기만 해야 하는 옷 수는 $22-6=16$벌<br>\n(c) 수선만 해야 하는 옷 수는 $10-6=4$벌"
+    },
+    {
+      "id": "ch4-q026",
+      "type": "proof",
+      "text": "<strong>[문제 26]</strong> 주변 놀이터 구조물의 색상 구성을 조사하였다. 총 115개의 구조물을 조사하였을 때 구조물에 빨간색 또는 노란색이 포함된 경우는 71개, 빨간색 또는 파란색이 포함된 경우는 68개, 노란색 또는 파란색이 포함된 경우는 77개이고, 빨간색과 노란색이 함께 포함된 경우는 17개, 빨간색과 파란색이 함께 포함된 경우는 16개, 노란색과 파란색이 함께 포함된 경우는 19개이며, 빨간색, 노란색, 파란색 외의 다른 색이 포함된 경우는 23개였다. 다음 물음에 답하라.<br><br>\n(a) 빨간색, 노란색, 파란색만을 포함하는 경우는 각각 몇 개인가?<br>\n(b) 빨간색, 노란색, 파란색 3가지를 모두 포함하는 경우는 몇 개인가?",
+      "hint": "세 색 중 하나 이상 포함한 구조물 수를 먼저 구하고, 포함-배제로 삼중교집합을 계산",
+      "modelAnswer": "세 색 중 하나 이상 포함한 구조물 수는 $115-23=92$개.<br>\n또 $|R\\cup Y|=71, |R\\cup B|=68, |Y\\cup B|=77$, $|R\\cap Y|=17, |R\\cap B|=16, |Y\\cap B|=19$.<br>\n$|R|+|Y|=88$, $|R|+|B|=84$, $|Y|+|B|=96$ 이므로 $|R|=38, |Y|=50, |B|=46$.<br>\n$92=38+50+46-17-16-19+x$ 이므로 $x=10$. 따라서 세 색 모두 포함은 10개.<br>\n빨간색만: $38-17-16+10=15$개, 노란색만: $50-17-19+10=24$개, 파란색만: $46-16-19+10=21$개."
+    },
+    {
+      "id": "ch4-q027",
+      "type": "proof",
+      "text": "<strong>[문제 27]</strong> 학생들이 프로그래밍, 이산수학, 자료구조 세 과목 중 수강하고 싶은 과목을 선택하였다. 프로그래밍을 선택한 학생은 80명, 이산수학을 선택한 학생은 95명, 세 과목 중 어떤 과목도 선택하지 않은 학생은 13명, 세 과목 중 한 과목이라도 선택한 학생은 187명이다. 다음 물음에 답하라.<br><br>\n(a) 조사 대상인 전체 학생은 몇 명인가?<br>\n(b) 프로그래밍 또는 이산수학을 선택한 학생은 137명이다. 프로그래밍과 이산수학을 모두 선택한 학생은 몇 명인가?<br>\n(c) 프로그래밍 또는 자료구조를 선택한 학생은 130명이고 프로그래밍과 자료구조를 모두 선택한 학생은 40명이다. 자료구조를 선택한 학생은 몇 명인가?<br>\n(d) (a) ~ (c)의 정보와 함께 이산수학과 자료구조를 모두 선택한 학생은 38명이다. 세 과목 모두를 선택한 학생은 몇 명인가?",
+      "hint": "전체 수, 두 집합 포함-배제, 세 집합 포함-배제를 순서대로 적용",
+      "modelAnswer": "(a) 전체 학생 수는 $187+13=200$명.<br>\n(b) $|P\\cap D|=80+95-137=38$명.<br>\n(c) $130=80+|S|-40$ 이므로 자료구조 선택 학생 수는 $|S|=90$명.<br>\n(d) $187=80+95+90-38-40-38+x$ 이므로 $x=38$명. 따라서 세 과목 모두를 선택한 학생은 38명이다."
+    },
+    {
+      "id": "ch4-q028",
+      "type": "proof",
+      "text": "<strong>[문제 28]</strong> 다음 집합의 대수법칙이 성립함을 증명하라.<br><br>\n(a) 드 모르간의 법칙 $\\overline{A \\cap B} = \\overline{A} \\cup \\overline{B}$<br>\n(b) 보법칙 $A \\cup \\overline{A} = U$<br>\n(c) 보법칙 $A \\cap \\overline{A} = \\emptyset$<br>\n(d) 분배법칙 $A \\times (B - C) = (A \\times B) - (A \\times C)$<br>\n(e) 분배법칙 $A \\cup (B \\cap C) = (A \\cup B) \\cap (A \\cup C)$",
+      "hint": "원소 임의 선택 후 포함관계를 양방향으로 보이면 됨",
+      "modelAnswer": "(a) $x\\in\\overline{A\\cap B}\\iff x\\notin A\\cap B\\iff (x\\notin A)\\lor(x\\notin B)\\iff x\\in\\overline A\\cup\\overline B$.<br>\n(b) 임의의 $x\\in U$에 대해 $x\\in A$ 이거나 $x\\notin A$ 이므로 $x\\in A\\cup\\overline A$. 따라서 $A\\cup\\overline A=U$.<br>\n(c) $x\\in A\\cap\\overline A$라면 동시에 $x\\in A$이고 $x\\notin A$여야 하므로 모순. 따라서 공집합.<br>\n(d) $(a,b)\\in A\\times(B-C)\\iff a\\in A, b\\in B, b\\notin C\\iff (a,b)\\in A\\times B$ 이고 $(a,b)\\notin A\\times C$. 따라서 $(A\\times B)-(A\\times C)$.<br>\n(e) $x\\in A\\cup(B\\cap C)\\iff x\\in A$ 또는 $(x\\in B\\land x\\in C)\\iff (x\\in A\\cup B)\\land(x\\in A\\cup C)$."
+    },
+    {
+      "id": "ch4-q029",
+      "type": "proof",
+      "text": "<strong>[문제 29]</strong> 다음 식이 성립함을 보여라.<br><br>\n(a) $(A - B) \\cap (A - C) = A - (B \\cup C)$<br>\n(b) $\\overline{(\\overline{A \\cap B}) \\cap (\\overline{A} \\cap \\overline{B})} = A \\cup B$<br>\n(c) $(A - B) \\cup (C - B) = (A \\cup C) - B$<br>\n(d) $(A \\cup B) - (A \\cap B) = A \\oplus B$<br>\n(e) $(A \\cup B) - (B - A) = A$",
+      "hint": "차집합을 $\\cap$과 여집합으로 바꾸면 간단해짐",
+      "modelAnswer": "(a) $(A\\cap\\overline B)\\cap(A\\cap\\overline C)=A\\cap\\overline{B\\cup C}=A-(B\\cup C)$.<br>\n(b) 드 모르간을 적용하면 내부는 $(\\overline{A\\cap B})\\cap\\overline{A\\cup B}$이고 전체 여집합을 취하면 $A\\cup B$.<br>\n(c) $(A\\cap\\overline B)\\cup(C\\cap\\overline B)=(A\\cup C)\\cap\\overline B=(A\\cup C)-B$.<br>\n(d) 대칭차집합의 정의 자체가 양쪽 중 한쪽에만 속하는 원소이므로 $(A\\cup B)-(A\\cap B)=A\\oplus B$.<br>\n(e) $(A\\cup B)-(B-A)=(A\\cup B)\\cap\\overline{(B\\cap\\overline A)}=(A\\cup B)\\cap(\\overline B\\cup A)=A$."
+    },
+    {
+      "id": "ch4-q030",
+      "type": "proof",
+      "text": "<strong>[문제 30]</strong> 다음 식을 간략히 정리하라.<br><br>\n(a) $\\overline{A} \\cup \\overline{B} \\cup B$<br>\n(b) $\\{A \\cup (\\overline{A} \\cap \\overline{B})\\} \\cap B$<br>\n(c) $(A \\cup B) - \\overline{A \\cap B}$<br>\n(d) $(A \\oplus B) - (A \\cup B)$<br>\n(e) $(A \\cap B) \\oplus \\overline{B}$",
+      "hint": "보법칙, 분배법칙, 대칭차집합 정의 사용",
+      "modelAnswer": "(a) $\\overline B\\cup B=U$ 이므로 전체는 $U$.<br>\n(b) $A\\cup(\\overline A\\cap\\overline B)=(A\\cup\\overline A)\\cap(A\\cup\\overline B)=U\\cap(A\\cup\\overline B)=A\\cup\\overline B$. 여기에 $\\cap B$를 취하면 $A\\cap B$.<br>\n(c) $(A\\cup B)\\cap(A\\cap B)=A\\cap B$.<br>\n(d) $A\\oplus B\\subseteq A\\cup B$ 이므로 차집합은 $\\emptyset$.<br>\n(e) $(A\\cap B)\\oplus\\overline B=((A\\cap B)-\\overline B)\\cup(\\overline B-(A\\cap B))=(A\\cap B)\\cup\\overline B=A\\cup\\overline B$."
+    },
+    {
+      "id": "ch4-q031",
+      "type": "proof",
+      "text": "<strong>[문제 31]</strong> 다음 식을 간략히 정리하라.<br><br>\n(a) $\\{(A \\cap \\overline{B}) \\cup C\\} \\cup \\{(\\overline{A} \\cup B) \\cap \\overline{C}\\}$<br>\n(b) $\\{(A \\cap \\overline{C}) \\cap (\\overline{A} \\cup B)\\} \\cup C$<br>\n(c) $(C - A) \\cap (A - B)$<br>\n(d) $(A - C) \\cap (A - B) \\cup (A \\cap B) \\cup (A \\cap C)$<br>\n(e) $\\{(A \\cap B) - (C - B)\\} - \\{(B - A) \\cup (B \\cap C)\\}$",
+      "hint": "차집합을 먼저 바꾸고 분배·흡수법칙 적용",
+      "modelAnswer": "(a) 정리하면 $U$. 실제로 $((A\\cap\\overline B)\\cup C)\\cup((\\overline A\\cup B)\\cap\\overline C)$를 전개하면 $C\\cup((A\\cap\\overline B)\\cup(\\overline A\\cup B))=C\\cup U=U$.<br>\n(b) $(A\\cap\\overline C)\\cap(\\overline A\\cup B)=(A\\cap B\\cap\\overline C)$ 이므로 전체는 $(A\\cap B\\cap\\overline C)\\cup C=(A\\cap B)\\cup C$.<br>\n(c) $(C\\cap\\overline A)\\cap(A\\cap\\overline B)=\\emptyset$.<br>\n(d) $(A\\cap\\overline C\\cap\\overline B)\\cup(A\\cap B)\\cup(A\\cap C)=A\\cap((\\overline B\\cap\\overline C)\\cup B\\cup C)=A$.<br>\n(e) $(A\\cap B)-(C-B)=A\\cap B$ 이고 다시 $((A\\cap B)-((B-A)\\cup(B\\cap C)))=A\\cap B\\cap\\overline C=A\\cap(B-C)$."
+    }
+  ]
+}

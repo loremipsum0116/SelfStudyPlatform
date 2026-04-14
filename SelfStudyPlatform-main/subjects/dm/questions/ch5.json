@@ -1,0 +1,107 @@
+{
+  "title": "Chapter 5 · 행렬과 행렬 연산",
+  "questions": [
+    {
+      "id": "ch5-q001",
+      "type": "proof",
+      "text": "<strong>[문제 01]</strong> 주어진 행렬에 대하여 다음을 구하라.<br><br>\n$A = \\begin{bmatrix} 1 & 5 & -1 \\\\ -5 & 0 & -5 \\\\ -1 & 5 & 1 \\end{bmatrix}, \\quad\nB = \\begin{bmatrix} 6 & 2 & 8 & 3 \\\\ 4 & 7 & 2 & 1 \\\\ 0 & 9 & 7 & 6 \\\\ 5 & 5 & 3 & 4 \\end{bmatrix}$<br><br>\n(a) 각 행렬의 크기<br>\n(b) $a_{13}, a_{23}, a_{31}, b_{14}, b_{22}, b_{31}, b_{43}$<br>\n(c) 각 행렬의 3행<br>\n(d) 각 행렬의 1열<br>\n(e) 각 행렬의 원소 $0$에 대한 원소 표기<br>\n(f) 각 행렬의 원소 $5$에 대한 원소 표기",
+      "hint": "행렬의 크기, 원소 표기, 특정 행·열, 특정 값의 위치를 각각 구하면 된다."
+    },
+    {
+      "id": "ch5-q002",
+      "type": "proof",
+      "text": "<strong>[문제 02]</strong> 주어진 행렬에 대하여 다음 물음에 답하라.<br><br>\n$A = \\begin{bmatrix} -5 & 0 \\\\ 1 & 2 \\end{bmatrix}, \\quad\nB = \\begin{bmatrix} 0 & 4 & 2 \\\\ 7 & 1 & 5 \\\\ -2 & -7 & 9 \\end{bmatrix}, \\quad\nC = \\begin{bmatrix} 6 & 3 \\\\ 5 & -4 \\\\ -2 & 9 \\end{bmatrix}, \\quad\nD = \\begin{bmatrix} -1 & 2 \\\\ 5 & -2 \\\\ 0 & 3 \\end{bmatrix}$<br><br>\n연산이 가능하면 연산 결과를 구하고 불가능하면 그 이유를 설명하라.<br><br>\n(a) $A + A$<br>\n(b) $A + B$<br>\n(c) $A + D$<br>\n(d) $B + B$<br>\n(e) $B + C$<br>\n(f) $A - C$<br>\n(g) $B - A$<br>\n(h) $B - B$<br>\n(i) $B - D$<br>\n(j) $C - B$",
+      "hint": "행렬의 덧셈과 뺄셈은 두 행렬의 크기가 같을 때만 가능하다."
+    },
+    {
+      "id": "ch5-q003",
+      "type": "proof",
+      "text": "<strong>[문제 03]</strong> 주어진 행렬에 대하여 다음 물음에 답하라.<br><br>\n$A = \\begin{bmatrix} -5 & 0 \\\\ 1 & 2 \\end{bmatrix}, \\quad\nB = \\begin{bmatrix} 0 & 4 & 2 \\\\ 7 & 1 & 5 \\\\ -2 & -7 & 9 \\end{bmatrix}, \\quad\nC = \\begin{bmatrix} 6 & 3 \\\\ 5 & -4 \\\\ -2 & 9 \\end{bmatrix}, \\quad\nD = \\begin{bmatrix} -1 & 2 \\\\ 5 & -2 \\\\ 0 & 3 \\end{bmatrix}$<br><br>\n연산이 가능하면 연산 결과를 구하고 불가능하면 그 이유를 설명하라.<br><br>\n(a) $C + A$<br>\n(b) $C + D$<br>\n(c) $D + B$<br>\n(d) $D + C$<br>\n(e) $D + D$<br>\n(f) $C - C$<br>\n(g) $C - D$<br>\n(h) $D - A$<br>\n(i) $D - B$<br>\n(j) $D - D$",
+      "hint": "행렬의 크기를 먼저 비교한 뒤 가능한 경우 같은 위치의 원소끼리 계산한다."
+    },
+    {
+      "id": "ch5-q004",
+      "type": "proof",
+      "text": "<strong>[문제 04]</strong> 주어진 행렬 $A, B, C, D$에 대하여 다음 물음에 답하라.<br><br>\n$A = \\begin{bmatrix} 1 & 3 \\\\ 5 & 1 \\\\ 8 & 0 \\end{bmatrix}, \\quad\nB = \\begin{bmatrix} 7 & 1 \\\\ 4 & 5 \\end{bmatrix}, \\quad\nC = \\begin{bmatrix} 4 & 5 & 3 \\\\ 8 & 0 & 1 \\\\ 2 & 7 & 2 \\end{bmatrix}, \\quad\nD = \\begin{bmatrix} 0 & 1 & 2 \\\\ 0 & 3 & 4 \\end{bmatrix}$<br><br>\n연산이 가능하면 연산 결과를 구하고 불가능하면 그 이유를 설명하라.<br><br>\n(a) $AA$<br>\n(b) $AB$<br>\n(c) $AC$<br>\n(d) $AD$<br>\n(e) $BA$<br>\n(f) $2BD$<br>\n(g) $C - AD$<br>\n(h) $3(A + A)C$<br>\n(i) $DA + B$",
+      "hint": "행렬 곱은 앞 행렬의 열 수와 뒤 행렬의 행 수가 같을 때만 가능하다."
+    },
+    {
+      "id": "ch5-q005",
+      "type": "proof",
+      "text": "<strong>[문제 05]</strong> 다음이 성립함을 확인하라. ($O$ : 영행렬, $I$ : 단위행렬)<br><br>\n(a) $B + O = O + B$<br>\n(b) $BI = IB$<br>\n(c) $CO = OC$<br>\n(d) $C + I = I + C$",
+      "hint": "영행렬과 단위행렬의 정의를 이용하여 각 식의 좌변과 우변을 직접 계산한다."
+    },
+    {
+      "id": "ch5-q006",
+      "type": "proof",
+      "text": "<strong>[문제 06]</strong> 다음을 연산하라.<br><br>\n(a) $3A$<br>\n(b) $-6B$<br>\n(c) $4C$<br>\n(d) $-5D$<br><br>\n단, 행렬은 다음과 같다.<br><br>\n$A = \\begin{bmatrix} 1 & 3 \\\\ 5 & 1 \\\\ 8 & 0 \\end{bmatrix}, \\quad\nB = \\begin{bmatrix} 7 & 1 \\\\ 4 & 5 \\end{bmatrix}, \\quad\nC = \\begin{bmatrix} 4 & 5 & 3 \\\\ 8 & 0 & 1 \\\\ 2 & 7 & 2 \\end{bmatrix}, \\quad\nD = \\begin{bmatrix} 0 & 1 & 2 \\\\ 0 & 3 & 4 \\end{bmatrix}$",
+      "hint": "스칼라 곱은 행렬의 모든 원소에 같은 수를 곱하면 된다."
+    },
+    {
+      "id": "ch5-q007",
+      "type": "proof",
+      "text": "<strong>[문제 07]</strong> 주어진 행렬 $A, B, C, D$에 대하여 다음 물음에 답하라.<br><br>\n$A = \\begin{bmatrix} 1 & 3 \\\\ 5 & 1 \\\\ 8 & 0 \\end{bmatrix}, \\quad\nB = \\begin{bmatrix} 7 & 1 \\\\ 4 & 5 \\end{bmatrix}, \\quad\nC = \\begin{bmatrix} 4 & 5 & 3 \\\\ 8 & 0 & 1 \\\\ 2 & 7 & 2 \\end{bmatrix}, \\quad\nD = \\begin{bmatrix} 0 & 1 & 2 \\\\ 0 & 3 & 4 \\end{bmatrix}$<br><br>\n연산이 가능하면 연산 결과를 구하고 불가능하면 그 이유를 설명하라.<br><br>\n(a) $BC$<br>\n(b) $CC$<br>\n(c) $CD$<br>\n(d) $DC$<br>\n(e) $DA$<br>\n(f) $AD - B$<br>\n(g) $BD - DC$<br>\n(h) $5CA + AB$<br>\n(i) $ABC$",
+      "hint": "곱셈의 가능 여부와 결과 행렬의 크기를 먼저 판단하고 계산한다."
+    },
+    {
+      "id": "ch5-q008",
+      "type": "proof",
+      "text": "<strong>[문제 08]</strong> 다음 행렬의 전치행렬을 구하고 각 행렬이 대칭행렬인지 판별하라.<br><br>\n$A = \\begin{bmatrix} 1 & 5 & 8 \\\\ 5 & 3 & 0 \\\\ 8 & 0 & 7 \\end{bmatrix}, \\quad\nB = \\begin{bmatrix} 3 & 1 & 8 \\\\ 2 & 3 & 7 \\\\ 1 & 1 & 5 \\end{bmatrix}, \\quad\nC = \\begin{bmatrix} 0 & 1 & 1 & 0 \\\\ 0 & -3 & 1 & -8 \\\\ 8 & 2 & 3 & 7 \\\\ -5 & 1 & 1 & 5 \\end{bmatrix}, \\quad\nD = \\begin{bmatrix} 1 & 9 & 4 & 0 \\\\ 9 & 2 & -2 & -8 \\\\ 4 & -2 & -3 & 1 \\\\ 0 & 1 & -8 & 9 \\end{bmatrix}$",
+      "hint": "전치행렬은 행과 열을 바꾼 행렬이며, 대칭행렬은 $A=A^T$를 만족한다."
+    },
+    {
+      "id": "ch5-q009",
+      "type": "proof",
+      "text": "<strong>[문제 09]</strong> 다음 행렬의 전치행렬을 구하고 각 행렬이 대칭행렬인지 판별하라.<br><br>\n$A = \\begin{bmatrix} 1 & 0 & -1 & 7 \\\\ 0 & 2 & 6 & -3 \\\\ -1 & 6 & 3 & 5 \\\\ 7 & -3 & 5 & 4 \\end{bmatrix}, \\quad\nB = \\begin{bmatrix} 5 & 0 & -1 & -5 \\\\ 3 & 4 & 8 & 6 \\\\ 1 & -7 & 3 & 9 \\\\ -2 & -1 & 2 & 0 \\end{bmatrix}$<br><br>\n$C = \\begin{bmatrix} 3 & 1 & 2 & -7 \\\\ 1 & -2 & 6 & -3 \\\\ 5 & -4 & 1 & 8 \\\\ 7 & 2 & 5 & 4 \\end{bmatrix}, \\quad\nD = \\begin{bmatrix} -3 & 8 & -4 & 1 \\\\ 8 & 7 & 2 & 2 \\\\ -4 & 2 & 6 & 5 \\\\ 1 & 2 & 5 & 8 \\end{bmatrix}$",
+      "hint": "각 행렬에 대해 $A^T$를 구한 뒤 원래 행렬과 같은지 비교한다."
+    },
+    {
+      "id": "ch5-q010",
+      "type": "proof",
+      "text": "<strong>[문제 10]</strong> 주어진 부울행렬에 대하여 다음 물음에 답하라.<br><br>\n$A = \\begin{bmatrix} 1 & 1 \\\\ 0 & 0 \\end{bmatrix}, \\quad\nB = \\begin{bmatrix} 0 & 1 & 0 \\\\ 1 & 1 & 1 \\end{bmatrix}, \\quad\nC = \\begin{bmatrix} 0 & 1 \\\\ 0 & 0 \\end{bmatrix}, \\quad\nD = \\begin{bmatrix} 1 & 1 \\\\ 0 & 0 \\\\ 0 & 1 \\end{bmatrix}$<br><br>\n(a) 위 행렬 중 두 개의 부울행렬을 이용하여 합과 교차가 가능한 모든 연산을 하라.<br>\n(b) 위 행렬 중 두 개의 부울행렬을 이용하여 부울곱이 가능한 모든 연산을 하라.",
+      "hint": "부울 합과 교차는 크기가 같아야 하고, 부울곱은 앞의 열 수와 뒤의 행 수가 같아야 한다."
+    },
+    {
+      "id": "ch5-q011",
+      "type": "proof",
+      "text": "<strong>[문제 11]</strong> 주어진 부울행렬에 대하여 다음을 연산하라.<br><br>\n$A = \\begin{bmatrix} 1 & 0 \\\\ 0 & 0 \\end{bmatrix}, \\quad\nB = \\begin{bmatrix} 0 & 0 \\\\ 1 & 1 \\\\ 1 & 1 \\end{bmatrix}, \\quad\nC = \\begin{bmatrix} 1 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}$<br><br>\n$D = \\begin{bmatrix} 1 & 1 & 0 \\\\ 0 & 0 & 1 \\\\ 0 & 1 & 1 \\end{bmatrix}, \\quad\nE = \\begin{bmatrix} 0 & 1 & 0 \\\\ 0 & 1 & 0 \\end{bmatrix}, \\quad\nF = \\begin{bmatrix} 0 & 0 & 1 \\\\ 1 & 1 & 1 \\\\ 0 & 1 & 0 \\end{bmatrix}$<br><br>\n(a) $(C \\odot B) \\lor A$<br>\n(b) $(C \\odot B) \\land A$<br>\n(c) $(B \\odot C) \\lor D$<br>\n(d) $(B \\odot C) \\land D$",
+      "hint": "부울곱은 $\\land$와 $\\lor$로 계산하고, 그 뒤에 부울 합 또는 교차를 적용한다."
+    },
+    {
+      "id": "ch5-q012",
+      "type": "proof",
+      "text": "<strong>[문제 12]</strong> 기본 행렬식을 이용하여 다음 행렬의 행렬식을 구하라.<br><br>\n(a) $A = \\begin{bmatrix} 8 & 3 \\\\ -2 & -2 \\end{bmatrix}$<br>\n(b) $B = \\begin{bmatrix} 3 & 4 \\\\ 6 & 8 \\end{bmatrix}$<br>\n(c) $C = \\begin{bmatrix} 6 & -1 \\\\ 2 & 3 \\end{bmatrix}$",
+      "hint": "$2\\times2$ 행렬식은 $ad-bc$ 공식을 사용한다."
+    },
+    {
+      "id": "ch5-q013",
+      "type": "proof",
+      "text": "<strong>[문제 13]</strong> 주어진 행렬에 대하여 다음 물음에 답하라.<br><br>\n$A = \\begin{bmatrix} 2 & 1 & -1 \\\\ -3 & 5 & 3 \\\\ 0 & 4 & 1 \\end{bmatrix}, \\quad\nB = \\begin{bmatrix} 1 & 2 & 3 \\\\ 0 & 5 & -4 \\\\ 3 & 6 & 9 \\end{bmatrix}, \\quad\nC = \\begin{bmatrix} 0 & -6 & 3 \\\\ 0 & 2 & 4 \\\\ 0 & 1 & 7 \\end{bmatrix}, \\quad\nD = \\begin{bmatrix} 1 & 2 & 4 \\\\ 5 & -3 & 6 \\\\ -2 & 1 & -1 \\end{bmatrix}$<br><br>\n$E = \\begin{bmatrix} 3 & 4 & 2 \\\\ 6 & 8 & 4 \\\\ -1 & 0 & 1 \\end{bmatrix}, \\quad\nF = \\begin{bmatrix} -9 & 0 & 1 \\\\ 2 & -1 & 3 \\\\ 7 & -1 & 3 \\end{bmatrix}, \\quad\nG = \\begin{bmatrix} 3 & -2 & 0 \\\\ 6 & -4 & 5 \\\\ 4 & -3 & 3 \\end{bmatrix}$<br><br>\n(a) 각 행렬의 소행렬과 소행렬식을 구하라.<br>\n(b) 각 행렬의 여인수행렬을 이용하여 행렬식을 구하라.<br>\n(c) 각 행렬의 수반행렬을 구하라.<br>\n(d) 각 행렬의 행렬식을 이용하여 가역행렬과 특이행렬을 구분하라.<br>\n(e) 위 행렬 중 가역행렬의 역행렬을 구하라.<br>\n(f) 가우스-조단 소거법을 이용하여 가역행렬의 역행렬을 구하고, (e)의 결과와 같은지 확인하라.",
+      "hint": "소행렬식, 여인수, 수반행렬, 행렬식, 역행렬, 가우스-조단 소거법 순서로 정리해서 계산한다."
+    },
+    {
+      "id": "ch5-q014",
+      "type": "proof",
+      "text": "<strong>[문제 14]</strong> 주어진 행렬들을 보고 다음 물음에 답하라.<br><br>\n$A = \\begin{bmatrix} 1 & 3 & 0 & 2 \\\\ 0 & -2 & 5 & -1 \\\\ 3 & -4 & 4 & 0 \\\\ 1 & 0 & -5 & 2 \\end{bmatrix}, \\quad\nB = \\begin{bmatrix} 3 & -1 & 5 & 2 \\\\ 0 & 1 & 4 & 1 \\\\ 4 & 2 & 2 & -3 \\\\ -1 & 0 & -3 & -1 \\end{bmatrix}$<br><br>\n$C = \\begin{bmatrix} 1 & -1 & -4 & 2 \\\\ 2 & 0 & -5 & 3 \\\\ 4 & -2 & -3 & 1 \\\\ 2 & 1 & -4 & 3 \\end{bmatrix}, \\quad\nD = \\begin{bmatrix} 5 & 9 & 0 & -6 \\\\ 6 & 4 & 4 & -5 \\\\ 1 & 2 & -1 & -2 \\\\ -2 & 1 & 0 & 3 \\end{bmatrix}$<br><br>\n(a) 각 행렬의 소행렬과 소행렬식을 구하라.<br>\n(b) 각 행렬의 여인수행렬을 구하라.<br>\n(c) 각 행렬의 수반행렬을 구하라.<br>\n(d) 각 행렬의 행렬식을 구하라.<br>\n(e) 각 행렬의 역행렬을 구하라.<br>\n(f) 가우스-조단 소거법을 이용하여 역행렬을 구하고, (e)의 결과와 같은지 확인하라.",
+      "hint": "$4\\times4$ 행렬은 계산량이 많으므로 행 또는 열 전개와 소거 과정을 체계적으로 적는다."
+    },
+    {
+      "id": "ch5-q015",
+      "type": "proof",
+      "text": "<strong>[문제 15]</strong> 가우스 소거법과 가우스-조단 소거법을 각각 이용하여 다음 연립일차방정식의 해를 구하라.<br><br>\n(a) $\\begin{cases} 3x - 5y + z = -3 \\\\ 3x + 2y - z = 0 \\\\ -x - y + z = 1 \\end{cases}$<br>\n(b) $\\begin{cases} 5x - y + z = -6 \\\\ x + y + 3z = 0 \\\\ -2x + 2y + 4z = 2 \\end{cases}$<br>\n(c) $\\begin{cases} 3x + 2y - z = 5 \\\\ x - 3y + 4z = -9 \\\\ 2x - y + z = 2 \\end{cases}$<br>\n(d) $\\begin{cases} 2y + 3z = 7 \\\\ 2x + 6y + 8z = 10 \\\\ x + 5y + 6z = 1 \\end{cases}$",
+      "hint": "첨가행렬을 만든 뒤 가우스 소거법과 가우스-조단 소거법을 각각 적용해 해를 비교한다."
+    },
+    {
+      "id": "ch5-q016",
+      "type": "proof",
+      "text": "<strong>[문제 16]</strong> 가우스 소거법과 가우스-조단 소거법을 각각 이용하여 다음 연립일차방정식의 해를 구하라.<br><br>\n(a) $\\begin{cases} 3x + 2y - 3z = 1 \\\\ -x - 5y + z = 4 \\\\ 2x - y - 4z = -3 \\end{cases}$<br>\n(b) $\\begin{cases} 2x - 2y + 3z = 1 \\\\ -x + 3y - 4z = -11 \\\\ x - y + z = -3 \\end{cases}$<br>\n(c) $\\begin{cases} x - y - 5z = -16 \\\\ 4x + 2y - 5z = -1 \\\\ -x + z = 4 \\end{cases}$<br>\n(d) $\\begin{cases} -5x - y + 8z = -9 \\\\ 3x + 2y - 5z = -2 \\\\ 8x + 3y - 9z = 15 \\end{cases}$",
+      "hint": "행 연산 과정을 생략하지 말고, 각 단계에서 첨가행렬이 어떻게 바뀌는지 적는다."
+    },
+    {
+      "id": "ch5-q017",
+      "type": "proof",
+      "text": "<strong>[문제 17]</strong> 가우스 소거법과 가우스-조단 소거법을 각각 이용하여 다음 연립일차방정식의 해를 구하라.<br><br>\n(a) $\\begin{cases} 4w + 4x + 5y + 3z = 7 \\\\ 3w + 3x + 3y + 3z = 9 \\\\ 2w + x + 6y + 3z = 10 \\\\ 2w + 4y + 2z = 4 \\end{cases}$<br>\n(b) $\\begin{cases} 3w + x + 2y - 3z = 9 \\\\ -w + x - 3y + 2z = -12 \\\\ 2w - 3x + 5y + 6z = 17 \\\\ -w - 2x - 4y - 5z = -23 \\end{cases}$<br>\n(c) $\\begin{cases} w + x + y + z = -2 \\\\ -2w - x + 2y + 3z = 29 \\\\ w + 3x - y - z = -16 \\\\ w - 2x + 3y + 2z = 11 \\end{cases}$<br>\n(d) $\\begin{cases} 4w + 5x - 9y + z = -24 \\\\ -3w - 2x + 2y + 3z = 13 \\\\ -2w + 7x + 13y + 3z = -14 \\\\ -w + x + y + 2z = -1 \\end{cases}$",
+      "hint": "미지수가 4개이므로 첨가행렬의 피벗 위치를 순서대로 잡아 소거한다."
+    }
+  ]
+}

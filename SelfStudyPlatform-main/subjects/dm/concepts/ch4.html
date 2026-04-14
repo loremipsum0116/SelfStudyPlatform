@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script type="module" src="../../../shared/auth-guard.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ch.4 집합론 · 개념 정리</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+<script defer src="../../../shared/katex-boot.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../shared/styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html">← 허브</a>
+    <div class="crumbs"><span>Ch.4</span><span class="sep">/</span><span class="now">개념 정리</span></div>
+    <a href="../practice/ch4.html">문제풀이 →</a>
+  </div>
+
+  <header class="masthead">
+    <div class="kicker"><span>Discrete Mathematics · Chapter 04</span><span>Concepts</span></div>
+    <h1 class="title">집합론과<br><em>집합의 연산</em></h1>
+    <p class="deck">집합의 표현부터 부분집합, 합집합·교집합, 포함-배제의 원리, 곱집합과 멱집합, 그리고 집합의 대수 법칙까지 — 챕터 4 문제를 풀기 위한 핵심 개념을 기초부터 정리합니다.</p>
+  </header>
+
+  <div class="classifier">
+    <h2>이 문서의 분류 기준</h2>
+    <p style="margin:4px 0 12px;font-size:14.5px;color:var(--ink-soft)">챕터 4는 <strong>집합의 정의 → 포함 관계 → 기본 연산 → 기수 계산 → 특수한 집합 → 대수 법칙</strong>의 흐름으로 정리했습니다.</p>
+    <ul>
+      <li><b>§1</b> 집합의 기초 표기와 분류 — 문제 01~02</li>
+      <li><b>§2</b> 원소와 집합의 포함 관계 — 문제 03~06</li>
+      <li><b>§3</b> 집합의 기본 연산 — 문제 07~12</li>
+      <li><b>§4</b> 포함-배제의 원리와 기수 계산 — 문제 13~16, 20~27</li>
+      <li><b>§5</b> 곱집합과 멱집합 — 문제 17~19</li>
+      <li><b>§6</b> 집합의 대수 법칙 — 문제 28~31</li>
+    </ul>
+  </div>
+
+  <nav class="toc">
+    <span class="lbl">Contents</span>
+    <ol>
+      <li><a href="#s1"><span class="n">§1</span>집합의 기초</a></li>
+      <li><a href="#s2"><span class="n">§2</span>포함 관계</a></li>
+      <li><a href="#s3"><span class="n">§3</span>집합의 기본 연산</a></li>
+      <li><a href="#s4"><span class="n">§4</span>포함-배제의 원리</a></li>
+      <li><a href="#s5"><span class="n">§5</span>곱집합과 멱집합</a></li>
+      <li><a href="#s6"><span class="n">§6</span>집합의 대수 법칙</a></li>
+    </ol>
+  </nav>
+
+  <section id="s1">
+    <div class="sec-head">
+      <span class="sec-num">§ 01</span>
+      <h2 class="sec-title">집합의 기초 표기와 분류</h2>
+      <span class="scope">문제 01~02</span>
+    </div>
+
+    <h3>1.1 집합과 원소</h3>
+    <p><strong>집합(Set)</strong>은 명확한 기준에 따라 구별할 수 있는 대상들의 모임입니다. 집합은 보통 $A, B, C$ 같은 대문자로, 집합을 이루는 각 대상은 <strong>원소(Element)</strong>라 하며 $a, b, x$ 같은 소문자로 나타냅니다.</p>
+
+    <dl class="terms">
+      <div>
+        <dt>원소가 속한다 <small>Membership</small></dt>
+        <dd>원소 $a$가 집합 $A$에 들어 있으면 $a \in A$ 로 씁니다.</dd>
+      </div>
+      <div>
+        <dt>원소가 속하지 않는다</dt>
+        <dd>원소 $a$가 집합 $A$에 들어 있지 않으면 $a \notin A$ 로 씁니다.</dd>
+      </div>
+    </dl>
+
+    <div class="note warn">
+      <span class="lbl">★ 가장 자주 틀리는 부분</span>
+      $\in$ 은 <strong>원소와 집합 사이</strong>의 관계를 나타내는 기호입니다. 집합과 집합의 관계는 $\subseteq$ 같은 <strong>부분집합 기호</strong>를 써야 합니다.
+    </div>
+
+    <h3>1.2 집합의 표현 방법</h3>
+    <h4>원소나열법</h4>
+    <p>집합에 속하는 원소를 중괄호 안에 직접 나열하는 방법입니다.</p>
+    <div class="example"><div class="example-body">$A = \{1, 2, 3, 4, 5\}$</div></div>
+
+    <h4>조건제시법</h4>
+    <p>원소들이 만족하는 공통 조건을 이용해 집합을 나타내는 방법입니다. 이산수학 문제에서는 이 표현이 매우 자주 나옵니다.</p>
+    <div class="example"><div class="example-body">$A = \{x \mid 1 \le x \le 5,\ x \in \mathbb{N}\}$</div></div>
+    <p>세로선 $\mid$ 앞은 원소의 형태, 뒤는 그 원소가 만족해야 하는 조건입니다.</p>
+
+    <h3>1.3 자주 쓰는 수 체계 기호</h3>
+    <dl class="terms">
+      <div>
+        <dt>$\mathbb{N}$</dt>
+        <dd>자연수 집합</dd>
+      </div>
+      <div>
+        <dt>$\mathbb{Z}$</dt>
+        <dd>정수 집합</dd>
+      </div>
+      <div>
+        <dt>$\mathbb{R}$</dt>
+        <dd>실수 집합</dd>
+      </div>
+    </dl>
+
+    <h3>1.4 집합의 기수와 기본 분류</h3>
+    <p><strong>기수(Cardinality)</strong>는 집합의 원소 개수이며 $|A|$ 로 표기합니다.</p>
+    <dl class="terms">
+      <div>
+        <dt>유한집합 <small>Finite Set</small></dt>
+        <dd>원소 개수가 유한한 집합입니다.</dd>
+      </div>
+      <div>
+        <dt>무한집합 <small>Infinite Set</small></dt>
+        <dd>원소 개수가 끝없이 많은 집합입니다. 예: $\mathbb{N}$</dd>
+      </div>
+      <div>
+        <dt>공집합 <small>Empty Set</small></dt>
+        <dd>원소가 하나도 없는 집합입니다. $\emptyset$ 또는 $\{\}$ 로 쓰며, $|\emptyset| = 0$ 입니다.</dd>
+      </div>
+    </dl>
+  </section>
+
+  <section id="s2">
+    <div class="sec-head">
+      <span class="sec-num">§ 02</span>
+      <h2 class="sec-title">원소와 집합의 포함 관계</h2>
+      <span class="scope">문제 03~06</span>
+    </div>
+
+    <h3>2.1 부분집합</h3>
+    <p>집합 $A$의 모든 원소가 집합 $B$에도 속하면 $A$를 $B$의 <strong>부분집합</strong>이라고 하며 $A \subseteq B$ 로 씁니다.</p>
+    $$A \subseteq B \iff \forall x(x \in A \to x \in B)$$
+
+    <div class="note">
+      <span class="lbl">핵심 성질</span>
+      모든 집합은 자기 자신의 부분집합입니다. 또한 공집합은 모든 집합의 부분집합입니다.
+    </div>
+
+    <h3>2.2 진부분집합</h3>
+    <p>$A \subseteq B$ 이면서 동시에 $A \ne B$ 이면, $A$를 $B$의 <strong>진부분집합</strong>이라 하고 $A \subset B$ 로 씁니다. 즉, $B$에는 $A$에 없는 원소가 적어도 하나 이상 있습니다.</p>
+
+    <h3>2.3 두 집합의 상등</h3>
+    <p>두 집합이 정확히 같은 원소를 가지면 $A = B$ 입니다. 집합의 순서는 중요하지 않고, 같은 원소를 여러 번 써도 집합에서는 한 번만 취급합니다.</p>
+    <div class="example">
+      <div class="example-body">
+        $\{1,2,3\} = \{3,2,1\}$ 이고, $\{1,1,2,2,3\} = \{1,2,3\}$ 입니다.
+      </div>
+    </div>
+    <p>$A = B$ 를 보일 때는 보통 다음 두 가지를 모두 증명합니다.</p>
+    $$A \subseteq B \quad \text{and} \quad B \subseteq A$$
+  </section>
+
+  <section id="s3">
+    <div class="sec-head">
+      <span class="sec-num">§ 03</span>
+      <h2 class="sec-title">집합의 기본 연산</h2>
+      <span class="scope">문제 07~12</span>
+    </div>
+    <p>집합의 연산은 챕터 2의 명제 논리와 연결해서 보면 훨씬 이해하기 쉽습니다. 합집합은 OR, 교집합은 AND, 여집합은 NOT과 대응합니다.</p>
+
+    <h3>3.1 합집합</h3>
+    <p>집합 $A$ 또는 집합 $B$에 속하는 원소들의 집합입니다.</p>
+    $$A \cup B = \{x \mid x \in A \lor x \in B\}$$
+
+    <h3>3.2 교집합</h3>
+    <p>집합 $A$와 $B$에 공통으로 들어 있는 원소들의 집합입니다.</p>
+    $$A \cap B = \{x \mid x \in A \land x \in B\}$$
+    <div class="note">
+      <span class="lbl">서로소</span>
+      두 집합의 공통 원소가 하나도 없으면 $A \cap B = \emptyset$ 이고, 이때 두 집합을 <strong>서로소</strong>라고 합니다.
+    </div>
+
+    <h3>3.3 차집합</h3>
+    <p>$A$에는 속하지만 $B$에는 속하지 않는 원소들의 집합입니다.</p>
+    $$A - B = \{x \mid x \in A \land x \notin B\}$$
+    <div class="note warn">
+      <span class="lbl">필수 변환</span>
+      차집합은 계산할 때 자주 $A - B = A \cap B^c$ 형태로 바꾸어 사용합니다.
+    </div>
+
+    <h3>3.4 여집합</h3>
+    <p><strong>전체집합</strong> $U$가 주어져 있을 때, $A$에 속하지 않는 원소들의 집합을 $A$의 여집합이라고 합니다.</p>
+    $$A^c = U - A = \{x \mid x \in U \land x \notin A\}$$
+    <p>여집합은 전체집합이 무엇인지가 먼저 정해져야만 의미가 있습니다.</p>
+
+    <h3>3.5 대칭차집합</h3>
+    <p>두 집합 중 정확히 한쪽에만 속하는 원소들의 집합입니다. 즉, 겹치는 부분은 빼고 남는 부분만 모읍니다.</p>
+    $$A \oplus B = (A-B) \cup (B-A) = (A \cup B) - (A \cap B)$$
+  </section>
+
+  <section id="s4">
+    <div class="sec-head">
+      <span class="sec-num">§ 04</span>
+      <h2 class="sec-title">포함-배제의 원리와 기수 계산</h2>
+      <span class="scope">문제 13~16, 20~27</span>
+    </div>
+    <p>집합 문제에서 개수를 묻는 문장제는 대부분 <strong>포함-배제의 원리</strong>로 풀립니다. 핵심은 겹친 부분을 중복해서 세지 않도록 조정하는 것입니다.</p>
+
+    <h3>4.1 두 집합의 포함-배제 원리</h3>
+    $$|A \cup B| = |A| + |B| - |A \cap B|$$
+    <p>$|A| + |B|$를 그대로 더하면 교집합 부분이 두 번 더해지므로, $|A \cap B|$를 한 번 빼 주어야 합니다.</p>
+
+    <h3>4.2 세 집합의 포함-배제 원리</h3>
+    $$|A \cup B \cup C| = |A| + |B| + |C| - |A \cap B| - |B \cap C| - |C \cap A| + |A \cap B \cap C|$$
+    <p>세 집합의 경우에는 두 집합씩 겹치는 부분을 먼저 빼고, 그러면 세 집합이 모두 겹치는 부분이 너무 많이 빠지므로 마지막에 한 번 다시 더합니다.</p>
+
+    <h3>4.3 자주 쓰는 기수 공식</h3>
+    <dl class="terms">
+      <div>
+        <dt>차집합의 원소 개수</dt>
+        <dd>$|A-B| = |A| - |A \cap B|$</dd>
+      </div>
+      <div>
+        <dt>여집합의 원소 개수</dt>
+        <dd>$|A^c| = |U| - |A|$</dd>
+      </div>
+      <div>
+        <dt>대칭차집합의 원소 개수</dt>
+        <dd>$|A \oplus B| = |A \cup B| - |A \cap B|$</dd>
+      </div>
+    </dl>
+
+    <div class="example">
+      <div class="example-body">
+        문장제에서 먼저 해야 할 일은 조건을 집합으로 바꾸는 것입니다. 예를 들어 전체 학생 집합을 $U$, 축구를 하는 학생 집합을 $A$, 농구를 하는 학생 집합을 $B$로 두면, “둘 다 하는 학생 수”는 $|A \cap B|$, “적어도 하나는 하는 학생 수”는 $|A \cup B|$가 됩니다.
+      </div>
+    </div>
+  </section>
+
+  <section id="s5">
+    <div class="sec-head">
+      <span class="sec-num">§ 05</span>
+      <h2 class="sec-title">곱집합과 멱집합</h2>
+      <span class="scope">문제 17~19</span>
+    </div>
+
+    <h3>5.1 곱집합</h3>
+    <p>집합 $A$의 원소를 첫 번째 성분으로, 집합 $B$의 원소를 두 번째 성분으로 하는 <strong>순서쌍</strong>들의 집합을 곱집합이라고 합니다.</p>
+    $$A \times B = \{(a,b) \mid a \in A,\ b \in B\}$$
+    <div class="note warn">
+      <span class="lbl">주의</span>
+      순서쌍은 순서가 중요하므로 일반적으로 $(a,b) \ne (b,a)$ 입니다. 따라서 보통 $A \times B \ne B \times A$ 입니다.
+    </div>
+    $$|A \times B| = |A|\cdot|B|$$
+
+    <h3>5.2 멱집합</h3>
+    <p>집합 $A$의 <strong>모든 부분집합</strong>을 원소로 갖는 집합을 멱집합이라 하고 $P(A)$ 또는 $2^A$ 로 표기합니다.</p>
+    <div class="example">
+      <div class="example-body">
+        $A = \{1,2\}$ 이면 부분집합은 $\emptyset, \{1\}, \{2\}, \{1,2\}$ 이므로
+        $$P(A)=\{\emptyset, \{1\}, \{2\}, \{1,2\}\}$$
+      </div>
+    </div>
+    <p>원소가 $n$개인 집합의 멱집합 원소 개수는 다음과 같습니다.</p>
+    $$|P(A)| = 2^{|A|}$$
+    <p>이 공식은 각 원소를 “부분집합에 넣을지 말지” 두 가지 선택으로 생각하면 쉽게 이해할 수 있습니다.</p>
+  </section>
+
+  <section id="s6">
+    <div class="sec-head">
+      <span class="sec-num">§ 06</span>
+      <h2 class="sec-title">집합의 대수 법칙</h2>
+      <span class="scope">문제 28~31</span>
+    </div>
+    <p>집합식의 간단화는 명제 논리의 동치 법칙과 거의 같은 구조입니다. 식을 줄이거나 같음을 증명할 때 자주 사용합니다.</p>
+
+    <h3>6.1 교환법칙</h3>
+    $$A \cup B = B \cup A \qquad A \cap B = B \cap A$$
+
+    <h3>6.2 결합법칙</h3>
+    $$(A \cup B) \cup C = A \cup (B \cup C)$$
+    $$(A \cap B) \cap C = A \cap (B \cap C)$$
+
+    <h3>6.3 분배법칙</h3>
+    $$A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$$
+    $$A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$$
+
+    <h3>6.4 드 모르간의 법칙</h3>
+    $$\overline{A \cup B} = \bar{A} \cap \bar{B}$$
+    $$\overline{A \cap B} = \bar{A} \cup \bar{B}$$
+    <p>전체에 걸린 여집합을 풀면, 합집합과 교집합 기호가 서로 뒤바뀝니다.</p>
+
+    <h3>6.5 흡수법칙</h3>
+    $$A \cup (A \cap B) = A$$
+    $$A \cap (A \cup B) = A$$
+
+    <h3>6.6 차집합 변환</h3>
+    $$A-B = A \cap \bar{B}$$
+    <div class="note warn">
+      <span class="lbl">실전 팁</span>
+      집합식 간단화 문제에서는 차집합 기호를 먼저 $A \cap \bar{B}$ 형태로 바꾼 뒤, 드 모르간 법칙과 분배법칙을 적용하면 훨씬 정리가 쉬워집니다.
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

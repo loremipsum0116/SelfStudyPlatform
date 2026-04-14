@@ -1,0 +1,2978 @@
+{
+  "chapterId": "ch1",
+  "title": "Chapter 1 · 수의 체계와 컴퓨터의 수 표현",
+  "questions": [
+    {
+      "id": "ch1-q001",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 01(a)]</strong> 다음 수 중 <em>자연수</em>를 모두 고른 것은?<br><br>$\\dfrac{2}{3},\\;64,\\;\\sqrt{34},\\;-6,\\;-\\dfrac{1}{2},\\;-3.74,\\;1.1234567532341\\cdots,\\;-62.75637563\\cdots,$<br>$-\\sqrt{81},\\;\\dfrac{54}{9},\\;\\sqrt{16}+3i,\\;-\\dfrac{35}{112},\\;\\sqrt{3}\\,i,\\;-43.8698688672\\cdots,\\;7.129971289713\\cdots,\\;12.12$",
+      "choices": [
+        "$64,\\; \\dfrac{54}{9}$",
+        "$64,\\; -\\sqrt{81},\\; \\dfrac{54}{9}$",
+        "$64,\\; \\dfrac{54}{9},\\; 12.12$",
+        "$64$"
+      ],
+      "answer": 0,
+      "explanation": "$64$는 자연수, $\\dfrac{54}{9} = 6$이므로 자연수입니다. $-\\sqrt{81} = -9$는 음수이므로 자연수가 아닙니다."
+    },
+    {
+      "id": "ch1-q002",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 01(b)]</strong> 다음 수 중 <em>정수</em>를 모두 고른 것은?<br><br>$\\dfrac{2}{3},\\;64,\\;\\sqrt{34},\\;-6,\\;-\\dfrac{1}{2},\\;-3.74,\\;1.1234567532341\\cdots,\\;-62.75637563\\cdots,$<br>$-\\sqrt{81},\\;\\dfrac{54}{9},\\;\\sqrt{16}+3i,\\;-\\dfrac{35}{112},\\;\\sqrt{3}\\,i,\\;-43.8698688672\\cdots,\\;7.129971289713\\cdots,\\;12.12$",
+      "choices": [
+        "$64,\\; -6,\\; -\\sqrt{81},\\; \\dfrac{54}{9}$",
+        "$64,\\; -6,\\; \\dfrac{54}{9}$",
+        "$64,\\; -6,\\; -\\sqrt{81},\\; \\dfrac{54}{9},\\; 12.12$",
+        "$64,\\; -6$"
+      ],
+      "answer": 0,
+      "explanation": "$64$, $-6$은 정수, $-\\sqrt{81} = -9$, $\\dfrac{54}{9} = 6$도 정수입니다."
+    },
+    {
+      "id": "ch1-q003",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 01(c)]</strong> 다음 수 중 <em>무리수</em>를 모두 고른 것은?<br><br>$\\dfrac{2}{3},\\;64,\\;\\sqrt{34},\\;-6,\\;-\\dfrac{1}{2},\\;-3.74,\\;1.1234567532341\\cdots,\\;-62.75637563\\cdots,$<br>$-\\sqrt{81},\\;\\dfrac{54}{9},\\;\\sqrt{16}+3i,\\;-\\dfrac{35}{112},\\;\\sqrt{3}\\,i,\\;-43.8698688672\\cdots,\\;7.129971289713\\cdots,\\;12.12$",
+      "choices": [
+        "$\\sqrt{34},\\;1.1234567532341\\cdots,\\;-43.8698688672\\cdots,\\;7.129971289713\\cdots$",
+        "$\\sqrt{34},\\;1.1234567532341\\cdots,\\;-62.75637563\\cdots,\\;-43.8698688672\\cdots$",
+        "$\\sqrt{34},\\;\\sqrt{3}\\,i,\\;1.1234567532341\\cdots$",
+        "$\\sqrt{34},\\;1.1234567532341\\cdots,\\;-43.8698688672\\cdots$"
+      ],
+      "answer": 0,
+      "explanation": "$\\sqrt{34}$는 무리수, $1.1234567532341\\cdots$는 규칙 없는 무한소수(무리수), $-43.8698688672\\cdots$, $7.129971289713\\cdots$도 규칙 없는 무한소수입니다. $-62.75637563\\cdots$는 '7563'이 순환하므로 유리수입니다. 허수($\\sqrt{3}\\,i$)는 무리수가 아닌 별도의 수 체계입니다."
+    },
+    {
+      "id": "ch1-q004",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 01(d)]</strong> 다음 수 중 <em>허수</em>를 모두 고른 것은?<br><br>$\\dfrac{2}{3},\\;64,\\;\\sqrt{34},\\;-6,\\;-\\dfrac{1}{2},\\;-3.74,\\;1.1234567532341\\cdots,\\;-62.75637563\\cdots,$<br>$-\\sqrt{81},\\;\\dfrac{54}{9},\\;\\sqrt{16}+3i,\\;-\\dfrac{35}{112},\\;\\sqrt{3}\\,i,\\;-43.8698688672\\cdots,\\;7.129971289713\\cdots,\\;12.12$",
+      "choices": [
+        "$\\sqrt{16}+3i,\\;\\sqrt{3}\\,i$",
+        "$\\sqrt{16}+3i$",
+        "$\\sqrt{3}\\,i$",
+        "$\\sqrt{16}+3i,\\;\\sqrt{3}\\,i,\\;\\sqrt{34}$"
+      ],
+      "answer": 0,
+      "explanation": "$\\sqrt{16}+3i = 4+3i$와 $\\sqrt{3}\\,i$는 허수부가 0이 아니므로 허수입니다."
+    },
+    {
+      "id": "ch1-q005",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 01(e)]</strong> 다음 수 중 <em>기약분수(하한항)</em>로 이미 표현된 유리수를 모두 고른 것은?<br><br>$\\dfrac{2}{3},\\;-\\dfrac{1}{2},\\;\\dfrac{54}{9},\\;-\\dfrac{35}{112}$",
+      "choices": [
+        "$\\dfrac{2}{3},\\;-\\dfrac{1}{2}$",
+        "$\\dfrac{2}{3},\\;-\\dfrac{1}{2},\\;-\\dfrac{35}{112}$",
+        "$\\dfrac{2}{3}$만",
+        "$\\dfrac{2}{3},\\;-\\dfrac{1}{2},\\;\\dfrac{54}{9}$"
+      ],
+      "answer": 0,
+      "explanation": "$\\gcd(2,3)=1$, $\\gcd(1,2)=1$이므로 기약분수입니다. $\\dfrac{54}{9}=6$, $\\dfrac{35}{112}=\\dfrac{5}{16}$이므로 기약분수가 아닙니다."
+    },
+    {
+      "id": "ch1-q006",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 02(a)]</strong> 다음 유리수 중 <em>이미 기약분수(하한항)</em>인 것을 모두 고른 것은?<br><br>$\\dfrac{36}{60},\\;\\dfrac{3}{29},\\;\\dfrac{5}{255},\\;\\dfrac{78}{234},\\;\\dfrac{16}{81},\\;\\dfrac{1}{4},\\;\\dfrac{112}{7},\\;\\dfrac{45}{145},\\;\\dfrac{7}{120},\\;\\dfrac{34}{68},\\;\\dfrac{120}{13},\\;\\dfrac{52}{117}$",
+      "choices": [
+        "$\\dfrac{3}{29},\\;\\dfrac{16}{81},\\;\\dfrac{1}{4},\\;\\dfrac{7}{120},\\;\\dfrac{120}{13}$",
+        "$\\dfrac{3}{29},\\;\\dfrac{16}{81},\\;\\dfrac{1}{4},\\;\\dfrac{7}{120}$",
+        "$\\dfrac{3}{29},\\;\\dfrac{1}{4},\\;\\dfrac{7}{120},\\;\\dfrac{120}{13}$",
+        "$\\dfrac{3}{29},\\;\\dfrac{16}{81},\\;\\dfrac{1}{4},\\;\\dfrac{7}{120},\\;\\dfrac{120}{13},\\;\\dfrac{52}{117}$"
+      ],
+      "answer": 0,
+      "explanation": "각 분수에서 $\\gcd$를 구하면: $\\gcd(3,29)=1$, $\\gcd(16,81)=1$, $\\gcd(1,4)=1$, $\\gcd(7,120)=1$, $\\gcd(120,13)=1$이므로 이 5개가 기약분수입니다."
+    },
+    {
+      "id": "ch1-q007",
+      "type": "short-answer",
+      "text": "<strong>[문제 02]</strong> $\\dfrac{36}{60}$을 기약분수(하한항)로 나타내시오. <em>(예: 3/5)</em>",
+      "answer": "3/5",
+      "accepted": [
+        "3/5",
+        "3/5",
+        "3 / 5"
+      ],
+      "explanation": "$\\gcd(36,60) = 12$이므로 $\\dfrac{36}{60} = \\dfrac{3}{5}$."
+    },
+    {
+      "id": "ch1-q008",
+      "type": "short-answer",
+      "text": "<strong>[문제 02]</strong> $\\dfrac{5}{255}$을 기약분수(하한항)로 나타내시오. <em>(예: 3/5)</em>",
+      "answer": "1/51",
+      "accepted": [
+        "1/51",
+        "1/51",
+        "1 / 51"
+      ],
+      "explanation": "$\\gcd(5,255) = 5$이므로 $\\dfrac{5}{255} = \\dfrac{1}{51}$."
+    },
+    {
+      "id": "ch1-q009",
+      "type": "short-answer",
+      "text": "<strong>[문제 02]</strong> $\\dfrac{78}{234}$을 기약분수(하한항)로 나타내시오. <em>(예: 3/5)</em>",
+      "answer": "1/3",
+      "accepted": [
+        "1/3",
+        "1/3",
+        "1 / 3"
+      ],
+      "explanation": "$\\gcd(78,234) = 78$이므로 $\\dfrac{78}{234} = \\dfrac{1}{3}$."
+    },
+    {
+      "id": "ch1-q010",
+      "type": "short-answer",
+      "text": "<strong>[문제 02]</strong> $\\dfrac{112}{7}$을 기약분수(하한항)로 나타내시오. <em>(예: 3/5)</em>",
+      "answer": "16/1",
+      "accepted": [
+        "16/1",
+        "16/1",
+        "16 / 1"
+      ],
+      "explanation": "$\\gcd(112,7) = 7$이므로 $\\dfrac{112}{7} = \\dfrac{16}{1}$."
+    },
+    {
+      "id": "ch1-q011",
+      "type": "short-answer",
+      "text": "<strong>[문제 02]</strong> $\\dfrac{45}{145}$을 기약분수(하한항)로 나타내시오. <em>(예: 3/5)</em>",
+      "answer": "9/29",
+      "accepted": [
+        "9/29",
+        "9/29",
+        "9 / 29"
+      ],
+      "explanation": "$\\gcd(45,145) = 5$이므로 $\\dfrac{45}{145} = \\dfrac{9}{29}$."
+    },
+    {
+      "id": "ch1-q012",
+      "type": "short-answer",
+      "text": "<strong>[문제 02]</strong> $\\dfrac{34}{68}$을 기약분수(하한항)로 나타내시오. <em>(예: 3/5)</em>",
+      "answer": "1/2",
+      "accepted": [
+        "1/2",
+        "1/2",
+        "1 / 2"
+      ],
+      "explanation": "$\\gcd(34,68) = 34$이므로 $\\dfrac{34}{68} = \\dfrac{1}{2}$."
+    },
+    {
+      "id": "ch1-q013",
+      "type": "short-answer",
+      "text": "<strong>[문제 02]</strong> $\\dfrac{52}{117}$을 기약분수(하한항)로 나타내시오. <em>(예: 3/5)</em>",
+      "answer": "4/9",
+      "accepted": [
+        "4/9",
+        "4/9",
+        "4 / 9"
+      ],
+      "explanation": "$\\gcd(52,117) = 13$이므로 $\\dfrac{52}{117} = \\dfrac{4}{9}$."
+    },
+    {
+      "id": "ch1-q014",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 03(a)]</strong> 다음 중 <em>유리수</em>를 모두 고른 것은?<br><br>$5.5252525252\\cdots,\\;12.1234123412\\cdots,\\;\\sqrt{91},\\;\\sqrt{148}$",
+      "choices": [
+        "$5.5252525252\\cdots,\\;12.1234123412\\cdots$",
+        "$5.5252525252\\cdots$ 만",
+        "$5.5252525252\\cdots,\\;12.1234123412\\cdots,\\;\\sqrt{91}$",
+        "모두 무리수"
+      ],
+      "answer": 0,
+      "explanation": "$5.\\overline{52}$와 $12.\\overline{1234}$는 순환소수이므로 유리수입니다. $\\sqrt{91}$, $\\sqrt{148}$은 완전제곱수가 아니므로 무리수입니다."
+    },
+    {
+      "id": "ch1-q015",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 03(b)]</strong> 다음 중 <em>유리수</em>를 모두 고른 것은?<br><br>$1.42736189921\\cdots,\\;4.1652538593\\cdots,\\;\\sqrt{36},\\;\\sqrt{625}$",
+      "choices": [
+        "$\\sqrt{36},\\;\\sqrt{625}$",
+        "$\\sqrt{36}$ 만",
+        "$1.42736189921\\cdots,\\;\\sqrt{36},\\;\\sqrt{625}$",
+        "모두 유리수"
+      ],
+      "answer": 0,
+      "explanation": "$\\sqrt{36}=6$, $\\sqrt{625}=25$이므로 유리수입니다. 나머지 두 수는 규칙 없는 무한소수이므로 무리수입니다."
+    },
+    {
+      "id": "ch1-q016",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 03(c)]</strong> 다음 중 <em>무리수</em>를 모두 고른 것은?<br><br>$880.0012967377\\cdots,\\;79.9101910191\\cdots,\\;\\sqrt{73},\\;\\sqrt{81}$",
+      "choices": [
+        "$880.0012967377\\cdots,\\;\\sqrt{73}$",
+        "$880.0012967377\\cdots,\\;79.9101910191\\cdots,\\;\\sqrt{73}$",
+        "$\\sqrt{73}$ 만",
+        "$\\sqrt{73},\\;\\sqrt{81}$"
+      ],
+      "answer": 0,
+      "explanation": "$79.9101910191\\cdots = 79.9\\overline{10191}$은 순환소수→유리수, $\\sqrt{81}=9$→유리수. $880.0012967377\\cdots$은 비순환 무한소수→무리수, $\\sqrt{73}$→무리수."
+    },
+    {
+      "id": "ch1-q017",
+      "type": "short-answer",
+      "text": "<strong>[문제 04(a)]</strong> $A=5,\\;B=13+8i$ 일 때, $A+B$를 구하시오. <em>(예: 3+4i)</em>",
+      "answer": "18+8i",
+      "accepted": [
+        "18+8i",
+        "18 + 8i"
+      ],
+      "explanation": "$5 + (13+8i) = 18+8i$"
+    },
+    {
+      "id": "ch1-q018",
+      "type": "short-answer",
+      "text": "<strong>[문제 04(b)]</strong> $A=5,\\;B=13+8i$ 일 때, $B-A$를 구하시오.",
+      "answer": "8+8i",
+      "accepted": [
+        "8+8i",
+        "8 + 8i"
+      ],
+      "explanation": "$(13+8i) - 5 = 8+8i$"
+    },
+    {
+      "id": "ch1-q019",
+      "type": "short-answer",
+      "text": "<strong>[문제 04(c)]</strong> $A=5,\\;B=13+8i$ 일 때, $AB$를 구하시오.",
+      "answer": "65+40i",
+      "accepted": [
+        "65+40i",
+        "65 + 40i"
+      ],
+      "explanation": "$5(13+8i) = 65+40i$"
+    },
+    {
+      "id": "ch1-q020",
+      "type": "short-answer",
+      "text": "<strong>[문제 04(d)]</strong> $A=5,\\;B=13+8i$ 일 때, $\\dfrac{B}{A}$를 구하시오. <em>(예: 13/5+8/5i)</em>",
+      "answer": "13/5+8/5i",
+      "accepted": [
+        "13/5+8/5i",
+        "13/5 + 8/5i",
+        "2.6+1.6i",
+        "2.6 + 1.6i"
+      ],
+      "explanation": "$\\dfrac{13+8i}{5} = \\dfrac{13}{5}+\\dfrac{8}{5}i$"
+    },
+    {
+      "id": "ch1-q021",
+      "type": "short-answer",
+      "text": "<strong>[문제 04(e)]</strong> $C=2+2i,\\;D=9i$ 일 때, $C+D$를 구하시오.",
+      "answer": "2+11i",
+      "accepted": [
+        "2+11i",
+        "2 + 11i"
+      ],
+      "explanation": "$(2+2i)+9i = 2+11i$"
+    },
+    {
+      "id": "ch1-q022",
+      "type": "short-answer",
+      "text": "<strong>[문제 04(f)]</strong> $C=2+2i,\\;D=9i$ 일 때, $D-C$를 구하시오.",
+      "answer": "-2+7i",
+      "accepted": [
+        "-2+7i",
+        "-2 + 7i"
+      ],
+      "explanation": "$9i-(2+2i) = -2+7i$"
+    },
+    {
+      "id": "ch1-q023",
+      "type": "short-answer",
+      "text": "<strong>[문제 04(g)]</strong> $C=2+2i,\\;D=9i$ 일 때, $CD$를 구하시오.",
+      "answer": "-18+18i",
+      "accepted": [
+        "-18+18i",
+        "-18 + 18i"
+      ],
+      "explanation": "$(2+2i)(9i) = 18i + 18i^2 = 18i - 18 = -18+18i$"
+    },
+    {
+      "id": "ch1-q024",
+      "type": "short-answer",
+      "text": "<strong>[문제 04(h)]</strong> $C=2+2i,\\;D=9i$ 일 때, $\\dfrac{C}{D}$를 구하시오. <em>(예: 2/9-2/9i)</em>",
+      "answer": "2/9-2/9i",
+      "accepted": [
+        "2/9-2/9i",
+        "2/9 - 2/9i"
+      ],
+      "explanation": "$\\dfrac{2+2i}{9i} = \\dfrac{(2+2i)(-9i)}{(9i)(-9i)} = \\dfrac{-18i+18}{81} = \\dfrac{2}{9}-\\dfrac{2}{9}i$"
+    },
+    {
+      "id": "ch1-q025",
+      "type": "short-answer",
+      "text": "<strong>[문제 05(a)]</strong> $B=4,\\;C=23i$ 일 때, $B+C$를 구하시오.",
+      "answer": "4+23i",
+      "accepted": [
+        "4+23i",
+        "4 + 23i"
+      ],
+      "explanation": "$4 + 23i = 4+23i$"
+    },
+    {
+      "id": "ch1-q026",
+      "type": "short-answer",
+      "text": "<strong>[문제 05(b)]</strong> $A=1+10i,\\;D=5+17i$ 일 때, $D-A$를 구하시오.",
+      "answer": "4+7i",
+      "accepted": [
+        "4+7i",
+        "4 + 7i"
+      ],
+      "explanation": "$(5+17i)-(1+10i) = 4+7i$"
+    },
+    {
+      "id": "ch1-q027",
+      "type": "short-answer",
+      "text": "<strong>[문제 05(c)]</strong> $A=1+10i,\\;C=23i$ 일 때, $AC$를 구하시오.",
+      "answer": "-230+23i",
+      "accepted": [
+        "-230+23i",
+        "-230 + 23i"
+      ],
+      "explanation": "$(1+10i)(23i) = 23i + 230i^2 = -230+23i$"
+    },
+    {
+      "id": "ch1-q028",
+      "type": "short-answer",
+      "text": "<strong>[문제 05(d)]</strong> $C=23i,\\;D=5+17i$ 일 때, $\\dfrac{D}{C}$를 구하시오.",
+      "answer": "17/23-5/23i",
+      "accepted": [
+        "17/23-5/23i",
+        "17/23 - 5/23i"
+      ],
+      "explanation": "$\\dfrac{5+17i}{23i} = \\dfrac{(5+17i)(-23i)}{529} = \\dfrac{391-115i}{529} = \\dfrac{17}{23}-\\dfrac{5}{23}i$"
+    },
+    {
+      "id": "ch1-q029",
+      "type": "short-answer",
+      "text": "<strong>[문제 05(e)]</strong> $A=1+10i,\\;D=5+17i$ 일 때, $A+D$를 구하시오.",
+      "answer": "6+27i",
+      "accepted": [
+        "6+27i",
+        "6 + 27i"
+      ],
+      "explanation": "$(1+10i)+(5+17i) = 6+27i$"
+    },
+    {
+      "id": "ch1-q030",
+      "type": "short-answer",
+      "text": "<strong>[문제 05(f)]</strong> $B=4,\\;C=23i$ 일 때, $B-C$를 구하시오.",
+      "answer": "4-23i",
+      "accepted": [
+        "4-23i",
+        "4 - 23i"
+      ],
+      "explanation": "$4 - 23i = 4-23i$"
+    },
+    {
+      "id": "ch1-q031",
+      "type": "short-answer",
+      "text": "<strong>[문제 05(g)]</strong> $B=4,\\;D=5+17i$ 일 때, $BD$를 구하시오.",
+      "answer": "20+68i",
+      "accepted": [
+        "20+68i",
+        "20 + 68i"
+      ],
+      "explanation": "$4(5+17i) = 20+68i$"
+    },
+    {
+      "id": "ch1-q032",
+      "type": "short-answer",
+      "text": "<strong>[문제 05(h)]</strong> $A=1+10i,\\;C=23i$ 일 때, $\\dfrac{A}{C}$를 구하시오.",
+      "answer": "10/23-1/23i",
+      "accepted": [
+        "10/23-1/23i",
+        "10/23 - 1/23i"
+      ],
+      "explanation": "$\\dfrac{1+10i}{23i} = \\dfrac{(1+10i)(-23i)}{529} = \\dfrac{230-23i}{529} = \\dfrac{10}{23}-\\dfrac{1}{23}i$"
+    },
+    {
+      "id": "ch1-q033",
+      "type": "short-answer",
+      "text": "<strong>[문제 06(a)]</strong> $\\displaystyle\\sum_{i=1}^{5} 4$의 값을 구하시오.",
+      "answer": "20",
+      "accepted": [
+        "20"
+      ],
+      "explanation": "상수의 합: $4 \\times 5 = 20$"
+    },
+    {
+      "id": "ch1-q034",
+      "type": "short-answer",
+      "text": "<strong>[문제 06(b)]</strong> $\\displaystyle\\sum_{j=-2}^{3} 3^j$의 값을 구하시오. <em>(분수는 a/b 형식)</em>",
+      "answer": "364/9",
+      "accepted": [
+        "364/9",
+        "364 / 9"
+      ],
+      "explanation": "$3^{-2}+3^{-1}+3^0+3^1+3^2+3^3 = \\tfrac{1}{9}+\\tfrac{1}{3}+1+3+9+27 = \\tfrac{364}{9}$"
+    },
+    {
+      "id": "ch1-q035",
+      "type": "short-answer",
+      "text": "<strong>[문제 06(c)]</strong> $\\displaystyle\\sum_{j=-2}^{3} 3j$의 값을 구하시오.",
+      "answer": "9",
+      "accepted": [
+        "9"
+      ],
+      "explanation": "$-6+(-3)+0+3+6+9 = 9$"
+    },
+    {
+      "id": "ch1-q036",
+      "type": "short-answer",
+      "text": "<strong>[문제 06(d)]</strong> $\\displaystyle\\sum_{i=1}^{8} (3+i)$의 값을 구하시오.",
+      "answer": "60",
+      "accepted": [
+        "60"
+      ],
+      "explanation": "$4+5+6+7+8+9+10+11 = 60$"
+    },
+    {
+      "id": "ch1-q037",
+      "type": "short-answer",
+      "text": "<strong>[문제 06(e)]</strong> $\\displaystyle\\sum_{i=6}^{9} i^2 + 5$의 값을 구하시오. <em>(시그마는 $i^2$에만 적용)</em>",
+      "answer": "235",
+      "accepted": [
+        "235"
+      ],
+      "explanation": "$\\sum_{i=6}^{9} i^2 + 5 = (36+49+64+81)+5 = 230+5 = 235$"
+    },
+    {
+      "id": "ch1-q038",
+      "type": "short-answer",
+      "text": "<strong>[문제 06(f)]</strong> $\\displaystyle\\sum_{i=-5}^{0} 10 + 7$의 값을 구하시오. <em>(시그마는 $10$에만 적용)</em>",
+      "answer": "67",
+      "accepted": [
+        "67"
+      ],
+      "explanation": "$\\sum_{i=-5}^{0} 10 + 7 = 6 \\times 10 + 7 = 67$"
+    },
+    {
+      "id": "ch1-q039",
+      "type": "short-answer",
+      "text": "<strong>[문제 07(a)]</strong> $\\displaystyle\\sum_{k=4}^{6} 15k + 7$의 값을 구하시오. <em>(시그마는 $15k$에만 적용)</em>",
+      "answer": "232",
+      "accepted": [
+        "232"
+      ],
+      "explanation": "$15(4)+15(5)+15(6)+7 = 60+75+90+7 = 232$"
+    },
+    {
+      "id": "ch1-q040",
+      "type": "short-answer",
+      "text": "<strong>[문제 07(b)]</strong> $\\displaystyle\\sum_{k=4}^{6} (15k+7)$의 값을 구하시오.",
+      "answer": "246",
+      "accepted": [
+        "246"
+      ],
+      "explanation": "$(15 \\cdot 4+7)+(15 \\cdot 5+7)+(15 \\cdot 6+7) = 67+82+97 = 246$"
+    },
+    {
+      "id": "ch1-q041",
+      "type": "short-answer",
+      "text": "<strong>[문제 07(c)]</strong> $\\displaystyle\\sum_{k=-2}^{1} (k^2+3k)$의 값을 구하시오.",
+      "answer": "0",
+      "accepted": [
+        "0"
+      ],
+      "explanation": "$(-2)+(-2)+0+4 = 0$"
+    },
+    {
+      "id": "ch1-q042",
+      "type": "short-answer",
+      "text": "<strong>[문제 07(d)]</strong> $\\displaystyle\\sum_{i=3}^{10} i^2 + \\sum_{i=1}^{4} 15i$의 값을 구하시오.",
+      "answer": "530",
+      "accepted": [
+        "530"
+      ],
+      "explanation": "$(9+16+25+36+49+64+81+100)+(15+30+45+60) = 380+150 = 530$"
+    },
+    {
+      "id": "ch1-q043",
+      "type": "short-answer",
+      "text": "<strong>[문제 07(e)]</strong> $\\displaystyle\\sum_{i=-5}^{5} i + \\sum_{i=5}^{5} 5$의 값을 구하시오.",
+      "answer": "5",
+      "accepted": [
+        "5"
+      ],
+      "explanation": "$\\sum_{i=-5}^{5} i = 0$ (대칭), $\\sum_{i=5}^{5} 5 = 5$. 합은 $5$."
+    },
+    {
+      "id": "ch1-q044",
+      "type": "short-answer",
+      "text": "<strong>[문제 07(f)]</strong> $\\displaystyle\\sum_{i=0}^{5} i^i$의 값을 구하시오. <em>($0^0 = 1$로 정의)</em>",
+      "answer": "3414",
+      "accepted": [
+        "3414"
+      ],
+      "explanation": "$0^0+1^1+2^2+3^3+4^4+5^5 = 1+1+4+27+256+3125 = 3414$"
+    },
+    {
+      "id": "ch1-q045",
+      "type": "short-answer",
+      "text": "<strong>[문제 08(a)]</strong> $\\displaystyle\\prod_{i=1}^{5} 8$의 값을 구하시오.",
+      "answer": "32768",
+      "accepted": [
+        "32768"
+      ],
+      "explanation": "$8^5 = 32768$"
+    },
+    {
+      "id": "ch1-q046",
+      "type": "short-answer",
+      "text": "<strong>[문제 08(b)]</strong> $\\displaystyle\\prod_{j=-2}^{3} 2j$의 값을 구하시오.",
+      "answer": "0",
+      "accepted": [
+        "0"
+      ],
+      "explanation": "$j=0$일 때 $2 \\cdot 0 = 0$이 포함되므로 전체 곱은 $0$입니다."
+    },
+    {
+      "id": "ch1-q047",
+      "type": "short-answer",
+      "text": "<strong>[문제 08(c)]</strong> $\\displaystyle\\prod_{i=-2}^{3} i + 3$의 값을 구하시오. <em>(곱 기호는 $i$에만 적용)</em>",
+      "answer": "3",
+      "accepted": [
+        "3"
+      ],
+      "explanation": "$\\prod_{i=-2}^{3} i = (-2)(-1)(0)(1)(2)(3) = 0$이므로 $0+3 = 3$"
+    },
+    {
+      "id": "ch1-q048",
+      "type": "short-answer",
+      "text": "<strong>[문제 08(d)]</strong> $\\displaystyle\\prod_{i=-2}^{3} (i+3)$의 값을 구하시오.",
+      "answer": "720",
+      "accepted": [
+        "720"
+      ],
+      "explanation": "$(1)(2)(3)(4)(5)(6) = 720 = 6!$"
+    },
+    {
+      "id": "ch1-q049",
+      "type": "short-answer",
+      "text": "<strong>[문제 08(e)]</strong> $\\displaystyle\\prod_{k=-3}^{2} (k+2)$의 값을 구하시오.",
+      "answer": "0",
+      "accepted": [
+        "0"
+      ],
+      "explanation": "$k=-2$일 때 $k+2=0$이므로 전체 곱은 $0$입니다."
+    },
+    {
+      "id": "ch1-q050",
+      "type": "short-answer",
+      "text": "<strong>[문제 08(f)]</strong> $\\displaystyle\\prod_{i=1}^{10} i$의 값을 구하시오.",
+      "answer": "3628800",
+      "accepted": [
+        "3628800"
+      ],
+      "explanation": "$10! = 3628800$"
+    },
+    {
+      "id": "ch1-q051",
+      "type": "short-answer",
+      "text": "<strong>[문제 09(a)]</strong> $\\displaystyle\\prod_{i=1}^{5} (3i^2-i)$의 값을 구하시오.",
+      "answer": "1478400",
+      "accepted": [
+        "1478400"
+      ],
+      "explanation": "$(3-1)(12-2)(27-3)(48-4)(75-5) = 2 \\times 10 \\times 24 \\times 44 \\times 70 = 1478400$"
+    },
+    {
+      "id": "ch1-q052",
+      "type": "short-answer",
+      "text": "<strong>[문제 09(b)]</strong> $\\displaystyle\\prod_{j=-2}^{3} 2^j$의 값을 구하시오.",
+      "answer": "8",
+      "accepted": [
+        "8"
+      ],
+      "explanation": "$2^{-2} \\cdot 2^{-1} \\cdot 2^0 \\cdot 2^1 \\cdot 2^2 \\cdot 2^3 = 2^{-2-1+0+1+2+3} = 2^3 = 8$"
+    },
+    {
+      "id": "ch1-q053",
+      "type": "short-answer",
+      "text": "<strong>[문제 09(c)]</strong> $\\displaystyle\\prod_{i=1}^{3} (i+1)^i$의 값을 구하시오.",
+      "answer": "1152",
+      "accepted": [
+        "1152"
+      ],
+      "explanation": "$2^1 \\times 3^2 \\times 4^3 = 2 \\times 9 \\times 64 = 1152$"
+    },
+    {
+      "id": "ch1-q054",
+      "type": "short-answer",
+      "text": "<strong>[문제 09(d)]</strong> $\\displaystyle\\prod_{i=0}^{3} (i!)$의 값을 구하시오.",
+      "answer": "12",
+      "accepted": [
+        "12"
+      ],
+      "explanation": "$0! \\times 1! \\times 2! \\times 3! = 1 \\times 1 \\times 2 \\times 6 = 12$"
+    },
+    {
+      "id": "ch1-q055",
+      "type": "short-answer",
+      "text": "<strong>[문제 09(e)]</strong> $0!$의 값을 구하시오.",
+      "answer": "1",
+      "accepted": [
+        "1"
+      ],
+      "explanation": "$0! = 1$ (정의)"
+    },
+    {
+      "id": "ch1-q056",
+      "type": "short-answer",
+      "text": "<strong>[문제 09(f)]</strong> $10!$의 값을 구하시오.",
+      "answer": "3628800",
+      "accepted": [
+        "3628800"
+      ],
+      "explanation": "$10! = 3628800$"
+    },
+    {
+      "id": "ch1-q057",
+      "type": "short-answer",
+      "text": "<strong>[문제 10(a)]</strong> $\\displaystyle\\prod_{i=0}^{2}\\!\\left(\\prod_{k=-2}^{-1} 2k\\right)$의 값을 구하시오.",
+      "answer": "512",
+      "accepted": [
+        "512"
+      ],
+      "explanation": "안쪽: $2(-2) \\times 2(-1) = (-4)(-2)=8$. 바깥쪽: $8^3 = 512$"
+    },
+    {
+      "id": "ch1-q058",
+      "type": "short-answer",
+      "text": "<strong>[문제 10(b)]</strong> $\\displaystyle\\sum_{i=1}^{3}\\sum_{k=3}^{7}(i+k)$의 값을 구하시오.",
+      "answer": "105",
+      "accepted": [
+        "105"
+      ],
+      "explanation": "안쪽: $\\sum_{k=3}^{7}(i+k)=5i+25$. 바깥: $(30)+(35)+(40)=105$"
+    },
+    {
+      "id": "ch1-q059",
+      "type": "short-answer",
+      "text": "<strong>[문제 10(c)]</strong> $\\displaystyle\\sum_{i=1}^{2}\\prod_{k=0}^{3}(2i+1)$의 값을 구하시오.",
+      "answer": "706",
+      "accepted": [
+        "706"
+      ],
+      "explanation": "$i=1$: $3^4=81$, $i=2$: $5^4=625$. 합: $81+625=706$"
+    },
+    {
+      "id": "ch1-q060",
+      "type": "short-answer",
+      "text": "<strong>[문제 10(d)]</strong> $\\displaystyle\\prod_{k=0}^{2}\\sum_{i=1}^{3}(2i+1)$의 값을 구하시오.",
+      "answer": "3375",
+      "accepted": [
+        "3375"
+      ],
+      "explanation": "안쪽: $3+5+7=15$ (모든 $k$에 동일). $15^3 = 3375$"
+    },
+    {
+      "id": "ch1-q061",
+      "type": "short-answer",
+      "text": "<strong>[문제 10(e)]</strong> $\\displaystyle\\prod_{i=1}^{3}\\sum_{k=1}^{3}(i+k)$의 값을 구하시오.",
+      "answer": "1620",
+      "accepted": [
+        "1620"
+      ],
+      "explanation": "$i=1$: $9$, $i=2$: $12$, $i=3$: $15$. $9 \\times 12 \\times 15 = 1620$"
+    },
+    {
+      "id": "ch1-q062",
+      "type": "short-answer",
+      "text": "<strong>[문제 10(f)]</strong> $\\displaystyle\\sum_{i=1}^{2}\\prod_{k=3}^{5}(i+k)$의 값을 구하시오.",
+      "answer": "330",
+      "accepted": [
+        "330"
+      ],
+      "explanation": "$i=1$: $4 \\times 5 \\times 6=120$, $i=2$: $5 \\times 6 \\times 7=210$. 합: $330$"
+    },
+    {
+      "id": "ch1-q063",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 11(a)]</strong> $3+4+5+6+7+8+9+10+11+12$를 합 기호로 올바르게 표현한 것은?",
+      "choices": [
+        "$\\displaystyle\\sum_{i=3}^{12} i$",
+        "$\\displaystyle\\sum_{i=1}^{10} (i+2)$",
+        "$\\displaystyle\\sum_{i=0}^{9} (i+3)$",
+        "위 보기 모두 올바름"
+      ],
+      "answer": 3,
+      "explanation": "세 표현 모두 같은 값을 나타냅니다. $\\sum_{i=3}^{12} i = \\sum_{i=1}^{10}(i+2) = \\sum_{i=0}^{9}(i+3)$"
+    },
+    {
+      "id": "ch1-q064",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 11(b)]</strong> $(-5)+(-4)+(-3)+(-2)+(-1)+0$을 합 기호로 올바르게 표현한 것은?",
+      "choices": [
+        "$\\displaystyle\\sum_{i=-5}^{0} i$",
+        "$\\displaystyle\\sum_{i=0}^{5} (-i)$",
+        "$\\displaystyle\\sum_{i=1}^{6} (i-6)$",
+        "위 보기 모두 올바름"
+      ],
+      "answer": 3,
+      "explanation": "세 표현 모두 $-5-4-3-2-1+0 = -15$를 나타냅니다."
+    },
+    {
+      "id": "ch1-q065",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 11(c)]</strong> $(3+9)+(4+16)+(5+25)+(6+36)+(7+49)$를 합 기호로 올바르게 표현한 것은?",
+      "choices": [
+        "$\\displaystyle\\sum_{i=3}^{7} (i+i^2)$",
+        "$\\displaystyle\\sum_{i=3}^{7} i \\cdot (1+i)$",
+        "$\\displaystyle\\sum_{i=3}^{7} i + \\sum_{i=3}^{7} i^2$",
+        "위 보기 모두 올바름"
+      ],
+      "answer": 3,
+      "explanation": "$i+i^2 = i(1+i)$이고, 합의 분배로 $\\sum(i+i^2)=\\sum i + \\sum i^2$. 모두 같습니다."
+    },
+    {
+      "id": "ch1-q066",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 11(d)]</strong> $(-5)\\times(-4)\\times(-3)\\times(-2)\\times(-1)$을 곱 기호나 팩토리얼로 올바르게 표현한 것은?",
+      "choices": [
+        "$\\displaystyle-\\,5!\\;/\\;(-1)$",
+        "$\\displaystyle\\prod_{i=1}^{5} (-i)$",
+        "$\\displaystyle-5!$",
+        "$\\displaystyle\\prod_{i=-5}^{-1} i$"
+      ],
+      "answer": 3,
+      "explanation": "$(-5)(-4)(-3)(-2)(-1) = \\prod_{i=-5}^{-1} i = (-1)^5 \\cdot 5! = -120$"
+    },
+    {
+      "id": "ch1-q067",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 11(e)]</strong> $1\\times2\\times3\\times4\\times5\\times6\\times7$을 올바르게 표현한 것은?",
+      "choices": [
+        "$7!$",
+        "$\\displaystyle\\prod_{i=1}^{7} i$",
+        "$\\dfrac{7!}{0!}$",
+        "위 보기 모두 올바름"
+      ],
+      "answer": 3,
+      "explanation": "$1 \\times 2 \\times \\cdots \\times 7 = 7! = \\prod_{i=1}^{7} i = 5040$"
+    },
+    {
+      "id": "ch1-q068",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 11(f)]</strong> $(1+3)\\times(4+6)\\times(9+9)\\times(16+12)\\times(25+15)$를 곱 기호로 올바르게 표현한 것은?<br><em>힌트: 각 인수를 $i=1,2,3,4,5$에 대해 $(i^2 + 3i)$로 쓸 수 있습니다.</em>",
+      "choices": [
+        "$\\displaystyle\\prod_{i=1}^{5} (i^2+3i)$",
+        "$\\displaystyle\\prod_{i=1}^{5} i(i+3)$",
+        "A와 B 모두 올바름",
+        "위 식으로는 표현 불가"
+      ],
+      "answer": 2,
+      "explanation": "$(1+3)(4+6)(9+9)(16+12)(25+15) = 4 \\cdot 10 \\cdot 18 \\cdot 28 \\cdot 40$이고, $i^2+3i = i(i+3)$이므로 두 표현 모두 맞습니다."
+    },
+    {
+      "id": "ch1-q069",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 12(a)]</strong> $10+20+30+40+50+60+70$을 합 기호로 올바르게 표현한 것은?",
+      "choices": [
+        "$\\displaystyle\\sum_{i=1}^{7} 10i$",
+        "$\\displaystyle\\sum_{i=10}^{70} i$",
+        "$\\displaystyle 10\\sum_{i=1}^{7} i$",
+        "A와 C 모두 올바름"
+      ],
+      "answer": 3,
+      "explanation": "$10+20+\\cdots+70 = \\sum_{i=1}^{7} 10i = 10\\sum_{i=1}^{7} i$"
+    },
+    {
+      "id": "ch1-q070",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 12(b)]</strong> $10\\times20\\times30\\times40\\times50\\times60\\times70$을 곱 기호로 올바르게 표현한 것은?",
+      "choices": [
+        "$\\displaystyle\\prod_{i=1}^{7} 10i$",
+        "$\\displaystyle 10^7 \\cdot 7!$",
+        "$\\displaystyle 10^7 \\prod_{i=1}^{7} i$",
+        "위 보기 모두 올바름"
+      ],
+      "answer": 3,
+      "explanation": "$\\prod_{i=1}^{7} 10i = 10^7 \\cdot \\prod_{i=1}^{7} i = 10^7 \\cdot 7!$"
+    },
+    {
+      "id": "ch1-q071",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 12(c)]</strong> $7^7$을 곱 기호로 올바르게 표현한 것은?",
+      "choices": [
+        "$\\displaystyle\\prod_{i=1}^{7} 7$",
+        "$\\displaystyle\\sum_{i=1}^{7} 7$",
+        "$\\displaystyle 7 \\cdot 7!$",
+        "$\\displaystyle\\prod_{i=0}^{6} 7$"
+      ],
+      "answer": 0,
+      "explanation": "$\\prod_{i=1}^{7} 7 = 7^7$. 참고: $\\sum_{i=1}^{7} 7 = 49 \\neq 7^7$"
+    },
+    {
+      "id": "ch1-q072",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 12(d)]</strong> $\\underbrace{7+7+7+7+7+7+7+7}_{8\\text{개}}$을 올바르게 표현한 것은?",
+      "choices": [
+        "$\\displaystyle\\sum_{i=1}^{8} 7$",
+        "$7 \\times 8$",
+        "$\\displaystyle\\prod_{i=1}^{8} 7$",
+        "A와 B 모두 올바름"
+      ],
+      "answer": 3,
+      "explanation": "$\\sum_{i=1}^{8} 7 = 7 \\times 8 = 56$"
+    },
+    {
+      "id": "ch1-q073",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 12(e)]</strong> $11+15+19+23+27+31$을 합 기호로 올바르게 표현한 것은?<br><em>힌트: 첫째항 11, 공차 4인 등차수열</em>",
+      "choices": [
+        "$\\displaystyle\\sum_{i=0}^{5} (4i+11)$",
+        "$\\displaystyle\\sum_{i=1}^{6} (4i+7)$",
+        "A와 B 모두 올바름",
+        "$\\displaystyle\\sum_{i=1}^{6} (4i+11)$"
+      ],
+      "answer": 2,
+      "explanation": "$4(0)+11=11,\\;4(1)+11=15,\\;\\ldots$ 또는 $4(1)+7=11,\\;4(2)+7=15,\\;\\ldots$ 모두 같은 수열입니다."
+    },
+    {
+      "id": "ch1-q074",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 12(f)]</strong> $21\\times42\\times63\\times84\\times105$를 곱 기호로 올바르게 표현한 것은?",
+      "choices": [
+        "$\\displaystyle\\prod_{i=1}^{5} 21i$",
+        "$\\displaystyle 21^5 \\cdot 5!$",
+        "A와 B 모두 올바름",
+        "$\\displaystyle\\prod_{i=1}^{5} (20i+1)$"
+      ],
+      "answer": 2,
+      "explanation": "$21 \\cdot 1,\\;21 \\cdot 2,\\;\\ldots,\\;21 \\cdot 5$이므로 $\\prod_{i=1}^{5} 21i = 21^5 \\cdot 5!$"
+    },
+    {
+      "id": "ch1-q075",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 12(g)]</strong> $i \\in \\mathbb{Z},\\;-3 \\le i \\le 3$ 일 때, $-3+0+3+6+9+12+15$를 합 기호로 올바르게 표현한 것은?",
+      "choices": [
+        "$\\displaystyle\\sum_{i=-3}^{3} (3i+6)$",
+        "$\\displaystyle\\sum_{i=-3}^{3} 3(i+2)$",
+        "A와 B 모두 올바름",
+        "$\\displaystyle\\sum_{i=-3}^{3} (3i+3)$"
+      ],
+      "answer": 2,
+      "explanation": "$3i+6 = 3(i+2)$. $i=-3$: $-3$, $i=-2$: $0$, ..., $i=3$: $15$ ✓"
+    },
+    {
+      "id": "ch1-q076",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 12(h)]</strong> $\\dfrac{-15}{(-125+25)^3} \\times \\dfrac{-12}{(-64+16)^3} \\times \\dfrac{-9}{(-27+9)^3} \\times \\dfrac{-6}{(-8+4)^3}$을 곱 기호로 올바르게 표현한 것은?<br><em>힌트: 분자 $= -3i$, 분모 $= (-i^3+i^2)^3$ 패턴을 관찰하세요 ($i=2,3,4,5$).</em>",
+      "choices": [
+        "$\\displaystyle\\prod_{i=2}^{5} \\dfrac{-3i}{(-i^3+i^2)^3}$",
+        "$\\displaystyle\\prod_{i=2}^{5} \\dfrac{-3i}{(i^2(1-i))^3}$",
+        "A와 B 모두 올바름",
+        "$\\displaystyle\\prod_{i=2}^{5} \\dfrac{3i}{(i^3-i^2)^3}$"
+      ],
+      "answer": 2,
+      "explanation": "분자: $-15,-12,-9,-6 = -3(5),-3(4),-3(3),-3(2)$이므로 $i$ 역순 또는 $-3i$. 분모: $(-i^3+i^2)^3 = (i^2(1-i))^3$. A와 B는 동일 표현입니다."
+    },
+    {
+      "id": "ch1-q077",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 13(a)]</strong> $\\{(1\\!-\\!3)+(1\\!-\\!2)+(1\\!-\\!1)\\} + \\{(2\\!-\\!3)+(2\\!-\\!2)+(2\\!-\\!1)\\} + \\{(3\\!-\\!3)+(3\\!-\\!2)+(3\\!-\\!1)\\}$<br>을 올바르게 표현한 것은?",
+      "choices": [
+        "$\\displaystyle\\sum_{i=1}^{3}\\sum_{k=1}^{3}(i-k)$",
+        "$\\displaystyle\\sum_{k=1}^{3}\\sum_{i=1}^{3}(i-k)$",
+        "A와 B 모두 올바름",
+        "$\\displaystyle\\sum_{i=1}^{3}\\prod_{k=1}^{3}(i-k)$"
+      ],
+      "answer": 2,
+      "explanation": "이중 합의 순서를 바꿔도 결과는 같습니다. $\\sum\\sum(i-k) = -9$"
+    },
+    {
+      "id": "ch1-q078",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 13(b)]</strong> $\\{(1\\!-\\!3)(1\\!-\\!2)(1\\!-\\!1)\\} \\times \\{(2\\!-\\!3)(2\\!-\\!2)(2\\!-\\!1)\\} \\times \\{(3\\!-\\!3)(3\\!-\\!2)(3\\!-\\!1)\\}$<br>을 올바르게 표현한 것은?",
+      "choices": [
+        "$\\displaystyle\\prod_{i=1}^{3}\\prod_{k=1}^{3}(i-k)$",
+        "$\\displaystyle\\prod_{i=1}^{3}\\left\\{\\prod_{k=1}^{3}(i-k)\\right\\}$",
+        "A와 B 모두 올바름",
+        "$\\displaystyle\\sum_{i=1}^{3}\\prod_{k=1}^{3}(i-k)$"
+      ],
+      "answer": 2,
+      "explanation": "바깥 곱, 안쪽 곱. A와 B는 동일 표현이며, $i=1$ 또는 $i=3$일 때 $k=1$ 또는 $k=3$에서 $0$이 나와 전체 곱은 $0$."
+    },
+    {
+      "id": "ch1-q079",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 13(c)]</strong> $\\{(1\\!-\\!3)+(1\\!-\\!2)+(1\\!-\\!1)\\} \\times \\{(2\\!-\\!3)+(2\\!-\\!2)+(2\\!-\\!1)\\} \\times \\{(3\\!-\\!3)+(3\\!-\\!2)+(3\\!-\\!1)\\}$<br>을 올바르게 표현한 것은?",
+      "choices": [
+        "$\\displaystyle\\prod_{i=1}^{3}\\sum_{k=1}^{3}(i-k)$",
+        "$\\displaystyle\\sum_{i=1}^{3}\\prod_{k=1}^{3}(i-k)$",
+        "$\\displaystyle\\prod_{i=1}^{3}\\prod_{k=1}^{3}(i-k)$",
+        "$\\displaystyle\\sum_{i=1}^{3}\\sum_{k=1}^{3}(i-k)$"
+      ],
+      "answer": 0,
+      "explanation": "각 중괄호 안은 합(안쪽 $\\sum$), 중괄호끼리는 곱(바깥 $\\prod$). $(-3) \\times (-1) \\times (1)=3$? 아닙니다: $i=1$: $-2+(-1)+0=-3$, $i=2$: $-1+0+1=0$, $i=3$: $0+1+2=3$. 곱: $(-3)(0)(3)=0$"
+    },
+    {
+      "id": "ch1-q080",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 13(d)]</strong> $\\{(1\\!-\\!3)(1\\!-\\!2)(1\\!-\\!1)\\} + \\{(2\\!-\\!3)(2\\!-\\!2)(2\\!-\\!1)\\} + \\{(3\\!-\\!3)(3\\!-\\!2)(3\\!-\\!1)\\}$<br>을 올바르게 표현한 것은?",
+      "choices": [
+        "$\\displaystyle\\sum_{i=1}^{3}\\prod_{k=1}^{3}(i-k)$",
+        "$\\displaystyle\\prod_{i=1}^{3}\\sum_{k=1}^{3}(i-k)$",
+        "$\\displaystyle\\sum_{i=1}^{3}\\sum_{k=1}^{3}(i-k)$",
+        "$\\displaystyle\\prod_{i=1}^{3}\\prod_{k=1}^{3}(i-k)$"
+      ],
+      "answer": 0,
+      "explanation": "각 중괄호 안은 곱(안쪽 $\\prod$), 중괄호끼리는 합(바깥 $\\sum$). $i=1$: $(-2)(-1)(0)=0$, $i=2$: $(-1)(0)(1)=0$, $i=3$: $(0)(1)(2)=0$. 합: $0$"
+    },
+    {
+      "id": "ch1-q081",
+      "type": "short-answer",
+      "text": "<strong>[문제 14]</strong> $n=72,\\;d=6$일 때, 몫 $q$와 나머지 $r$을 구하시오. <em>(q,r 형식으로 입력)</em>",
+      "answer": "12,0",
+      "accepted": [
+        "12,0",
+        "12, 0",
+        "q=12, r=0"
+      ],
+      "explanation": "$72 = 6 \\times 12 + 0$ (나누어떨어짐)"
+    },
+    {
+      "id": "ch1-q082",
+      "type": "short-answer",
+      "text": "<strong>[문제 14]</strong> $n=90,\\;d=8$일 때, 몫 $q$와 나머지 $r$을 구하시오. <em>(q,r 형식으로 입력)</em>",
+      "answer": "11,2",
+      "accepted": [
+        "11,2",
+        "11, 2",
+        "q=11, r=2"
+      ],
+      "explanation": "$90 = 8 \\times 11 + 2$ (나누어떨어지지 않음)"
+    },
+    {
+      "id": "ch1-q083",
+      "type": "short-answer",
+      "text": "<strong>[문제 14]</strong> $n=124,\\;d=4$일 때, 몫 $q$와 나머지 $r$을 구하시오. <em>(q,r 형식으로 입력)</em>",
+      "answer": "31,0",
+      "accepted": [
+        "31,0",
+        "31, 0",
+        "q=31, r=0"
+      ],
+      "explanation": "$124 = 4 \\times 31 + 0$ (나누어떨어짐)"
+    },
+    {
+      "id": "ch1-q084",
+      "type": "short-answer",
+      "text": "<strong>[문제 14]</strong> $n=211,\\;d=10$일 때, 몫 $q$와 나머지 $r$을 구하시오. <em>(q,r 형식으로 입력)</em>",
+      "answer": "21,1",
+      "accepted": [
+        "21,1",
+        "21, 1",
+        "q=21, r=1"
+      ],
+      "explanation": "$211 = 10 \\times 21 + 1$ (나누어떨어지지 않음)"
+    },
+    {
+      "id": "ch1-q085",
+      "type": "short-answer",
+      "text": "<strong>[문제 14]</strong> $n=9,\\;d=2$일 때, 몫 $q$와 나머지 $r$을 구하시오. <em>(q,r 형식으로 입력)</em>",
+      "answer": "4,1",
+      "accepted": [
+        "4,1",
+        "4, 1",
+        "q=4, r=1"
+      ],
+      "explanation": "$9 = 2 \\times 4 + 1$ (나누어떨어지지 않음)"
+    },
+    {
+      "id": "ch1-q086",
+      "type": "short-answer",
+      "text": "<strong>[문제 14]</strong> $n=142,\\;d=6$일 때, 몫 $q$와 나머지 $r$을 구하시오. <em>(q,r 형식으로 입력)</em>",
+      "answer": "23,4",
+      "accepted": [
+        "23,4",
+        "23, 4",
+        "q=23, r=4"
+      ],
+      "explanation": "$142 = 6 \\times 23 + 4$ (나누어떨어지지 않음)"
+    },
+    {
+      "id": "ch1-q087",
+      "type": "short-answer",
+      "text": "<strong>[문제 14]</strong> $n=198,\\;d=18$일 때, 몫 $q$와 나머지 $r$을 구하시오. <em>(q,r 형식으로 입력)</em>",
+      "answer": "11,0",
+      "accepted": [
+        "11,0",
+        "11, 0",
+        "q=11, r=0"
+      ],
+      "explanation": "$198 = 18 \\times 11 + 0$ (나누어떨어짐)"
+    },
+    {
+      "id": "ch1-q088",
+      "type": "short-answer",
+      "text": "<strong>[문제 14]</strong> $n=294,\\;d=6$일 때, 몫 $q$와 나머지 $r$을 구하시오. <em>(q,r 형식으로 입력)</em>",
+      "answer": "49,0",
+      "accepted": [
+        "49,0",
+        "49, 0",
+        "q=49, r=0"
+      ],
+      "explanation": "$294 = 6 \\times 49 + 0$ (나누어떨어짐)"
+    },
+    {
+      "id": "ch1-q089",
+      "type": "short-answer",
+      "text": "<strong>[문제 15]</strong> $n=-113,\\;d=4$일 때, 몫 $q$와 나머지 $r$을 구하시오. ($0 \\le r < d$)<br><em>(q,r 형식으로 입력)</em>",
+      "answer": "-29,3",
+      "accepted": [
+        "-29,3",
+        "-29, 3",
+        "q=-29, r=3"
+      ],
+      "explanation": "$-113 = 4 \\times (-29) + 3$ (나누어떨어지지 않음)"
+    },
+    {
+      "id": "ch1-q090",
+      "type": "short-answer",
+      "text": "<strong>[문제 15]</strong> $n=-86,\\;d=43$일 때, 몫 $q$와 나머지 $r$을 구하시오. ($0 \\le r < d$)<br><em>(q,r 형식으로 입력)</em>",
+      "answer": "-2,0",
+      "accepted": [
+        "-2,0",
+        "-2, 0",
+        "q=-2, r=0"
+      ],
+      "explanation": "$-86 = 43 \\times (-2) + 0$ (나누어떨어짐)"
+    },
+    {
+      "id": "ch1-q091",
+      "type": "short-answer",
+      "text": "<strong>[문제 15]</strong> $n=-333,\\;d=9$일 때, 몫 $q$와 나머지 $r$을 구하시오. ($0 \\le r < d$)<br><em>(q,r 형식으로 입력)</em>",
+      "answer": "-37,0",
+      "accepted": [
+        "-37,0",
+        "-37, 0",
+        "q=-37, r=0"
+      ],
+      "explanation": "$-333 = 9 \\times (-37) + 0$ (나누어떨어짐)"
+    },
+    {
+      "id": "ch1-q092",
+      "type": "short-answer",
+      "text": "<strong>[문제 15]</strong> $n=-712,\\;d=11$일 때, 몫 $q$와 나머지 $r$을 구하시오. ($0 \\le r < d$)<br><em>(q,r 형식으로 입력)</em>",
+      "answer": "-65,3",
+      "accepted": [
+        "-65,3",
+        "-65, 3",
+        "q=-65, r=3"
+      ],
+      "explanation": "$-712 = 11 \\times (-65) + 3$ (나누어떨어지지 않음)"
+    },
+    {
+      "id": "ch1-q093",
+      "type": "short-answer",
+      "text": "<strong>[문제 15]</strong> $n=-49,\\;d=3$일 때, 몫 $q$와 나머지 $r$을 구하시오. ($0 \\le r < d$)<br><em>(q,r 형식으로 입력)</em>",
+      "answer": "-17,2",
+      "accepted": [
+        "-17,2",
+        "-17, 2",
+        "q=-17, r=2"
+      ],
+      "explanation": "$-49 = 3 \\times (-17) + 2$ (나누어떨어지지 않음)"
+    },
+    {
+      "id": "ch1-q094",
+      "type": "short-answer",
+      "text": "<strong>[문제 15]</strong> $n=-529,\\;d=88$일 때, 몫 $q$와 나머지 $r$을 구하시오. ($0 \\le r < d$)<br><em>(q,r 형식으로 입력)</em>",
+      "answer": "-7,87",
+      "accepted": [
+        "-7,87",
+        "-7, 87",
+        "q=-7, r=87"
+      ],
+      "explanation": "$-529 = 88 \\times (-7) + 87$ (나누어떨어지지 않음)"
+    },
+    {
+      "id": "ch1-q095",
+      "type": "short-answer",
+      "text": "<strong>[문제 15]</strong> $n=-218,\\;d=8$일 때, 몫 $q$와 나머지 $r$을 구하시오. ($0 \\le r < d$)<br><em>(q,r 형식으로 입력)</em>",
+      "answer": "-28,6",
+      "accepted": [
+        "-28,6",
+        "-28, 6",
+        "q=-28, r=6"
+      ],
+      "explanation": "$-218 = 8 \\times (-28) + 6$ (나누어떨어지지 않음)"
+    },
+    {
+      "id": "ch1-q096",
+      "type": "short-answer",
+      "text": "<strong>[문제 15]</strong> $n=-1274,\\;d=32$일 때, 몫 $q$와 나머지 $r$을 구하시오. ($0 \\le r < d$)<br><em>(q,r 형식으로 입력)</em>",
+      "answer": "-40,6",
+      "accepted": [
+        "-40,6",
+        "-40, 6",
+        "q=-40, r=6"
+      ],
+      "explanation": "$-1274 = 32 \\times (-40) + 6$ (나누어떨어지지 않음)"
+    },
+    {
+      "id": "ch1-q097",
+      "type": "proof",
+      "text": "<strong>[문제 16(a)]</strong> $17.5_{10}$을 기수와 자릿수를 이용하여 전개식으로 표현하시오.<br><em>예: $12.3_{10} = 1 \\times 10^1 + 2 \\times 10^0 + 3 \\times 10^{-1}$</em>",
+      "hint": "각 자릿수에 기수(10)의 거듭제곱을 곱한 전개식을 작성",
+      "modelAnswer": "$17.5_{10} = 1 \\times 10^1 + 7 \\times 10^0 + 5 \\times 10^{-1}$"
+    },
+    {
+      "id": "ch1-q098",
+      "type": "proof",
+      "text": "<strong>[문제 16(b)]</strong> $11.01_2$를 기수와 자릿수를 이용하여 전개식으로 표현하시오.",
+      "hint": "기수는 2",
+      "modelAnswer": "$11.01_2 = 1 \\times 2^1 + 1 \\times 2^0 + 0 \\times 2^{-1} + 1 \\times 2^{-2}$"
+    },
+    {
+      "id": "ch1-q099",
+      "type": "proof",
+      "text": "<strong>[문제 16(c)]</strong> $890.5625_{10}$을 기수와 자릿수를 이용하여 전개식으로 표현하시오.",
+      "hint": "기수는 10",
+      "modelAnswer": "$890.5625_{10} = 8 \\times 10^2 + 9 \\times 10^1 + 0 \\times 10^0 + 5 \\times 10^{-1} + 6 \\times 10^{-2} + 2 \\times 10^{-3} + 5 \\times 10^{-4}$"
+    },
+    {
+      "id": "ch1-q100",
+      "type": "proof",
+      "text": "<strong>[문제 16(d)]</strong> $1001.11101_2$를 기수와 자릿수를 이용하여 전개식으로 표현하시오.",
+      "hint": "기수는 2",
+      "modelAnswer": "$1001.11101_2 = 1 \\times 2^3 + 0 \\times 2^2 + 0 \\times 2^1 + 1 \\times 2^0 + 1 \\times 2^{-1} + 1 \\times 2^{-2} + 1 \\times 2^{-3} + 0 \\times 2^{-4} + 1 \\times 2^{-5}$"
+    },
+    {
+      "id": "ch1-q101",
+      "type": "proof",
+      "text": "<strong>[문제 16(e)]</strong> $3921.2711_{10}$을 기수와 자릿수를 이용하여 전개식으로 표현하시오.",
+      "hint": "기수는 10",
+      "modelAnswer": "$3921.2711_{10} = 3 \\times 10^3 + 9 \\times 10^2 + 2 \\times 10^1 + 1 \\times 10^0 + 2 \\times 10^{-1} + 7 \\times 10^{-2} + 1 \\times 10^{-3} + 1 \\times 10^{-4}$"
+    },
+    {
+      "id": "ch1-q102",
+      "type": "proof",
+      "text": "<strong>[문제 16(f)]</strong> $11011.101101_2$를 기수와 자릿수를 이용하여 전개식으로 표현하시오.",
+      "hint": "기수는 2",
+      "modelAnswer": "$11011.101101_2 = 1 \\times 2^4 + 1 \\times 2^3 + 0 \\times 2^2 + 1 \\times 2^1 + 1 \\times 2^0 + 1 \\times 2^{-1} + 0 \\times 2^{-2} + 1 \\times 2^{-3} + 1 \\times 2^{-4} + 0 \\times 2^{-5} + 1 \\times 2^{-6}$"
+    },
+    {
+      "id": "ch1-q103",
+      "type": "proof",
+      "text": "<strong>[문제 17(a)]</strong> $42.1_8$을 기수와 자릿수를 이용하여 전개식으로 표현하시오.",
+      "hint": "기수는 8",
+      "modelAnswer": "$42.1_8 = 4 \\times 8^1 + 2 \\times 8^0 + 1 \\times 8^{-1}$"
+    },
+    {
+      "id": "ch1-q104",
+      "type": "proof",
+      "text": "<strong>[문제 17(b)]</strong> $\\text{D0.12}_{16}$을 기수와 자릿수를 이용하여 전개식으로 표현하시오. <em>(D=13)</em>",
+      "hint": "기수는 16, D=13",
+      "modelAnswer": "$\\text{D0.12}_{16} = 13 \\times 16^1 + 0 \\times 16^0 + 1 \\times 16^{-1} + 2 \\times 16^{-2}$"
+    },
+    {
+      "id": "ch1-q105",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $19.5$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "10011.1",
+      "accepted": [
+        "10011.1",
+        "10011.1"
+      ],
+      "explanation": "$19.5_{10} = 10011.1_2$"
+    },
+    {
+      "id": "ch1-q106",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $19.5$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "23.4",
+      "accepted": [
+        "23.4"
+      ],
+      "explanation": "$19.5_{10} = 23.4_8$"
+    },
+    {
+      "id": "ch1-q107",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $19.5$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "13.8",
+      "accepted": [
+        "13.8",
+        "13.8"
+      ],
+      "explanation": "$19.5_{10} = 13.8_{16}$"
+    },
+    {
+      "id": "ch1-q108",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $23.375$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "10111.011",
+      "accepted": [
+        "10111.011",
+        "10111.011"
+      ],
+      "explanation": "$23.375_{10} = 10111.011_2$"
+    },
+    {
+      "id": "ch1-q109",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $23.375$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "27.3",
+      "accepted": [
+        "27.3"
+      ],
+      "explanation": "$23.375_{10} = 27.3_8$"
+    },
+    {
+      "id": "ch1-q110",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $23.375$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "17.6",
+      "accepted": [
+        "17.6",
+        "17.6"
+      ],
+      "explanation": "$23.375_{10} = 17.6_{16}$"
+    },
+    {
+      "id": "ch1-q111",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $149.6875$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "10010101.1011",
+      "accepted": [
+        "10010101.1011",
+        "10010101.1011"
+      ],
+      "explanation": "$149.6875_{10} = 10010101.1011_2$"
+    },
+    {
+      "id": "ch1-q112",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $149.6875$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "225.54",
+      "accepted": [
+        "225.54"
+      ],
+      "explanation": "$149.6875_{10} = 225.54_8$"
+    },
+    {
+      "id": "ch1-q113",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $149.6875$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "95.B",
+      "accepted": [
+        "95.B",
+        "95.b"
+      ],
+      "explanation": "$149.6875_{10} = 95.B_{16}$"
+    },
+    {
+      "id": "ch1-q114",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $311.65625$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "100110111.10101",
+      "accepted": [
+        "100110111.10101",
+        "100110111.10101"
+      ],
+      "explanation": "$311.65625_{10} = 100110111.10101_2$"
+    },
+    {
+      "id": "ch1-q115",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $311.65625$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "467.52",
+      "accepted": [
+        "467.52"
+      ],
+      "explanation": "$311.65625_{10} = 467.52_8$"
+    },
+    {
+      "id": "ch1-q116",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $311.65625$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "137.A8",
+      "accepted": [
+        "137.A8",
+        "137.a8"
+      ],
+      "explanation": "$311.65625_{10} = 137.A8_{16}$"
+    },
+    {
+      "id": "ch1-q117",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $823.7265625$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "1100110111.1011101",
+      "accepted": [
+        "1100110111.1011101",
+        "1100110111.1011101"
+      ],
+      "explanation": "$823.7265625_{10} = 1100110111.1011101_2$"
+    },
+    {
+      "id": "ch1-q118",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $823.7265625$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "1467.564",
+      "accepted": [
+        "1467.564"
+      ],
+      "explanation": "$823.7265625_{10} = 1467.564_8$"
+    },
+    {
+      "id": "ch1-q119",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $823.7265625$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "337.BA",
+      "accepted": [
+        "337.BA",
+        "337.ba"
+      ],
+      "explanation": "$823.7265625_{10} = 337.BA_{16}$"
+    },
+    {
+      "id": "ch1-q120",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $1377.34375$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "10101100001.01011",
+      "accepted": [
+        "10101100001.01011",
+        "10101100001.01011"
+      ],
+      "explanation": "$1377.34375_{10} = 10101100001.01011_2$"
+    },
+    {
+      "id": "ch1-q121",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $1377.34375$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "2541.26",
+      "accepted": [
+        "2541.26"
+      ],
+      "explanation": "$1377.34375_{10} = 2541.26_8$"
+    },
+    {
+      "id": "ch1-q122",
+      "type": "short-answer",
+      "text": "<strong>[문제 18]</strong> ${}10$진수 $1377.34375$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "561.58",
+      "accepted": [
+        "561.58",
+        "561.58"
+      ],
+      "explanation": "$1377.34375_{10} = 561.58_{16}$"
+    },
+    {
+      "id": "ch1-q123",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $48.75$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "110000.11",
+      "accepted": [
+        "110000.11",
+        "110000.11"
+      ],
+      "explanation": "$48.75_{10} = 110000.11_2$"
+    },
+    {
+      "id": "ch1-q124",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $48.75$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "60.6",
+      "accepted": [
+        "60.6"
+      ],
+      "explanation": "$48.75_{10} = 60.6_8$"
+    },
+    {
+      "id": "ch1-q125",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $48.75$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "30.C",
+      "accepted": [
+        "30.C",
+        "30.c"
+      ],
+      "explanation": "$48.75_{10} = 30.C_{16}$"
+    },
+    {
+      "id": "ch1-q126",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $93.5625$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "1011101.1001",
+      "accepted": [
+        "1011101.1001",
+        "1011101.1001"
+      ],
+      "explanation": "$93.5625_{10} = 1011101.1001_2$"
+    },
+    {
+      "id": "ch1-q127",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $93.5625$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "135.44",
+      "accepted": [
+        "135.44"
+      ],
+      "explanation": "$93.5625_{10} = 135.44_8$"
+    },
+    {
+      "id": "ch1-q128",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $93.5625$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "5D.9",
+      "accepted": [
+        "5D.9",
+        "5d.9"
+      ],
+      "explanation": "$93.5625_{10} = 5D.9_{16}$"
+    },
+    {
+      "id": "ch1-q129",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $157.40625$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "10011101.01101",
+      "accepted": [
+        "10011101.01101",
+        "10011101.01101"
+      ],
+      "explanation": "$157.40625_{10} = 10011101.01101_2$"
+    },
+    {
+      "id": "ch1-q130",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $157.40625$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "235.32",
+      "accepted": [
+        "235.32"
+      ],
+      "explanation": "$157.40625_{10} = 235.32_8$"
+    },
+    {
+      "id": "ch1-q131",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $157.40625$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "9D.68",
+      "accepted": [
+        "9D.68",
+        "9d.68"
+      ],
+      "explanation": "$157.40625_{10} = 9D.68_{16}$"
+    },
+    {
+      "id": "ch1-q132",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $299.34375$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "100101011.01011",
+      "accepted": [
+        "100101011.01011",
+        "100101011.01011"
+      ],
+      "explanation": "$299.34375_{10} = 100101011.01011_2$"
+    },
+    {
+      "id": "ch1-q133",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $299.34375$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "453.26",
+      "accepted": [
+        "453.26"
+      ],
+      "explanation": "$299.34375_{10} = 453.26_8$"
+    },
+    {
+      "id": "ch1-q134",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $299.34375$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "12B.58",
+      "accepted": [
+        "12B.58",
+        "12b.58"
+      ],
+      "explanation": "$299.34375_{10} = 12B.58_{16}$"
+    },
+    {
+      "id": "ch1-q135",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $516.515625$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "1000000100.100001",
+      "accepted": [
+        "1000000100.100001",
+        "1000000100.100001"
+      ],
+      "explanation": "$516.515625_{10} = 1000000100.100001_2$"
+    },
+    {
+      "id": "ch1-q136",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $516.515625$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "1004.41",
+      "accepted": [
+        "1004.41"
+      ],
+      "explanation": "$516.515625_{10} = 1004.41_8$"
+    },
+    {
+      "id": "ch1-q137",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $516.515625$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "204.84",
+      "accepted": [
+        "204.84",
+        "204.84"
+      ],
+      "explanation": "$516.515625_{10} = 204.84_{16}$"
+    },
+    {
+      "id": "ch1-q138",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $1001.625$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "1111101001.101",
+      "accepted": [
+        "1111101001.101",
+        "1111101001.101"
+      ],
+      "explanation": "$1001.625_{10} = 1111101001.101_2$"
+    },
+    {
+      "id": "ch1-q139",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $1001.625$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "1751.5",
+      "accepted": [
+        "1751.5"
+      ],
+      "explanation": "$1001.625_{10} = 1751.5_8$"
+    },
+    {
+      "id": "ch1-q140",
+      "type": "short-answer",
+      "text": "<strong>[문제 19]</strong> ${}10$진수 $1001.625$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "3E9.A",
+      "accepted": [
+        "3E9.A",
+        "3e9.a"
+      ],
+      "explanation": "$1001.625_{10} = 3E9.A_{16}$"
+    },
+    {
+      "id": "ch1-q141",
+      "type": "short-answer",
+      "text": "<strong>[문제 20]</strong> 2진수 $10.01_2$를 10진수로 변환하시오.",
+      "answer": "2.25",
+      "accepted": [
+        "2.25",
+        "2.25"
+      ],
+      "explanation": "$10.01_2 = 2.25_{10}$"
+    },
+    {
+      "id": "ch1-q142",
+      "type": "short-answer",
+      "text": "<strong>[문제 20]</strong> 2진수 $101.1011_2$를 10진수로 변환하시오.",
+      "answer": "5.6875",
+      "accepted": [
+        "5.6875",
+        "5.6875"
+      ],
+      "explanation": "$101.1011_2 = 5.6875_{10}$"
+    },
+    {
+      "id": "ch1-q143",
+      "type": "short-answer",
+      "text": "<strong>[문제 20]</strong> 2진수 $1110.111_2$를 10진수로 변환하시오.",
+      "answer": "14.875",
+      "accepted": [
+        "14.875",
+        "14.875"
+      ],
+      "explanation": "$1110.111_2 = 14.875_{10}$"
+    },
+    {
+      "id": "ch1-q144",
+      "type": "short-answer",
+      "text": "<strong>[문제 20]</strong> 2진수 $10101.101_2$를 10진수로 변환하시오.",
+      "answer": "21.625",
+      "accepted": [
+        "21.625",
+        "21.625"
+      ],
+      "explanation": "$10101.101_2 = 21.625_{10}$"
+    },
+    {
+      "id": "ch1-q145",
+      "type": "short-answer",
+      "text": "<strong>[문제 20]</strong> 2진수 $1011101.1101_2$를 10진수로 변환하시오.",
+      "answer": "93.8125",
+      "accepted": [
+        "93.8125",
+        "93.8125"
+      ],
+      "explanation": "$1011101.1101_2 = 93.8125_{10}$"
+    },
+    {
+      "id": "ch1-q146",
+      "type": "short-answer",
+      "text": "<strong>[문제 20]</strong> 2진수 $11100111.101011_2$를 10진수로 변환하시오.",
+      "answer": "231.672",
+      "accepted": [
+        "231.672",
+        "231.671875"
+      ],
+      "explanation": "$11100111.101011_2 = 231.672_{10}$"
+    },
+    {
+      "id": "ch1-q147",
+      "type": "short-answer",
+      "text": "<strong>[문제 21]</strong> 2진수 $11.1111_2$를 10진수로 변환하시오.",
+      "answer": "3.9375",
+      "accepted": [
+        "3.9375",
+        "3.9375"
+      ],
+      "explanation": "$11.1111_2 = 3.9375_{10}$"
+    },
+    {
+      "id": "ch1-q148",
+      "type": "short-answer",
+      "text": "<strong>[문제 21]</strong> 2진수 $1011.11011_2$를 10진수로 변환하시오.",
+      "answer": "11.8438",
+      "accepted": [
+        "11.8438",
+        "11.84375"
+      ],
+      "explanation": "$1011.11011_2 = 11.8438_{10}$"
+    },
+    {
+      "id": "ch1-q149",
+      "type": "short-answer",
+      "text": "<strong>[문제 21]</strong> 2진수 $11011.1001_2$를 10진수로 변환하시오.",
+      "answer": "27.5625",
+      "accepted": [
+        "27.5625",
+        "27.5625"
+      ],
+      "explanation": "$11011.1001_2 = 27.5625_{10}$"
+    },
+    {
+      "id": "ch1-q150",
+      "type": "short-answer",
+      "text": "<strong>[문제 21]</strong> 2진수 $101100.11_2$를 10진수로 변환하시오.",
+      "answer": "44.75",
+      "accepted": [
+        "44.75",
+        "44.75"
+      ],
+      "explanation": "$101100.11_2 = 44.75_{10}$"
+    },
+    {
+      "id": "ch1-q151",
+      "type": "short-answer",
+      "text": "<strong>[문제 21]</strong> 2진수 $1110001.00101_2$를 10진수로 변환하시오.",
+      "answer": "113.156",
+      "accepted": [
+        "113.156",
+        "113.15625"
+      ],
+      "explanation": "$1110001.00101_2 = 113.156_{10}$"
+    },
+    {
+      "id": "ch1-q152",
+      "type": "short-answer",
+      "text": "<strong>[문제 21]</strong> 2진수 $1000110.0011_2$를 10진수로 변환하시오.",
+      "answer": "70.1875",
+      "accepted": [
+        "70.1875",
+        "70.1875"
+      ],
+      "explanation": "$1000110.0011_2 = 70.1875_{10}$"
+    },
+    {
+      "id": "ch1-q153",
+      "type": "short-answer",
+      "text": "<strong>[문제 22]</strong> 8진수 $4.2_8$을 10진수로 변환하시오.",
+      "answer": "4.25",
+      "accepted": [
+        "4.25",
+        "4.25"
+      ],
+      "explanation": "$4.2_8 = 4.25_{10}$"
+    },
+    {
+      "id": "ch1-q154",
+      "type": "short-answer",
+      "text": "<strong>[문제 22]</strong> 8진수 $56.32_8$을 10진수로 변환하시오.",
+      "answer": "46.4062",
+      "accepted": [
+        "46.4062",
+        "46.40625"
+      ],
+      "explanation": "$56.32_8 = 46.4062_{10}$"
+    },
+    {
+      "id": "ch1-q155",
+      "type": "short-answer",
+      "text": "<strong>[문제 22]</strong> 8진수 $263.156_8$을 10진수로 변환하시오.",
+      "answer": "179.215",
+      "accepted": [
+        "179.215",
+        "179.21484375"
+      ],
+      "explanation": "$263.156_8 = 179.215_{10}$"
+    },
+    {
+      "id": "ch1-q156",
+      "type": "short-answer",
+      "text": "<strong>[문제 22]</strong> 8진수 $711.653_8$을 10진수로 변환하시오.",
+      "answer": "457.834",
+      "accepted": [
+        "457.834",
+        "457.833984375"
+      ],
+      "explanation": "$711.653_8 = 457.834_{10}$"
+    },
+    {
+      "id": "ch1-q157",
+      "type": "short-answer",
+      "text": "<strong>[문제 22]</strong> 8진수 $1020.75_8$을 10진수로 변환하시오.",
+      "answer": "528.953",
+      "accepted": [
+        "528.953",
+        "528.953125"
+      ],
+      "explanation": "$1020.75_8 = 528.953_{10}$"
+    },
+    {
+      "id": "ch1-q158",
+      "type": "short-answer",
+      "text": "<strong>[문제 22]</strong> 8진수 $2153.2667_8$을 10진수로 변환하시오.",
+      "answer": "1131.36",
+      "accepted": [
+        "1131.36",
+        "1131.357177734375"
+      ],
+      "explanation": "$2153.2667_8 = 1131.36_{10}$"
+    },
+    {
+      "id": "ch1-q159",
+      "type": "short-answer",
+      "text": "<strong>[문제 23]</strong> 8진수 $22.56_8$을 10진수로 변환하시오.",
+      "answer": "18.7188",
+      "accepted": [
+        "18.7188",
+        "18.71875"
+      ],
+      "explanation": "$22.56_8 = 18.7188_{10}$"
+    },
+    {
+      "id": "ch1-q160",
+      "type": "short-answer",
+      "text": "<strong>[문제 23]</strong> 8진수 $146.73_8$을 10진수로 변환하시오.",
+      "answer": "102.922",
+      "accepted": [
+        "102.922",
+        "102.921875"
+      ],
+      "explanation": "$146.73_8 = 102.922_{10}$"
+    },
+    {
+      "id": "ch1-q161",
+      "type": "short-answer",
+      "text": "<strong>[문제 23]</strong> 8진수 $376.14_8$을 10진수로 변환하시오.",
+      "answer": "254.188",
+      "accepted": [
+        "254.188",
+        "254.1875"
+      ],
+      "explanation": "$376.14_8 = 254.188_{10}$"
+    },
+    {
+      "id": "ch1-q162",
+      "type": "short-answer",
+      "text": "<strong>[문제 23]</strong> 8진수 $1035.712_8$을 10진수로 변환하시오.",
+      "answer": "541.895",
+      "accepted": [
+        "541.895",
+        "541.89453125"
+      ],
+      "explanation": "$1035.712_8 = 541.895_{10}$"
+    },
+    {
+      "id": "ch1-q163",
+      "type": "short-answer",
+      "text": "<strong>[문제 23]</strong> 8진수 $1433.103_8$을 10진수로 변환하시오.",
+      "answer": "795.131",
+      "accepted": [
+        "795.131",
+        "795.130859375"
+      ],
+      "explanation": "$1433.103_8 = 795.131_{10}$"
+    },
+    {
+      "id": "ch1-q164",
+      "type": "short-answer",
+      "text": "<strong>[문제 23]</strong> 8진수 $3147.52_8$을 10진수로 변환하시오.",
+      "answer": "1639.66",
+      "accepted": [
+        "1639.66",
+        "1639.65625"
+      ],
+      "explanation": "$3147.52_8 = 1639.66_{10}$"
+    },
+    {
+      "id": "ch1-q165",
+      "type": "short-answer",
+      "text": "<strong>[문제 24]</strong> 16진수 $\\text{48.091}_{16}$을 10진수로 변환하시오.",
+      "answer": "72.03540039",
+      "accepted": [
+        "72.03540039",
+        "72.035400390625"
+      ],
+      "explanation": "$\\text{48.091}_{16} = 72.03540039_{10}$"
+    },
+    {
+      "id": "ch1-q166",
+      "type": "short-answer",
+      "text": "<strong>[문제 24]</strong> 16진수 $\\text{9D0.5C}_{16}$을 10진수로 변환하시오.",
+      "answer": "2512.359375",
+      "accepted": [
+        "2512.359375",
+        "2512.359375"
+      ],
+      "explanation": "$\\text{9D0.5C}_{16} = 2512.359375_{10}$"
+    },
+    {
+      "id": "ch1-q167",
+      "type": "short-answer",
+      "text": "<strong>[문제 24]</strong> 16진수 $\\text{FED.BCA}_{16}$을 10진수로 변환하시오.",
+      "answer": "4077.736816",
+      "accepted": [
+        "4077.736816",
+        "4077.73681640625"
+      ],
+      "explanation": "$\\text{FED.BCA}_{16} = 4077.736816_{10}$"
+    },
+    {
+      "id": "ch1-q168",
+      "type": "short-answer",
+      "text": "<strong>[문제 24]</strong> 16진수 $\\text{16.15}_{16}$을 10진수로 변환하시오.",
+      "answer": "22.08203125",
+      "accepted": [
+        "22.08203125",
+        "22.08203125"
+      ],
+      "explanation": "$\\text{16.15}_{16} = 22.08203125_{10}$"
+    },
+    {
+      "id": "ch1-q169",
+      "type": "short-answer",
+      "text": "<strong>[문제 24]</strong> 16진수 $\\text{E9.4902}_{16}$을 10진수로 변환하시오.",
+      "answer": "233.2851868",
+      "accepted": [
+        "233.2851868",
+        "233.28518676757812"
+      ],
+      "explanation": "$\\text{E9.4902}_{16} = 233.2851868_{10}$"
+    },
+    {
+      "id": "ch1-q170",
+      "type": "short-answer",
+      "text": "<strong>[문제 24]</strong> 16진수 $\\text{5CB.101}_{16}$을 10진수로 변환하시오.",
+      "answer": "1483.062744",
+      "accepted": [
+        "1483.062744",
+        "1483.062744140625"
+      ],
+      "explanation": "$\\text{5CB.101}_{16} = 1483.062744_{10}$"
+    },
+    {
+      "id": "ch1-q171",
+      "type": "short-answer",
+      "text": "<strong>[문제 25]</strong> 16진수 $\\text{5A.39}_{16}$을 10진수로 변환하시오.",
+      "answer": "90.22265625",
+      "accepted": [
+        "90.22265625",
+        "90.22265625"
+      ],
+      "explanation": "$\\text{5A.39}_{16} = 90.22265625_{10}$"
+    },
+    {
+      "id": "ch1-q172",
+      "type": "short-answer",
+      "text": "<strong>[문제 25]</strong> 16진수 $\\text{BB.AC}_{16}$을 10진수로 변환하시오.",
+      "answer": "187.671875",
+      "accepted": [
+        "187.671875",
+        "187.671875"
+      ],
+      "explanation": "$\\text{BB.AC}_{16} = 187.671875_{10}$"
+    },
+    {
+      "id": "ch1-q173",
+      "type": "short-answer",
+      "text": "<strong>[문제 25]</strong> 16진수 $\\text{15A.269}_{16}$을 10진수로 변환하시오.",
+      "answer": "346.1506348",
+      "accepted": [
+        "346.1506348",
+        "346.150634765625"
+      ],
+      "explanation": "$\\text{15A.269}_{16} = 346.1506348_{10}$"
+    },
+    {
+      "id": "ch1-q174",
+      "type": "short-answer",
+      "text": "<strong>[문제 25]</strong> 16진수 $\\text{34D.E}_{16}$을 10진수로 변환하시오.",
+      "answer": "845.875",
+      "accepted": [
+        "845.875",
+        "845.875"
+      ],
+      "explanation": "$\\text{34D.E}_{16} = 845.875_{10}$"
+    },
+    {
+      "id": "ch1-q175",
+      "type": "short-answer",
+      "text": "<strong>[문제 25]</strong> 16진수 $\\text{D01.18}_{16}$을 10진수로 변환하시오.",
+      "answer": "3329.09375",
+      "accepted": [
+        "3329.09375",
+        "3329.09375"
+      ],
+      "explanation": "$\\text{D01.18}_{16} = 3329.09375_{10}$"
+    },
+    {
+      "id": "ch1-q176",
+      "type": "short-answer",
+      "text": "<strong>[문제 25]</strong> 16진수 $\\text{20AC.19E}_{16}$을 10진수로 변환하시오.",
+      "answer": "8364.101074",
+      "accepted": [
+        "8364.101074",
+        "8364.10107421875"
+      ],
+      "explanation": "$\\text{20AC.19E}_{16} = 8364.101074_{10}$"
+    },
+    {
+      "id": "ch1-q177",
+      "type": "short-answer",
+      "text": "<strong>[문제 26]</strong> 2진수 $11001.11_2$를 <strong>8진수</strong>로 변환하시오.",
+      "answer": "31.6",
+      "accepted": [
+        "31.6"
+      ],
+      "explanation": "$11001.11_2 = 31.6_8$"
+    },
+    {
+      "id": "ch1-q178",
+      "type": "short-answer",
+      "text": "<strong>[문제 26]</strong> 2진수 $11001.11_2$를 <strong>16진수</strong>로 변환하시오.",
+      "answer": "19.C",
+      "accepted": [
+        "19.C",
+        "19.c"
+      ],
+      "explanation": "$11001.11_2 = 19.C_{16}$"
+    },
+    {
+      "id": "ch1-q179",
+      "type": "short-answer",
+      "text": "<strong>[문제 26]</strong> 2진수 $1001111.101011_2$를 <strong>8진수</strong>로 변환하시오.",
+      "answer": "117.53",
+      "accepted": [
+        "117.53"
+      ],
+      "explanation": "$1001111.101011_2 = 117.53_8$"
+    },
+    {
+      "id": "ch1-q180",
+      "type": "short-answer",
+      "text": "<strong>[문제 26]</strong> 2진수 $1001111.101011_2$를 <strong>16진수</strong>로 변환하시오.",
+      "answer": "4F.AC",
+      "accepted": [
+        "4F.AC",
+        "4f.ac"
+      ],
+      "explanation": "$1001111.101011_2 = 4F.AC_{16}$"
+    },
+    {
+      "id": "ch1-q181",
+      "type": "short-answer",
+      "text": "<strong>[문제 26]</strong> 2진수 $11101111.11010111_2$를 <strong>8진수</strong>로 변환하시오.",
+      "answer": "357.656",
+      "accepted": [
+        "357.656"
+      ],
+      "explanation": "$11101111.11010111_2 = 357.656_8$"
+    },
+    {
+      "id": "ch1-q182",
+      "type": "short-answer",
+      "text": "<strong>[문제 26]</strong> 2진수 $11101111.11010111_2$를 <strong>16진수</strong>로 변환하시오.",
+      "answer": "EF.D7",
+      "accepted": [
+        "EF.D7",
+        "ef.d7"
+      ],
+      "explanation": "$11101111.11010111_2 = EF.D7_{16}$"
+    },
+    {
+      "id": "ch1-q183",
+      "type": "short-answer",
+      "text": "<strong>[문제 26]</strong> 2진수 $101001110110.110000111_2$를 <strong>8진수</strong>로 변환하시오.",
+      "answer": "5166.607",
+      "accepted": [
+        "5166.607"
+      ],
+      "explanation": "$101001110110.110000111_2 = 5166.607_8$"
+    },
+    {
+      "id": "ch1-q184",
+      "type": "short-answer",
+      "text": "<strong>[문제 26]</strong> 2진수 $101001110110.110000111_2$를 <strong>16진수</strong>로 변환하시오.",
+      "answer": "A76.C38",
+      "accepted": [
+        "A76.C38",
+        "a76.c38"
+      ],
+      "explanation": "$101001110110.110000111_2 = A76.C38_{16}$"
+    },
+    {
+      "id": "ch1-q185",
+      "type": "short-answer",
+      "text": "<strong>[문제 26]</strong> 2진수 $1100111010110.10111111001_2$를 <strong>8진수</strong>로 변환하시오.",
+      "answer": "14726.5762",
+      "accepted": [
+        "14726.5762"
+      ],
+      "explanation": "$1100111010110.10111111001_2 = 14726.5762_8$"
+    },
+    {
+      "id": "ch1-q186",
+      "type": "short-answer",
+      "text": "<strong>[문제 26]</strong> 2진수 $1100111010110.10111111001_2$를 <strong>16진수</strong>로 변환하시오.",
+      "answer": "19D6.BF2",
+      "accepted": [
+        "19D6.BF2",
+        "19d6.bf2"
+      ],
+      "explanation": "$1100111010110.10111111001_2 = 19D6.BF2_{16}$"
+    },
+    {
+      "id": "ch1-q187",
+      "type": "short-answer",
+      "text": "<strong>[문제 26]</strong> 2진수 $101100100011110.0001010001011_2$를 <strong>8진수</strong>로 변환하시오.",
+      "answer": "54436.05054",
+      "accepted": [
+        "54436.05054"
+      ],
+      "explanation": "$101100100011110.0001010001011_2 = 54436.05054_8$"
+    },
+    {
+      "id": "ch1-q188",
+      "type": "short-answer",
+      "text": "<strong>[문제 26]</strong> 2진수 $101100100011110.0001010001011_2$를 <strong>16진수</strong>로 변환하시오.",
+      "answer": "591E.1458",
+      "accepted": [
+        "591E.1458",
+        "591e.1458"
+      ],
+      "explanation": "$101100100011110.0001010001011_2 = 591E.1458_{16}$"
+    },
+    {
+      "id": "ch1-q189",
+      "type": "short-answer",
+      "text": "<strong>[문제 27]</strong> 2진수 $101.11001_2$를 <strong>8진수</strong>로 변환하시오.",
+      "answer": "5.62",
+      "accepted": [
+        "5.62"
+      ],
+      "explanation": "$101.11001_2 = 5.62_8$"
+    },
+    {
+      "id": "ch1-q190",
+      "type": "short-answer",
+      "text": "<strong>[문제 27]</strong> 2진수 $101.11001_2$를 <strong>16진수</strong>로 변환하시오.",
+      "answer": "5.C8",
+      "accepted": [
+        "5.C8",
+        "5.c8"
+      ],
+      "explanation": "$101.11001_2 = 5.C8_{16}$"
+    },
+    {
+      "id": "ch1-q191",
+      "type": "short-answer",
+      "text": "<strong>[문제 27]</strong> 2진수 $1011010.001101_2$를 <strong>8진수</strong>로 변환하시오.",
+      "answer": "132.15",
+      "accepted": [
+        "132.15"
+      ],
+      "explanation": "$1011010.001101_2 = 132.15_8$"
+    },
+    {
+      "id": "ch1-q192",
+      "type": "short-answer",
+      "text": "<strong>[문제 27]</strong> 2진수 $1011010.001101_2$를 <strong>16진수</strong>로 변환하시오.",
+      "answer": "5A.34",
+      "accepted": [
+        "5A.34",
+        "5a.34"
+      ],
+      "explanation": "$1011010.001101_2 = 5A.34_{16}$"
+    },
+    {
+      "id": "ch1-q193",
+      "type": "short-answer",
+      "text": "<strong>[문제 27]</strong> 2진수 $11111110.001101111_2$를 <strong>8진수</strong>로 변환하시오.",
+      "answer": "376.157",
+      "accepted": [
+        "376.157"
+      ],
+      "explanation": "$11111110.001101111_2 = 376.157_8$"
+    },
+    {
+      "id": "ch1-q194",
+      "type": "short-answer",
+      "text": "<strong>[문제 27]</strong> 2진수 $11111110.001101111_2$를 <strong>16진수</strong>로 변환하시오.",
+      "answer": "FE.378",
+      "accepted": [
+        "FE.378",
+        "fe.378"
+      ],
+      "explanation": "$11111110.001101111_2 = FE.378_{16}$"
+    },
+    {
+      "id": "ch1-q195",
+      "type": "short-answer",
+      "text": "<strong>[문제 27]</strong> 2진수 $1000001110.11111101_2$를 <strong>8진수</strong>로 변환하시오.",
+      "answer": "1016.772",
+      "accepted": [
+        "1016.772"
+      ],
+      "explanation": "$1000001110.11111101_2 = 1016.772_8$"
+    },
+    {
+      "id": "ch1-q196",
+      "type": "short-answer",
+      "text": "<strong>[문제 27]</strong> 2진수 $1000001110.11111101_2$를 <strong>16진수</strong>로 변환하시오.",
+      "answer": "20E.FD",
+      "accepted": [
+        "20E.FD",
+        "20e.fd"
+      ],
+      "explanation": "$1000001110.11111101_2 = 20E.FD_{16}$"
+    },
+    {
+      "id": "ch1-q197",
+      "type": "short-answer",
+      "text": "<strong>[문제 27]</strong> 2진수 $1010101100101.11101010111_2$를 <strong>8진수</strong>로 변환하시오.",
+      "answer": "12545.7256",
+      "accepted": [
+        "12545.7256"
+      ],
+      "explanation": "$1010101100101.11101010111_2 = 12545.7256_8$"
+    },
+    {
+      "id": "ch1-q198",
+      "type": "short-answer",
+      "text": "<strong>[문제 27]</strong> 2진수 $1010101100101.11101010111_2$를 <strong>16진수</strong>로 변환하시오.",
+      "answer": "1565.EAE",
+      "accepted": [
+        "1565.EAE",
+        "1565.eae"
+      ],
+      "explanation": "$1010101100101.11101010111_2 = 1565.EAE_{16}$"
+    },
+    {
+      "id": "ch1-q199",
+      "type": "short-answer",
+      "text": "<strong>[문제 27]</strong> 2진수 $1111110110001.10101011_2$를 <strong>8진수</strong>로 변환하시오.",
+      "answer": "17661.526",
+      "accepted": [
+        "17661.526"
+      ],
+      "explanation": "$1111110110001.10101011_2 = 17661.526_8$"
+    },
+    {
+      "id": "ch1-q200",
+      "type": "short-answer",
+      "text": "<strong>[문제 27]</strong> 2진수 $1111110110001.10101011_2$를 <strong>16진수</strong>로 변환하시오.",
+      "answer": "1FB1.AB",
+      "accepted": [
+        "1FB1.AB",
+        "1fb1.ab"
+      ],
+      "explanation": "$1111110110001.10101011_2 = 1FB1.AB_{16}$"
+    },
+    {
+      "id": "ch1-q201",
+      "type": "short-answer",
+      "text": "<strong>[문제 28]</strong> 8진수 $15.36_8$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "1101.01111",
+      "accepted": [
+        "1101.01111"
+      ],
+      "explanation": "$15.36_8 = 1101.01111_2$"
+    },
+    {
+      "id": "ch1-q202",
+      "type": "short-answer",
+      "text": "<strong>[문제 28]</strong> 8진수 $15.36_8$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "D.78",
+      "accepted": [
+        "D.78",
+        "d.78"
+      ],
+      "explanation": "$15.36_8 = D.78_{16}$"
+    },
+    {
+      "id": "ch1-q203",
+      "type": "short-answer",
+      "text": "<strong>[문제 28]</strong> 8진수 $67.1234_8$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "110111.0010100111",
+      "accepted": [
+        "110111.0010100111"
+      ],
+      "explanation": "$67.1234_8 = 110111.0010100111_2$"
+    },
+    {
+      "id": "ch1-q204",
+      "type": "short-answer",
+      "text": "<strong>[문제 28]</strong> 8진수 $67.1234_8$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "37.29C",
+      "accepted": [
+        "37.29C",
+        "37.29c"
+      ],
+      "explanation": "$67.1234_8 = 37.29C_{16}$"
+    },
+    {
+      "id": "ch1-q205",
+      "type": "short-answer",
+      "text": "<strong>[문제 28]</strong> 8진수 $125.3623_8$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "1010101.011110010011",
+      "accepted": [
+        "1010101.011110010011"
+      ],
+      "explanation": "$125.3623_8 = 1010101.011110010011_2$"
+    },
+    {
+      "id": "ch1-q206",
+      "type": "short-answer",
+      "text": "<strong>[문제 28]</strong> 8진수 $125.3623_8$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "55.793",
+      "accepted": [
+        "55.793",
+        "55.793"
+      ],
+      "explanation": "$125.3623_8 = 55.793_{16}$"
+    },
+    {
+      "id": "ch1-q207",
+      "type": "short-answer",
+      "text": "<strong>[문제 28]</strong> 8진수 $713.5272_8$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "111001011.10101011101",
+      "accepted": [
+        "111001011.10101011101"
+      ],
+      "explanation": "$713.5272_8 = 111001011.10101011101_2$"
+    },
+    {
+      "id": "ch1-q208",
+      "type": "short-answer",
+      "text": "<strong>[문제 28]</strong> 8진수 $713.5272_8$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "1CB.ABA",
+      "accepted": [
+        "1CB.ABA",
+        "1cb.aba"
+      ],
+      "explanation": "$713.5272_8 = 1CB.ABA_{16}$"
+    },
+    {
+      "id": "ch1-q209",
+      "type": "short-answer",
+      "text": "<strong>[문제 28]</strong> 8진수 $1623.7715_8$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "1110010011.111111001101",
+      "accepted": [
+        "1110010011.111111001101"
+      ],
+      "explanation": "$1623.7715_8 = 1110010011.111111001101_2$"
+    },
+    {
+      "id": "ch1-q210",
+      "type": "short-answer",
+      "text": "<strong>[문제 28]</strong> 8진수 $1623.7715_8$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "393.FCD",
+      "accepted": [
+        "393.FCD",
+        "393.fcd"
+      ],
+      "explanation": "$1623.7715_8 = 393.FCD_{16}$"
+    },
+    {
+      "id": "ch1-q211",
+      "type": "short-answer",
+      "text": "<strong>[문제 28]</strong> 8진수 $51623.1622_8$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "101001110010011.00111001001",
+      "accepted": [
+        "101001110010011.00111001001"
+      ],
+      "explanation": "$51623.1622_8 = 101001110010011.00111001001_2$"
+    },
+    {
+      "id": "ch1-q212",
+      "type": "short-answer",
+      "text": "<strong>[문제 28]</strong> 8진수 $51623.1622_8$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "5393.392",
+      "accepted": [
+        "5393.392",
+        "5393.392"
+      ],
+      "explanation": "$51623.1622_8 = 5393.392_{16}$"
+    },
+    {
+      "id": "ch1-q213",
+      "type": "short-answer",
+      "text": "<strong>[문제 29]</strong> 8진수 $67.214_8$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "110111.0100011",
+      "accepted": [
+        "110111.0100011"
+      ],
+      "explanation": "$67.214_8 = 110111.0100011_2$"
+    },
+    {
+      "id": "ch1-q214",
+      "type": "short-answer",
+      "text": "<strong>[문제 29]</strong> 8진수 $67.214_8$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "37.46",
+      "accepted": [
+        "37.46",
+        "37.46"
+      ],
+      "explanation": "$67.214_8 = 37.46_{16}$"
+    },
+    {
+      "id": "ch1-q215",
+      "type": "short-answer",
+      "text": "<strong>[문제 29]</strong> 8진수 $105.772_8$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "1000101.11111101",
+      "accepted": [
+        "1000101.11111101"
+      ],
+      "explanation": "$105.772_8 = 1000101.11111101_2$"
+    },
+    {
+      "id": "ch1-q216",
+      "type": "short-answer",
+      "text": "<strong>[문제 29]</strong> 8진수 $105.772_8$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "45.FD",
+      "accepted": [
+        "45.FD",
+        "45.fd"
+      ],
+      "explanation": "$105.772_8 = 45.FD_{16}$"
+    },
+    {
+      "id": "ch1-q217",
+      "type": "short-answer",
+      "text": "<strong>[문제 29]</strong> 8진수 $471.32511_8$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "100111001.011010101001001",
+      "accepted": [
+        "100111001.011010101001001"
+      ],
+      "explanation": "$471.32511_8 = 100111001.011010101001001_2$"
+    },
+    {
+      "id": "ch1-q218",
+      "type": "short-answer",
+      "text": "<strong>[문제 29]</strong> 8진수 $471.32511_8$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "139.6A92",
+      "accepted": [
+        "139.6A92",
+        "139.6a92"
+      ],
+      "explanation": "$471.32511_8 = 139.6A92_{16}$"
+    },
+    {
+      "id": "ch1-q219",
+      "type": "short-answer",
+      "text": "<strong>[문제 29]</strong> 8진수 $2012.7054_8$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "10000001010.1110001011",
+      "accepted": [
+        "10000001010.1110001011"
+      ],
+      "explanation": "$2012.7054_8 = 10000001010.1110001011_2$"
+    },
+    {
+      "id": "ch1-q220",
+      "type": "short-answer",
+      "text": "<strong>[문제 29]</strong> 8진수 $2012.7054_8$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "40A.E2C",
+      "accepted": [
+        "40A.E2C",
+        "40a.e2c"
+      ],
+      "explanation": "$2012.7054_8 = 40A.E2C_{16}$"
+    },
+    {
+      "id": "ch1-q221",
+      "type": "short-answer",
+      "text": "<strong>[문제 29]</strong> 8진수 $5123.637_8$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "101001010011.110011111",
+      "accepted": [
+        "101001010011.110011111"
+      ],
+      "explanation": "$5123.637_8 = 101001010011.110011111_2$"
+    },
+    {
+      "id": "ch1-q222",
+      "type": "short-answer",
+      "text": "<strong>[문제 29]</strong> 8진수 $5123.637_8$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "A53.CF8",
+      "accepted": [
+        "A53.CF8",
+        "a53.cf8"
+      ],
+      "explanation": "$5123.637_8 = A53.CF8_{16}$"
+    },
+    {
+      "id": "ch1-q223",
+      "type": "short-answer",
+      "text": "<strong>[문제 29]</strong> 8진수 $6410.7123_8$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "110100001000.111001010011",
+      "accepted": [
+        "110100001000.111001010011"
+      ],
+      "explanation": "$6410.7123_8 = 110100001000.111001010011_2$"
+    },
+    {
+      "id": "ch1-q224",
+      "type": "short-answer",
+      "text": "<strong>[문제 29]</strong> 8진수 $6410.7123_8$을 <strong>16진수</strong>로 변환하시오.",
+      "answer": "D08.E53",
+      "accepted": [
+        "D08.E53",
+        "d08.e53"
+      ],
+      "explanation": "$6410.7123_8 = D08.E53_{16}$"
+    },
+    {
+      "id": "ch1-q225",
+      "type": "short-answer",
+      "text": "<strong>[문제 30]</strong> 16진수 $\\text{12.34}_{16}$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "10010.001101",
+      "accepted": [
+        "10010.001101"
+      ],
+      "explanation": "$\\text{12.34}_{16} = 10010.001101_2$"
+    },
+    {
+      "id": "ch1-q226",
+      "type": "short-answer",
+      "text": "<strong>[문제 30]</strong> 16진수 $\\text{12.34}_{16}$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "22.15",
+      "accepted": [
+        "22.15"
+      ],
+      "explanation": "$\\text{12.34}_{16} = 22.15_8$"
+    },
+    {
+      "id": "ch1-q227",
+      "type": "short-answer",
+      "text": "<strong>[문제 30]</strong> 16진수 $\\text{68.EE}_{16}$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "1101000.1110111",
+      "accepted": [
+        "1101000.1110111"
+      ],
+      "explanation": "$\\text{68.EE}_{16} = 1101000.1110111_2$"
+    },
+    {
+      "id": "ch1-q228",
+      "type": "short-answer",
+      "text": "<strong>[문제 30]</strong> 16진수 $\\text{68.EE}_{16}$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "150.734",
+      "accepted": [
+        "150.734"
+      ],
+      "explanation": "$\\text{68.EE}_{16} = 150.734_8$"
+    },
+    {
+      "id": "ch1-q229",
+      "type": "short-answer",
+      "text": "<strong>[문제 30]</strong> 16진수 $\\text{9C.709B}_{16}$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "10011100.0111000010011011",
+      "accepted": [
+        "10011100.0111000010011011"
+      ],
+      "explanation": "$\\text{9C.709B}_{16} = 10011100.0111000010011011_2$"
+    },
+    {
+      "id": "ch1-q230",
+      "type": "short-answer",
+      "text": "<strong>[문제 30]</strong> 16진수 $\\text{9C.709B}_{16}$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "234.341154",
+      "accepted": [
+        "234.341154"
+      ],
+      "explanation": "$\\text{9C.709B}_{16} = 234.341154_8$"
+    },
+    {
+      "id": "ch1-q231",
+      "type": "short-answer",
+      "text": "<strong>[문제 30]</strong> 16진수 $\\text{1AC.053A}_{16}$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "110101100.000001010011101",
+      "accepted": [
+        "110101100.000001010011101"
+      ],
+      "explanation": "$\\text{1AC.053A}_{16} = 110101100.000001010011101_2$"
+    },
+    {
+      "id": "ch1-q232",
+      "type": "short-answer",
+      "text": "<strong>[문제 30]</strong> 16진수 $\\text{1AC.053A}_{16}$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "654.01235",
+      "accepted": [
+        "654.01235"
+      ],
+      "explanation": "$\\text{1AC.053A}_{16} = 654.01235_8$"
+    },
+    {
+      "id": "ch1-q233",
+      "type": "short-answer",
+      "text": "<strong>[문제 30]</strong> 16진수 $\\text{39E.8AD2}_{16}$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "1110011110.100010101101001",
+      "accepted": [
+        "1110011110.100010101101001"
+      ],
+      "explanation": "$\\text{39E.8AD2}_{16} = 1110011110.100010101101001_2$"
+    },
+    {
+      "id": "ch1-q234",
+      "type": "short-answer",
+      "text": "<strong>[문제 30]</strong> 16진수 $\\text{39E.8AD2}_{16}$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "1636.42551",
+      "accepted": [
+        "1636.42551"
+      ],
+      "explanation": "$\\text{39E.8AD2}_{16} = 1636.42551_8$"
+    },
+    {
+      "id": "ch1-q235",
+      "type": "short-answer",
+      "text": "<strong>[문제 30]</strong> 16진수 $\\text{B0A.19D3}_{16}$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "101100001010.0001100111010011",
+      "accepted": [
+        "101100001010.0001100111010011"
+      ],
+      "explanation": "$\\text{B0A.19D3}_{16} = 101100001010.0001100111010011_2$"
+    },
+    {
+      "id": "ch1-q236",
+      "type": "short-answer",
+      "text": "<strong>[문제 30]</strong> 16진수 $\\text{B0A.19D3}_{16}$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "5412.063514",
+      "accepted": [
+        "5412.063514"
+      ],
+      "explanation": "$\\text{B0A.19D3}_{16} = 5412.063514_8$"
+    },
+    {
+      "id": "ch1-q237",
+      "type": "short-answer",
+      "text": "<strong>[문제 31]</strong> 16진수 $\\text{396.12}_{16}$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "1110010110.0001001",
+      "accepted": [
+        "1110010110.0001001"
+      ],
+      "explanation": "$\\text{396.12}_{16} = 1110010110.0001001_2$"
+    },
+    {
+      "id": "ch1-q238",
+      "type": "short-answer",
+      "text": "<strong>[문제 31]</strong> 16진수 $\\text{396.12}_{16}$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "1626.044",
+      "accepted": [
+        "1626.044"
+      ],
+      "explanation": "$\\text{396.12}_{16} = 1626.044_8$"
+    },
+    {
+      "id": "ch1-q239",
+      "type": "short-answer",
+      "text": "<strong>[문제 31]</strong> 16진수 $\\text{BB.AC}_{16}$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "10111011.101011",
+      "accepted": [
+        "10111011.101011"
+      ],
+      "explanation": "$\\text{BB.AC}_{16} = 10111011.101011_2$"
+    },
+    {
+      "id": "ch1-q240",
+      "type": "short-answer",
+      "text": "<strong>[문제 31]</strong> 16진수 $\\text{BB.AC}_{16}$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "273.53",
+      "accepted": [
+        "273.53"
+      ],
+      "explanation": "$\\text{BB.AC}_{16} = 273.53_8$"
+    },
+    {
+      "id": "ch1-q241",
+      "type": "short-answer",
+      "text": "<strong>[문제 31]</strong> 16진수 $\\text{AE.FCD}_{16}$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "10101110.111111001101",
+      "accepted": [
+        "10101110.111111001101"
+      ],
+      "explanation": "$\\text{AE.FCD}_{16} = 10101110.111111001101_2$"
+    },
+    {
+      "id": "ch1-q242",
+      "type": "short-answer",
+      "text": "<strong>[문제 31]</strong> 16진수 $\\text{AE.FCD}_{16}$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "256.7715",
+      "accepted": [
+        "256.7715"
+      ],
+      "explanation": "$\\text{AE.FCD}_{16} = 256.7715_8$"
+    },
+    {
+      "id": "ch1-q243",
+      "type": "short-answer",
+      "text": "<strong>[문제 31]</strong> 16진수 $\\text{4A79.C15}_{16}$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "100101001111001.110000010101",
+      "accepted": [
+        "100101001111001.110000010101"
+      ],
+      "explanation": "$\\text{4A79.C15}_{16} = 100101001111001.110000010101_2$"
+    },
+    {
+      "id": "ch1-q244",
+      "type": "short-answer",
+      "text": "<strong>[문제 31]</strong> 16진수 $\\text{4A79.C15}_{16}$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "45171.6025",
+      "accepted": [
+        "45171.6025"
+      ],
+      "explanation": "$\\text{4A79.C15}_{16} = 45171.6025_8$"
+    },
+    {
+      "id": "ch1-q245",
+      "type": "short-answer",
+      "text": "<strong>[문제 31]</strong> 16진수 $\\text{C04B.100F}_{16}$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "1100000001001011.0001000000001111",
+      "accepted": [
+        "1100000001001011.0001000000001111"
+      ],
+      "explanation": "$\\text{C04B.100F}_{16} = 1100000001001011.0001000000001111_2$"
+    },
+    {
+      "id": "ch1-q246",
+      "type": "short-answer",
+      "text": "<strong>[문제 31]</strong> 16진수 $\\text{C04B.100F}_{16}$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "140113.040074",
+      "accepted": [
+        "140113.040074"
+      ],
+      "explanation": "$\\text{C04B.100F}_{16} = 140113.040074_8$"
+    },
+    {
+      "id": "ch1-q247",
+      "type": "short-answer",
+      "text": "<strong>[문제 31]</strong> 16진수 $\\text{FE13.ABCD}_{16}$을 <strong>2진수</strong>로 변환하시오.",
+      "answer": "1111111000010011.1010101111001101",
+      "accepted": [
+        "1111111000010011.1010101111001101"
+      ],
+      "explanation": "$\\text{FE13.ABCD}_{16} = 1111111000010011.1010101111001101_2$"
+    },
+    {
+      "id": "ch1-q248",
+      "type": "short-answer",
+      "text": "<strong>[문제 31]</strong> 16진수 $\\text{FE13.ABCD}_{16}$을 <strong>8진수</strong>로 변환하시오.",
+      "answer": "177023.527464",
+      "accepted": [
+        "177023.527464"
+      ],
+      "explanation": "$\\text{FE13.ABCD}_{16} = 177023.527464_8$"
+    },
+    {
+      "id": "ch1-q249",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $9_{10}$의 8비트 <strong>부호-1의 보수</strong> 표현을 구하시오.",
+      "answer": "00001001",
+      "accepted": [
+        "00001001"
+      ],
+      "explanation": "$9_{10}$의 1의 보수: $00001001$"
+    },
+    {
+      "id": "ch1-q250",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $9_{10}$의 8비트 <strong>부호-2의 보수</strong> 표현을 구하시오.",
+      "answer": "00001001",
+      "accepted": [
+        "00001001"
+      ],
+      "explanation": "$9_{10}$의 2의 보수: $00001001$"
+    },
+    {
+      "id": "ch1-q251",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $-13_{10}$의 8비트 <strong>부호-1의 보수</strong> 표현을 구하시오.",
+      "answer": "11110010",
+      "accepted": [
+        "11110010"
+      ],
+      "explanation": "$-13_{10}$의 1의 보수: $11110010$"
+    },
+    {
+      "id": "ch1-q252",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $-13_{10}$의 8비트 <strong>부호-2의 보수</strong> 표현을 구하시오.",
+      "answer": "11110011",
+      "accepted": [
+        "11110011"
+      ],
+      "explanation": "$-13_{10}$의 2의 보수: $11110011$"
+    },
+    {
+      "id": "ch1-q253",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $-48_{10}$의 8비트 <strong>부호-1의 보수</strong> 표현을 구하시오.",
+      "answer": "11001111",
+      "accepted": [
+        "11001111"
+      ],
+      "explanation": "$-48_{10}$의 1의 보수: $11001111$"
+    },
+    {
+      "id": "ch1-q254",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $-48_{10}$의 8비트 <strong>부호-2의 보수</strong> 표현을 구하시오.",
+      "answer": "11010000",
+      "accepted": [
+        "11010000"
+      ],
+      "explanation": "$-48_{10}$의 2의 보수: $11010000$"
+    },
+    {
+      "id": "ch1-q255",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $84_{10}$의 8비트 <strong>부호-1의 보수</strong> 표현을 구하시오.",
+      "answer": "01010100",
+      "accepted": [
+        "01010100"
+      ],
+      "explanation": "$84_{10}$의 1의 보수: $01010100$"
+    },
+    {
+      "id": "ch1-q256",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $84_{10}$의 8비트 <strong>부호-2의 보수</strong> 표현을 구하시오.",
+      "answer": "01010100",
+      "accepted": [
+        "01010100"
+      ],
+      "explanation": "$84_{10}$의 2의 보수: $01010100$"
+    },
+    {
+      "id": "ch1-q257",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $-97_{10}$의 8비트 <strong>부호-1의 보수</strong> 표현을 구하시오.",
+      "answer": "10011110",
+      "accepted": [
+        "10011110"
+      ],
+      "explanation": "$-97_{10}$의 1의 보수: $10011110$"
+    },
+    {
+      "id": "ch1-q258",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $-97_{10}$의 8비트 <strong>부호-2의 보수</strong> 표현을 구하시오.",
+      "answer": "10011111",
+      "accepted": [
+        "10011111"
+      ],
+      "explanation": "$-97_{10}$의 2의 보수: $10011111$"
+    },
+    {
+      "id": "ch1-q259",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $-103_{10}$의 8비트 <strong>부호-1의 보수</strong> 표현을 구하시오.",
+      "answer": "10011000",
+      "accepted": [
+        "10011000"
+      ],
+      "explanation": "$-103_{10}$의 1의 보수: $10011000$"
+    },
+    {
+      "id": "ch1-q260",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $-103_{10}$의 8비트 <strong>부호-2의 보수</strong> 표현을 구하시오.",
+      "answer": "10011001",
+      "accepted": [
+        "10011001"
+      ],
+      "explanation": "$-103_{10}$의 2의 보수: $10011001$"
+    },
+    {
+      "id": "ch1-q261",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $-118_{10}$의 8비트 <strong>부호-1의 보수</strong> 표현을 구하시오.",
+      "answer": "10001001",
+      "accepted": [
+        "10001001"
+      ],
+      "explanation": "$-118_{10}$의 1의 보수: $10001001$"
+    },
+    {
+      "id": "ch1-q262",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $-118_{10}$의 8비트 <strong>부호-2의 보수</strong> 표현을 구하시오.",
+      "answer": "10001010",
+      "accepted": [
+        "10001010"
+      ],
+      "explanation": "$-118_{10}$의 2의 보수: $10001010$"
+    },
+    {
+      "id": "ch1-q263",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $125_{10}$의 8비트 <strong>부호-1의 보수</strong> 표현을 구하시오.",
+      "answer": "01111101",
+      "accepted": [
+        "01111101"
+      ],
+      "explanation": "$125_{10}$의 1의 보수: $01111101$"
+    },
+    {
+      "id": "ch1-q264",
+      "type": "short-answer",
+      "text": "<strong>[문제 32]</strong> $125_{10}$의 8비트 <strong>부호-2의 보수</strong> 표현을 구하시오.",
+      "answer": "01111101",
+      "accepted": [
+        "01111101"
+      ],
+      "explanation": "$125_{10}$의 2의 보수: $01111101$"
+    },
+    {
+      "id": "ch1-q265",
+      "type": "proof",
+      "text": "<strong>[문제 33(a)]</strong> 부호-절댓값 표현 $00111010 + 10100100$를 1의 보수와 2의 보수 표현을 이용하여 각각 연산하고, 결과의 10진수 표현까지 구하시오.<br><em>(부호-절댓값: $00111010=58_{10}$, $10100100=-36_{10}$)</em>",
+      "hint": "00111010(부호-절댓값)=58, 10100100(부호-절댓값)=-36. 합: 22. 1의 보수와 2의 보수 각각으로 두 수를 변환 → 이진 덧셈 → 결과 해석",
+      "modelAnswer": "부호-절댓값: 00111010=58, 10100100=-36\n합: 58+(-36)=22\n2의 보수로: 58→00111010, -36→11011100\n덧셈 결과를 10진수로 변환하면 22"
+    },
+    {
+      "id": "ch1-q266",
+      "type": "proof",
+      "text": "<strong>[문제 33(b)]</strong> 부호-절댓값 표현 $10001000 + 11100100$를 1의 보수와 2의 보수 표현을 이용하여 각각 연산하고, 결과의 10진수 표현까지 구하시오.<br><em>(부호-절댓값: $10001000=-8_{10}$, $11100100=-100_{10}$)</em>",
+      "hint": "10001000(부호-절댓값)=-8, 11100100(부호-절댓값)=-100. 합: -108. 1의 보수와 2의 보수 각각으로 두 수를 변환 → 이진 덧셈 → 결과 해석",
+      "modelAnswer": "부호-절댓값: 10001000=-8, 11100100=-100\n합: -8+(-100)=-108\n2의 보수로: -8→11111000, -100→10011100\n덧셈 결과를 10진수로 변환하면 -108"
+    },
+    {
+      "id": "ch1-q267",
+      "type": "proof",
+      "text": "<strong>[문제 33(c)]</strong> 부호-절댓값 표현 $01010111 + 00001101$를 1의 보수와 2의 보수 표현을 이용하여 각각 연산하고, 결과의 10진수 표현까지 구하시오.<br><em>(부호-절댓값: $01010111=87_{10}$, $00001101=13_{10}$)</em>",
+      "hint": "01010111(부호-절댓값)=87, 00001101(부호-절댓값)=13. 합: 100. 1의 보수와 2의 보수 각각으로 두 수를 변환 → 이진 덧셈 → 결과 해석",
+      "modelAnswer": "부호-절댓값: 01010111=87, 00001101=13\n합: 87+(13)=100\n2의 보수로: 87→01010111, 13→00001101\n덧셈 결과를 10진수로 변환하면 100"
+    },
+    {
+      "id": "ch1-q268",
+      "type": "proof",
+      "text": "<strong>[문제 33(d)]</strong> 부호-절댓값 표현 $10000111 + 11001111$를 1의 보수와 2의 보수 표현을 이용하여 각각 연산하고, 결과의 10진수 표현까지 구하시오.<br><em>(부호-절댓값: $10000111=-7_{10}$, $11001111=-79_{10}$)</em>",
+      "hint": "10000111(부호-절댓값)=-7, 11001111(부호-절댓값)=-79. 합: -86. 1의 보수와 2의 보수 각각으로 두 수를 변환 → 이진 덧셈 → 결과 해석",
+      "modelAnswer": "부호-절댓값: 10000111=-7, 11001111=-79\n합: -7+(-79)=-86\n2의 보수로: -7→11111001, -79→10110001\n덧셈 결과를 10진수로 변환하면 -86"
+    },
+    {
+      "id": "ch1-q269",
+      "type": "proof",
+      "text": "<strong>[문제 33(e)]</strong> 부호-절댓값 표현 $10110100 + 00110011$를 1의 보수와 2의 보수 표현을 이용하여 각각 연산하고, 결과의 10진수 표현까지 구하시오.<br><em>(부호-절댓값: $10110100=-52_{10}$, $00110011=51_{10}$)</em>",
+      "hint": "10110100(부호-절댓값)=-52, 00110011(부호-절댓값)=51. 합: -1. 1의 보수와 2의 보수 각각으로 두 수를 변환 → 이진 덧셈 → 결과 해석",
+      "modelAnswer": "부호-절댓값: 10110100=-52, 00110011=51\n합: -52+(51)=-1\n2의 보수로: -52→11001100, 51→00110011\n덧셈 결과를 10진수로 변환하면 -1"
+    },
+    {
+      "id": "ch1-q270",
+      "type": "proof",
+      "text": "<strong>[문제 33(f)]</strong> 부호-절댓값 표현 $11010010 + 10011110$를 1의 보수와 2의 보수 표현을 이용하여 각각 연산하고, 결과의 10진수 표현까지 구하시오.<br><em>(부호-절댓값: $11010010=-82_{10}$, $10011110=-30_{10}$)</em>",
+      "hint": "11010010(부호-절댓값)=-82, 10011110(부호-절댓값)=-30. 합: -112. 1의 보수와 2의 보수 각각으로 두 수를 변환 → 이진 덧셈 → 결과 해석",
+      "modelAnswer": "부호-절댓값: 11010010=-82, 10011110=-30\n합: -82+(-30)=-112\n2의 보수로: -82→10101110, -30→11100010\n덧셈 결과를 10진수로 변환하면 -112"
+    },
+    {
+      "id": "ch1-q271",
+      "type": "proof",
+      "text": "<strong>[문제 34(a)]</strong> 8비트 1의 보수와 2의 보수 표현을 이용하여 $42_{10} + 77_{10}$를 연산하고, 결과의 10진수 표현까지 구하시오.",
+      "hint": "a=42, b=77. 결과: 119. 각 수를 1의 보수/2의 보수로 변환 → 8비트 이진 덧셈 → carry 처리 → 결과 해석",
+      "modelAnswer": "a=42 → 2의 보수: 00101010\nb=77 → 2의 보수: 01001101\n덧셈 결과의 10진수: 119"
+    },
+    {
+      "id": "ch1-q272",
+      "type": "proof",
+      "text": "<strong>[문제 34(b)]</strong> 8비트 1의 보수와 2의 보수 표현을 이용하여 $-42_{10} + 77_{10}$를 연산하고, 결과의 10진수 표현까지 구하시오.",
+      "hint": "a=-42, b=77. 결과: 35. 각 수를 1의 보수/2의 보수로 변환 → 8비트 이진 덧셈 → carry 처리 → 결과 해석",
+      "modelAnswer": "a=-42 → 2의 보수: 11010110\nb=77 → 2의 보수: 01001101\n덧셈 결과의 10진수: 35"
+    },
+    {
+      "id": "ch1-q273",
+      "type": "proof",
+      "text": "<strong>[문제 34(c)]</strong> 8비트 1의 보수와 2의 보수 표현을 이용하여 $42_{10} - 77_{10}$를 연산하고, 결과의 10진수 표현까지 구하시오.",
+      "hint": "a=42, b=-77. 결과: -35. 각 수를 1의 보수/2의 보수로 변환 → 8비트 이진 덧셈 → carry 처리 → 결과 해석",
+      "modelAnswer": "a=42 → 2의 보수: 00101010\nb=-77 → 2의 보수: 10110011\n덧셈 결과의 10진수: -35"
+    },
+    {
+      "id": "ch1-q274",
+      "type": "proof",
+      "text": "<strong>[문제 34(d)]</strong> 8비트 1의 보수와 2의 보수 표현을 이용하여 $-42_{10} - 77_{10}$를 연산하고, 결과의 10진수 표현까지 구하시오.",
+      "hint": "a=-42, b=-77. 결과: -119. 각 수를 1의 보수/2의 보수로 변환 → 8비트 이진 덧셈 → carry 처리 → 결과 해석",
+      "modelAnswer": "a=-42 → 2의 보수: 11010110\nb=-77 → 2의 보수: 10110011\n덧셈 결과의 10진수: -119"
+    },
+    {
+      "id": "ch1-q275",
+      "type": "proof",
+      "text": "<strong>[문제 35(a)]</strong> 8비트 1의 보수와 2의 보수 표현을 이용하여 $12_{10} + 51_{10}$를 연산하고, 결과의 10진수 표현까지 구하시오.",
+      "hint": "a=12, b=51. 결과: 63. 각 수를 1의 보수/2의 보수로 변환 → 8비트 이진 덧셈 → carry 처리 → 결과 해석",
+      "modelAnswer": "a=12 → 2의 보수: 00001100\nb=51 → 2의 보수: 00110011\n덧셈 결과의 10진수: 63"
+    },
+    {
+      "id": "ch1-q276",
+      "type": "proof",
+      "text": "<strong>[문제 35(b)]</strong> 8비트 1의 보수와 2의 보수 표현을 이용하여 $-12_{10} + 51_{10}$를 연산하고, 결과의 10진수 표현까지 구하시오.",
+      "hint": "a=-12, b=51. 결과: 39. 각 수를 1의 보수/2의 보수로 변환 → 8비트 이진 덧셈 → carry 처리 → 결과 해석",
+      "modelAnswer": "a=-12 → 2의 보수: 11110100\nb=51 → 2의 보수: 00110011\n덧셈 결과의 10진수: 39"
+    },
+    {
+      "id": "ch1-q277",
+      "type": "proof",
+      "text": "<strong>[문제 35(c)]</strong> 8비트 1의 보수와 2의 보수 표현을 이용하여 $12_{10} - 51_{10}$를 연산하고, 결과의 10진수 표현까지 구하시오.",
+      "hint": "a=12, b=-51. 결과: -39. 각 수를 1의 보수/2의 보수로 변환 → 8비트 이진 덧셈 → carry 처리 → 결과 해석",
+      "modelAnswer": "a=12 → 2의 보수: 00001100\nb=-51 → 2의 보수: 11001101\n덧셈 결과의 10진수: -39"
+    },
+    {
+      "id": "ch1-q278",
+      "type": "proof",
+      "text": "<strong>[문제 35(d)]</strong> 8비트 1의 보수와 2의 보수 표현을 이용하여 $-12_{10} - 51_{10}$를 연산하고, 결과의 10진수 표현까지 구하시오.",
+      "hint": "a=-12, b=-51. 결과: -63. 각 수를 1의 보수/2의 보수로 변환 → 8비트 이진 덧셈 → carry 처리 → 결과 해석",
+      "modelAnswer": "a=-12 → 2의 보수: 11110100\nb=-51 → 2의 보수: 11001101\n덧셈 결과의 10진수: -63"
+    },
+    {
+      "id": "ch1-q279",
+      "type": "proof",
+      "text": "<strong>[문제 36(a)]</strong> 8비트 1의 보수와 2의 보수 표현을 이용하여 $101_{10} + 14_{10}$를 연산하고, 결과의 10진수 표현까지 구하시오.",
+      "hint": "a=101, b=14. 결과: 115. 각 수를 1의 보수/2의 보수로 변환 → 8비트 이진 덧셈 → carry 처리 → 결과 해석",
+      "modelAnswer": "a=101 → 2의 보수: 01100101\nb=14 → 2의 보수: 00001110\n덧셈 결과의 10진수: 115"
+    },
+    {
+      "id": "ch1-q280",
+      "type": "proof",
+      "text": "<strong>[문제 36(b)]</strong> 8비트 1의 보수와 2의 보수 표현을 이용하여 $-101_{10} + 14_{10}$를 연산하고, 결과의 10진수 표현까지 구하시오.",
+      "hint": "a=-101, b=14. 결과: -87. 각 수를 1의 보수/2의 보수로 변환 → 8비트 이진 덧셈 → carry 처리 → 결과 해석",
+      "modelAnswer": "a=-101 → 2의 보수: 10011011\nb=14 → 2의 보수: 00001110\n덧셈 결과의 10진수: -87"
+    },
+    {
+      "id": "ch1-q281",
+      "type": "proof",
+      "text": "<strong>[문제 36(c)]</strong> 8비트 1의 보수와 2의 보수 표현을 이용하여 $101_{10} - 14_{10}$를 연산하고, 결과의 10진수 표현까지 구하시오.",
+      "hint": "a=101, b=-14. 결과: 87. 각 수를 1의 보수/2의 보수로 변환 → 8비트 이진 덧셈 → carry 처리 → 결과 해석",
+      "modelAnswer": "a=101 → 2의 보수: 01100101\nb=-14 → 2의 보수: 11110010\n덧셈 결과의 10진수: 87"
+    },
+    {
+      "id": "ch1-q282",
+      "type": "proof",
+      "text": "<strong>[문제 36(d)]</strong> 8비트 1의 보수와 2의 보수 표현을 이용하여 $-101_{10} - 14_{10}$를 연산하고, 결과의 10진수 표현까지 구하시오.",
+      "hint": "a=-101, b=-14. 결과: -115. 각 수를 1의 보수/2의 보수로 변환 → 8비트 이진 덧셈 → carry 처리 → 결과 해석",
+      "modelAnswer": "a=-101 → 2의 보수: 10011011\nb=-14 → 2의 보수: 11110010\n덧셈 결과의 10진수: -115"
+    }
+  ]
+}

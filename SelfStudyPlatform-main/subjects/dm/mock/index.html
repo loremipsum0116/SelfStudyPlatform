@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script type="module" src="../../../shared/auth-guard.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이산수학 · 모의고사</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+  <script defer src="../../../shared/katex-boot.js"></script>
+  <script defer src="../../../shared/grader.js"></script>
+  <script defer src="../../../shared/practice.js"></script>
+  <!-- db.js는 module이라 자동 defer; window.__db 를 등록 -->
+  <script type="module" src="../../../shared/db.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../shared/styles.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a href="../index.html">← 과목 허브</a>
+      <div class="crumbs"><span>이산수학</span><span class="sep">/</span><span class="now">모의고사</span></div>
+      <a href="history.html">최근 기록 →</a>
+    </div>
+    <header class="masthead">
+      <div class="kicker"><span>Discrete Mathematics</span><span>Mock Exam</span></div>
+      <h1 class="title" id="quiz-title">이산수학 모의고사</h1>
+      <p class="deck">실전처럼 시간을 재면서 풀어보세요. 제출 시 결과가 저장되며 최근 5회까지 보관됩니다.</p>
+    </header>
+
+    <div class="quiz-header">
+      <div>
+        <div class="meta">AI 채점</div>
+        <div id="api-status" class="api-status err">API KEY · 미등록</div>
+      </div>
+      <div>
+        <button class="btn-reset" onclick="toggleApiSetup()" style="padding:10px 16px">API 키 관리</button>
+      </div>
+    </div>
+
+    <div class="api-setup" id="api-setup" style="display:none">
+      <h4>Google Gemini API 키 등록</h4>
+      <p>증명형 문제는 Google Gemini 2.5 Flash (thinking 모드)로 채점됩니다. Google AI Studio (<a href="https://aistudio.google.com/apikey" target="_blank" style="color:var(--accent)">aistudio.google.com/apikey</a>)에서 무료로 API 키를 발급받을 수 있습니다. API 키는 <strong>이 브라우저에만</strong> 저장되며 서버로 전송되지 않습니다.</p>
+      <p style="color:var(--warn)">⚠️ 공용 컴퓨터에서는 권장하지 않습니다.</p>
+      <input type="password" id="api-key-input" placeholder="AIzaSy...">
+      <div class="row">
+        <button onclick="handleSaveApiKey()">저장</button>
+        <button class="secondary" onclick="handleClearApiKey()">저장된 키 삭제</button>
+        <button class="secondary" onclick="toggleApiSetup()">닫기</button>
+      </div>
+    </div>
+
+    <div id="questions-container">
+      <div class="note"><span class="lbl">Loading</span>문제를 불러오는 중...</div>
+    </div>
+
+    <footer class="page-footer">
+      <span>이산수학 · 모의고사</span>
+      <span><a href="../index.html" style="color:var(--accent);text-decoration:none">과목 허브로 →</a></span>
+    </footer>
+  </div>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => initPractice('dm', 'mock', 'mock'));
+  </script>
+  <script type="module">
+    import { onAuthChange } from '../../../shared/auth.js';
+    onAuthChange(() => { /* 로그인 상태 갱신 훅 */ });
+  </script>
+</body>
+</html>

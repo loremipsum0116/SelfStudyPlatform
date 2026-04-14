@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script type="module" src="shared/auth-guard.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>관리자 패널</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared/styles.css" />
+  <style>
+    .admin { max-width:900px; margin:40px auto; padding:0 20px; }
+    .admin .header { display:flex; justify-content:space-between; align-items:center; margin-bottom:32px; }
+    .admin .header h1 { margin:0; font-size:28px; }
+
+    .tab-bar { display:flex; gap:0; border-bottom:2px solid var(--ink); margin-bottom:24px; }
+    .tab-bar button { padding:10px 20px; border:1px solid var(--ink); border-bottom:none;
+      background:var(--bg); font-family:var(--mono); font-size:11px; letter-spacing:.15em;
+      text-transform:uppercase; cursor:pointer; margin-bottom:-2px; }
+    .tab-bar button.active { background:var(--card); font-weight:600; border-bottom:2px solid var(--card); }
+
+    .user-card { background:var(--card); border:1px solid #ddd; padding:16px 20px;
+      border-radius:8px; margin:10px 0; display:flex; justify-content:space-between;
+      align-items:center; gap:16px; flex-wrap:wrap; }
+    .user-card .info { flex:1; min-width:200px; }
+    .user-card .email { font-weight:600; font-size:15px; }
+    .user-card .meta { font-size:12px; color:var(--ink-muted); font-family:var(--mono); margin-top:4px; }
+    .user-card .actions { display:flex; gap:6px; flex-wrap:wrap; }
+    .user-card .actions button { padding:8px 14px; border:1px solid var(--ink);
+      font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+      cursor:pointer; transition:all .15s; }
+    .btn-approve { background:var(--ok); color:#fff; border-color:var(--ok) !important; }
+    .btn-approve:hover { background:#1e5a2f; }
+    .btn-deny { background:var(--err); color:#fff; border-color:var(--err) !important; }
+    .btn-deny:hover { background:#8a2a14; }
+    .btn-delete { background:#1a1a1a; color:#fff; border-color:#1a1a1a !important; }
+    .btn-delete:hover { background:#c7851c; border-color:#c7851c !important; }
+
+    .status-badge { display:inline-block; padding:2px 8px; border-radius:4px;
+      font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; }
+    .status-badge.pending { background:var(--warn-soft); color:var(--warn); border:1px solid var(--warn); }
+    .status-badge.approved { background:var(--ok-soft); color:var(--ok); border:1px solid var(--ok); }
+    .status-badge.denied { background:var(--err-soft); color:var(--err); border:1px solid var(--err); }
+
+    .empty-state { text-align:center; padding:40px 20px; color:var(--ink-muted); font-size:15px; }
+    .count-badge { font-family:var(--mono); font-size:10px; background:var(--accent);
+      color:#fff; padding:2px 6px; border-radius:10px; margin-left:6px; }
+
+    .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+      padding:12px 24px; border-radius:8px; font-size:14px; font-family:var(--sans);
+      z-index:1000; opacity:0; transition:opacity .3s; pointer-events:none; }
+    .toast.show { opacity:1; }
+    .toast.ok { background:var(--ok); color:#fff; }
+    .toast.err { background:var(--err); color:#fff; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="admin">
+      <div class="header">
+        <h1>👑 관리자 패널</h1>
+        <div>
+          <a href="dashboard.html" style="margin-right:12px;font-size:14px">← 대시보드</a>
+          <button id="logout-btn" class="btn" style="padding:6px 12px">로그아웃</button>
+        </div>
+      </div>
+
+      <div id="not-admin" style="display:none">
+        <div class="empty-state">
+          <div style="font-size:48px;margin-bottom:12px">🚫</div>
+          <p>관리자만 접근 가능합니다.</p>
+          <a href="dashboard.html">대시보드로 돌아가기</a>
+        </div>
+      </div>
+
+      <div id="admin-content" style="display:none">
+        <div class="tab-bar">
+          <button class="active" data-tab="pending">대기 중 <span id="pending-count" class="count-badge">0</span></button>
+          <button data-tab="approved">승인됨</button>
+          <button data-tab="denied">거부됨</button>
+          <button data-tab="all">전체</button>
+        </div>
+        <div id="user-list"></div>
+
+      <h2 style="margin-top:32px">가입 요청</h2>
+      <p class="note">일반 계정은 여기서 먼저 승인된 뒤에만 실제 회원가입을 완료할 수 있습니다.</p>
+      <div id="request-list"></div>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script type="module">
+    import { onAuthChange, signOutUser } from './shared/auth.js';
+    import { getAllUsers, setUserStatus, deleteUserProfile, isSuperAdmin, getAllSignupRequests, setSignupRequestStatus, deleteSignupRequest } from './shared/db.js';
+
+    const logoutBtn = document.getElementById('logout-btn');
+    const notAdmin = document.getElementById('not-admin');
+    const adminContent = document.getElementById('admin-content');
+    const userListEl = document.getElementById('user-list');
+    const requestListEl = document.getElementById('request-list');
+    const pendingCount = document.getElementById('pending-count');
+    const tabs = document.querySelectorAll('.tab-bar button');
+    const toastEl = document.getElementById('toast');
+
+    let currentTab = 'pending';
+    let allUsers = [];
+    let allRequests = [];
+
+    function showToast(msg, type) {
+      toastEl.textContent = msg;
+      toastEl.className = 'toast show ' + type;
+      setTimeout(() => toastEl.classList.remove('show'), 2500);
+    }
+
+    logoutBtn.addEventListener('click', async () => {
+      await signOutUser();
+      window.location.href = 'login.html';
+    });
+
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        currentTab = btn.dataset.tab;
+        renderUsers();
+      });
+    });
+
+    function fmtDate(ts) {
+      if (!ts) return '—';
+      try {
+        const d = ts.toDate ? ts.toDate() : new Date(ts);
+        return d.toLocaleString('ko-KR');
+      } catch { return '—'; }
+    }
+
+    function renderUsers() {
+      let filtered = allUsers;
+      if (currentTab !== 'all') filtered = allUsers.filter(u => u.status === currentTab);
+
+      if (!filtered.length) {
+        userListEl.innerHTML = '<div class="empty-state">해당 상태의 유저가 없습니다.</div>';
+        return;
+      }
+
+      userListEl.innerHTML = filtered.map(u => {
+        const isSelf = u.email === 'sst7050@naver.com';
+        let actions = '';
+        if (!isSelf) {
+          if (u.status === 'pending') {
+            actions = `
+              <button class="btn-approve" data-uid="${u.id}" data-action="approved">승인</button>
+              <button class="btn-deny" data-uid="${u.id}" data-action="denied">거부</button>
+              <button class="btn-delete" data-uid="${u.id}" data-action="delete">탈퇴</button>`;
+          } else if (u.status === 'approved') {
+            actions = `
+              <button class="btn-deny" data-uid="${u.id}" data-action="denied">거부</button>
+              <button class="btn-delete" data-uid="${u.id}" data-action="delete">탈퇴</button>`;
+          } else if (u.status === 'denied') {
+            actions = `
+              <button class="btn-approve" data-uid="${u.id}" data-action="approved">승인</button>
+              <button class="btn-delete" data-uid="${u.id}" data-action="delete">탈퇴</button>`;
+          }
+        }
+        return `
+          <div class="user-card">
+            <div class="info">
+              <div class="email">${u.email || '(이메일 없음)'}${isSelf ? ' 👑' : ''}</div>
+              <div class="meta">
+                <span class="status-badge ${u.status}">${u.status}</span>
+                &nbsp;·&nbsp;가입: ${fmtDate(u.createdAt)}
+              </div>
+            </div>
+            <div class="actions">${actions}</div>
+          </div>`;
+      }).join('');
+
+      // 이벤트 바인딩
+      userListEl.querySelectorAll('button[data-uid]').forEach(btn => {
+        btn.addEventListener('click', () => handleAction(btn.dataset.uid, btn.dataset.action));
+      });
+    }
+
+
+    function renderRequests() {
+      if (!allRequests.length) {
+        requestListEl.innerHTML = '<div class="empty">현재 가입 요청이 없습니다.</div>';
+        return;
+      }
+      requestListEl.innerHTML = allRequests.map(r => `
+        <div class="user-card">
+          <div class="info">
+            <div class="email">${r.email}</div>
+            <div class="meta"><span class="status-badge ${r.status}">${r.status}</span></div>
+          </div>
+          <div class="actions">
+            ${r.status !== 'approved' ? `<button class="btn-approve" data-req-email="${r.email}" data-req-action="approved">승인</button>` : ''}
+            ${r.status !== 'denied' ? `<button class="btn-deny" data-req-email="${r.email}" data-req-action="denied">거부</button>` : ''}
+            <button class="btn-delete" data-req-email="${r.email}" data-req-action="delete">삭제</button>
+          </div>
+        </div>`).join('');
+
+      requestListEl.querySelectorAll('button[data-req-email]').forEach(btn => {
+        btn.addEventListener('click', () => handleRequestAction(btn.dataset.reqEmail, btn.dataset.reqAction));
+      });
+    }
+
+    async function handleRequestAction(email, action) {
+      try {
+        if (action === 'delete') {
+          await deleteSignupRequest(email);
+          showToast('가입 요청 삭제 완료', 'ok');
+        } else {
+          await setSignupRequestStatus(email, action, window.__auth?.getCurrentUser?.()?.email || null);
+          showToast(`가입 요청 ${action === 'approved' ? '승인' : '거부'} 완료`, 'ok');
+        }
+        await loadUsers();
+      } catch (err) {
+        showToast('처리 실패: ' + err.message, 'err');
+      }
+    }
+
+    async function handleAction(uid, action) {
+      try {
+        if (action === 'delete') {
+          const user = allUsers.find(u => u.id === uid);
+          const email = user ? user.email : uid;
+          if (!confirm(`정말로 "${email}" 유저를 탈퇴 처리하시겠습니까?\n\nFirestore 프로필이 삭제됩니다.\n(Firebase Auth 계정은 서버 측에서 별도 삭제 필요)`)) return;
+          await deleteUserProfile(uid);
+          showToast(`${email} 탈퇴 완료`, 'ok');
+        } else {
+          await setUserStatus(uid, action);
+          const label = action === 'approved' ? '승인' : '거부';
+          showToast(`유저 ${label} 완료`, 'ok');
+        }
+        await loadUsers();
+      } catch (err) {
+        showToast('처리 실패: ' + err.message, 'err');
+      }
+    }
+
+    async function loadUsers() {
+      allUsers = await getAllUsers();
+      allRequests = await getAllSignupRequests();
+      allUsers.sort((a, b) => {
+        const order = { pending: 0, approved: 1, denied: 2 };
+        const diff = (order[a.status] ?? 3) - (order[b.status] ?? 3);
+        if (diff !== 0) return diff;
+        const aT = a.createdAt?.toDate?.() || new Date(0);
+        const bT = b.createdAt?.toDate?.() || new Date(0);
+        return bT - aT;
+      });
+      allRequests.sort((a, b) => {
+        const order = { pending: 0, approved: 1, denied: 2 };
+        return (order[a.status] ?? 3) - (order[b.status] ?? 3);
+      });
+      pendingCount.textContent = allUsers.filter(u => u.status === 'pending').length;
+      renderUsers();
+      renderRequests();
+    }
+
+    onAuthChange(async (user) => {
+      if (!user) return;
+      if (!isSuperAdmin()) { notAdmin.style.display = 'block'; return; }
+      adminContent.style.display = 'block';
+      await loadUsers();
+    });
+  </script>
+</body>
+</html>

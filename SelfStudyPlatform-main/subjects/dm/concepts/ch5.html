@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script type="module" src="../../../shared/auth-guard.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ch.5 행렬 · 개념 정리</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+  <script defer src="../../../shared/katex-boot.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../shared/styles.css">
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topbar">
+    <a href="../index.html">← 허브</a>
+    <div class="crumbs"><span>Ch.5</span><span class="sep">/</span><span class="now">개념 정리</span></div>
+    <a href="../practice/ch5.html">문제풀이 →</a>
+  </div>
+
+  <header class="masthead">
+    <div class="kicker"><span>Discrete Mathematics · Chapter 05</span><span>Concepts</span></div>
+    <h1 class="title">행렬과<br><em>행렬 연산</em></h1>
+    <p class="deck">행렬의 기초, 기본 연산, 행렬의 곱, 특수한 행렬, 부울 행렬, 행렬식과 역행렬, 가우스 소거법까지 — 챕터 5 문제를 풀기 위한 핵심 개념을 기초부터 정리합니다.</p>
+  </header>
+
+  <div class="classifier">
+    <h2>이 문서의 분류 기준</h2>
+    <p style="margin:4px 0 12px;font-size:14.5px;color:var(--ink-soft)">챕터 5는 <strong>행렬의 구조 → 기본 연산 → 곱셈 → 특수한 행렬 → 부울 행렬 → 행렬식과 역행렬 → 소거법</strong>의 흐름으로 정리했습니다.</p>
+    <ul>
+      <li><b>§1</b> 행렬의 기초 — 문제 01</li>
+      <li><b>§2</b> 행렬의 기본 연산 — 문제 02, 03, 06</li>
+      <li><b>§3</b> 행렬의 곱셈 — 문제 04, 07</li>
+      <li><b>§4</b> 특수한 형태의 행렬 — 문제 05, 08, 09</li>
+      <li><b>§5</b> 부울 행렬과 연산 — 문제 10, 11</li>
+      <li><b>§6</b> 행렬식과 역행렬 — 문제 12, 13, 14</li>
+      <li><b>§7</b> 연립일차방정식과 가우스 소거법 — 문제 13(f), 14(f), 15, 16, 17</li>
+    </ul>
+  </div>
+
+  <nav class="toc">
+    <span class="lbl">Contents</span>
+    <ol>
+      <li><a href="#s1"><span class="n">§1</span>행렬의 기초</a></li>
+      <li><a href="#s2"><span class="n">§2</span>행렬의 기본 연산</a></li>
+      <li><a href="#s3"><span class="n">§3</span>행렬의 곱셈</a></li>
+      <li><a href="#s4"><span class="n">§4</span>특수한 행렬</a></li>
+      <li><a href="#s5"><span class="n">§5</span>부울 행렬</a></li>
+      <li><a href="#s6"><span class="n">§6</span>행렬식과 역행렬</a></li>
+      <li><a href="#s7"><span class="n">§7</span>가우스 소거법</a></li>
+    </ol>
+  </nav>
+
+  <section id="s1">
+    <div class="sec-head">
+      <span class="sec-num">§ 01</span>
+      <h2 class="sec-title">행렬의 기초</h2>
+      <span class="scope">문제 01</span>
+    </div>
+
+    <h3>1.1 행렬, 행, 열</h3>
+    <p><strong>행렬(Matrix)</strong>은 수나 기호를 직사각형 모양으로 배열한 것입니다. 행렬은 보통 $A, B, C$ 같은 대문자로 나타냅니다.</p>
+    <p>가로 방향 줄을 <strong>행(row)</strong>, 세로 방향 줄을 <strong>열(column)</strong>이라고 합니다.</p>
+
+    <div class="example">
+      <div class="example-body">
+        $$A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}$$
+        이 행렬은 <strong>2행 3열</strong> 행렬입니다.
+      </div>
+    </div>
+
+    <h3>1.2 행렬의 크기</h3>
+    <p>$m$개의 행과 $n$개의 열을 가진 행렬을 <strong>$m \times n$ 행렬</strong>이라고 합니다. 읽을 때는 “엠 바이 엔”이라고 읽습니다.</p>
+    <p>행렬의 덧셈, 뺄셈, 곱셈이 가능한지 판단할 때 가장 먼저 보는 것이 바로 이 크기입니다.</p>
+
+    <h3>1.3 행렬의 원소</h3>
+    <p>행렬을 이루는 각각의 값을 <strong>원소(element)</strong>라고 합니다. 행렬 $A$의 $i$행 $j$열 원소는 $a_{ij}$ 로 씁니다.</p>
+    <div class="example">
+      <div class="example-body">
+        $$A = \begin{bmatrix} 7 & 8 & 9 \\ 1 & 2 & 3 \end{bmatrix}$$
+        여기서 $a_{23} = 3$ 입니다. 즉, 2행 3열의 원소는 3입니다.
+      </div>
+    </div>
+  </section>
+
+  <section id="s2">
+    <div class="sec-head">
+      <span class="sec-num">§ 02</span>
+      <h2 class="sec-title">행렬의 기본 연산</h2>
+      <span class="scope">문제 02, 03, 06</span>
+    </div>
+
+    <h3>2.1 행렬의 덧셈과 뺄셈</h3>
+    <p>행렬의 덧셈과 뺄셈은 <strong>같은 위치의 원소끼리</strong> 계산합니다. 따라서 두 행렬의 크기가 완전히 같아야만 연산할 수 있습니다.</p>
+    $$A \pm B = [a_{ij} \pm b_{ij}]$$
+
+    <div class="note warn">
+      <span class="lbl">필수 조건</span>
+      $2 \times 3$ 행렬과 $3 \times 2$ 행렬은 원소 개수가 같아 보여도 덧셈·뺄셈을 할 수 없습니다. <strong>행과 열의 위치까지 정확히 같아야</strong> 합니다.
+    </div>
+
+    <div class="example">
+      <div class="example-body">
+        $$\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} + \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix} = \begin{bmatrix} 6 & 8 \\ 10 & 12 \end{bmatrix}$$
+      </div>
+    </div>
+
+    <h3>2.2 스칼라 곱</h3>
+    <p><strong>스칼라(scalar)</strong>는 하나의 수를 뜻합니다. 스칼라 $k$와 행렬 $A$의 곱 $kA$는 행렬의 모든 원소에 $k$를 곱한 것입니다.</p>
+    $$kA = [k a_{ij}]$$
+
+    <div class="example">
+      <div class="example-body">
+        $$3\begin{bmatrix} 1 & -2 \\ 0 & 4 \end{bmatrix} = \begin{bmatrix} 3 & -6 \\ 0 & 12 \end{bmatrix}$$
+      </div>
+    </div>
+  </section>
+
+  <section id="s3">
+    <div class="sec-head">
+      <span class="sec-num">§ 03</span>
+      <h2 class="sec-title">행렬의 곱셈</h2>
+      <span class="scope">문제 04, 07</span>
+    </div>
+
+    <h3>3.1 곱셈이 가능한 조건</h3>
+    <p>행렬의 곱셈 $AB$가 가능하려면 <strong>앞 행렬의 열 수</strong>와 <strong>뒤 행렬의 행 수</strong>가 같아야 합니다.</p>
+    $$ (m \times k) \cdot (k \times n) \Rightarrow (m \times n) $$
+    <p>결과 행렬의 크기는 바깥쪽 크기인 $m \times n$ 이 됩니다.</p>
+
+    <div class="note warn">
+      <span class="lbl">가장 중요한 주의사항</span>
+      행렬의 곱셈은 보통 <strong>교환법칙이 성립하지 않습니다.</strong> 즉, 일반적으로 $AB \ne BA$ 입니다. 하나는 가능하고 다른 하나는 아예 계산이 불가능한 경우도 많습니다.
+    </div>
+
+    <h3>3.2 계산 방법</h3>
+    <p>$C = AB$ 일 때, $c_{ij}$ 는 $A$의 $i$행과 $B$의 $j$열을 대응시켜 곱한 뒤 모두 더한 값입니다.</p>
+    $$c_{ij} = \sum_{r=1}^{k} a_{ir} b_{rj}$$
+
+    <div class="example">
+      <div class="example-body">
+        $$A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}, \quad B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}$$
+        $$AB = \begin{bmatrix} 1\cdot5 + 2\cdot7 & 1\cdot6 + 2\cdot8 \\ 3\cdot5 + 4\cdot7 & 3\cdot6 + 4\cdot8 \end{bmatrix} = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}$$
+      </div>
+    </div>
+  </section>
+
+  <section id="s4">
+    <div class="sec-head">
+      <span class="sec-num">§ 04</span>
+      <h2 class="sec-title">특수한 형태의 행렬들</h2>
+      <span class="scope">문제 05, 08, 09</span>
+    </div>
+
+    <h3>4.1 영행렬</h3>
+    <p>모든 원소가 $0$인 행렬을 <strong>영행렬</strong>이라 하고 보통 $O$로 나타냅니다.</p>
+    <p>크기에 맞는 영행렬에 대해 $A + O = A$ 가 성립합니다.</p>
+
+    <h3>4.2 단위행렬</h3>
+    <p>주대각선의 원소가 모두 $1$이고 나머지가 모두 $0$인 정사각행렬을 <strong>단위행렬</strong>이라 하고 $I$로 나타냅니다.</p>
+    <div class="example">
+      <div class="example-body">
+        $$I_3 = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$
+      </div>
+    </div>
+    <p>크기가 맞으면 $AI = IA = A$ 입니다.</p>
+
+    <h3>4.3 전치행렬</h3>
+    <p>행과 열을 서로 바꾸어 얻는 행렬을 <strong>전치행렬</strong>이라 하고 $A^T$ 로 나타냅니다.</p>
+    $$A = [a_{ij}] \Rightarrow A^T = [a_{ji}]$$
+    <p>즉, 1행은 1열이 되고 2행은 2열이 됩니다.</p>
+
+    <h3>4.4 대칭행렬</h3>
+    <p>정사각행렬 $A$가 자신의 전치행렬과 같으면, 즉 $A = A^T$ 이면 <strong>대칭행렬</strong>이라고 합니다.</p>
+    <p>대칭행렬은 주대각선을 기준으로 좌우가 거울처럼 대응합니다.</p>
+  </section>
+
+  <section id="s5">
+    <div class="sec-head">
+      <span class="sec-num">§ 05</span>
+      <h2 class="sec-title">부울 행렬과 연산</h2>
+      <span class="scope">문제 10, 11</span>
+    </div>
+
+    <p><strong>부울 행렬(Boolean Matrix)</strong>은 모든 원소가 $0$ 또는 $1$로만 이루어진 행렬입니다. 일반 행렬과 달리 계산에서 논리 연산을 사용합니다.</p>
+
+    <h3>5.1 부울 합</h3>
+    <p>같은 위치의 원소끼리 논리합 OR을 취합니다.</p>
+    $$1 \lor 1 = 1, \quad 1 \lor 0 = 1, \quad 0 \lor 1 = 1, \quad 0 \lor 0 = 0$$
+
+    <h3>5.2 부울 곱</h3>
+    <p>같은 위치의 원소끼리 논리곱 AND를 취합니다.</p>
+    $$1 \land 1 = 1, \quad 1 \land 0 = 0, \quad 0 \land 1 = 0, \quad 0 \land 0 = 0$$
+
+    <h3>5.3 부울 행렬의 곱</h3>
+    <p>형식은 일반 행렬 곱과 같지만, 곱하기는 $\land$, 더하기는 $\lor$ 로 바꾸어 계산합니다.</p>
+    $$c_{ij} = (a_{i1} \land b_{1j}) \lor (a_{i2} \land b_{2j}) \lor \cdots \lor (a_{ik} \land b_{kj})$$
+    <p>따라서 결과의 각 원소는 항상 $0$ 또는 $1$만 나옵니다.</p>
+
+    <div class="example">
+      <div class="example-body">
+        한 위치의 계산이 $(1\land0) \lor (1\land1)$ 이라면 $0 \lor 1 = 1$ 이므로 결과는 1입니다.
+      </div>
+    </div>
+  </section>
+
+  <section id="s6">
+    <div class="sec-head">
+      <span class="sec-num">§ 06</span>
+      <h2 class="sec-title">행렬식과 역행렬</h2>
+      <span class="scope">문제 12, 13, 14</span>
+    </div>
+
+    <h3>6.1 소행렬식과 여인수</h3>
+    <p>정사각행렬 $A$의 원소 $a_{ij}$ 에 대하여, $i$행과 $j$열을 지우고 남은 행렬의 행렬식을 <strong>소행렬식</strong> $M_{ij}$ 라고 합니다.</p>
+    <p>이때 <strong>여인수</strong>는 다음과 같이 정의합니다.</p>
+    $$C_{ij} = (-1)^{i+j} M_{ij}$$
+    <p>$i+j$가 짝수이면 부호가 그대로이고, 홀수이면 부호가 바뀝니다.</p>
+
+    <h3>6.2 행렬식</h3>
+    <p><strong>행렬식(determinant)</strong>은 정사각행렬에 대응되는 하나의 수입니다. 보통 $|A|$ 또는 $\det(A)$ 로 씁니다.</p>
+
+    <h4>$2 \times 2$ 행렬식</h4>
+    $$\begin{vmatrix} a & b \\ c & d \end{vmatrix} = ad - bc$$
+
+    <h4>$3 \times 3$ 행렬식</h4>
+    <p>보통 한 행이나 한 열을 기준으로 <strong>여인수 전개</strong>를 합니다.</p>
+    $$|A| = a_{11}C_{11} + a_{12}C_{12} + a_{13}C_{13}$$
+    <p>실제로는 계산이 가장 쉬운 행이나 열을 골라 전개하면 됩니다.</p>
+
+    <h3>6.3 가역행렬, 특이행렬</h3>
+    <dl class="terms">
+      <div>
+        <dt>가역행렬 <small>Invertible Matrix</small></dt>
+        <dd>역행렬이 존재하는 행렬입니다. 조건은 $|A| \ne 0$ 입니다.</dd>
+      </div>
+      <div>
+        <dt>특이행렬 <small>Singular Matrix</small></dt>
+        <dd>역행렬이 존재하지 않는 행렬입니다. 조건은 $|A| = 0$ 입니다.</dd>
+      </div>
+    </dl>
+
+    <h3>6.4 수반행렬과 역행렬</h3>
+    <p><strong>수반행렬</strong> $\operatorname{adj}(A)$ 는 각 원소를 그 원소의 여인수로 바꾼 행렬을 만든 뒤 전치한 것입니다.</p>
+    <p>가역행렬에서는 다음 공식으로 역행렬을 구할 수 있습니다.</p>
+    $$A^{-1} = \frac{1}{|A|}\operatorname{adj}(A)$$
+
+    <h4>$2 \times 2$ 역행렬 공식</h4>
+    $$A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}, \quad A^{-1} = \frac{1}{ad-bc}\begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$$
+
+    <div class="note warn">
+      <span class="lbl">조건 확인</span>
+      $ad-bc = 0$ 이면 분모가 0이 되므로 역행렬이 존재하지 않습니다.
+    </div>
+  </section>
+
+  <section id="s7">
+    <div class="sec-head">
+      <span class="sec-num">§ 07</span>
+      <h2 class="sec-title">연립일차방정식과 가우스 소거법</h2>
+      <span class="scope">문제 13(f), 14(f), 15, 16, 17</span>
+    </div>
+
+    <h3>7.1 첨가행렬</h3>
+    <p>연립일차방정식의 계수와 상수항을 하나로 묶어 만든 행렬을 <strong>첨가행렬</strong>이라고 합니다.</p>
+    <div class="example">
+      <div class="example-body">
+        $$\begin{cases}
+        x + 2y = 5 \\
+        3x - y = 4
+        \end{cases}
+        \quad \Rightarrow \quad
+        \left[\begin{array}{cc|c}
+        1 & 2 & 5 \\
+        3 & -1 & 4
+        \end{array}\right]$$
+      </div>
+    </div>
+
+    <h3>7.2 기본 행 연산</h3>
+    <p>연립방정식의 해를 바꾸지 않으면서 행렬을 변형하는 방법은 다음 세 가지입니다.</p>
+    <ul>
+      <li>두 행의 위치를 서로 바꾼다.</li>
+      <li>한 행에 0이 아닌 상수를 곱한다.</li>
+      <li>한 행의 상수배를 다른 행에 더하거나 뺀다.</li>
+    </ul>
+
+    <h3>7.3 가우스 소거법</h3>
+    <p>행 연산을 이용해 아래쪽을 차례로 0으로 만들어 <strong>행사다리꼴(REF)</strong>을 만드는 방법입니다. 이 상태가 되면 맨 아래 식부터 값을 구해 위로 올라가는 <strong>후진 대입</strong>을 합니다.</p>
+
+    <h3>7.4 가우스-조단 소거법</h3>
+    <p>가우스 소거법을 더 진행해서, 아래뿐 아니라 위쪽도 0으로 만들고 피벗을 1로 맞추면 <strong>기약 행사다리꼴(RREF)</strong>이 됩니다.</p>
+    <p>이 상태에서는 마지막 열의 값이 바로 미지수의 해가 되므로 후진 대입이 필요 없습니다.</p>
+
+    <div class="note">
+      <span class="lbl">풀이 흐름</span>
+      문제를 풀 때는 먼저 연립방정식을 첨가행렬로 바꾸고, 피벗을 기준으로 아래를 지운 뒤, 필요하면 위까지 지워 RREF로 정리하면 됩니다. 분수 계산이 나와도 방식은 완전히 같습니다.
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
