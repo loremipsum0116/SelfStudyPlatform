@@ -167,11 +167,21 @@ nav.toc .n{font-family:var(--mono);font-size:11px;color:var(--accent);margin-rig
 .quiz-header .api-status.ok{background:var(--ok-soft);color:var(--ok);border-color:var(--ok)}
 .quiz-header .api-status.err{background:var(--err-soft);color:var(--err);border-color:var(--err)}
 
+.practice-filter-panel{background:var(--card);border:1px solid var(--ink);padding:18px 22px;margin:-8px 0 28px}
+.practice-filter-toggle{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;cursor:pointer}
+.practice-filter-toggle input{width:18px;height:18px;accent-color:var(--accent);cursor:pointer}
+.practice-filter-copy{margin-top:12px}
+.practice-filter-count{font-family:var(--serif);font-size:20px;font-weight:700;margin-bottom:6px}
+.practice-filter-help{font-size:13.5px;color:var(--ink-soft);line-height:1.7}
+
 .question{background:var(--card);border:1px solid var(--ink);margin:20px 0;padding:24px 28px;position:relative}
-.question .q-num{font-family:var(--mono);font-size:10px;letter-spacing:.25em;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
-.question .q-num .tag{background:var(--accent-soft);padding:2px 8px;margin-left:8px;border:1px solid var(--ink);color:var(--ink)}
+.question .q-num{font-family:var(--mono);font-size:10px;letter-spacing:.25em;color:var(--accent);text-transform:uppercase;margin-bottom:8px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.question .q-num .display-num{display:inline-block}
+.question .q-num .tag{background:var(--accent-soft);padding:2px 8px;border:1px solid var(--ink);color:var(--ink);letter-spacing:.12em}
 .question .q-num .tag.proof{background:#1a1a1a;color:var(--bg);border-color:#1a1a1a}
+.question .q-num .tag.assignment{background:var(--warn-soft);color:var(--warn);border-color:var(--warn)}
 .question .q-text{font-size:15.5px;margin:10px 0 18px;line-height:1.7}
+.question .q-text .prompt-emphasis{display:inline-block;margin-left:6px;color:var(--warn);font-weight:700;font-size:13px;letter-spacing:.02em}
 .question .q-text p{margin:8px 0}
 
 /* multiple choice */

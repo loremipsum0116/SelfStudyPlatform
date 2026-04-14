@@ -4,2799 +4,912 @@
   "questions": [
     {
       "id": "ch2-q001",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 01(a)]</strong> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"지금 날씨가 어떻습니까?\"",
-      "choices": [
-        "명제이다 (참)",
-        "명제이다 (거짓)",
-        "명제가 아니다"
-      ],
-      "answer": 2,
-      "explanation": "의문문은 참·거짓을 판별할 수 없으므로 명제가 아닙니다."
+      "type": "proof",
+      "text": "<strong>[문제 01(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"지금 날씨가 어떻습니까?\"",
+      "explanation": "의문문은 참·거짓을 판별할 수 없으므로 명제가 아닙니다.",
+      "hint": "문장이 참·거짓을 객관적으로 판별할 수 있는지 먼저 판단한 뒤, 명제라면 진릿값이 왜 그런지 설명하세요.",
+      "modelAnswer": "최종 판정: 명제가 아니다. 풀이: 의문문은 참·거짓을 판별할 수 없으므로 명제가 아닙니다."
     },
     {
       "id": "ch2-q002",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 01(b)]</strong> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"4는 소수(prime number)이다.\"",
-      "choices": [
-        "명제이다 (참)",
-        "명제이다 (거짓)",
-        "명제가 아니다"
-      ],
-      "answer": 1,
-      "explanation": "$4 = 2 \\times 2$이므로 소수가 아닙니다. 거짓인 명제입니다."
+      "type": "proof",
+      "text": "<strong>[문제 01(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"4는 소수(prime number)이다.\"",
+      "explanation": "$4 = 2 \\times 2$이므로 소수가 아닙니다. 거짓인 명제입니다.",
+      "hint": "문장이 참·거짓을 객관적으로 판별할 수 있는지 먼저 판단한 뒤, 명제라면 진릿값이 왜 그런지 설명하세요.",
+      "modelAnswer": "정답은 명제이다 (거짓)이다. 풀이: $4 = 2 \\times 2$이므로 소수가 아닙니다. 거짓인 명제입니다."
     },
     {
       "id": "ch2-q003",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 01(c)]</strong> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"대한민국은 살기 좋은 나라이다.\"",
-      "choices": [
-        "명제이다 (참)",
-        "명제이다 (거짓)",
-        "명제가 아니다"
-      ],
-      "answer": 2,
-      "explanation": "\"살기 좋다\"는 주관적 판단이므로 참·거짓을 객관적으로 판별할 수 없어 명제가 아닙니다."
+      "type": "proof",
+      "text": "<strong>[문제 01(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"대한민국은 살기 좋은 나라이다.\"",
+      "explanation": "\"살기 좋다\"는 주관적 판단이므로 참·거짓을 객관적으로 판별할 수 없어 명제가 아닙니다.",
+      "hint": "문장이 참·거짓을 객관적으로 판별할 수 있는지 먼저 판단한 뒤, 명제라면 진릿값이 왜 그런지 설명하세요.",
+      "modelAnswer": "최종 판정: 명제가 아니다. 풀이: \"살기 좋다\"는 주관적 판단이므로 참·거짓을 객관적으로 판별할 수 없어 명제가 아닙니다."
     },
     {
       "id": "ch2-q004",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 01(d)]</strong> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"$x^2 - 3 = 6$\"",
-      "choices": [
-        "명제이다 (참)",
-        "명제이다 (거짓)",
-        "명제가 아니다"
-      ],
-      "answer": 2,
-      "explanation": "$x$의 값이 정해지지 않은 변수이므로 참·거짓을 판별할 수 없습니다. 명제함수이지 명제가 아닙니다."
+      "type": "proof",
+      "text": "<strong>[문제 01(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"$x^2 - 3 = 6$\"",
+      "explanation": "$x$의 값이 정해지지 않은 변수이므로 참·거짓을 판별할 수 없습니다. 명제함수이지 명제가 아닙니다.",
+      "hint": "문장이 참·거짓을 객관적으로 판별할 수 있는지 먼저 판단한 뒤, 명제라면 진릿값이 왜 그런지 설명하세요.",
+      "modelAnswer": "최종 판정: 명제가 아니다. 풀이: $x$의 값이 정해지지 않은 변수이므로 참·거짓을 판별할 수 없습니다. 명제함수이지 명제가 아닙니다."
     },
     {
       "id": "ch2-q005",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 01(e)]</strong> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"7은 홀수이다.\"",
-      "choices": [
-        "명제이다 (참)",
-        "명제이다 (거짓)",
-        "명제가 아니다"
-      ],
-      "answer": 0,
-      "explanation": "$7 = 2 \\times 3 + 1$이므로 홀수입니다. 참인 명제입니다."
+      "type": "proof",
+      "text": "<strong>[문제 01(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"7은 홀수이다.\"",
+      "explanation": "$7 = 2 \\times 3 + 1$이므로 홀수입니다. 참인 명제입니다.",
+      "hint": "문장이 참·거짓을 객관적으로 판별할 수 있는지 먼저 판단한 뒤, 명제라면 진릿값이 왜 그런지 설명하세요.",
+      "modelAnswer": "정답은 명제이다 (참)이다. 풀이: $7 = 2 \\times 3 + 1$이므로 홀수입니다. 참인 명제입니다."
     },
     {
       "id": "ch2-q006",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 01(f)]</strong> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"런던은 영국의 수도이다.\"",
-      "choices": [
-        "명제이다 (참)",
-        "명제이다 (거짓)",
-        "명제가 아니다"
-      ],
-      "answer": 0,
-      "explanation": "런던은 영국의 수도이므로 참인 명제입니다."
+      "type": "proof",
+      "text": "<strong>[문제 01(f)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"런던은 영국의 수도이다.\"",
+      "explanation": "런던은 영국의 수도이므로 참인 명제입니다.",
+      "hint": "문장이 참·거짓을 객관적으로 판별할 수 있는지 먼저 판단한 뒤, 명제라면 진릿값이 왜 그런지 설명하세요.",
+      "modelAnswer": "정답은 명제이다 (참)이다. 풀이: 런던은 영국의 수도이므로 참인 명제입니다."
     },
     {
       "id": "ch2-q007",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 01(g)]</strong> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"$x^2 = 3$을 만족하는 정수 $x$가 존재한다.\"",
-      "choices": [
-        "명제이다 (참)",
-        "명제이다 (거짓)",
-        "명제가 아니다"
-      ],
-      "answer": 1,
-      "explanation": "$x^2 = 3$을 만족하는 $x = \\pm\\sqrt{3}$이고, 이는 정수가 아닙니다. 거짓인 명제입니다."
+      "type": "proof",
+      "text": "<strong>[문제 01(g)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"$x^2 = 3$을 만족하는 정수 $x$가 존재한다.\"",
+      "explanation": "$x^2 = 3$을 만족하는 $x = \\pm\\sqrt{3}$이고, 이는 정수가 아닙니다. 거짓인 명제입니다.",
+      "hint": "문장이 참·거짓을 객관적으로 판별할 수 있는지 먼저 판단한 뒤, 명제라면 진릿값이 왜 그런지 설명하세요.",
+      "modelAnswer": "정답은 명제이다 (거짓)이다. 풀이: $x^2 = 3$을 만족하는 $x = \\pm\\sqrt{3}$이고, 이는 정수가 아닙니다. 거짓인 명제입니다."
     },
     {
       "id": "ch2-q008",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 02(a)]</strong> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"책이 두껍고 무겁다.\"",
-      "choices": [
-        "명제이다 (참)",
-        "명제이다 (거짓)",
-        "명제가 아니다"
-      ],
-      "answer": 2,
-      "explanation": "\"두껍다\", \"무겁다\"는 주관적 판단이며, 어떤 책인지 특정되지 않아 명제가 아닙니다."
+      "type": "proof",
+      "text": "<strong>[문제 02(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"책이 두껍고 무겁다.\"",
+      "explanation": "\"두껍다\", \"무겁다\"는 주관적 판단이며, 어떤 책인지 특정되지 않아 명제가 아닙니다.",
+      "hint": "문장이 참·거짓을 객관적으로 판별할 수 있는지 먼저 판단한 뒤, 명제라면 진릿값이 왜 그런지 설명하세요.",
+      "modelAnswer": "최종 판정: 명제가 아니다. 풀이: \"두껍다\", \"무겁다\"는 주관적 판단이며, 어떤 책인지 특정되지 않아 명제가 아닙니다."
     },
     {
       "id": "ch2-q009",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 02(b)]</strong> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"$\\sqrt{2x - 1} < 10$을 만족하는 실수 $x$는 무수히 많다.\"",
-      "choices": [
-        "명제이다 (참)",
-        "명제이다 (거짓)",
-        "명제가 아니다"
-      ],
-      "answer": 0,
-      "explanation": "$\\sqrt{2x-1} < 10$에서 $2x-1 < 100$이고 $2x-1 \\ge 0$이므로 $0.5 \\le x < 50.5$인 실수가 무수히 많습니다. 참인 명제입니다."
+      "type": "proof",
+      "text": "<strong>[문제 02(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"$\\sqrt{2x - 1} < 10$을 만족하는 실수 $x$는 무수히 많다.\"",
+      "explanation": "$\\sqrt{2x-1} < 10$에서 $2x-1 < 100$이고 $2x-1 \\ge 0$이므로 $0.5 \\le x < 50.5$인 실수가 무수히 많습니다. 참인 명제입니다.",
+      "hint": "문장이 참·거짓을 객관적으로 판별할 수 있는지 먼저 판단한 뒤, 명제라면 진릿값이 왜 그런지 설명하세요.",
+      "modelAnswer": "정답은 명제이다 (참)이다. 풀이: $\\sqrt{2x-1} < 10$에서 $2x-1 < 100$이고 $2x-1 \\ge 0$이므로 $0.5 \\le x < 50.5$인 실수가 무수히 많습니다. 참인 명제입니다."
     },
     {
       "id": "ch2-q010",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 02(c)]</strong> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"신발을 사야 할 것 같아.\"",
-      "choices": [
-        "명제이다 (참)",
-        "명제이다 (거짓)",
-        "명제가 아니다"
-      ],
-      "answer": 2,
-      "explanation": "개인의 주관적 판단(추측)이므로 참·거짓을 객관적으로 판별할 수 없어 명제가 아닙니다."
+      "type": "proof",
+      "text": "<strong>[문제 02(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"신발을 사야 할 것 같아.\"",
+      "explanation": "개인의 주관적 판단(추측)이므로 참·거짓을 객관적으로 판별할 수 없어 명제가 아닙니다.",
+      "hint": "문장이 참·거짓을 객관적으로 판별할 수 있는지 먼저 판단한 뒤, 명제라면 진릿값이 왜 그런지 설명하세요.",
+      "modelAnswer": "최종 판정: 명제가 아니다. 풀이: 개인의 주관적 판단(추측)이므로 참·거짓을 객관적으로 판별할 수 없어 명제가 아닙니다."
     },
     {
       "id": "ch2-q011",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 02(d)]</strong> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"부산은 서울의 남서쪽에 위치한다.\"",
-      "choices": [
-        "명제이다 (참)",
-        "명제이다 (거짓)",
-        "명제가 아니다"
-      ],
-      "answer": 1,
-      "explanation": "부산은 서울의 남동쪽에 위치합니다. 남서쪽이 아니므로 거짓인 명제입니다."
+      "type": "proof",
+      "text": "<strong>[문제 02(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"부산은 서울의 남서쪽에 위치한다.\"",
+      "explanation": "부산은 서울의 남동쪽에 위치합니다. 남서쪽이 아니므로 거짓인 명제입니다.",
+      "hint": "문장이 참·거짓을 객관적으로 판별할 수 있는지 먼저 판단한 뒤, 명제라면 진릿값이 왜 그런지 설명하세요.",
+      "modelAnswer": "정답은 명제이다 (거짓)이다. 풀이: 부산은 서울의 남동쪽에 위치합니다. 남서쪽이 아니므로 거짓인 명제입니다."
     },
     {
       "id": "ch2-q012",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 02(e)]</strong> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"빨간 장미가 노란 장미보다 더 향기롭다.\"",
-      "choices": [
-        "명제이다 (참)",
-        "명제이다 (거짓)",
-        "명제가 아니다"
-      ],
-      "answer": 2,
-      "explanation": "\"더 향기롭다\"는 주관적 판단이므로 명제가 아닙니다."
+      "type": "proof",
+      "text": "<strong>[문제 02(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"빨간 장미가 노란 장미보다 더 향기롭다.\"",
+      "explanation": "\"더 향기롭다\"는 주관적 판단이므로 명제가 아닙니다.",
+      "hint": "문장이 참·거짓을 객관적으로 판별할 수 있는지 먼저 판단한 뒤, 명제라면 진릿값이 왜 그런지 설명하세요.",
+      "modelAnswer": "최종 판정: 명제가 아니다. 풀이: \"더 향기롭다\"는 주관적 판단이므로 명제가 아닙니다."
     },
     {
       "id": "ch2-q013",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 02(f)]</strong> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"$+4$는 양수이다.\"",
-      "choices": [
-        "명제이다 (참)",
-        "명제이다 (거짓)",
-        "명제가 아니다"
-      ],
-      "answer": 0,
-      "explanation": "$+4 = 4 > 0$이므로 양수입니다. 참인 명제입니다."
+      "type": "proof",
+      "text": "<strong>[문제 02(f)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"$+4$는 양수이다.\"",
+      "explanation": "$+4 = 4 > 0$이므로 양수입니다. 참인 명제입니다.",
+      "hint": "문장이 참·거짓을 객관적으로 판별할 수 있는지 먼저 판단한 뒤, 명제라면 진릿값이 왜 그런지 설명하세요.",
+      "modelAnswer": "정답은 명제이다 (참)이다. 풀이: $+4 = 4 > 0$이므로 양수입니다. 참인 명제입니다."
     },
     {
       "id": "ch2-q014",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 02(g)]</strong> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"$53 \\text{ div } 7 = 9$\"",
-      "choices": [
-        "명제이다 (참)",
-        "명제이다 (거짓)",
-        "명제가 아니다"
-      ],
-      "answer": 1,
-      "explanation": "$53 \\div 7 = 7$ 나머지 $4$이므로 $53 \\text{ div } 7 = 7$입니다. $9$가 아니므로 거짓인 명제입니다."
+      "type": "proof",
+      "text": "<strong>[문제 02(g)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장이 명제인지 판별하고, 명제라면 진릿값을 구하라.<br><br>\"$53 \\text{ div } 7 = 9$\"",
+      "explanation": "$53 \\div 7 = 7$ 나머지 $4$이므로 $53 \\text{ div } 7 = 7$입니다. $9$가 아니므로 거짓인 명제입니다.",
+      "hint": "문장이 참·거짓을 객관적으로 판별할 수 있는지 먼저 판단한 뒤, 명제라면 진릿값이 왜 그런지 설명하세요.",
+      "modelAnswer": "정답은 명제이다 (거짓)이다. 풀이: $53 \\div 7 = 7$ 나머지 $4$이므로 $53 \\text{ div } 7 = 7$입니다. $9$가 아니므로 거짓인 명제입니다."
     },
     {
       "id": "ch2-q015",
       "type": "proof",
-      "text": "<strong>[문제 03(a)]</strong> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : $3 + 8 \\le 11$ (참)<br>명제 $q$ : $100 \\times 4 \\neq 3800$ (참)<br>명제 $r$ : 10월 9일은 한글날이다. (참)<br><br>\"$100 \\times 4 \\neq 3800$\"",
+      "text": "<strong>[문제 03(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : $3 + 8 \\le 11$ (참)<br>명제 $q$ : $100 \\times 4 \\neq 3800$ (참)<br>명제 $r$ : 10월 9일은 한글날이다. (참)<br><br>\"$100 \\times 4 \\neq 3800$\"",
       "hint": "주어진 문장이 어떤 명제에 해당하는지 확인",
       "modelAnswer": "$q$ 그 자체입니다. $100 \\times 4 = 400 \\neq 3800$이므로 $q$는 참(T)입니다."
     },
     {
       "id": "ch2-q016",
       "type": "proof",
-      "text": "<strong>[문제 03(b)]</strong> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : $3 + 8 \\le 11$ (참)<br>명제 $q$ : $100 \\times 4 \\neq 3800$ (참)<br>명제 $r$ : 10월 9일은 한글날이다. (참)<br><br>\"$3 + 8 > 11$이고, 10월 9일은 한글날이다.\"",
+      "text": "<strong>[문제 03(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : $3 + 8 \\le 11$ (참)<br>명제 $q$ : $100 \\times 4 \\neq 3800$ (참)<br>명제 $r$ : 10월 9일은 한글날이다. (참)<br><br>\"$3 + 8 > 11$이고, 10월 9일은 한글날이다.\"",
       "hint": "$3+8>11$은 $p$의 부정",
       "modelAnswer": "$\\sim p \\land r$. $\\sim p$: F, $r$: T이므로 F $\\land$ T $=$ F"
     },
     {
       "id": "ch2-q017",
       "type": "proof",
-      "text": "<strong>[문제 03(c)]</strong> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : $3 + 8 \\le 11$ (참)<br>명제 $q$ : $100 \\times 4 \\neq 3800$ (참)<br>명제 $r$ : 10월 9일은 한글날이다. (참)<br><br>\"$3 + 8 \\le 11$이고, $100 \\times 4 \\neq 3800$\"",
+      "text": "<strong>[문제 03(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : $3 + 8 \\le 11$ (참)<br>명제 $q$ : $100 \\times 4 \\neq 3800$ (참)<br>명제 $r$ : 10월 9일은 한글날이다. (참)<br><br>\"$3 + 8 \\le 11$이고, $100 \\times 4 \\neq 3800$\"",
       "hint": "두 명제의 논리곱",
       "modelAnswer": "$p \\land q$. T $\\land$ T $=$ T"
     },
     {
       "id": "ch2-q018",
       "type": "proof",
-      "text": "<strong>[문제 03(d)]</strong> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : $3 + 8 \\le 11$ (참)<br>명제 $q$ : $100 \\times 4 \\neq 3800$ (참)<br>명제 $r$ : 10월 9일은 한글날이다. (참)<br><br>\"$100 \\times 4 = 3800$이고 10월 9일이 한글날이면, $3 + 8 > 11$이다.\"",
+      "text": "<strong>[문제 03(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : $3 + 8 \\le 11$ (참)<br>명제 $q$ : $100 \\times 4 \\neq 3800$ (참)<br>명제 $r$ : 10월 9일은 한글날이다. (참)<br><br>\"$100 \\times 4 = 3800$이고 10월 9일이 한글날이면, $3 + 8 > 11$이다.\"",
       "hint": "조건문의 전건에 논리곱이 있는 형태",
       "modelAnswer": "$(\\sim q \\land r) \\rightarrow \\sim p$. (F $\\land$ T) $\\rightarrow$ F $=$ F $\\rightarrow$ F $=$ T"
     },
     {
       "id": "ch2-q019",
       "type": "proof",
-      "text": "<strong>[문제 03(e)]</strong> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : $3 + 8 \\le 11$ (참)<br>명제 $q$ : $100 \\times 4 \\neq 3800$ (참)<br>명제 $r$ : 10월 9일은 한글날이다. (참)<br><br>\"10월 9일이 한글날이 아니면, $100 \\times 4 = 3800$이거나 $3 + 8 \\le 11$이다.\"",
+      "text": "<strong>[문제 03(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : $3 + 8 \\le 11$ (참)<br>명제 $q$ : $100 \\times 4 \\neq 3800$ (참)<br>명제 $r$ : 10월 9일은 한글날이다. (참)<br><br>\"10월 9일이 한글날이 아니면, $100 \\times 4 = 3800$이거나 $3 + 8 \\le 11$이다.\"",
       "hint": "조건문의 후건에 논리합이 있는 형태",
       "modelAnswer": "$\\sim r \\rightarrow (\\sim q \\lor p)$. F $\\rightarrow$ (F $\\lor$ T) $=$ F $\\rightarrow$ T $=$ T"
     },
     {
       "id": "ch2-q020",
       "type": "proof",
-      "text": "<strong>[문제 04(a)]</strong> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : 오렌지 주스는 하얀색이다 (거짓)<br>명제 $q$ : 원주율은 약 3.141592이다. (참)<br>명제 $r$ : 자연수는 0보다 크거나 같다. (참)<br><br>\"원주율이 약 3.141592가 아니거나, 오렌지 주스가 하얀색이다.\"",
+      "text": "<strong>[문제 04(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : 오렌지 주스는 하얀색이다 (거짓)<br>명제 $q$ : 원주율은 약 3.141592이다. (참)<br>명제 $r$ : 자연수는 0보다 크거나 같다. (참)<br><br>\"원주율이 약 3.141592가 아니거나, 오렌지 주스가 하얀색이다.\"",
       "hint": "논리합으로 표현",
       "modelAnswer": "$\\sim q \\lor p$. F $\\lor$ F $=$ F"
     },
     {
       "id": "ch2-q021",
       "type": "proof",
-      "text": "<strong>[문제 04(b)]</strong> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : 오렌지 주스는 하얀색이다 (거짓)<br>명제 $q$ : 원주율은 약 3.141592이다. (참)<br>명제 $r$ : 자연수는 0보다 크거나 같다. (참)<br><br>\"자연수가 0보다 크거나 같거나, 원주율이 약 3.141592가 아니다.\"",
+      "text": "<strong>[문제 04(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : 오렌지 주스는 하얀색이다 (거짓)<br>명제 $q$ : 원주율은 약 3.141592이다. (참)<br>명제 $r$ : 자연수는 0보다 크거나 같다. (참)<br><br>\"자연수가 0보다 크거나 같거나, 원주율이 약 3.141592가 아니다.\"",
       "hint": "논리합으로 표현",
       "modelAnswer": "$r \\lor \\sim q$. T $\\lor$ F $=$ T"
     },
     {
       "id": "ch2-q022",
       "type": "proof",
-      "text": "<strong>[문제 04(c)]</strong> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : 오렌지 주스는 하얀색이다 (거짓)<br>명제 $q$ : 원주율은 약 3.141592이다. (참)<br>명제 $r$ : 자연수는 0보다 크거나 같다. (참)<br><br>\"자연수가 0보다 크거나 같으면, 오렌지 주스는 하얀색이 아니다.\"",
+      "text": "<strong>[문제 04(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : 오렌지 주스는 하얀색이다 (거짓)<br>명제 $q$ : 원주율은 약 3.141592이다. (참)<br>명제 $r$ : 자연수는 0보다 크거나 같다. (참)<br><br>\"자연수가 0보다 크거나 같으면, 오렌지 주스는 하얀색이 아니다.\"",
       "hint": "조건문으로 표현",
       "modelAnswer": "$r \\rightarrow \\sim p$. T $\\rightarrow$ T $=$ T"
     },
     {
       "id": "ch2-q023",
       "type": "proof",
-      "text": "<strong>[문제 04(d)]</strong> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : 오렌지 주스는 하얀색이다 (거짓)<br>명제 $q$ : 원주율은 약 3.141592이다. (참)<br>명제 $r$ : 자연수는 0보다 크거나 같다. (참)<br><br>\"원주율이 약 3.141592이거나 오렌지 주스가 하얀색이 아님을 모두 부정하고 자연수는 0보다 크거나 같다.\"",
+      "text": "<strong>[문제 04(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : 오렌지 주스는 하얀색이다 (거짓)<br>명제 $q$ : 원주율은 약 3.141592이다. (참)<br>명제 $r$ : 자연수는 0보다 크거나 같다. (참)<br><br>\"원주율이 약 3.141592이거나 오렌지 주스가 하얀색이 아님을 모두 부정하고 자연수는 0보다 크거나 같다.\"",
       "hint": "\"A를 모두 부정하고 B\" → ~A ∧ B",
       "modelAnswer": "$\\sim(q \\lor \\sim p) \\land r$. $q \\lor \\sim p = $ T $\\lor$ T $=$ T이므로 $\\sim$T $\\land$ T $=$ F $\\land$ T $=$ F"
     },
     {
       "id": "ch2-q024",
       "type": "proof",
-      "text": "<strong>[문제 04(e)]</strong> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : 오렌지 주스는 하얀색이다 (거짓)<br>명제 $q$ : 원주율은 약 3.141592이다. (참)<br>명제 $r$ : 자연수는 0보다 크거나 같다. (참)<br><br>\"오렌지 주스가 하얀색이면 자연수가 0보다 크거나 같음을 모두 부정하는 조건이 있을 때, 원주율이 약 3.141592가 아니면 자연수는 0보다 크거나 같다.\"",
+      "text": "<strong>[문제 04(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q, r$이 다음과 같을 때, 주어진 명제를 합성명제 형태로 나타내고 진릿값을 구하라.<br><br>명제 $p$ : 오렌지 주스는 하얀색이다 (거짓)<br>명제 $q$ : 원주율은 약 3.141592이다. (참)<br>명제 $r$ : 자연수는 0보다 크거나 같다. (참)<br><br>\"오렌지 주스가 하얀색이면 자연수가 0보다 크거나 같음을 모두 부정하는 조건이 있을 때, 원주율이 약 3.141592가 아니면 자연수는 0보다 크거나 같다.\"",
       "hint": "\"A이면 B를 모두 부정\" → ~(p→r), 전체는 조건문",
       "modelAnswer": "$\\sim(p \\rightarrow r) \\rightarrow (\\sim q \\rightarrow r)$. $p \\rightarrow r = $ F $\\rightarrow$ T $=$ T이므로 $\\sim$T $=$ F. $\\sim q \\rightarrow r = $ F $\\rightarrow$ T $=$ T. F $\\rightarrow$ T $=$ T"
     },
     {
       "id": "ch2-q025",
-      "type": "truth-table",
-      "text": "<strong>[문제 05(a)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$\\sim(\\sim p \\land q)$",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$\\sim p$",
-        "$\\sim p \\land q$",
-        "$\\sim(\\sim p \\land q)$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "F",
-          "F",
-          "T"
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          "F",
-          "T"
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          "T",
-          "F"
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          "F",
-          "T"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 2,
-      "explanation": "$\\sim(\\sim p \\land q) \\equiv p \\lor \\sim q$ (드모르간). 결과: T,T,F,T → 충족가능(사건명제)"
+      "type": "proof",
+      "text": "<strong>[문제 05(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$\\sim(\\sim p \\land q)$",
+      "explanation": "$\\sim(\\sim p \\land q) \\equiv p \\lor \\sim q$ (드모르간). 결과: T,T,F,T → 충족가능(사건명제)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $\\sim p$=F, $\\sim p \\land q$=F, $\\sim(\\sim p \\land q)$=T / 2행: $p$=T, $q$=F, $\\sim p$=F, $\\sim p \\land q$=F, $\\sim(\\sim p \\land q)$=T / 3행: $p$=F, $q$=T, $\\sim p$=T, $\\sim p \\land q$=T, $\\sim(\\sim p \\land q)$=F / 4행: $p$=F, $q$=F, $\\sim p$=T, $\\sim p \\land q$=F, $\\sim(\\sim p \\land q)$=T. 따라서 합성명제의 종류는 충족가능(사건명제)이다. 해설: $\\sim(\\sim p \\land q) \\equiv p \\lor \\sim q$ (드모르간). 결과: T,T,F,T → 충족가능(사건명제)"
     },
     {
       "id": "ch2-q026",
-      "type": "truth-table",
-      "text": "<strong>[문제 05(b)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$(p \\land q) \\land \\sim(q \\lor r)$",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$r$",
-        "$p \\land q$",
-        "$q \\lor r$",
-        "$\\sim(q \\lor r)$",
-        "$(p \\land q) \\land \\sim(q \\lor r)$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "T",
-          "T",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "T",
-          "T",
-          "F",
-          "T",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          "F",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          "F",
-          "F",
-          "T",
-          "F"
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          "F",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "F",
-          "T",
-          "F",
-          "F",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          "F",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "F",
-          "F",
-          "F",
-          "F",
-          "F",
-          "T",
-          "F"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 1,
-      "explanation": "$q$가 T이면 $\\sim(q \\lor r)$=F, $q$가 F이면 $p \\land q$=F. 항상 F → 모순(contradiction)"
+      "type": "proof",
+      "text": "<strong>[문제 05(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$(p \\land q) \\land \\sim(q \\lor r)$",
+      "explanation": "$q$가 T이면 $\\sim(q \\lor r)$=F, $q$가 F이면 $p \\land q$=F. 항상 F → 모순(contradiction)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $r$=T, $p \\land q$=T, $q \\lor r$=T, $\\sim(q \\lor r)$=F, $(p \\land q) \\land \\sim(q \\lor r)$=F / 2행: $p$=T, $q$=T, $r$=F, $p \\land q$=T, $q \\lor r$=T, $\\sim(q \\lor r)$=F, $(p \\land q) \\land \\sim(q \\lor r)$=F / 3행: $p$=T, $q$=F, $r$=T, $p \\land q$=F, $q \\lor r$=T, $\\sim(q \\lor r)$=F, $(p \\land q) \\land \\sim(q \\lor r)$=F / 4행: $p$=T, $q$=F, $r$=F, $p \\land q$=F, $q \\lor r$=F, $\\sim(q \\lor r)$=T, $(p \\land q) \\land \\sim(q \\lor r)$=F / 5행: $p$=F, $q$=T, $r$=T, $p \\land q$=F, $q \\lor r$=T, $\\sim(q \\lor r)$=F, $(p \\land q) \\land \\sim(q \\lor r)$=F / 6행: $p$=F, $q$=T, $r$=F, $p \\land q$=F, $q \\lor r$=T, $\\sim(q \\lor r)$=F, $(p \\land q) \\land \\sim(q \\lor r)$=F / 7행: $p$=F, $q$=F, $r$=T, $p \\land q$=F, $q \\lor r$=T, $\\sim(q \\lor r)$=F, $(p \\land q) \\land \\sim(q \\lor r)$=F / 8행: $p$=F, $q$=F, $r$=F, $p \\land q$=F, $q \\lor r$=F, $\\sim(q \\lor r)$=T, $(p \\land q) \\land \\sim(q \\lor r)$=F. 따라서 합성명제의 종류는 모순(contradiction)이다. 해설: $q$가 T이면 $\\sim(q \\lor r)$=F, $q$가 F이면 $p \\land q$=F. 항상 F → 모순(contradiction)"
     },
     {
       "id": "ch2-q027",
-      "type": "truth-table",
-      "text": "<strong>[문제 05(c)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$(\\sim p \\lor r) \\rightarrow \\sim q$",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$r$",
-        "$\\sim p$",
-        "$\\sim q$",
-        "$\\sim p \\lor r$",
-        "$(\\sim p \\lor r) \\rightarrow \\sim q$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "T",
-          "F",
-          "F",
-          "T",
-          "F"
-        ],
-        [
-          "T",
-          "T",
-          "F",
-          "F",
-          "F",
-          "F",
-          "T"
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          "F",
-          "T",
-          "T",
-          "T"
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          "F",
-          "T",
-          "F",
-          "T"
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          "T",
-          "F",
-          "T",
-          "F"
-        ],
-        [
-          "F",
-          "T",
-          "F",
-          "T",
-          "F",
-          "T",
-          "F"
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          "T",
-          "T",
-          "T",
-          "T"
-        ],
-        [
-          "F",
-          "F",
-          "F",
-          "T",
-          "T",
-          "T",
-          "T"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 2,
-      "explanation": "결과: F,T,T,T,F,F,T,T → 충족가능(사건명제)"
+      "type": "proof",
+      "text": "<strong>[문제 05(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$(\\sim p \\lor r) \\rightarrow \\sim q$",
+      "explanation": "결과: F,T,T,T,F,F,T,T → 충족가능(사건명제)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $r$=T, $\\sim p$=F, $\\sim q$=F, $\\sim p \\lor r$=T, $(\\sim p \\lor r) \\rightarrow \\sim q$=F / 2행: $p$=T, $q$=T, $r$=F, $\\sim p$=F, $\\sim q$=F, $\\sim p \\lor r$=F, $(\\sim p \\lor r) \\rightarrow \\sim q$=T / 3행: $p$=T, $q$=F, $r$=T, $\\sim p$=F, $\\sim q$=T, $\\sim p \\lor r$=T, $(\\sim p \\lor r) \\rightarrow \\sim q$=T / 4행: $p$=T, $q$=F, $r$=F, $\\sim p$=F, $\\sim q$=T, $\\sim p \\lor r$=F, $(\\sim p \\lor r) \\rightarrow \\sim q$=T / 5행: $p$=F, $q$=T, $r$=T, $\\sim p$=T, $\\sim q$=F, $\\sim p \\lor r$=T, $(\\sim p \\lor r) \\rightarrow \\sim q$=F / 6행: $p$=F, $q$=T, $r$=F, $\\sim p$=T, $\\sim q$=F, $\\sim p \\lor r$=T, $(\\sim p \\lor r) \\rightarrow \\sim q$=F / 7행: $p$=F, $q$=F, $r$=T, $\\sim p$=T, $\\sim q$=T, $\\sim p \\lor r$=T, $(\\sim p \\lor r) \\rightarrow \\sim q$=T / 8행: $p$=F, $q$=F, $r$=F, $\\sim p$=T, $\\sim q$=T, $\\sim p \\lor r$=T, $(\\sim p \\lor r) \\rightarrow \\sim q$=T. 따라서 합성명제의 종류는 충족가능(사건명제)이다. 해설: 결과: F,T,T,T,F,F,T,T → 충족가능(사건명제)"
     },
     {
       "id": "ch2-q028",
-      "type": "truth-table",
-      "text": "<strong>[문제 05(d)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$\\sim(p \\lor \\sim q) \\rightarrow (\\sim p \\land q)$",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$\\sim p$",
-        "$\\sim q$",
-        "$p \\lor \\sim q$",
-        "$\\sim(p \\lor \\sim q)$",
-        "$\\sim p \\land q$",
-        "$\\sim(p \\lor \\sim q) \\rightarrow (\\sim p \\land q)$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "F",
-          "F",
-          "T",
-          "F",
-          "F",
-          "T"
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          "T",
-          "T",
-          "F",
-          "F",
-          "T"
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          "F",
-          "F",
-          "T",
-          "T",
-          "T"
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          "T",
-          "T",
-          "F",
-          "F",
-          "T"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 0,
-      "explanation": "$\\sim(p \\lor \\sim q) = \\sim p \\land q$ (드모르간)이므로 $A \\rightarrow A$ 형태. 항상 T → 항진명제(tautology)"
+      "type": "proof",
+      "text": "<strong>[문제 05(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$\\sim(p \\lor \\sim q) \\rightarrow (\\sim p \\land q)$",
+      "explanation": "$\\sim(p \\lor \\sim q) = \\sim p \\land q$ (드모르간)이므로 $A \\rightarrow A$ 형태. 항상 T → 항진명제(tautology)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $\\sim p$=F, $\\sim q$=F, $p \\lor \\sim q$=T, $\\sim(p \\lor \\sim q)$=F, $\\sim p \\land q$=F, $\\sim(p \\lor \\sim q) \\rightarrow (\\sim p \\land q)$=T / 2행: $p$=T, $q$=F, $\\sim p$=F, $\\sim q$=T, $p \\lor \\sim q$=T, $\\sim(p \\lor \\sim q)$=F, $\\sim p \\land q$=F, $\\sim(p \\lor \\sim q) \\rightarrow (\\sim p \\land q)$=T / 3행: $p$=F, $q$=T, $\\sim p$=T, $\\sim q$=F, $p \\lor \\sim q$=F, $\\sim(p \\lor \\sim q)$=T, $\\sim p \\land q$=T, $\\sim(p \\lor \\sim q) \\rightarrow (\\sim p \\land q)$=T / 4행: $p$=F, $q$=F, $\\sim p$=T, $\\sim q$=T, $p \\lor \\sim q$=T, $\\sim(p \\lor \\sim q)$=F, $\\sim p \\land q$=F, $\\sim(p \\lor \\sim q) \\rightarrow (\\sim p \\land q)$=T. 따라서 합성명제의 종류는 항진명제(tautology)이다. 해설: $\\sim(p \\lor \\sim q) = \\sim p \\land q$ (드모르간)이므로 $A \\rightarrow A$ 형태. 항상 T → 항진명제(tautology)"
     },
     {
       "id": "ch2-q029",
-      "type": "truth-table",
-      "text": "<strong>[문제 06(a)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$p \\land q \\rightarrow p$",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$p \\land q$",
-        "$p \\land q \\rightarrow p$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "T",
-          "T"
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          "T"
-        ],
-        [
-          "F",
-          "T",
-          "F",
-          "T"
-        ],
-        [
-          "F",
-          "F",
-          "F",
-          "T"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 0,
-      "explanation": "$p \\land q$가 참이면 $p$는 반드시 참. 항상 T → 항진명제(tautology)"
+      "type": "proof",
+      "text": "<strong>[문제 06(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$p \\land q \\rightarrow p$",
+      "explanation": "$p \\land q$가 참이면 $p$는 반드시 참. 항상 T → 항진명제(tautology)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $p \\land q$=T, $p \\land q \\rightarrow p$=T / 2행: $p$=T, $q$=F, $p \\land q$=F, $p \\land q \\rightarrow p$=T / 3행: $p$=F, $q$=T, $p \\land q$=F, $p \\land q \\rightarrow p$=T / 4행: $p$=F, $q$=F, $p \\land q$=F, $p \\land q \\rightarrow p$=T. 따라서 합성명제의 종류는 항진명제(tautology)이다. 해설: $p \\land q$가 참이면 $p$는 반드시 참. 항상 T → 항진명제(tautology)"
     },
     {
       "id": "ch2-q030",
-      "type": "truth-table",
-      "text": "<strong>[문제 06(b)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$p \\lor q \\rightarrow \\sim q$",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$p \\lor q$",
-        "$\\sim q$",
-        "$p \\lor q \\rightarrow \\sim q$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          "T",
-          "T"
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "F",
-          "F",
-          "F",
-          "T",
-          "T"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 2,
-      "explanation": "결과: F,T,F,T → 충족가능(사건명제)"
+      "type": "proof",
+      "text": "<strong>[문제 06(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$p \\lor q \\rightarrow \\sim q$",
+      "explanation": "결과: F,T,F,T → 충족가능(사건명제)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $p \\lor q$=T, $\\sim q$=F, $p \\lor q \\rightarrow \\sim q$=F / 2행: $p$=T, $q$=F, $p \\lor q$=T, $\\sim q$=T, $p \\lor q \\rightarrow \\sim q$=T / 3행: $p$=F, $q$=T, $p \\lor q$=T, $\\sim q$=F, $p \\lor q \\rightarrow \\sim q$=F / 4행: $p$=F, $q$=F, $p \\lor q$=F, $\\sim q$=T, $p \\lor q \\rightarrow \\sim q$=T. 따라서 합성명제의 종류는 충족가능(사건명제)이다. 해설: 결과: F,T,F,T → 충족가능(사건명제)"
     },
     {
       "id": "ch2-q031",
-      "type": "truth-table",
-      "text": "<strong>[문제 06(c)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$p \\land \\sim q \\land (p \\rightarrow q)$",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$\\sim q$",
-        "$p \\rightarrow q$",
-        "$p \\land \\sim q \\land (p \\rightarrow q)$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "F",
-          "T",
-          "F"
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "F",
-          "T",
-          "F",
-          "T",
-          "F"
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          "T",
-          "F"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 1,
-      "explanation": "$p$가 T이고 $\\sim q$가 T이면 $p \\to q$=F. 동시 충족 불가. 항상 F → 모순(contradiction)"
+      "type": "proof",
+      "text": "<strong>[문제 06(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$p \\land \\sim q \\land (p \\rightarrow q)$",
+      "explanation": "$p$가 T이고 $\\sim q$가 T이면 $p \\to q$=F. 동시 충족 불가. 항상 F → 모순(contradiction)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $\\sim q$=F, $p \\rightarrow q$=T, $p \\land \\sim q \\land (p \\rightarrow q)$=F / 2행: $p$=T, $q$=F, $\\sim q$=T, $p \\rightarrow q$=F, $p \\land \\sim q \\land (p \\rightarrow q)$=F / 3행: $p$=F, $q$=T, $\\sim q$=F, $p \\rightarrow q$=T, $p \\land \\sim q \\land (p \\rightarrow q)$=F / 4행: $p$=F, $q$=F, $\\sim q$=T, $p \\rightarrow q$=T, $p \\land \\sim q \\land (p \\rightarrow q)$=F. 따라서 합성명제의 종류는 모순(contradiction)이다. 해설: $p$가 T이고 $\\sim q$가 T이면 $p \\to q$=F. 동시 충족 불가. 항상 F → 모순(contradiction)"
     },
     {
       "id": "ch2-q032",
-      "type": "truth-table",
-      "text": "<strong>[문제 06(d)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$\\sim(p \\lor q) \\rightarrow (\\sim p \\land \\sim q)$",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$p \\lor q$",
-        "$\\sim(p \\lor q)$",
-        "$\\sim p$",
-        "$\\sim q$",
-        "$\\sim p \\land \\sim q$",
-        "$\\sim(p \\lor q) \\rightarrow (\\sim p \\land \\sim q)$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "T",
-          "F",
-          "F",
-          "F",
-          "F",
-          "T"
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          "F",
-          "F",
-          "T",
-          "F",
-          "T"
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          "F",
-          "T",
-          "F",
-          "F",
-          "T"
-        ],
-        [
-          "F",
-          "F",
-          "F",
-          "T",
-          "T",
-          "T",
-          "T",
-          "T"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 0,
-      "explanation": "드모르간 법칙에 의해 $\\sim(p \\lor q) \\equiv \\sim p \\land \\sim q$. $A \\to A$는 항상 T → 항진명제(tautology)"
+      "type": "proof",
+      "text": "<strong>[문제 06(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$\\sim(p \\lor q) \\rightarrow (\\sim p \\land \\sim q)$",
+      "explanation": "드모르간 법칙에 의해 $\\sim(p \\lor q) \\equiv \\sim p \\land \\sim q$. $A \\to A$는 항상 T → 항진명제(tautology)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $p \\lor q$=T, $\\sim(p \\lor q)$=F, $\\sim p$=F, $\\sim q$=F, $\\sim p \\land \\sim q$=F, $\\sim(p \\lor q) \\rightarrow (\\sim p \\land \\sim q)$=T / 2행: $p$=T, $q$=F, $p \\lor q$=T, $\\sim(p \\lor q)$=F, $\\sim p$=F, $\\sim q$=T, $\\sim p \\land \\sim q$=F, $\\sim(p \\lor q) \\rightarrow (\\sim p \\land \\sim q)$=T / 3행: $p$=F, $q$=T, $p \\lor q$=T, $\\sim(p \\lor q)$=F, $\\sim p$=T, $\\sim q$=F, $\\sim p \\land \\sim q$=F, $\\sim(p \\lor q) \\rightarrow (\\sim p \\land \\sim q)$=T / 4행: $p$=F, $q$=F, $p \\lor q$=F, $\\sim(p \\lor q)$=T, $\\sim p$=T, $\\sim q$=T, $\\sim p \\land \\sim q$=T, $\\sim(p \\lor q) \\rightarrow (\\sim p \\land \\sim q)$=T. 따라서 합성명제의 종류는 항진명제(tautology)이다. 해설: 드모르간 법칙에 의해 $\\sim(p \\lor q) \\equiv \\sim p \\land \\sim q$. $A \\to A$는 항상 T → 항진명제(tautology)"
     },
     {
       "id": "ch2-q033",
-      "type": "truth-table",
-      "text": "<strong>[문제 07(a)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$(r \\rightarrow \\sim p) \\land \\sim(p \\lor q) \\land q$",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$r$",
-        "$\\sim p$",
-        "$r \\rightarrow \\sim p$",
-        "$p \\lor q$",
-        "$\\sim(p \\lor q)$",
-        "$(r \\rightarrow \\sim p) \\land \\sim(p \\lor q) \\land q$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "T",
-          "F",
-          "F",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "T",
-          "T",
-          "F",
-          "F",
-          "T",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          "F",
-          "F",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          "F",
-          "T",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          "T",
-          "T",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "F",
-          "T",
-          "F",
-          "T",
-          "T",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          "T",
-          "T",
-          "F",
-          "T",
-          "F"
-        ],
-        [
-          "F",
-          "F",
-          "F",
-          "T",
-          "T",
-          "F",
-          "T",
-          "F"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 1,
-      "explanation": "$\\sim(p \\lor q)$가 T이면 $q$=F이어야 하는데, $q$가 T이어야 하므로 모순. 항상 F → 모순(contradiction)"
+      "type": "proof",
+      "text": "<strong>[문제 07(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$(r \\rightarrow \\sim p) \\land \\sim(p \\lor q) \\land q$",
+      "explanation": "$\\sim(p \\lor q)$가 T이면 $q$=F이어야 하는데, $q$가 T이어야 하므로 모순. 항상 F → 모순(contradiction)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $r$=T, $\\sim p$=F, $r \\rightarrow \\sim p$=F, $p \\lor q$=T, $\\sim(p \\lor q)$=F, $(r \\rightarrow \\sim p) \\land \\sim(p \\lor q) \\land q$=F / 2행: $p$=T, $q$=T, $r$=F, $\\sim p$=F, $r \\rightarrow \\sim p$=T, $p \\lor q$=T, $\\sim(p \\lor q)$=F, $(r \\rightarrow \\sim p) \\land \\sim(p \\lor q) \\land q$=F / 3행: $p$=T, $q$=F, $r$=T, $\\sim p$=F, $r \\rightarrow \\sim p$=F, $p \\lor q$=T, $\\sim(p \\lor q)$=F, $(r \\rightarrow \\sim p) \\land \\sim(p \\lor q) \\land q$=F / 4행: $p$=T, $q$=F, $r$=F, $\\sim p$=F, $r \\rightarrow \\sim p$=T, $p \\lor q$=T, $\\sim(p \\lor q)$=F, $(r \\rightarrow \\sim p) \\land \\sim(p \\lor q) \\land q$=F / 5행: $p$=F, $q$=T, $r$=T, $\\sim p$=T, $r \\rightarrow \\sim p$=T, $p \\lor q$=T, $\\sim(p \\lor q)$=F, $(r \\rightarrow \\sim p) \\land \\sim(p \\lor q) \\land q$=F / 6행: $p$=F, $q$=T, $r$=F, $\\sim p$=T, $r \\rightarrow \\sim p$=T, $p \\lor q$=T, $\\sim(p \\lor q)$=F, $(r \\rightarrow \\sim p) \\land \\sim(p \\lor q) \\land q$=F / 7행: $p$=F, $q$=F, $r$=T, $\\sim p$=T, $r \\rightarrow \\sim p$=T, $p \\lor q$=F, $\\sim(p \\lor q)$=T, $(r \\rightarrow \\sim p) \\land \\sim(p \\lor q) \\land q$=F / 8행: $p$=F, $q$=F, $r$=F, $\\sim p$=T, $r \\rightarrow \\sim p$=T, $p \\lor q$=F, $\\sim(p \\lor q)$=T, $(r \\rightarrow \\sim p) \\land \\sim(p \\lor q) \\land q$=F. 따라서 합성명제의 종류는 모순(contradiction)이다. 해설: $\\sim(p \\lor q)$가 T이면 $q$=F이어야 하는데, $q$가 T이어야 하므로 모순. 항상 F → 모순(contradiction)"
     },
     {
       "id": "ch2-q034",
-      "type": "truth-table",
-      "text": "<strong>[문제 07(b)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$p \\oplus \\sim q \\lor p$<br><em>(연산자 우선순위: $\\sim$ &gt; $\\land$ &gt; $\\lor$ &gt; $\\oplus$이므로 $p \\oplus ((\\sim q) \\lor p)$로 해석)</em>",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$\\sim q$",
-        "$\\sim q \\lor p$",
-        "$p \\oplus (\\sim q \\lor p)$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "F",
-          "T",
-          "F"
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          "T",
-          "F"
-        ],
-        [
-          "F",
-          "T",
-          "F",
-          "F",
-          "F"
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          "T",
-          "T"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 2,
-      "explanation": "결과: F,F,F,T → 충족가능(사건명제)"
+      "type": "proof",
+      "text": "<strong>[문제 07(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$p \\oplus \\sim q \\lor p$<br><em>(연산자 우선순위: $\\sim$ &gt; $\\land$ &gt; $\\lor$ &gt; $\\oplus$이므로 $p \\oplus ((\\sim q) \\lor p)$로 해석)</em>",
+      "explanation": "결과: F,F,F,T → 충족가능(사건명제)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $\\sim q$=F, $\\sim q \\lor p$=T, $p \\oplus (\\sim q \\lor p)$=F / 2행: $p$=T, $q$=F, $\\sim q$=T, $\\sim q \\lor p$=T, $p \\oplus (\\sim q \\lor p)$=F / 3행: $p$=F, $q$=T, $\\sim q$=F, $\\sim q \\lor p$=F, $p \\oplus (\\sim q \\lor p)$=F / 4행: $p$=F, $q$=F, $\\sim q$=T, $\\sim q \\lor p$=T, $p \\oplus (\\sim q \\lor p)$=T. 따라서 합성명제의 종류는 충족가능(사건명제)이다. 해설: 결과: F,F,F,T → 충족가능(사건명제)"
     },
     {
       "id": "ch2-q035",
-      "type": "truth-table",
-      "text": "<strong>[문제 07(c)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$(p \\oplus \\sim q) \\leftrightarrow (\\sim p \\oplus q)$",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$\\sim p$",
-        "$\\sim q$",
-        "$p \\oplus \\sim q$",
-        "$\\sim p \\oplus q$",
-        "$(p \\oplus \\sim q) \\leftrightarrow (\\sim p \\oplus q)$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "F",
-          "F",
-          "T",
-          "T",
-          "T"
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          "T",
-          "F",
-          "F",
-          "T"
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          "F",
-          "F",
-          "F",
-          "T"
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          "T",
-          "T",
-          "T",
-          "T"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 0,
-      "explanation": "$p \\oplus \\sim q$와 $\\sim p \\oplus q$는 항상 같은 값. 모두 T → 항진명제(tautology)"
+      "type": "proof",
+      "text": "<strong>[문제 07(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$(p \\oplus \\sim q) \\leftrightarrow (\\sim p \\oplus q)$",
+      "explanation": "$p \\oplus \\sim q$와 $\\sim p \\oplus q$는 항상 같은 값. 모두 T → 항진명제(tautology)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $\\sim p$=F, $\\sim q$=F, $p \\oplus \\sim q$=T, $\\sim p \\oplus q$=T, $(p \\oplus \\sim q) \\leftrightarrow (\\sim p \\oplus q)$=T / 2행: $p$=T, $q$=F, $\\sim p$=F, $\\sim q$=T, $p \\oplus \\sim q$=F, $\\sim p \\oplus q$=F, $(p \\oplus \\sim q) \\leftrightarrow (\\sim p \\oplus q)$=T / 3행: $p$=F, $q$=T, $\\sim p$=T, $\\sim q$=F, $p \\oplus \\sim q$=F, $\\sim p \\oplus q$=F, $(p \\oplus \\sim q) \\leftrightarrow (\\sim p \\oplus q)$=T / 4행: $p$=F, $q$=F, $\\sim p$=T, $\\sim q$=T, $p \\oplus \\sim q$=T, $\\sim p \\oplus q$=T, $(p \\oplus \\sim q) \\leftrightarrow (\\sim p \\oplus q)$=T. 따라서 합성명제의 종류는 항진명제(tautology)이다. 해설: $p \\oplus \\sim q$와 $\\sim p \\oplus q$는 항상 같은 값. 모두 T → 항진명제(tautology)"
     },
     {
       "id": "ch2-q036",
-      "type": "truth-table",
-      "text": "<strong>[문제 07(d)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$(\\sim p \\oplus q) \\leftrightarrow ((p \\land q) \\rightarrow \\sim p)$",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$\\sim p$",
-        "$\\sim p \\oplus q$",
-        "$p \\land q$",
-        "$(p \\land q) \\rightarrow \\sim p$",
-        "$(\\sim p \\oplus q) \\leftrightarrow ((p \\land q) \\rightarrow \\sim p)$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "F",
-          "T",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          "F",
-          "F",
-          "T",
-          "F"
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          "F",
-          "F",
-          "T",
-          "F"
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          "T",
-          "F",
-          "T",
-          "T"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 2,
-      "explanation": "결과: F,F,F,T → 충족가능(사건명제)"
+      "type": "proof",
+      "text": "<strong>[문제 07(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$(\\sim p \\oplus q) \\leftrightarrow ((p \\land q) \\rightarrow \\sim p)$",
+      "explanation": "결과: F,F,F,T → 충족가능(사건명제)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $\\sim p$=F, $\\sim p \\oplus q$=T, $p \\land q$=T, $(p \\land q) \\rightarrow \\sim p$=F, $(\\sim p \\oplus q) \\leftrightarrow ((p \\land q) \\rightarrow \\sim p)$=F / 2행: $p$=T, $q$=F, $\\sim p$=F, $\\sim p \\oplus q$=F, $p \\land q$=F, $(p \\land q) \\rightarrow \\sim p$=T, $(\\sim p \\oplus q) \\leftrightarrow ((p \\land q) \\rightarrow \\sim p)$=F / 3행: $p$=F, $q$=T, $\\sim p$=T, $\\sim p \\oplus q$=F, $p \\land q$=F, $(p \\land q) \\rightarrow \\sim p$=T, $(\\sim p \\oplus q) \\leftrightarrow ((p \\land q) \\rightarrow \\sim p)$=F / 4행: $p$=F, $q$=F, $\\sim p$=T, $\\sim p \\oplus q$=T, $p \\land q$=F, $(p \\land q) \\rightarrow \\sim p$=T, $(\\sim p \\oplus q) \\leftrightarrow ((p \\land q) \\rightarrow \\sim p)$=T. 따라서 합성명제의 종류는 충족가능(사건명제)이다. 해설: 결과: F,F,F,T → 충족가능(사건명제)"
     },
     {
       "id": "ch2-q037",
-      "type": "truth-table",
-      "text": "<strong>[문제 08(a)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$\\sim(p \\lor r) \\rightarrow (\\sim q \\rightarrow r)$",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$r$",
-        "$p \\lor r$",
-        "$\\sim(p \\lor r)$",
-        "$\\sim q$",
-        "$\\sim q \\rightarrow r$",
-        "$\\sim(p \\lor r) \\rightarrow (\\sim q \\rightarrow r)$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "T",
-          "T",
-          "F",
-          "F",
-          "T",
-          "T"
-        ],
-        [
-          "T",
-          "T",
-          "F",
-          "T",
-          "F",
-          "F",
-          "T",
-          "T"
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          "T",
-          "F",
-          "T",
-          "T",
-          "T"
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          "T",
-          "F",
-          "T",
-          "F",
-          "T"
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          "T",
-          "F",
-          "F",
-          "T",
-          "T"
-        ],
-        [
-          "F",
-          "T",
-          "F",
-          "F",
-          "T",
-          "F",
-          "T",
-          "T"
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          "T",
-          "F",
-          "T",
-          "T",
-          "T"
-        ],
-        [
-          "F",
-          "F",
-          "F",
-          "F",
-          "T",
-          "T",
-          "F",
-          "F"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 2,
-      "explanation": "$(F,F,F)$에서만 F. 나머지 T → 충족가능(사건명제)"
+      "type": "proof",
+      "text": "<strong>[문제 08(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$\\sim(p \\lor r) \\rightarrow (\\sim q \\rightarrow r)$",
+      "explanation": "$(F,F,F)$에서만 F. 나머지 T → 충족가능(사건명제)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $r$=T, $p \\lor r$=T, $\\sim(p \\lor r)$=F, $\\sim q$=F, $\\sim q \\rightarrow r$=T, $\\sim(p \\lor r) \\rightarrow (\\sim q \\rightarrow r)$=T / 2행: $p$=T, $q$=T, $r$=F, $p \\lor r$=T, $\\sim(p \\lor r)$=F, $\\sim q$=F, $\\sim q \\rightarrow r$=T, $\\sim(p \\lor r) \\rightarrow (\\sim q \\rightarrow r)$=T / 3행: $p$=T, $q$=F, $r$=T, $p \\lor r$=T, $\\sim(p \\lor r)$=F, $\\sim q$=T, $\\sim q \\rightarrow r$=T, $\\sim(p \\lor r) \\rightarrow (\\sim q \\rightarrow r)$=T / 4행: $p$=T, $q$=F, $r$=F, $p \\lor r$=T, $\\sim(p \\lor r)$=F, $\\sim q$=T, $\\sim q \\rightarrow r$=F, $\\sim(p \\lor r) \\rightarrow (\\sim q \\rightarrow r)$=T / 5행: $p$=F, $q$=T, $r$=T, $p \\lor r$=T, $\\sim(p \\lor r)$=F, $\\sim q$=F, $\\sim q \\rightarrow r$=T, $\\sim(p \\lor r) \\rightarrow (\\sim q \\rightarrow r)$=T / 6행: $p$=F, $q$=T, $r$=F, $p \\lor r$=F, $\\sim(p \\lor r)$=T, $\\sim q$=F, $\\sim q \\rightarrow r$=T, $\\sim(p \\lor r) \\rightarrow (\\sim q \\rightarrow r)$=T / 7행: $p$=F, $q$=F, $r$=T, $p \\lor r$=T, $\\sim(p \\lor r)$=F, $\\sim q$=T, $\\sim q \\rightarrow r$=T, $\\sim(p \\lor r) \\rightarrow (\\sim q \\rightarrow r)$=T / 8행: $p$=F, $q$=F, $r$=F, $p \\lor r$=F, $\\sim(p \\lor r)$=T, $\\sim q$=T, $\\sim q \\rightarrow r$=F, $\\sim(p \\lor r) \\rightarrow (\\sim q \\rightarrow r)$=F. 따라서 합성명제의 종류는 충족가능(사건명제)이다. 해설: $(F,F,F)$에서만 F. 나머지 T → 충족가능(사건명제)"
     },
     {
       "id": "ch2-q038",
-      "type": "truth-table",
-      "text": "<strong>[문제 08(b)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$\\sim p \\lor q \\land (p \\oplus \\sim q)$<br><em>(우선순위에 따라 $\\sim p \\lor (q \\land (p \\oplus \\sim q))$로 해석)</em>",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$\\sim p$",
-        "$\\sim q$",
-        "$p \\oplus \\sim q$",
-        "$q \\land (p \\oplus \\sim q)$",
-        "$\\sim p \\lor (q \\land (p \\oplus \\sim q))$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "F",
-          "F",
-          "T",
-          "T",
-          "T"
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          "T",
-          "F",
-          "F",
-          "F"
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          "F",
-          "F",
-          "F",
-          "T"
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          "T",
-          "T",
-          "F",
-          "T"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 2,
-      "explanation": "결과: T,F,T,T → 충족가능(사건명제)"
+      "type": "proof",
+      "text": "<strong>[문제 08(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$\\sim p \\lor q \\land (p \\oplus \\sim q)$<br><em>(우선순위에 따라 $\\sim p \\lor (q \\land (p \\oplus \\sim q))$로 해석)</em>",
+      "explanation": "결과: T,F,T,T → 충족가능(사건명제)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $\\sim p$=F, $\\sim q$=F, $p \\oplus \\sim q$=T, $q \\land (p \\oplus \\sim q)$=T, $\\sim p \\lor (q \\land (p \\oplus \\sim q))$=T / 2행: $p$=T, $q$=F, $\\sim p$=F, $\\sim q$=T, $p \\oplus \\sim q$=F, $q \\land (p \\oplus \\sim q)$=F, $\\sim p \\lor (q \\land (p \\oplus \\sim q))$=F / 3행: $p$=F, $q$=T, $\\sim p$=T, $\\sim q$=F, $p \\oplus \\sim q$=F, $q \\land (p \\oplus \\sim q)$=F, $\\sim p \\lor (q \\land (p \\oplus \\sim q))$=T / 4행: $p$=F, $q$=F, $\\sim p$=T, $\\sim q$=T, $p \\oplus \\sim q$=T, $q \\land (p \\oplus \\sim q)$=F, $\\sim p \\lor (q \\land (p \\oplus \\sim q))$=T. 따라서 합성명제의 종류는 충족가능(사건명제)이다. 해설: 결과: T,F,T,T → 충족가능(사건명제)"
     },
     {
       "id": "ch2-q039",
-      "type": "truth-table",
-      "text": "<strong>[문제 08(c)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$\\sim\\{(p \\oplus q) \\lor (p \\leftrightarrow \\sim q)\\}$",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$\\sim q$",
-        "$p \\oplus q$",
-        "$p \\leftrightarrow \\sim q$",
-        "$(p \\oplus q) \\lor (p \\leftrightarrow \\sim q)$",
-        "$\\sim\\{(p \\oplus q) \\lor (p \\leftrightarrow \\sim q)\\}$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "F",
-          "F",
-          "F",
-          "F",
-          "T"
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          "T",
-          "T",
-          "T",
-          "F"
-        ],
-        [
-          "F",
-          "T",
-          "F",
-          "T",
-          "T",
-          "T",
-          "F"
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          "F",
-          "F",
-          "F",
-          "T"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 2,
-      "explanation": "$p \\oplus q \\equiv p \\leftrightarrow \\sim q$이므로 논리합은 $p \\oplus q$와 동일. 결과: T,F,F,T → 충족가능(사건명제)"
+      "type": "proof",
+      "text": "<strong>[문제 08(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$\\sim\\{(p \\oplus q) \\lor (p \\leftrightarrow \\sim q)\\}$",
+      "explanation": "$p \\oplus q \\equiv p \\leftrightarrow \\sim q$이므로 논리합은 $p \\oplus q$와 동일. 결과: T,F,F,T → 충족가능(사건명제)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $\\sim q$=F, $p \\oplus q$=F, $p \\leftrightarrow \\sim q$=F, $(p \\oplus q) \\lor (p \\leftrightarrow \\sim q)$=F, $\\sim\\{(p \\oplus q) \\lor (p \\leftrightarrow \\sim q)\\}$=T / 2행: $p$=T, $q$=F, $\\sim q$=T, $p \\oplus q$=T, $p \\leftrightarrow \\sim q$=T, $(p \\oplus q) \\lor (p \\leftrightarrow \\sim q)$=T, $\\sim\\{(p \\oplus q) \\lor (p \\leftrightarrow \\sim q)\\}$=F / 3행: $p$=F, $q$=T, $\\sim q$=F, $p \\oplus q$=T, $p \\leftrightarrow \\sim q$=T, $(p \\oplus q) \\lor (p \\leftrightarrow \\sim q)$=T, $\\sim\\{(p \\oplus q) \\lor (p \\leftrightarrow \\sim q)\\}$=F / 4행: $p$=F, $q$=F, $\\sim q$=T, $p \\oplus q$=F, $p \\leftrightarrow \\sim q$=F, $(p \\oplus q) \\lor (p \\leftrightarrow \\sim q)$=F, $\\sim\\{(p \\oplus q) \\lor (p \\leftrightarrow \\sim q)\\}$=T. 따라서 합성명제의 종류는 충족가능(사건명제)이다. 해설: $p \\oplus q \\equiv p \\leftrightarrow \\sim q$이므로 논리합은 $p \\oplus q$와 동일. 결과: T,F,F,T → 충족가능(사건명제)"
     },
     {
       "id": "ch2-q040",
-      "type": "truth-table",
-      "text": "<strong>[문제 08(d)]</strong> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$\\{(p \\leftrightarrow \\sim q) \\oplus (p \\rightarrow \\sim r) \\oplus r\\} \\leftrightarrow q$",
-      "headers": [
-        "$p$",
-        "$q$",
-        "$r$",
-        "$\\sim q$",
-        "$\\sim r$",
-        "$p \\leftrightarrow \\sim q$",
-        "$p \\rightarrow \\sim r$",
-        "$(p{\\leftrightarrow}\\sim q)\\oplus(p{\\rightarrow}\\sim r)\\oplus r$",
-        "$\\{\\cdots\\} \\leftrightarrow q$"
-      ],
-      "data": [
-        [
-          "T",
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "T",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        [
-          "F",
-          "F",
-          "F",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ]
-      ],
-      "answers": [
-        [
-          "T",
-          "T",
-          "T",
-          "F",
-          "F",
-          "F",
-          "F",
-          "T",
-          "T"
-        ],
-        [
-          "T",
-          "T",
-          "F",
-          "F",
-          "T",
-          "F",
-          "T",
-          "T",
-          "T"
-        ],
-        [
-          "T",
-          "F",
-          "T",
-          "T",
-          "F",
-          "T",
-          "F",
-          "F",
-          "T"
-        ],
-        [
-          "T",
-          "F",
-          "F",
-          "T",
-          "T",
-          "T",
-          "T",
-          "F",
-          "T"
-        ],
-        [
-          "F",
-          "T",
-          "T",
-          "F",
-          "F",
-          "T",
-          "T",
-          "T",
-          "T"
-        ],
-        [
-          "F",
-          "T",
-          "F",
-          "F",
-          "T",
-          "T",
-          "T",
-          "F",
-          "F"
-        ],
-        [
-          "F",
-          "F",
-          "T",
-          "T",
-          "F",
-          "F",
-          "T",
-          "F",
-          "T"
-        ],
-        [
-          "F",
-          "F",
-          "F",
-          "T",
-          "T",
-          "F",
-          "T",
-          "T",
-          "F"
-        ]
-      ],
-      "classificationChoices": [
-        "항진명제(tautology)",
-        "모순(contradiction)",
-        "충족가능(사건명제)"
-      ],
-      "classificationAnswer": 2,
-      "explanation": "8행 중 T와 F가 혼재 → 충족가능(사건명제)"
+      "type": "proof",
+      "text": "<strong>[문제 08(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제의 진리표를 완성하고, 합성명제의 종류를 구분하라.<br><br>$\\{(p \\leftrightarrow \\sim q) \\oplus (p \\rightarrow \\sim r) \\oplus r\\} \\leftrightarrow q$",
+      "explanation": "8행 중 T와 F가 혼재 → 충족가능(사건명제)",
+      "hint": "각 행에서 부분식의 진리값을 차례대로 계산하고, 마지막 열의 패턴으로 항진명제·모순·충족가능 여부를 판정하세요.",
+      "modelAnswer": "진리표 계산 결과: 1행: $p$=T, $q$=T, $r$=T, $\\sim q$=F, $\\sim r$=F, $p \\leftrightarrow \\sim q$=F, $p \\rightarrow \\sim r$=F, $(p{\\leftrightarrow}\\sim q)\\oplus(p{\\rightarrow}\\sim r)\\oplus r$=T, $\\{\\cdots\\} \\leftrightarrow q$=T / 2행: $p$=T, $q$=T, $r$=F, $\\sim q$=F, $\\sim r$=T, $p \\leftrightarrow \\sim q$=F, $p \\rightarrow \\sim r$=T, $(p{\\leftrightarrow}\\sim q)\\oplus(p{\\rightarrow}\\sim r)\\oplus r$=T, $\\{\\cdots\\} \\leftrightarrow q$=T / 3행: $p$=T, $q$=F, $r$=T, $\\sim q$=T, $\\sim r$=F, $p \\leftrightarrow \\sim q$=T, $p \\rightarrow \\sim r$=F, $(p{\\leftrightarrow}\\sim q)\\oplus(p{\\rightarrow}\\sim r)\\oplus r$=F, $\\{\\cdots\\} \\leftrightarrow q$=T / 4행: $p$=T, $q$=F, $r$=F, $\\sim q$=T, $\\sim r$=T, $p \\leftrightarrow \\sim q$=T, $p \\rightarrow \\sim r$=T, $(p{\\leftrightarrow}\\sim q)\\oplus(p{\\rightarrow}\\sim r)\\oplus r$=F, $\\{\\cdots\\} \\leftrightarrow q$=T / 5행: $p$=F, $q$=T, $r$=T, $\\sim q$=F, $\\sim r$=F, $p \\leftrightarrow \\sim q$=T, $p \\rightarrow \\sim r$=T, $(p{\\leftrightarrow}\\sim q)\\oplus(p{\\rightarrow}\\sim r)\\oplus r$=T, $\\{\\cdots\\} \\leftrightarrow q$=T / 6행: $p$=F, $q$=T, $r$=F, $\\sim q$=F, $\\sim r$=T, $p \\leftrightarrow \\sim q$=T, $p \\rightarrow \\sim r$=T, $(p{\\leftrightarrow}\\sim q)\\oplus(p{\\rightarrow}\\sim r)\\oplus r$=F, $\\{\\cdots\\} \\leftrightarrow q$=F / 7행: $p$=F, $q$=F, $r$=T, $\\sim q$=T, $\\sim r$=F, $p \\leftrightarrow \\sim q$=F, $p \\rightarrow \\sim r$=T, $(p{\\leftrightarrow}\\sim q)\\oplus(p{\\rightarrow}\\sim r)\\oplus r$=F, $\\{\\cdots\\} \\leftrightarrow q$=T / 8행: $p$=F, $q$=F, $r$=F, $\\sim q$=T, $\\sim r$=T, $p \\leftrightarrow \\sim q$=F, $p \\rightarrow \\sim r$=T, $(p{\\leftrightarrow}\\sim q)\\oplus(p{\\rightarrow}\\sim r)\\oplus r$=T, $\\{\\cdots\\} \\leftrightarrow q$=F. 따라서 합성명제의 종류는 충족가능(사건명제)이다. 해설: 8행 중 T와 F가 혼재 → 충족가능(사건명제)"
     },
     {
       "id": "ch2-q041",
       "type": "proof",
-      "text": "<strong>[문제 09(a)]</strong> 다음 명제의 역, 이, 대우 명제를 구하고, 각각의 진릿값을 구하라.<br><br>\"순수한 물의 어는점(빙점)이 섭씨 0℃이면, 섭씨 0℃ 이하에서는 반드시 비가 온다.\"",
+      "text": "<strong>[문제 09(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 명제의 역, 이, 대우 명제를 구하고, 각각의 진릿값을 구하라.<br><br>\"순수한 물의 어는점(빙점)이 섭씨 0℃이면, 섭씨 0℃ 이하에서는 반드시 비가 온다.\"",
       "hint": "$p$: 순수한 물의 어는점은 섭씨 0℃ (T), $q$: 섭씨 0℃ 이하에서 반드시 비가 온다 (F)",
       "modelAnswer": "$p \\to q$: T→F = F<br>역($q \\to p$): F→T = T<br>이($\\sim p \\to \\sim q$): F→T = T<br>대우($\\sim q \\to \\sim p$): T→F = F"
     },
     {
       "id": "ch2-q042",
       "type": "proof",
-      "text": "<strong>[문제 09(b)]</strong> 다음 명제의 역, 이, 대우 명제를 구하고, 각각의 진릿값을 구하라.<br><br>\"관악산이 제주도에 있으면, 설악산은 강원도에 있다.\"",
+      "text": "<strong>[문제 09(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 명제의 역, 이, 대우 명제를 구하고, 각각의 진릿값을 구하라.<br><br>\"관악산이 제주도에 있으면, 설악산은 강원도에 있다.\"",
       "hint": "$p$: 관악산이 제주도에 있다 (F), $q$: 설악산은 강원도에 있다 (T)",
       "modelAnswer": "$p \\to q$: F→T = T<br>역($q \\to p$): T→F = F<br>이($\\sim p \\to \\sim q$): T→F = F<br>대우($\\sim q \\to \\sim p$): F→T = T"
     },
     {
       "id": "ch2-q043",
       "type": "proof",
-      "text": "<strong>[문제 09(c)]</strong> 다음 명제의 역, 이, 대우 명제를 구하고, 각각의 진릿값을 구하라.<br><br>\"모든 실수 $x$에 대하여 $x^2 \\ge 0$이면, 36의 제곱근은 $\\pm 6$이다.\"",
+      "text": "<strong>[문제 09(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 명제의 역, 이, 대우 명제를 구하고, 각각의 진릿값을 구하라.<br><br>\"모든 실수 $x$에 대하여 $x^2 \\ge 0$이면, 36의 제곱근은 $\\pm 6$이다.\"",
       "hint": "$p$: 모든 실수 $x$에 대해 $x^2 \\ge 0$ (T), $q$: 36의 제곱근은 $\\pm 6$ (T)",
       "modelAnswer": "$p \\to q$: T→T = T<br>역($q \\to p$): T→T = T<br>이($\\sim p \\to \\sim q$): F→F = T<br>대우($\\sim q \\to \\sim p$): F→F = T"
     },
     {
       "id": "ch2-q044",
       "type": "proof",
-      "text": "<strong>[문제 09(d)]</strong> 다음 명제의 역, 이, 대우 명제를 구하고, 각각의 진릿값을 구하라.<br><br>\"한강이 동해로 유입되면, 호주는 유럽연합에 속한다.\"",
+      "text": "<strong>[문제 09(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 명제의 역, 이, 대우 명제를 구하고, 각각의 진릿값을 구하라.<br><br>\"한강이 동해로 유입되면, 호주는 유럽연합에 속한다.\"",
       "hint": "$p$: 한강이 동해로 유입 (F), $q$: 호주는 EU에 속한다 (F)",
       "modelAnswer": "$p \\to q$: F→F = T<br>역($q \\to p$): F→F = T<br>이($\\sim p \\to \\sim q$): T→T = T<br>대우($\\sim q \\to \\sim p$): T→T = T"
     },
     {
       "id": "ch2-q045",
       "type": "proof",
-      "text": "<strong>[문제 09(e)]</strong> 다음 명제의 역, 이, 대우 명제를 구하고, 각각의 진릿값을 구하라.<br><br>\"8비트가 1바이트이면, 월요일의 다음날은 토요일이다.\"",
+      "text": "<strong>[문제 09(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 명제의 역, 이, 대우 명제를 구하고, 각각의 진릿값을 구하라.<br><br>\"8비트가 1바이트이면, 월요일의 다음날은 토요일이다.\"",
       "hint": "$p$: 8비트=1바이트 (T), $q$: 월요일 다음날은 토요일 (F)",
       "modelAnswer": "$p \\to q$: T→F = F<br>역($q \\to p$): F→T = T<br>이($\\sim p \\to \\sim q$): F→T = T<br>대우($\\sim q \\to \\sim p$): T→F = F"
     },
     {
       "id": "ch2-q046",
       "type": "proof",
-      "text": "<strong>[문제 10(a)]</strong> 명제 $p, q$가 다음과 같을 때, $p \\rightarrow q$의 역, 이, 대우 명제를 작성하고 진릿값을 구하라.<br><br>$p$ : 부산은 대한민국의 수도이다. (F)<br>$q$ : 워싱턴 D.C.는 미국의 수도이다. (T)",
+      "text": "<strong>[문제 10(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q$가 다음과 같을 때, $p \\rightarrow q$의 역, 이, 대우 명제를 작성하고 진릿값을 구하라.<br><br>$p$ : 부산은 대한민국의 수도이다. (F)<br>$q$ : 워싱턴 D.C.는 미국의 수도이다. (T)",
       "hint": "$p$: F, $q$: T",
       "modelAnswer": "$p \\to q$: F→T = T<br>역: T→F = F<br>이: T→F = F<br>대우: F→T = T"
     },
     {
       "id": "ch2-q047",
       "type": "proof",
-      "text": "<strong>[문제 10(b)]</strong> 명제 $p, q$가 다음과 같을 때, $p \\rightarrow q$의 역, 이, 대우 명제를 작성하고 진릿값을 구하라.<br><br>$p$ : $3 \\times 13 < 11$ (F)<br>$q$ : 삼각형 내각의 합은 $200^\\circ$이다. (F)",
+      "text": "<strong>[문제 10(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q$가 다음과 같을 때, $p \\rightarrow q$의 역, 이, 대우 명제를 작성하고 진릿값을 구하라.<br><br>$p$ : $3 \\times 13 < 11$ (F)<br>$q$ : 삼각형 내각의 합은 $200^\\circ$이다. (F)",
       "hint": "$3 \\times 13 = 39 \\not< 11$이므로 $p$: F, 삼각형 내각의 합은 $180^\\circ$이므로 $q$: F",
       "modelAnswer": "$p \\to q$: F→F = T<br>역: F→F = T<br>이: T→T = T<br>대우: T→T = T"
     },
     {
       "id": "ch2-q048",
       "type": "proof",
-      "text": "<strong>[문제 10(c)]</strong> 명제 $p, q$가 다음과 같을 때, $p \\rightarrow q$의 역, 이, 대우 명제를 작성하고 진릿값을 구하라.<br><br>$p$ : 자연수는 0보다 큰 정수이다. (T)<br>$q$ : 직선은 두 점을 지난다. (T)",
+      "text": "<strong>[문제 10(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q$가 다음과 같을 때, $p \\rightarrow q$의 역, 이, 대우 명제를 작성하고 진릿값을 구하라.<br><br>$p$ : 자연수는 0보다 큰 정수이다. (T)<br>$q$ : 직선은 두 점을 지난다. (T)",
       "hint": "$p$: T, $q$: T",
       "modelAnswer": "$p \\to q$: T→T = T<br>역: T→T = T<br>이: F→F = T<br>대우: F→F = T"
     },
     {
       "id": "ch2-q049",
       "type": "proof",
-      "text": "<strong>[문제 10(d)]</strong> 명제 $p, q$가 다음과 같을 때, $p \\rightarrow q$의 역, 이, 대우 명제를 작성하고 진릿값을 구하라.<br><br>$p$ : 모든 실수 $x$는 $\\dfrac{\\sqrt{4x}}{5} > 5$를 만족한다. (F)<br>$q$ : $2x+1=k$일 때 모든 정수 $x$에 대하여 $k$는 짝수이다. (F)",
+      "text": "<strong>[문제 10(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q$가 다음과 같을 때, $p \\rightarrow q$의 역, 이, 대우 명제를 작성하고 진릿값을 구하라.<br><br>$p$ : 모든 실수 $x$는 $\\dfrac{\\sqrt{4x}}{5} > 5$를 만족한다. (F)<br>$q$ : $2x+1=k$일 때 모든 정수 $x$에 대하여 $k$는 짝수이다. (F)",
       "hint": "$p$: F (반례 존재), $q$: F ($k=2x+1$은 홀수)",
       "modelAnswer": "$p \\to q$: F→F = T<br>역: F→F = T<br>이: T→T = T<br>대우: T→T = T"
     },
     {
       "id": "ch2-q050",
       "type": "proof",
-      "text": "<strong>[문제 10(e)]</strong> 명제 $p, q$가 다음과 같을 때, $p \\rightarrow q$의 역, 이, 대우 명제를 작성하고 진릿값을 구하라.<br><br>$p$ : 모든 정수 $x$에 대하여 $2x$는 항상 짝수이다. (T)<br>$q$ : 독도는 대한민국 땅이다. (T)",
+      "text": "<strong>[문제 10(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제 $p, q$가 다음과 같을 때, $p \\rightarrow q$의 역, 이, 대우 명제를 작성하고 진릿값을 구하라.<br><br>$p$ : 모든 정수 $x$에 대하여 $2x$는 항상 짝수이다. (T)<br>$q$ : 독도는 대한민국 땅이다. (T)",
       "hint": "$p$: T, $q$: T",
       "modelAnswer": "$p \\to q$: T→T = T<br>역: T→T = T<br>이: F→F = T<br>대우: F→F = T"
     },
     {
       "id": "ch2-q051",
       "type": "proof",
-      "text": "<strong>[문제 11(a)]</strong> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$\\sim(p \\oplus q) \\equiv p \\leftrightarrow q$",
+      "text": "<strong>[문제 11(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$\\sim(p \\oplus q) \\equiv p \\leftrightarrow q$",
       "hint": "$p \\oplus q$는 $p, q$가 다를 때 T, $p \\leftrightarrow q$는 같을 때 T",
       "modelAnswer": "$\\sim(p \\oplus q)$는 $p, q$가 같을 때 T = $p \\leftrightarrow q$. 진리표 4행 모두 일치."
     },
     {
       "id": "ch2-q052",
       "type": "proof",
-      "text": "<strong>[문제 11(b)]</strong> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$\\sim(p \\lor \\sim q) \\lor (\\sim p \\land \\sim q) \\equiv \\sim p$",
+      "text": "<strong>[문제 11(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$\\sim(p \\lor \\sim q) \\lor (\\sim p \\land \\sim q) \\equiv \\sim p$",
       "hint": "드모르간 법칙으로 $\\sim(p \\lor \\sim q) = \\sim p \\land q$",
       "modelAnswer": "$(\\sim p \\land q) \\lor (\\sim p \\land \\sim q) = \\sim p \\land (q \\lor \\sim q) = \\sim p \\land T = \\sim p$"
     },
     {
       "id": "ch2-q053",
       "type": "proof",
-      "text": "<strong>[문제 11(c)]</strong> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$[p \\land \\{\\sim(\\sim p \\lor q)\\}] \\lor (p \\land q) \\equiv p$",
+      "text": "<strong>[문제 11(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$[p \\land \\{\\sim(\\sim p \\lor q)\\}] \\lor (p \\land q) \\equiv p$",
       "hint": "$\\sim(\\sim p \\lor q) = p \\land \\sim q$ (드모르간)",
       "modelAnswer": "$[p \\land (p \\land \\sim q)] \\lor (p \\land q) = (p \\land \\sim q) \\lor (p \\land q) = p \\land (\\sim q \\lor q) = p \\land T = p$"
     },
     {
       "id": "ch2-q054",
       "type": "proof",
-      "text": "<strong>[문제 11(d)]</strong> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$(p \\rightarrow q) \\land (\\sim p \\rightarrow q) \\equiv q$",
+      "text": "<strong>[문제 11(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$(p \\rightarrow q) \\land (\\sim p \\rightarrow q) \\equiv q$",
       "hint": "조건문을 논리합으로 변환: $p \\to q \\equiv \\sim p \\lor q$",
       "modelAnswer": "$(\\sim p \\lor q) \\land (p \\lor q) = q \\lor (\\sim p \\land p) = q \\lor F = q$"
     },
     {
       "id": "ch2-q055",
       "type": "proof",
-      "text": "<strong>[문제 11(e)]</strong> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$(p \\land q) \\oplus (p \\lor q) \\equiv p \\oplus q$",
+      "text": "<strong>[문제 11(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$(p \\land q) \\oplus (p \\lor q) \\equiv p \\oplus q$",
       "hint": "진리표로 4행 모두 확인",
       "modelAnswer": "$(T,T)$: T⊕T=F, T⊕T=F ✓ | $(T,F)$: F⊕T=T, T⊕F=T ✓ | $(F,T)$: F⊕T=T, F⊕T=T ✓ | $(F,F)$: F⊕F=F, F⊕F=F ✓"
     },
     {
       "id": "ch2-q056",
       "type": "proof",
-      "text": "<strong>[문제 12(a)]</strong> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$(p \\lor q) \\rightarrow r \\equiv (p \\rightarrow r) \\land (q \\rightarrow r)$",
+      "text": "<strong>[문제 12(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$(p \\lor q) \\rightarrow r \\equiv (p \\rightarrow r) \\land (q \\rightarrow r)$",
       "hint": "조건문을 논리합으로 변환 후 분배법칙",
       "modelAnswer": "$(p \\lor q) \\to r = \\sim(p \\lor q) \\lor r = (\\sim p \\land \\sim q) \\lor r$<br>$(p \\to r) \\land (q \\to r) = (\\sim p \\lor r) \\land (\\sim q \\lor r) = (\\sim p \\land \\sim q) \\lor r$ (분배). 동치."
     },
     {
       "id": "ch2-q057",
       "type": "proof",
-      "text": "<strong>[문제 12(b)]</strong> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$\\{(\\sim p \\land r) \\rightarrow q\\} \\lor \\{p \\rightarrow (q \\lor \\sim r)\\} \\equiv T$",
+      "text": "<strong>[문제 12(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$\\{(\\sim p \\land r) \\rightarrow q\\} \\lor \\{p \\rightarrow (q \\lor \\sim r)\\} \\equiv T$",
       "hint": "각 조건문을 논리합으로 변환",
       "modelAnswer": "$(p \\lor \\sim r \\lor q) \\lor (\\sim p \\lor q \\lor \\sim r) = (p \\lor \\sim p) \\lor q \\lor \\sim r = T$. 항진명제."
     },
     {
       "id": "ch2-q058",
       "type": "proof",
-      "text": "<strong>[문제 12(c)]</strong> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$\\{(p \\rightarrow q) \\lor (p \\rightarrow r)\\} \\rightarrow (q \\lor r) \\equiv p \\lor q \\lor r$",
+      "text": "<strong>[문제 12(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$\\{(p \\rightarrow q) \\lor (p \\rightarrow r)\\} \\rightarrow (q \\lor r) \\equiv p \\lor q \\lor r$",
       "hint": "조건문 변환 후 정리",
       "modelAnswer": "$(\\sim p \\lor q \\lor r) \\to (q \\lor r) = \\sim(\\sim p \\lor q \\lor r) \\lor (q \\lor r) = (p \\land \\sim q \\land \\sim r) \\lor (q \\lor r) = p \\lor q \\lor r$. 진리표 8행 확인 일치."
     },
     {
       "id": "ch2-q059",
       "type": "proof",
-      "text": "<strong>[문제 12(d)]</strong> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$(p \\land r) \\lor \\{(p \\lor q) \\land \\sim r\\} \\lor (q \\land r) \\equiv p \\lor q$",
+      "text": "<strong>[문제 12(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$(p \\land r) \\lor \\{(p \\lor q) \\land \\sim r\\} \\lor (q \\land r) \\equiv p \\lor q$",
       "hint": "분배법칙으로 전개 후 정리",
       "modelAnswer": "$(p \\land r) \\lor (p \\land \\sim r) \\lor (q \\land \\sim r) \\lor (q \\land r) = p(r \\lor \\sim r) \\lor q(\\sim r \\lor r) = p \\lor q$"
     },
     {
       "id": "ch2-q060",
       "type": "proof",
-      "text": "<strong>[문제 12(e)]</strong> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$(p \\lor r) \\oplus (q \\lor r) \\equiv (p \\oplus q) \\land \\sim r$",
+      "text": "<strong>[문제 12(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 진리표와 논리적 동치법칙을 이용하여 다음 합성명제의 동치관계가 성립함을 보여라.<br><br>$(p \\lor r) \\oplus (q \\lor r) \\equiv (p \\oplus q) \\land \\sim r$",
       "hint": "진리표 8행 확인",
       "modelAnswer": "$(T,T,T)$: T⊕T=F, F∧F=F ✓ | $(T,F,F)$: T⊕F=T, T∧T=T ✓ | 등 8행 모두 일치."
     },
     {
       "id": "ch2-q061",
       "type": "proof",
-      "text": "<strong>[문제 13(a)]</strong> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$(\\sim p \\lor q) \\rightarrow q$",
+      "text": "<strong>[문제 13(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$(\\sim p \\lor q) \\rightarrow q$",
       "hint": "조건문을 논리합으로 변환: $\\sim(\\sim p \\lor q) \\lor q$",
       "modelAnswer": "$(p \\land \\sim q) \\lor q = (p \\lor q) \\land (\\sim q \\lor q) = (p \\lor q) \\land T = p \\lor q$. 답: $p \\lor q$"
     },
     {
       "id": "ch2-q062",
       "type": "proof",
-      "text": "<strong>[문제 13(b)]</strong> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$\\{\\sim p \\land (p \\rightarrow q)\\} \\land p$",
+      "text": "<strong>[문제 13(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$\\{\\sim p \\land (p \\rightarrow q)\\} \\land p$",
       "hint": "$p$와 $\\sim p$가 동시에 있으면 모순",
       "modelAnswer": "$\\sim p \\land p \\land \\cdots = F$. 답: $F$ (모순)"
     },
     {
       "id": "ch2-q063",
       "type": "proof",
-      "text": "<strong>[문제 13(c)]</strong> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$(p \\land q) \\lor \\{p \\land (p \\land \\sim q)\\}$",
+      "text": "<strong>[문제 13(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$(p \\land q) \\lor \\{p \\land (p \\land \\sim q)\\}$",
       "hint": "공통인수 $p$로 묶기",
       "modelAnswer": "$(p \\land q) \\lor (p \\land \\sim q) = p \\land (q \\lor \\sim q) = p$. 답: $p$"
     },
     {
       "id": "ch2-q064",
       "type": "proof",
-      "text": "<strong>[문제 13(d)]</strong> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$\\sim(p \\oplus q) \\rightarrow (\\sim p \\rightarrow q)$",
+      "text": "<strong>[문제 13(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$\\sim(p \\oplus q) \\rightarrow (\\sim p \\rightarrow q)$",
       "hint": "$\\sim(p \\oplus q) \\equiv p \\leftrightarrow q$를 활용",
       "modelAnswer": "$(p \\leftrightarrow q) \\to (p \\lor q)$. 진리표 확인: T,T,T,F. 답: $p \\lor q$"
     },
     {
       "id": "ch2-q065",
       "type": "proof",
-      "text": "<strong>[문제 13(e)]</strong> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$(\\sim p \\oplus q) \\rightarrow (p \\lor q)$",
+      "text": "<strong>[문제 13(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$(\\sim p \\oplus q) \\rightarrow (p \\lor q)$",
       "hint": "XOR을 전개하여 조건문 변환",
       "modelAnswer": "진리표 확인: T,T,T,F. 답: $p \\lor q$"
     },
     {
       "id": "ch2-q066",
       "type": "proof",
-      "text": "<strong>[문제 14(a)]</strong> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$(p \\lor r) \\rightarrow \\{(q \\land \\sim r) \\rightarrow p\\}$",
+      "text": "<strong>[문제 14(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$(p \\lor r) \\rightarrow \\{(q \\land \\sim r) \\rightarrow p\\}$",
       "hint": "이중 조건문을 풀어서 정리",
       "modelAnswer": "진리표(8행) 확인 결과 모두 T. 답: $T$ (항진명제)"
     },
     {
       "id": "ch2-q067",
       "type": "proof",
-      "text": "<strong>[문제 14(b)]</strong> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$(p \\leftrightarrow \\sim q) \\land (p \\land q)$",
+      "text": "<strong>[문제 14(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$(p \\leftrightarrow \\sim q) \\land (p \\land q)$",
       "hint": "$p \\leftrightarrow \\sim q$는 $p \\neq q$일 때 참, $p \\land q$는 둘 다 참",
       "modelAnswer": "동시 충족 불가. 답: $F$ (모순)"
     },
     {
       "id": "ch2-q068",
       "type": "proof",
-      "text": "<strong>[문제 14(c)]</strong> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$\\sim(p \\land q) \\oplus (\\sim p \\lor q)$",
+      "text": "<strong>[문제 14(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$\\sim(p \\land q) \\oplus (\\sim p \\lor q)$",
       "hint": "드모르간: $\\sim(p \\land q) = \\sim p \\lor \\sim q$",
       "modelAnswer": "$(\\sim p \\lor \\sim q) \\oplus (\\sim p \\lor q)$. 진리표: T,T,F,F. 답: $p$"
     },
     {
       "id": "ch2-q069",
       "type": "proof",
-      "text": "<strong>[문제 14(d)]</strong> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$\\{p \\land (p \\rightarrow q)\\} \\rightarrow q$",
+      "text": "<strong>[문제 14(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$\\{p \\land (p \\rightarrow q)\\} \\rightarrow q$",
       "hint": "전건긍정(Modus Ponens) 규칙",
       "modelAnswer": "$\\{p \\land (\\sim p \\lor q)\\} \\to q = (p \\land q) \\to q = \\sim(p \\land q) \\lor q = \\sim p \\lor \\sim q \\lor q = T$. 답: $T$ (항진명제)"
     },
     {
       "id": "ch2-q070",
       "type": "proof",
-      "text": "<strong>[문제 14(e)]</strong> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$\\sim p \\rightarrow (p \\lor \\sim p)$",
+      "text": "<strong>[문제 14(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 합성명제를 최대한 간략히 정리하라. 그리고 진리표를 이용하여 원래 명제와 간략히 정리한 결과가 동치인지 확인하라.<br><br>$\\sim p \\rightarrow (p \\lor \\sim p)$",
       "hint": "$p \\lor \\sim p \\equiv T$",
       "modelAnswer": "$\\sim p \\to T = T$. 답: $T$ (항진명제)"
     },
     {
       "id": "ch2-q071",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 15(a)]</strong> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$P(121)$의 진릿값은?",
-      "choices": [
-        "참 (T)",
-        "거짓 (F)"
-      ],
-      "answer": 0,
-      "explanation": "$\\sqrt{121} = 11 > 10$이므로 참."
+      "type": "proof",
+      "text": "<strong>[문제 15(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$P(121)$의 진릿값은?",
+      "explanation": "$\\sqrt{121} = 11 > 10$이므로 참.",
+      "hint": "논의영역과 조건을 먼저 해석한 뒤, 반례 또는 만족하는 예를 들어 참·거짓을 설명하세요.",
+      "modelAnswer": "최종 판정: 참 (T). 풀이: $\\sqrt{121} = 11 > 10$이므로 참."
     },
     {
       "id": "ch2-q072",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 15(b)]</strong> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$P(9)$의 진릿값은?",
-      "choices": [
-        "참 (T)",
-        "거짓 (F)"
-      ],
-      "answer": 1,
-      "explanation": "$\\sqrt{9} = 3$, $3 > 10$은 거짓."
+      "type": "proof",
+      "text": "<strong>[문제 15(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$P(9)$의 진릿값은?",
+      "explanation": "$\\sqrt{9} = 3$, $3 > 10$은 거짓.",
+      "hint": "논의영역과 조건을 먼저 해석한 뒤, 반례 또는 만족하는 예를 들어 참·거짓을 설명하세요.",
+      "modelAnswer": "최종 판정: 거짓 (F). 풀이: $\\sqrt{9} = 3$, $3 > 10$은 거짓."
     },
     {
       "id": "ch2-q073",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 15(c)]</strong> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$Q(6, 2)$의 진릿값은?",
-      "choices": [
-        "참 (T)",
-        "거짓 (F)"
-      ],
-      "answer": 0,
-      "explanation": "$6>3$: T, $2 \\le 10$: T. T→T = T"
+      "type": "proof",
+      "text": "<strong>[문제 15(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$Q(6, 2)$의 진릿값은?",
+      "explanation": "$6>3$: T, $2 \\le 10$: T. T→T = T",
+      "hint": "논의영역과 조건을 먼저 해석한 뒤, 반례 또는 만족하는 예를 들어 참·거짓을 설명하세요.",
+      "modelAnswer": "최종 판정: 참 (T). 풀이: $6>3$: T, $2 \\le 10$: T. T→T = T"
     },
     {
       "id": "ch2-q074",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 15(d)]</strong> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$Q(1, 1)$의 진릿값은?",
-      "choices": [
-        "참 (T)",
-        "거짓 (F)"
-      ],
-      "answer": 0,
-      "explanation": "$1>3$: F. F→(anything) = T"
+      "type": "proof",
+      "text": "<strong>[문제 15(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$Q(1, 1)$의 진릿값은?",
+      "explanation": "$1>3$: F. F→(anything) = T",
+      "hint": "논의영역과 조건을 먼저 해석한 뒤, 반례 또는 만족하는 예를 들어 참·거짓을 설명하세요.",
+      "modelAnswer": "최종 판정: 참 (T). 풀이: $1>3$: F. F→(anything) = T"
     },
     {
       "id": "ch2-q075",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 15(e)]</strong> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$Q(15, 12)$의 진릿값은?",
-      "choices": [
-        "참 (T)",
-        "거짓 (F)"
-      ],
-      "answer": 1,
-      "explanation": "$15>3$: T, $12 \\le 10$: F. T→F = F"
+      "type": "proof",
+      "text": "<strong>[문제 15(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$Q(15, 12)$의 진릿값은?",
+      "explanation": "$15>3$: T, $12 \\le 10$: F. T→F = F",
+      "hint": "논의영역과 조건을 먼저 해석한 뒤, 반례 또는 만족하는 예를 들어 참·거짓을 설명하세요.",
+      "modelAnswer": "최종 판정: 거짓 (F). 풀이: $15>3$: T, $12 \\le 10$: F. T→F = F"
     },
     {
       "id": "ch2-q076",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 15(f)]</strong> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$R(21, 8, 3)$의 진릿값은?",
-      "choices": [
-        "참 (T)",
-        "거짓 (F)"
-      ],
-      "answer": 1,
-      "explanation": "$21<15$: F. F∧T = F. $3=7$: F. F∨F = F"
+      "type": "proof",
+      "text": "<strong>[문제 15(f)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$R(21, 8, 3)$의 진릿값은?",
+      "explanation": "$21<15$: F. F∧T = F. $3=7$: F. F∨F = F",
+      "hint": "논의영역과 조건을 먼저 해석한 뒤, 반례 또는 만족하는 예를 들어 참·거짓을 설명하세요.",
+      "modelAnswer": "최종 판정: 거짓 (F). 풀이: $21<15$: F. F∧T = F. $3=7$: F. F∨F = F"
     },
     {
       "id": "ch2-q077",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 15(g)]</strong> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$R(7, 7, 7)$의 진릿값은?",
-      "choices": [
-        "참 (T)",
-        "거짓 (F)"
-      ],
-      "answer": 0,
-      "explanation": "$7<15$: T, $7\\ge 5$: T. T∧T = T. T∨T = T. 또는 $z=7$: T이므로 바로 T"
+      "type": "proof",
+      "text": "<strong>[문제 15(g)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$R(7, 7, 7)$의 진릿값은?",
+      "explanation": "$7<15$: T, $7\\ge 5$: T. T∧T = T. T∨T = T. 또는 $z=7$: T이므로 바로 T",
+      "hint": "논의영역과 조건을 먼저 해석한 뒤, 반례 또는 만족하는 예를 들어 참·거짓을 설명하세요.",
+      "modelAnswer": "최종 판정: 참 (T). 풀이: $7<15$: T, $7\\ge 5$: T. T∧T = T. T∨T = T. 또는 $z=7$: T이므로 바로 T"
     },
     {
       "id": "ch2-q078",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 15(h)]</strong> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$R(0, 0, -7)$의 진릿값은?",
-      "choices": [
-        "참 (T)",
-        "거짓 (F)"
-      ],
-      "answer": 1,
-      "explanation": "$0<15$: T, $0\\ge 5$: F. T∧F = F. $-7=7$: F. F∨F = F"
+      "type": "proof",
+      "text": "<strong>[문제 15(h)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 명제함수가 다음과 같을 때, 주어진 값에 대하여 진릿값을 구하라.<br>$P(x) : \\sqrt{x} > 10$<br>$Q(x, y) : (x > 3) \\rightarrow (y \\le 10)$<br>$R(x, y, z) : (x < 15 \\land y \\ge 5) \\lor (z = 7)$<br><br>$R(0, 0, -7)$의 진릿값은?",
+      "explanation": "$0<15$: T, $0\\ge 5$: F. T∧F = F. $-7=7$: F. F∨F = F",
+      "hint": "논의영역과 조건을 먼저 해석한 뒤, 반례 또는 만족하는 예를 들어 참·거짓을 설명하세요.",
+      "modelAnswer": "최종 판정: 거짓 (F). 풀이: $0<15$: T, $0\\ge 5$: F. T∧F = F. $-7=7$: F. F∨F = F"
     },
     {
       "id": "ch2-q079",
       "type": "proof",
-      "text": "<strong>[문제 16(a)]</strong> 주어진 논의영역과 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$D = \\{d \\mid d \\in \\mathbb{R}\\}$, $P(x, y) : x^2 < y^2$",
+      "text": "<strong>[문제 16(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 주어진 논의영역과 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$D = \\{d \\mid d \\in \\mathbb{R}\\}$, $P(x, y) : x^2 < y^2$",
       "hint": "$x^2 < y^2$는 $|x| < |y|$와 동치. $x=y$이면 항상 거짓",
       "modelAnswer": "$\\forall x \\forall y$: F ($x=y$이면 거짓)<br>$\\forall x \\exists y$: T (임의의 x에 대해 |y|>|x| 인 y 선택 가능)<br>$\\exists x \\forall y$: F (어떤 x를 택해도 y=x이면 거짓)<br>$\\exists x \\exists y$: T (예: x=1, y=2)<br>$\\forall y \\forall x$: F<br>$\\forall y \\exists x$: F (y=0이면 |x|<0 인 x가 존재하지 않음)<br>$\\exists y \\forall x$: F<br>$\\exists y \\exists x$: T"
     },
     {
       "id": "ch2-q080",
       "type": "proof",
-      "text": "<strong>[문제 16(b)]</strong> 주어진 논의영역과 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$D = \\{d \\mid -10 \\le d \\le 10,\\; d \\in \\mathbb{Z}\\}$, $P(x, y) : x + y = 2x - y$",
+      "text": "<strong>[문제 16(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 주어진 논의영역과 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$D = \\{d \\mid -10 \\le d \\le 10,\\; d \\in \\mathbb{Z}\\}$, $P(x, y) : x + y = 2x - y$",
       "hint": "$x + y = 2x - y \\Leftrightarrow 2y = x \\Leftrightarrow x = 2y$",
       "modelAnswer": "$\\forall x \\forall y$: F<br>$\\forall x \\exists y$: F (x가 홀수면 y=x/2 가 정수가 아님)<br>$\\exists x \\forall y$: F<br>$\\exists x \\exists y$: T (x=0, y=0)<br>$\\forall y \\forall x$: F<br>$\\forall y \\exists x$: F (y=6이면 x=12로 D 밖)<br>$\\exists y \\forall x$: F<br>$\\exists y \\exists x$: T"
     },
     {
       "id": "ch2-q081",
       "type": "proof",
-      "text": "<strong>[문제 16(c)]</strong> 주어진 논의영역과 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$D = \\{d \\mid -10 \\le d \\le 10,\\; d \\in \\mathbb{R}\\}$, $P(x, y) : x + y = 2x - y$",
+      "text": "<strong>[문제 16(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 주어진 논의영역과 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$D = \\{d \\mid -10 \\le d \\le 10,\\; d \\in \\mathbb{R}\\}$, $P(x, y) : x + y = 2x - y$",
       "hint": "$x = 2y$이므로 실수 범위에서 확인",
       "modelAnswer": "$\\forall x \\forall y$: F<br>$\\forall x \\exists y$: T (각 x마다 y=x/2 를 택하면 됨)<br>$\\exists x \\forall y$: F<br>$\\exists x \\exists y$: T<br>$\\forall y \\forall x$: F<br>$\\forall y \\exists x$: F (예: y=6이면 x=12가 필요해 D 밖)<br>$\\exists y \\forall x$: F<br>$\\exists y \\exists x$: T"
     },
     {
       "id": "ch2-q082",
       "type": "proof",
-      "text": "<strong>[문제 16(d)]</strong> 주어진 논의영역과 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$D = \\{d \\mid d < -10 \\lor d > 10,\\; d \\in \\mathbb{R}\\}$, $P(x, y) : (0 < x < 15) \\rightarrow (-10 \\le y < 5)$",
+      "text": "<strong>[문제 16(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 주어진 논의영역과 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$D = \\{d \\mid d < -10 \\lor d > 10,\\; d \\in \\mathbb{R}\\}$, $P(x, y) : (0 < x < 15) \\rightarrow (-10 \\le y < 5)$",
       "hint": "D에서 $0 < x < 15$를 만족하는 x는 $10 < x < 15$. 이때 y∈D이면 $y<-10$ 또는 $y>10$이므로 $-10 \\le y < 5$를 만족하는 y는 없음",
       "modelAnswer": "D에서 $10 < x < 15$인 x가 존재하고, 이 x에 대해 $-10 \\le y < 5$인 y∈D는 없으므로 조건문의 후건 F.<br>$\\forall x \\forall y$: F (x∈(10,15)일 때 F)<br>$\\forall x \\exists y$: F<br>$\\exists x \\forall y$: T (x=20이면 전건 F이므로 T)<br>$\\exists x \\exists y$: T<br>$\\forall y \\forall x$: F<br>$\\forall y \\exists x$: T (임의의 y에 대해 x=20 선택)<br>$\\exists y \\forall x$: F (어떤 y를 택해도 x∈(10,15)일 때 문제)<br>$\\exists y \\exists x$: T"
     },
     {
       "id": "ch2-q083",
       "type": "proof",
-      "text": "<strong>[문제 17(a)]</strong> 주어진 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$X = \\{x \\mid x \\in \\mathbb{Z}\\}$, $Y = \\{y \\mid y \\in \\mathbb{N}\\}$일 때, $P(x, y) : x^2 - y^2 > 0$",
+      "text": "<strong>[문제 17(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 주어진 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$X = \\{x \\mid x \\in \\mathbb{Z}\\}$, $Y = \\{y \\mid y \\in \\mathbb{N}\\}$일 때, $P(x, y) : x^2 - y^2 > 0$",
       "hint": "$x^2 > y^2$, 즉 $|x| > y$ (y≥1)",
       "modelAnswer": "$\\forall x \\forall y$: F (x=0이면 항상 F)<br>$\\forall x \\exists y$: F (x=0이면 $0-y^2 > 0$ 불가)<br>$\\exists x \\forall y$: F (어떤 정수 x를 택해도 충분히 큰 y에 대해 F)<br>$\\exists x \\exists y$: T (x=2, y=1)<br>$\\forall y \\forall x$: F<br>$\\forall y \\exists x$: T (임의의 자연수 y에 대해 x=y+1 선택)<br>$\\exists y \\forall x$: F<br>$\\exists y \\exists x$: T"
     },
     {
       "id": "ch2-q084",
       "type": "proof",
-      "text": "<strong>[문제 17(b)]</strong> 주어진 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$X = \\{x \\mid x \\in \\mathbb{R}\\}$, $Y = \\{y \\mid y \\in \\mathbb{R}\\}$일 때, $P(x, y) : x^2 - y^2 > 0$",
+      "text": "<strong>[문제 17(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 주어진 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$X = \\{x \\mid x \\in \\mathbb{R}\\}$, $Y = \\{y \\mid y \\in \\mathbb{R}\\}$일 때, $P(x, y) : x^2 - y^2 > 0$",
       "hint": "$|x| > |y|$",
       "modelAnswer": "$\\forall x \\forall y$: F<br>$\\forall x \\exists y$: F (x=0이면 불가)<br>$\\exists x \\forall y$: F<br>$\\exists x \\exists y$: T<br>$\\forall y \\forall x$: F<br>$\\forall y \\exists x$: T (임의의 y에 대해 x=|y|+1 선택)<br>$\\exists y \\forall x$: F<br>$\\exists y \\exists x$: T"
     },
     {
       "id": "ch2-q085",
       "type": "proof",
-      "text": "<strong>[문제 17(c)]</strong> 주어진 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$X = \\{x \\mid x \\in \\mathbb{N}\\}$, $Y = \\{y \\mid y \\in \\mathbb{Z}\\}$일 때, $P(x, y) : x^2 - y^2 > 0$",
+      "text": "<strong>[문제 17(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 주어진 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$X = \\{x \\mid x \\in \\mathbb{N}\\}$, $Y = \\{y \\mid y \\in \\mathbb{Z}\\}$일 때, $P(x, y) : x^2 - y^2 > 0$",
       "hint": "자연수 x, 정수 y에서 $x^2 > y^2$",
       "modelAnswer": "$\\forall x \\forall y$: F (예: x=1, y=1이면 1-1=0으로 거짓)<br>$\\forall x \\exists y$: T (각 x에 대해 y=0 선택 가능)<br>$\\exists x \\forall y$: F (어떤 x를 택해도 |y|를 충분히 크게 잡으면 거짓)<br>$\\exists x \\exists y$: T (예: x=1, y=0)<br>$\\forall y \\forall x$: F<br>$\\forall y \\exists x$: T (각 y에 대해 x=|y|+1 선택 가능)<br>$\\exists y \\forall x$: T (y=0이면 모든 자연수 x에 대해 x^2>0)<br>$\\exists y \\exists x$: T"
     },
     {
       "id": "ch2-q086",
       "type": "proof",
-      "text": "<strong>[문제 17(d)]</strong> 주어진 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$X = \\{x \\mid x \\in \\mathbb{R}\\}$, $Y = \\{y \\mid y \\in \\mathbb{R}\\}$일 때, $P(x, y) : x^2 + y^2 \\ge 0$",
+      "text": "<strong>[문제 17(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 주어진 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$X = \\{x \\mid x \\in \\mathbb{R}\\}$, $Y = \\{y \\mid y \\in \\mathbb{R}\\}$일 때, $P(x, y) : x^2 + y^2 \\ge 0$",
       "hint": "$x^2 + y^2 \\ge 0$은 항상 참 (실수의 제곱은 항상 ≥ 0)",
       "modelAnswer": "$\\forall x \\forall y$: F ($x=y$이면 거짓)<br>$\\forall x \\exists y$: T (임의의 x에 대해 |y|>|x| 인 y 선택 가능)<br>$\\exists x \\forall y$: F (어떤 x를 택해도 y=x이면 거짓)<br>$\\exists x \\exists y$: T (예: x=1, y=2)<br>$\\forall y \\forall x$: F<br>$\\forall y \\exists x$: F (y=0이면 |x|<0 인 x가 존재하지 않음)<br>$\\exists y \\forall x$: F<br>$\\exists y \\exists x$: T"
     },
     {
       "id": "ch2-q087",
       "type": "proof",
-      "text": "<strong>[문제 17(e)]</strong> 주어진 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$X = \\{x \\mid x \\in \\mathbb{Z}\\}$, $Y = \\{y \\mid y \\in \\mathbb{Z}\\}$일 때, $P(x, y) : x - y = 2x + y$",
+      "text": "<strong>[문제 17(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 주어진 명제함수에 대하여, 다음 8가지 한정자 조합의 진릿값을 모두 구하라.<br><br>$\\forall x \\forall y P(x,y)$, $\\forall x \\exists y P(x,y)$, $\\exists x \\forall y P(x,y)$, $\\exists x \\exists y P(x,y)$<br>$\\forall y \\forall x P(x,y)$, $\\forall y \\exists x P(x,y)$, $\\exists y \\forall x P(x,y)$, $\\exists y \\exists x P(x,y)$<br><br>$X = \\{x \\mid x \\in \\mathbb{Z}\\}$, $Y = \\{y \\mid y \\in \\mathbb{Z}\\}$일 때, $P(x, y) : x - y = 2x + y$",
       "hint": "$x - y = 2x + y \\Leftrightarrow -2y = x \\Leftrightarrow x = -2y$",
       "modelAnswer": "$\\forall x \\forall y$: F<br>$\\forall x \\exists y$: F (x가 홀수면 y=x/2 가 정수가 아님)<br>$\\exists x \\forall y$: F<br>$\\exists x \\exists y$: T (x=0, y=0)<br>$\\forall y \\forall x$: F<br>$\\forall y \\exists x$: T (임의의 y∈D에 대해 x=2y 도 D 안에 있음)<br>$\\exists y \\forall x$: F<br>$\\exists y \\exists x$: T"
     },
     {
       "id": "ch2-q088",
       "type": "proof",
-      "text": "<strong>[문제 18(a)]</strong> 논의영역과 명제함수가 다음과 같을 때, 주어진 한정된 명제함수의 기호 표현을 문장으로 나타내고 진릿값을 구하라.<br><br>$D = \\{d \\mid d \\in \\mathbb{Z}\\}$<br>$P(x) : x$는 소수<br>$Q(x) : x$의 약수의 합($x$는 제외)은 $x$이다.<br><br>$\\sim \\exists x P(x)$",
+      "text": "<strong>[문제 18(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 논의영역과 명제함수가 다음과 같을 때, 주어진 한정된 명제함수의 기호 표현을 문장으로 나타내고 진릿값을 구하라.<br><br>$D = \\{d \\mid d \\in \\mathbb{Z}\\}$<br>$P(x) : x$는 소수<br>$Q(x) : x$의 약수의 합($x$는 제외)은 $x$이다.<br><br>$\\sim \\exists x P(x)$",
       "hint": "문장 표현과 진릿값 판별",
       "modelAnswer": "$\\forall x \\forall y$: F<br>$\\forall x \\exists y$: T (각 x마다 y=x^2 선택 가능)<br>$\\exists x \\forall y$: F<br>$\\exists x \\exists y$: T<br>$\\forall y \\forall x$: F<br>$\\forall y \\exists x$: F (음수 y는 어떤 실수 x에 대해서도 x^2=y 불가)<br>$\\exists y \\forall x$: F<br>$\\exists y \\exists x$: T"
     },
     {
       "id": "ch2-q089",
       "type": "proof",
-      "text": "<strong>[문제 18(b)]</strong> 논의영역과 명제함수가 다음과 같을 때, 주어진 한정된 명제함수의 기호 표현을 문장으로 나타내고 진릿값을 구하라.<br><br>$D = \\{d \\mid d \\in \\mathbb{Z}\\}$<br>$P(x) : x$는 소수<br>$Q(x) : x$의 약수의 합($x$는 제외)은 $x$이다.<br><br>$\\exists x \\sim Q(x)$",
+      "text": "<strong>[문제 18(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 논의영역과 명제함수가 다음과 같을 때, 주어진 한정된 명제함수의 기호 표현을 문장으로 나타내고 진릿값을 구하라.<br><br>$D = \\{d \\mid d \\in \\mathbb{Z}\\}$<br>$P(x) : x$는 소수<br>$Q(x) : x$의 약수의 합($x$는 제외)은 $x$이다.<br><br>$\\exists x \\sim Q(x)$",
       "hint": "문장 표현과 진릿값 판별",
       "modelAnswer": "문장: 약수의 합(자신 제외)이 자신이 아닌 정수가 존재한다.<br>진릿값: 참 (T) (예: 2의 약수 합은 1이므로 2가 아님)"
     },
     {
       "id": "ch2-q090",
       "type": "proof",
-      "text": "<strong>[문제 18(c)]</strong> 논의영역과 명제함수가 다음과 같을 때, 주어진 한정된 명제함수의 기호 표현을 문장으로 나타내고 진릿값을 구하라.<br><br>$D = \\{d \\mid d \\in \\mathbb{Z}\\}$<br>$P(x) : x$는 소수<br>$Q(x) : x$의 약수의 합($x$는 제외)은 $x$이다.<br><br>$\\exists x (P(x) \\land Q(x))$",
+      "text": "<strong>[문제 18(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 논의영역과 명제함수가 다음과 같을 때, 주어진 한정된 명제함수의 기호 표현을 문장으로 나타내고 진릿값을 구하라.<br><br>$D = \\{d \\mid d \\in \\mathbb{Z}\\}$<br>$P(x) : x$는 소수<br>$Q(x) : x$의 약수의 합($x$는 제외)은 $x$이다.<br><br>$\\exists x (P(x) \\land Q(x))$",
       "hint": "문장 표현과 진릿값 판별",
       "modelAnswer": "문장: 소수이면서 약수의 합이 자신과 같은 정수가 존재한다.<br>진릿값: 거짓 (F) (소수의 진약수는 1뿐이므로 합이 1이 되며, 1은 소수가 아님)"
     },
     {
       "id": "ch2-q091",
       "type": "proof",
-      "text": "<strong>[문제 18(d)]</strong> 논의영역과 명제함수가 다음과 같을 때, 주어진 한정된 명제함수의 기호 표현을 문장으로 나타내고 진릿값을 구하라.<br><br>$D = \\{d \\mid d \\in \\mathbb{Z}\\}$<br>$P(x) : x$는 소수<br>$Q(x) : x$의 약수의 합($x$는 제외)은 $x$이다.<br><br>$\\forall x (P(x) \\lor Q(x))$",
+      "text": "<strong>[문제 18(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 논의영역과 명제함수가 다음과 같을 때, 주어진 한정된 명제함수의 기호 표현을 문장으로 나타내고 진릿값을 구하라.<br><br>$D = \\{d \\mid d \\in \\mathbb{Z}\\}$<br>$P(x) : x$는 소수<br>$Q(x) : x$의 약수의 합($x$는 제외)은 $x$이다.<br><br>$\\forall x (P(x) \\lor Q(x))$",
       "hint": "문장 표현과 진릿값 판별",
       "modelAnswer": "문장: 모든 정수는 소수이거나 약수의 합이 자신과 같다.<br>진릿값: 거짓 (F) (예: 4는 소수도 아니고 진약수의 합이 1+2=3으로 자신과 다름)"
     },
     {
       "id": "ch2-q092",
       "type": "proof",
-      "text": "<strong>[문제 18(e)]</strong> 논의영역과 명제함수가 다음과 같을 때, 주어진 한정된 명제함수의 기호 표현을 문장으로 나타내고 진릿값을 구하라.<br><br>$D = \\{d \\mid d \\in \\mathbb{Z}\\}$<br>$P(x) : x$는 소수<br>$Q(x) : x$의 약수의 합($x$는 제외)은 $x$이다.<br><br>$\\forall x \\sim(P(x) \\land Q(x))$",
+      "text": "<strong>[문제 18(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 논의영역과 명제함수가 다음과 같을 때, 주어진 한정된 명제함수의 기호 표현을 문장으로 나타내고 진릿값을 구하라.<br><br>$D = \\{d \\mid d \\in \\mathbb{Z}\\}$<br>$P(x) : x$는 소수<br>$Q(x) : x$의 약수의 합($x$는 제외)은 $x$이다.<br><br>$\\forall x \\sim(P(x) \\land Q(x))$",
       "hint": "문장 표현과 진릿값 판별",
       "modelAnswer": "문장: 모든 정수는 소수가 아니거나 약수의 합이 자신과 같지 않다.<br>진릿값: 참 (T) (소수이면서 동시에 완전수인 정수는 존재하지 않음)"
     },
     {
       "id": "ch2-q093",
       "type": "proof",
-      "text": "<strong>[문제 18(f)]</strong> 논의영역과 명제함수가 다음과 같을 때, 주어진 한정된 명제함수의 기호 표현을 문장으로 나타내고 진릿값을 구하라.<br><br>$D = \\{d \\mid d \\in \\mathbb{Z}\\}$<br>$P(x) : x$는 소수<br>$Q(x) : x$의 약수의 합($x$는 제외)은 $x$이다.<br><br>$\\sim \\forall x (P(x) \\lor Q(x))$",
+      "text": "<strong>[문제 18(f)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 논의영역과 명제함수가 다음과 같을 때, 주어진 한정된 명제함수의 기호 표현을 문장으로 나타내고 진릿값을 구하라.<br><br>$D = \\{d \\mid d \\in \\mathbb{Z}\\}$<br>$P(x) : x$는 소수<br>$Q(x) : x$의 약수의 합($x$는 제외)은 $x$이다.<br><br>$\\sim \\forall x (P(x) \\lor Q(x))$",
       "hint": "문장 표현과 진릿값 판별",
       "modelAnswer": "$\\forall x \\forall y$: F (예: x=1, y=2이면 1^2>2는 거짓)<br>$\\forall x \\exists y$: T (각 x에 대해 y=0 선택 가능)<br>$\\exists x \\forall y$: F (어떤 x를 택해도 y>x^2 선택 시 거짓)<br>$\\exists x \\exists y$: T (예: x=1, y=0)<br>$\\forall y \\forall x$: F<br>$\\forall y \\exists x$: T (각 y에 대해 x=y+1 선택 가능)<br>$\\exists y \\forall x$: T (y=0이면 모든 자연수 x>=1에 대해 x^2>0)<br>$\\exists y \\exists x$: T"
     },
     {
       "id": "ch2-q094",
       "type": "proof",
-      "text": "<strong>[문제 19(a)]</strong> 다음 괄호 안에 알맞은 내용을 작성하라.<br><br>$\\sim \\exists x \\exists y \\forall z P(x, y, z) \\equiv (\\quad\\quad\\quad) \\sim P(x, y, z)$",
+      "text": "<strong>[문제 19(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 괄호 안에 알맞은 내용을 작성하라.<br><br>$\\sim \\exists x \\exists y \\forall z P(x, y, z) \\equiv (\\quad\\quad\\quad) \\sim P(x, y, z)$",
       "hint": "한정자의 부정",
       "modelAnswer": "$\\forall x \\forall y \\exists z$"
     },
     {
       "id": "ch2-q095",
       "type": "proof",
-      "text": "<strong>[문제 19(b)]</strong> 다음 괄호 안에 알맞은 내용을 작성하라.<br><br>$\\forall x \\sim \\forall y \\forall z Q(x, y, z) \\equiv (\\quad\\quad\\quad) \\sim Q(x, y, z)$",
+      "text": "<strong>[문제 19(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 괄호 안에 알맞은 내용을 작성하라.<br><br>$\\forall x \\sim \\forall y \\forall z Q(x, y, z) \\equiv (\\quad\\quad\\quad) \\sim Q(x, y, z)$",
       "hint": "한정자의 부정",
       "modelAnswer": "$\\forall x \\exists y \\exists z$"
     },
     {
       "id": "ch2-q096",
       "type": "proof",
-      "text": "<strong>[문제 19(c)]</strong> 다음 괄호 안에 알맞은 내용을 작성하라.<br><br>$\\sim \\forall x \\exists y (P(x, y) \\land Q(x, y)) \\equiv (\\quad\\quad\\quad) (\\sim P(x, y) (\\quad\\quad\\quad) \\sim Q(x, y))$",
+      "text": "<strong>[문제 19(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 괄호 안에 알맞은 내용을 작성하라.<br><br>$\\sim \\forall x \\exists y (P(x, y) \\land Q(x, y)) \\equiv (\\quad\\quad\\quad) (\\sim P(x, y) (\\quad\\quad\\quad) \\sim Q(x, y))$",
       "hint": "한정자의 부정과 드모르간의 법칙",
       "modelAnswer": "앞 괄호: $\\exists x \\forall y$<br>뒤 괄호: $\\lor$"
     },
     {
       "id": "ch2-q097",
       "type": "proof",
-      "text": "<strong>[문제 19(d)]</strong> 다음 괄호 안에 알맞은 내용을 작성하라.<br><br>$\\sim \\exists x \\exists y (P(x, y) \\land \\sim Q(x, y)) \\equiv (\\quad\\quad\\quad) (\\sim P(x, y) \\lor Q(x, y))$",
+      "text": "<strong>[문제 19(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 괄호 안에 알맞은 내용을 작성하라.<br><br>$\\sim \\exists x \\exists y (P(x, y) \\land \\sim Q(x, y)) \\equiv (\\quad\\quad\\quad) (\\sim P(x, y) \\lor Q(x, y))$",
       "hint": "한정자의 부정과 드모르간의 법칙",
       "modelAnswer": "$\\forall x \\forall y$"
     },
     {
       "id": "ch2-q098",
       "type": "proof",
-      "text": "<strong>[문제 19(e)]</strong> 다음 괄호 안에 알맞은 내용을 작성하라.<br><br>$\\exists x \\sim \\exists y \\exists z (P(x, y, z) \\rightarrow Q(x, y, z)) \\equiv (\\quad\\quad\\quad) (P(x, y, z) \\land \\sim Q(x, y, z))$",
+      "text": "<strong>[문제 19(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 괄호 안에 알맞은 내용을 작성하라.<br><br>$\\exists x \\sim \\exists y \\exists z (P(x, y, z) \\rightarrow Q(x, y, z)) \\equiv (\\quad\\quad\\quad) (P(x, y, z) \\land \\sim Q(x, y, z))$",
       "hint": "조건문의 부정: $\\sim(P \\to Q) \\equiv P \\land \\sim Q$",
       "modelAnswer": "$\\exists x \\forall y \\forall z$"
     },
     {
       "id": "ch2-q099",
       "type": "proof",
-      "text": "<strong>[문제 20(a)]</strong> 다음 문장을 보고 사용한 추론법칙을 찾고 빈칸에 필요한 문장을 작성하라.<br><br>4월 5일은 식목일이다.<br>___________________________________________________<br>$\\therefore$ 4월 5일은 식목일이고, 봄에는 새싹이 나온다.",
+      "text": "<strong>[문제 20(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장을 보고 사용한 추론법칙을 찾고 빈칸에 필요한 문장을 작성하라.<br><br>4월 5일은 식목일이다.<br>___________________________________________________<br>$\\therefore$ 4월 5일은 식목일이고, 봄에는 새싹이 나온다.",
       "hint": "추론법칙과 빈칸 내용",
       "modelAnswer": "빈칸: 봄에는 새싹이 나온다.<br>추론법칙: 논리곱(Conjunction)"
     },
     {
       "id": "ch2-q100",
       "type": "proof",
-      "text": "<strong>[문제 20(b)]</strong> 다음 문장을 보고 사용한 추론법칙을 찾고 빈칸에 필요한 문장을 작성하라.<br><br>하늘이 흐리다.<br>하늘이 흐리면, 비가 온다.<br>$\\therefore$ ___________________________________________________",
+      "text": "<strong>[문제 20(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장을 보고 사용한 추론법칙을 찾고 빈칸에 필요한 문장을 작성하라.<br><br>하늘이 흐리다.<br>하늘이 흐리면, 비가 온다.<br>$\\therefore$ ___________________________________________________",
       "hint": "추론법칙과 빈칸 내용",
       "modelAnswer": "빈칸: 비가 온다.<br>추론법칙: 전건긍정(Modus Ponens)"
     },
     {
       "id": "ch2-q101",
       "type": "proof",
-      "text": "<strong>[문제 20(c)]</strong> 다음 문장을 보고 사용한 추론법칙을 찾고 빈칸에 필요한 문장을 작성하라.<br><br>___________________________________________________<br>냉장고에 요리 재료가 없으면, 마트에 가서 장을 본다.<br>$\\therefore$ 냉장고에 요리 재료가 있다.",
+      "text": "<strong>[문제 20(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장을 보고 사용한 추론법칙을 찾고 빈칸에 필요한 문장을 작성하라.<br><br>___________________________________________________<br>냉장고에 요리 재료가 없으면, 마트에 가서 장을 본다.<br>$\\therefore$ 냉장고에 요리 재료가 있다.",
       "hint": "추론법칙과 빈칸 내용",
       "modelAnswer": "빈칸: 마트에 가서 장을 보지 않는다.<br>추론법칙: 후건부정(Modus Tollens)"
     },
     {
       "id": "ch2-q102",
       "type": "proof",
-      "text": "<strong>[문제 20(d)]</strong> 다음 문장을 보고 사용한 추론법칙을 찾고 빈칸에 필요한 문장을 작성하라.<br><br>___________________________________________________<br>어제 공연을 보았다.<br>$\\therefore$ 백화점에서 쇼핑을 했다.",
+      "text": "<strong>[문제 20(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장을 보고 사용한 추론법칙을 찾고 빈칸에 필요한 문장을 작성하라.<br><br>___________________________________________________<br>어제 공연을 보았다.<br>$\\therefore$ 백화점에서 쇼핑을 했다.",
       "hint": "추론법칙과 빈칸 내용",
       "modelAnswer": "빈칸: 어제 공연을 보지 않았거나 백화점에서 쇼핑을 했다. (또는 어제 공연을 보았다면 백화점에서 쇼핑을 했다.)<br>추론법칙: 선언적 삼단논법(Disjunctive Syllogism) (또는 전건긍정)"
     },
     {
       "id": "ch2-q103",
       "type": "proof",
-      "text": "<strong>[문제 20(e)]</strong> 다음 문장을 보고 사용한 추론법칙을 찾고 빈칸에 필요한 문장을 작성하라.<br><br>기상청의 슈퍼컴퓨터가 정확하면, 개인용 컴퓨터로 영화를 볼 수 있다.<br>개인용 컴퓨터로 영화를 볼 수 있다면, 스마트폰으로 전화를 할 수 있다.<br>$\\therefore$ ___________________________________________________",
+      "text": "<strong>[문제 20(e)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 문장을 보고 사용한 추론법칙을 찾고 빈칸에 필요한 문장을 작성하라.<br><br>기상청의 슈퍼컴퓨터가 정확하면, 개인용 컴퓨터로 영화를 볼 수 있다.<br>개인용 컴퓨터로 영화를 볼 수 있다면, 스마트폰으로 전화를 할 수 있다.<br>$\\therefore$ ___________________________________________________",
       "hint": "추론법칙과 빈칸 내용",
       "modelAnswer": "빈칸: 기상청의 슈퍼컴퓨터가 정확하면, 스마트폰으로 전화를 할 수 있다.<br>추론법칙: 가언 삼단논법(Hypothetical Syllogism)"
     },
     {
       "id": "ch2-q104",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 21(a)]</strong> 진리표를 이용하여 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$q \\land \\sim r$<br>$r \\rightarrow \\sim p$<br>$\\therefore p \\rightarrow q$",
-      "choices": [
-        "유효추론이다",
-        "허위추론이다"
-      ],
-      "answer": 0,
-      "explanation": "$q \\land \\sim r$에서 $q=T, r=F$. 이때 $r \\to \\sim p$는 $F \\to \\sim p$이므로 $p$의 값에 관계없이 T. 따라서 전제가 모두 T가 되는 경우는 $(p=T, q=T, r=F)$와 $(p=F, q=T, r=F)$. 두 경우 모두 결론 $p \\to q$는 $T \\to T = T$ 또는 $F \\to T = T$이므로 결론이 항상 참. 유효추론."
+      "type": "proof",
+      "text": "<strong>[문제 21(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 진리표를 이용하여 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$q \\land \\sim r$<br>$r \\rightarrow \\sim p$<br>$\\therefore p \\rightarrow q$",
+      "explanation": "$q \\land \\sim r$에서 $q=T, r=F$. 이때 $r \\to \\sim p$는 $F \\to \\sim p$이므로 $p$의 값에 관계없이 T. 따라서 전제가 모두 T가 되는 경우는 $(p=T, q=T, r=F)$와 $(p=F, q=T, r=F)$. 두 경우 모두 결론 $p \\to q$는 $T \\to T = T$ 또는 $F \\to T = T$이므로 결론이 항상 참. 유효추론.",
+      "hint": "전제가 모두 참이 되는 경우를 따지거나, 사용한 추론 규칙을 명시하면서 결론이 왜 따라오는지 단계적으로 쓰세요.",
+      "modelAnswer": "최종 판정: 유효추론이다. 풀이: $q \\land \\sim r$에서 $q=T, r=F$. 이때 $r \\to \\sim p$는 $F \\to \\sim p$이므로 $p$의 값에 관계없이 T. 따라서 전제가 모두 T가 되는 경우는 $(p=T, q=T, r=F)$와 $(p=F, q=T, r=F)$. 두 경우 모두 결론 $p \\to q$는 $T \\to T = T$ 또는 $F \\to T = T$이므로 결론이 항상 참. 유효추론."
     },
     {
       "id": "ch2-q105",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 21(b)]</strong> 진리표를 이용하여 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$r \\rightarrow \\sim p$<br>$(p \\land \\sim q) \\rightarrow \\sim r$<br>$\\therefore q \\lor r$",
-      "choices": [
-        "유효추론이다",
-        "허위추론이다"
-      ],
-      "answer": 1,
-      "explanation": "$p=F, q=F, r=F$일 때, 전제1: $F \\to T = T$, 전제2: $F \\to T = T$로 모든 전제가 참이 된다. 그러나 이때 결론 $q \\lor r = F \\lor F = F$로 거짓이 된다. 따라서 허위추론."
+      "type": "proof",
+      "text": "<strong>[문제 21(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 진리표를 이용하여 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$r \\rightarrow \\sim p$<br>$(p \\land \\sim q) \\rightarrow \\sim r$<br>$\\therefore q \\lor r$",
+      "explanation": "$p=F, q=F, r=F$일 때, 전제1: $F \\to T = T$, 전제2: $F \\to T = T$로 모든 전제가 참이 된다. 그러나 이때 결론 $q \\lor r = F \\lor F = F$로 거짓이 된다. 따라서 허위추론.",
+      "hint": "전제가 모두 참이 되는 경우를 따지거나, 사용한 추론 규칙을 명시하면서 결론이 왜 따라오는지 단계적으로 쓰세요.",
+      "modelAnswer": "최종 판정: 허위추론이다. 풀이: $p=F, q=F, r=F$일 때, 전제1: $F \\to T = T$, 전제2: $F \\to T = T$로 모든 전제가 참이 된다. 그러나 이때 결론 $q \\lor r = F \\lor F = F$로 거짓이 된다. 따라서 허위추론."
     },
     {
       "id": "ch2-q106",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 21(c)]</strong> 진리표를 이용하여 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$q \\lor r \\rightarrow \\sim p$<br>$p \\lor \\sim q$<br>$q \\rightarrow r$<br>$\\therefore \\sim p \\lor \\sim q$",
-      "choices": [
-        "유효추론이다",
-        "허위추론이다"
-      ],
-      "answer": 0,
-      "explanation": "전제가 참인 경우를 찾으면, $p=T$일 때 전제2에 의해 $q=F$. $q=F$이면 전제3은 T. 전제1 $F \\lor r \\to F$가 참이 되려면 $r=F$. 이때 $(T,F,F)$에서 결론 $\\sim p \\lor \\sim q = F \\lor T = T$. 반면 $p=F$일 때 전제2에 의해 $q=F$이고, 전제1은 $\\sim p=T$이므로 항상 T. $(F,F,T)$나 $(F,F,F)$에서 결론 $\\sim p \\lor \\sim q = T \\lor T = T$. 모든 경우 결론이 T. 유효추론."
+      "type": "proof",
+      "text": "<strong>[문제 21(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 진리표를 이용하여 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$q \\lor r \\rightarrow \\sim p$<br>$p \\lor \\sim q$<br>$q \\rightarrow r$<br>$\\therefore \\sim p \\lor \\sim q$",
+      "explanation": "전제가 참인 경우를 찾으면, $p=T$일 때 전제2에 의해 $q=F$. $q=F$이면 전제3은 T. 전제1 $F \\lor r \\to F$가 참이 되려면 $r=F$. 이때 $(T,F,F)$에서 결론 $\\sim p \\lor \\sim q = F \\lor T = T$. 반면 $p=F$일 때 전제2에 의해 $q=F$이고, 전제1은 $\\sim p=T$이므로 항상 T. $(F,F,T)$나 $(F,F,F)$에서 결론 $\\sim p \\lor \\sim q = T \\lor T = T$. 모든 경우 결론이 T. 유효추론.",
+      "hint": "전제가 모두 참이 되는 경우를 따지거나, 사용한 추론 규칙을 명시하면서 결론이 왜 따라오는지 단계적으로 쓰세요.",
+      "modelAnswer": "최종 판정: 유효추론이다. 풀이: 전제가 참인 경우를 찾으면, $p=T$일 때 전제2에 의해 $q=F$. $q=F$이면 전제3은 T. 전제1 $F \\lor r \\to F$가 참이 되려면 $r=F$. 이때 $(T,F,F)$에서 결론 $\\sim p \\lor \\sim q = F \\lor T = T$. 반면 $p=F$일 때 전제2에 의해 $q=F$이고, 전제1은 $\\sim p=T$이므로 항상 T. $(F,F,T)$나 $(F,F,F)$에서 결론 $\\sim p \\lor \\sim q = T \\lor T = T$. 모든 경우 결론이 T. 유효추론."
     },
     {
       "id": "ch2-q107",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 21(d)]</strong> 진리표를 이용하여 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$p \\lor \\sim q \\lor r$<br>$(\\sim p \\lor \\sim r) \\land q$<br>$(\\sim p \\land \\sim q) \\lor r$<br>$\\therefore p \\land \\sim q$",
-      "choices": [
-        "유효추론이다",
-        "허위추론이다"
-      ],
-      "answer": 1,
-      "explanation": "전제2에서 $q=T$. 이를 전제3에 대입하면 $(\\sim p \\land F) \\lor r = r=T$. 전제2에 대입하면 $\\sim p \\lor F = \\sim p=T$이므로 $p=F$. 이때 $p=F, q=T, r=T$에서 전제1은 $F \\lor F \\lor T = T$로 모든 전제가 참. 하지만 결론 $p \\land \\sim q = F \\land F = F$. 허위추론."
+      "type": "proof",
+      "text": "<strong>[문제 21(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 진리표를 이용하여 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$p \\lor \\sim q \\lor r$<br>$(\\sim p \\lor \\sim r) \\land q$<br>$(\\sim p \\land \\sim q) \\lor r$<br>$\\therefore p \\land \\sim q$",
+      "explanation": "전제2에서 $q=T$. 이를 전제3에 대입하면 $(\\sim p \\land F) \\lor r = r=T$. 전제2에 대입하면 $\\sim p \\lor F = \\sim p=T$이므로 $p=F$. 이때 $p=F, q=T, r=T$에서 전제1은 $F \\lor F \\lor T = T$로 모든 전제가 참. 하지만 결론 $p \\land \\sim q = F \\land F = F$. 허위추론.",
+      "hint": "전제가 모두 참이 되는 경우를 따지거나, 사용한 추론 규칙을 명시하면서 결론이 왜 따라오는지 단계적으로 쓰세요.",
+      "modelAnswer": "최종 판정: 허위추론이다. 풀이: 전제2에서 $q=T$. 이를 전제3에 대입하면 $(\\sim p \\land F) \\lor r = r=T$. 전제2에 대입하면 $\\sim p \\lor F = \\sim p=T$이므로 $p=F$. 이때 $p=F, q=T, r=T$에서 전제1은 $F \\lor F \\lor T = T$로 모든 전제가 참. 하지만 결론 $p \\land \\sim q = F \\land F = F$. 허위추론."
     },
     {
       "id": "ch2-q108",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 22(a)]</strong> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$p \\rightarrow q$<br>$q \\rightarrow p$<br>$\\therefore \\mathbf{T}$",
-      "choices": [
-        "유효추론이다",
-        "허위추론이다"
-      ],
-      "answer": 0,
-      "explanation": "결론이 항진명제($\\mathbf{T}$)이므로 전제의 참/거짓 여부와 상관없이 항상 결론이 참이 된다. 따라서 유효추론."
+      "type": "proof",
+      "text": "<strong>[문제 22(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$p \\rightarrow q$<br>$q \\rightarrow p$<br>$\\therefore \\mathbf{T}$",
+      "explanation": "결론이 항진명제($\\mathbf{T}$)이므로 전제의 참/거짓 여부와 상관없이 항상 결론이 참이 된다. 따라서 유효추론.",
+      "hint": "전제가 모두 참이 되는 경우를 따지거나, 사용한 추론 규칙을 명시하면서 결론이 왜 따라오는지 단계적으로 쓰세요.",
+      "modelAnswer": "최종 판정: 유효추론이다. 풀이: 결론이 항진명제($\\mathbf{T}$)이므로 전제의 참/거짓 여부와 상관없이 항상 결론이 참이 된다. 따라서 유효추론."
     },
     {
       "id": "ch2-q109",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 22(b)]</strong> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$\\sim p \\lor \\sim q$<br>$\\sim q \\rightarrow r$<br>$\\sim r$<br>$\\therefore p$",
-      "choices": [
-        "유효추론이다",
-        "허위추론이다"
-      ],
-      "answer": 1,
-      "explanation": "$\\sim r$과 $\\sim q \\to r$에서 후건부정(또는 대우)으로 $q$가 참. $\\sim p \\lor \\sim q$에서 $\\sim q$가 거짓이므로 선언적 삼단논법에 의해 $\\sim p$가 참. 즉, $p$는 거짓. 전제가 모두 참일 때 결론 $p$가 거짓이 되므로 허위추론."
+      "type": "proof",
+      "text": "<strong>[문제 22(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$\\sim p \\lor \\sim q$<br>$\\sim q \\rightarrow r$<br>$\\sim r$<br>$\\therefore p$",
+      "explanation": "$\\sim r$과 $\\sim q \\to r$에서 후건부정(또는 대우)으로 $q$가 참. $\\sim p \\lor \\sim q$에서 $\\sim q$가 거짓이므로 선언적 삼단논법에 의해 $\\sim p$가 참. 즉, $p$는 거짓. 전제가 모두 참일 때 결론 $p$가 거짓이 되므로 허위추론.",
+      "hint": "전제가 모두 참이 되는 경우를 따지거나, 사용한 추론 규칙을 명시하면서 결론이 왜 따라오는지 단계적으로 쓰세요.",
+      "modelAnswer": "최종 판정: 허위추론이다. 풀이: $\\sim r$과 $\\sim q \\to r$에서 후건부정(또는 대우)으로 $q$가 참. $\\sim p \\lor \\sim q$에서 $\\sim q$가 거짓이므로 선언적 삼단논법에 의해 $\\sim p$가 참. 즉, $p$는 거짓. 전제가 모두 참일 때 결론 $p$가 거짓이 되므로 허위추론."
     },
     {
       "id": "ch2-q110",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 22(c)]</strong> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$p \\lor \\sim r$<br>$r \\land q$<br>$q \\rightarrow s$<br>$\\therefore p$",
-      "choices": [
-        "유효추론이다",
-        "허위추론이다"
-      ],
-      "answer": 0,
-      "explanation": "$r \\land q$에서 $r$이 참. $p \\lor \\sim r$에서 $\\sim r$이 거짓이므로 $p$가 참이어야 함. 따라서 전제가 참일 때 결론 $p$도 참이 되므로 유효추론."
+      "type": "proof",
+      "text": "<strong>[문제 22(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$p \\lor \\sim r$<br>$r \\land q$<br>$q \\rightarrow s$<br>$\\therefore p$",
+      "explanation": "$r \\land q$에서 $r$이 참. $p \\lor \\sim r$에서 $\\sim r$이 거짓이므로 $p$가 참이어야 함. 따라서 전제가 참일 때 결론 $p$도 참이 되므로 유효추론.",
+      "hint": "전제가 모두 참이 되는 경우를 따지거나, 사용한 추론 규칙을 명시하면서 결론이 왜 따라오는지 단계적으로 쓰세요.",
+      "modelAnswer": "최종 판정: 유효추론이다. 풀이: $r \\land q$에서 $r$이 참. $p \\lor \\sim r$에서 $\\sim r$이 거짓이므로 $p$가 참이어야 함. 따라서 전제가 참일 때 결론 $p$도 참이 되므로 유효추론."
     },
     {
       "id": "ch2-q111",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 22(d)]</strong> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$(q \\rightarrow p) \\rightarrow \\sim r$<br>$p$<br>$q \\lor r$<br>$\\therefore q$",
-      "choices": [
-        "유효추론이다",
-        "허위추론이다"
-      ],
-      "answer": 0,
-      "explanation": "$p$가 참이므로 $q \\to p$는 항상 참. $(q \\to p) \\to \\sim r$에서 전건긍정에 의해 $\\sim r$ 참, 즉 $r$ 거짓. $q \\lor r$에서 $r$ 거짓이므로 $q$가 참이어야 함. 전제가 참일 때 결론 $q$가 참이 되므로 유효추론."
+      "type": "proof",
+      "text": "<strong>[문제 22(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$(q \\rightarrow p) \\rightarrow \\sim r$<br>$p$<br>$q \\lor r$<br>$\\therefore q$",
+      "explanation": "$p$가 참이므로 $q \\to p$는 항상 참. $(q \\to p) \\to \\sim r$에서 전건긍정에 의해 $\\sim r$ 참, 즉 $r$ 거짓. $q \\lor r$에서 $r$ 거짓이므로 $q$가 참이어야 함. 전제가 참일 때 결론 $q$가 참이 되므로 유효추론.",
+      "hint": "전제가 모두 참이 되는 경우를 따지거나, 사용한 추론 규칙을 명시하면서 결론이 왜 따라오는지 단계적으로 쓰세요.",
+      "modelAnswer": "최종 판정: 유효추론이다. 풀이: $p$가 참이므로 $q \\to p$는 항상 참. $(q \\to p) \\to \\sim r$에서 전건긍정에 의해 $\\sim r$ 참, 즉 $r$ 거짓. $q \\lor r$에서 $r$ 거짓이므로 $q$가 참이어야 함. 전제가 참일 때 결론 $q$가 참이 되므로 유효추론."
     },
     {
       "id": "ch2-q112",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 23(a)]</strong> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$(p \\rightarrow q) \\rightarrow r$<br>$q \\rightarrow s$<br>$\\sim t$<br>$\\sim p \\lor t$<br>$p \\lor \\sim(r \\land s)$<br>$\\therefore \\sim q$",
-      "choices": [
-        "유효추론이다",
-        "허위추론이다"
-      ],
-      "answer": 0,
-      "explanation": "$\\sim t$와 $\\sim p \\lor t$에서 $\\sim p$. $\\sim p$와 $(p \\to q) \\to r$에서 $p \\to q$는 T이므로 $r$. $\\sim p$이고 $p \\lor \\sim(r \\land s)$에서 $\\sim(r \\land s)$. $r$이므로 $\\sim s$. $q \\to s$의 대우로 $\\sim s \\to \\sim q$이므로 $\\sim q$. 유효추론."
+      "type": "proof",
+      "text": "<strong>[문제 23(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$(p \\rightarrow q) \\rightarrow r$<br>$q \\rightarrow s$<br>$\\sim t$<br>$\\sim p \\lor t$<br>$p \\lor \\sim(r \\land s)$<br>$\\therefore \\sim q$",
+      "explanation": "$\\sim t$와 $\\sim p \\lor t$에서 $\\sim p$. $\\sim p$와 $(p \\to q) \\to r$에서 $p \\to q$는 T이므로 $r$. $\\sim p$이고 $p \\lor \\sim(r \\land s)$에서 $\\sim(r \\land s)$. $r$이므로 $\\sim s$. $q \\to s$의 대우로 $\\sim s \\to \\sim q$이므로 $\\sim q$. 유효추론.",
+      "hint": "전제가 모두 참이 되는 경우를 따지거나, 사용한 추론 규칙을 명시하면서 결론이 왜 따라오는지 단계적으로 쓰세요.",
+      "modelAnswer": "최종 판정: 유효추론이다. 풀이: $\\sim t$와 $\\sim p \\lor t$에서 $\\sim p$. $\\sim p$와 $(p \\to q) \\to r$에서 $p \\to q$는 T이므로 $r$. $\\sim p$이고 $p \\lor \\sim(r \\land s)$에서 $\\sim(r \\land s)$. $r$이므로 $\\sim s$. $q \\to s$의 대우로 $\\sim s \\to \\sim q$이므로 $\\sim q$. 유효추론."
     },
     {
       "id": "ch2-q113",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 23(b)]</strong> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$p \\lor q$<br>$q \\rightarrow r$<br>$\\sim(p \\land s) \\lor t$<br>$\\sim r$<br>$q \\lor (u \\land s)$<br>$\\therefore u \\rightarrow t$",
-      "choices": [
-        "유효추론이다",
-        "허위추론이다"
-      ],
-      "answer": 0,
-      "explanation": "$\\sim r$와 $q \\to r$의 대우로 $\\sim q$. $p \\lor q$와 $\\sim q$에서 $p$. $q \\lor (u \\land s)$와 $\\sim q$에서 $u \\land s$, 즉 $s$. $p$와 $s$에서 $p \\land s$. $\\sim(p \\land s) \\lor t$에서 $t$. $t$이면 $u \\to t$는 항상 참. 유효추론."
+      "type": "proof",
+      "text": "<strong>[문제 23(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$p \\lor q$<br>$q \\rightarrow r$<br>$\\sim(p \\land s) \\lor t$<br>$\\sim r$<br>$q \\lor (u \\land s)$<br>$\\therefore u \\rightarrow t$",
+      "explanation": "$\\sim r$와 $q \\to r$의 대우로 $\\sim q$. $p \\lor q$와 $\\sim q$에서 $p$. $q \\lor (u \\land s)$와 $\\sim q$에서 $u \\land s$, 즉 $s$. $p$와 $s$에서 $p \\land s$. $\\sim(p \\land s) \\lor t$에서 $t$. $t$이면 $u \\to t$는 항상 참. 유효추론.",
+      "hint": "전제가 모두 참이 되는 경우를 따지거나, 사용한 추론 규칙을 명시하면서 결론이 왜 따라오는지 단계적으로 쓰세요.",
+      "modelAnswer": "최종 판정: 유효추론이다. 풀이: $\\sim r$와 $q \\to r$의 대우로 $\\sim q$. $p \\lor q$와 $\\sim q$에서 $p$. $q \\lor (u \\land s)$와 $\\sim q$에서 $u \\land s$, 즉 $s$. $p$와 $s$에서 $p \\land s$. $\\sim(p \\land s) \\lor t$에서 $t$. $t$이면 $u \\to t$는 항상 참. 유효추론."
     },
     {
       "id": "ch2-q114",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 23(c)]</strong> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$\\{\\sim(p \\land t) \\lor r\\} \\lor s$<br>$u \\rightarrow p$<br>$\\sim q \\lor (u \\land t)$<br>$\\sim s$<br>$\\therefore q \\rightarrow (t \\rightarrow r)$",
-      "choices": [
-        "유효추론이다",
-        "허위추론이다"
-      ],
-      "answer": 0,
-      "explanation": "$\\sim s$와 첫째 전제에서 $\\sim(p \\land t) \\lor r$. 이는 $(p \\land t) \\to r$. $\\sim q \\lor (u \\land t)$에서 $q$가 T이면 $u \\land t$, 즉 $u$와 $t$. $u \\to p$에서 $p$. $p \\land t$이므로 $r$. 따라서 $q \\to (t \\to r)$ 성립. 유효추론."
+      "type": "proof",
+      "text": "<strong>[문제 23(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$\\{\\sim(p \\land t) \\lor r\\} \\lor s$<br>$u \\rightarrow p$<br>$\\sim q \\lor (u \\land t)$<br>$\\sim s$<br>$\\therefore q \\rightarrow (t \\rightarrow r)$",
+      "explanation": "$\\sim s$와 첫째 전제에서 $\\sim(p \\land t) \\lor r$. 이는 $(p \\land t) \\to r$. $\\sim q \\lor (u \\land t)$에서 $q$가 T이면 $u \\land t$, 즉 $u$와 $t$. $u \\to p$에서 $p$. $p \\land t$이므로 $r$. 따라서 $q \\to (t \\to r)$ 성립. 유효추론.",
+      "hint": "전제가 모두 참이 되는 경우를 따지거나, 사용한 추론 규칙을 명시하면서 결론이 왜 따라오는지 단계적으로 쓰세요.",
+      "modelAnswer": "최종 판정: 유효추론이다. 풀이: $\\sim s$와 첫째 전제에서 $\\sim(p \\land t) \\lor r$. 이는 $(p \\land t) \\to r$. $\\sim q \\lor (u \\land t)$에서 $q$가 T이면 $u \\land t$, 즉 $u$와 $t$. $u \\to p$에서 $p$. $p \\land t$이므로 $r$. 따라서 $q \\to (t \\to r)$ 성립. 유효추론."
     },
     {
       "id": "ch2-q115",
-      "type": "multiple-choice",
-      "text": "<strong>[문제 23(d)]</strong> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$\\sim p \\lor q$<br>$q \\rightarrow s$<br>$(\\sim p \\land r) \\rightarrow s$<br>$\\sim s$<br>$\\therefore \\sim r$",
-      "choices": [
-        "유효추론이다",
-        "허위추론이다"
-      ],
-      "answer": 0,
-      "explanation": "$\\sim s$와 $q \\to s$의 대우로 $\\sim q$. $\\sim p \\lor q$와 $\\sim q$에서 $\\sim p$. $(\\sim p \\land r) \\to s$와 $\\sim s$에서 $\\sim(\\sim p \\land r)$, 즉 $p \\lor \\sim r$. $\\sim p$이므로 $\\sim r$. 유효추론."
+      "type": "proof",
+      "text": "<strong>[문제 23(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음 추론이 유효추론인지 허위추론인지 판별하라.<br><br>$\\sim p \\lor q$<br>$q \\rightarrow s$<br>$(\\sim p \\land r) \\rightarrow s$<br>$\\sim s$<br>$\\therefore \\sim r$",
+      "explanation": "$\\sim s$와 $q \\to s$의 대우로 $\\sim q$. $\\sim p \\lor q$와 $\\sim q$에서 $\\sim p$. $(\\sim p \\land r) \\to s$와 $\\sim s$에서 $\\sim(\\sim p \\land r)$, 즉 $p \\lor \\sim r$. $\\sim p$이므로 $\\sim r$. 유효추론.",
+      "hint": "전제가 모두 참이 되는 경우를 따지거나, 사용한 추론 규칙을 명시하면서 결론이 왜 따라오는지 단계적으로 쓰세요.",
+      "modelAnswer": "최종 판정: 유효추론이다. 풀이: $\\sim s$와 $q \\to s$의 대우로 $\\sim q$. $\\sim p \\lor q$와 $\\sim q$에서 $\\sim p$. $(\\sim p \\land r) \\to s$와 $\\sim s$에서 $\\sim(\\sim p \\land r)$, 즉 $p \\lor \\sim r$. $\\sim p$이므로 $\\sim r$. 유효추론."
     },
     {
       "id": "ch2-q116",
       "type": "proof",
-      "text": "<strong>[문제 24(a)]</strong> 다음과 같이 전제가 주어진 추론의 결론을 유도하라.<br><br>전제 A : 변수를 정수형으로 선언하지 않고 조건에 따라 연산한다.<br>전제 B : 변수를 정수형으로 선언하지 않으면, 반복문이 무한히 실행된다.<br>전제 C : 반복문이 무한히 실행되면, 프로그램을 강제 종료한다.",
+      "text": "<strong>[문제 24(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음과 같이 전제가 주어진 추론의 결론을 유도하라.<br><br>전제 A : 변수를 정수형으로 선언하지 않고 조건에 따라 연산한다.<br>전제 B : 변수를 정수형으로 선언하지 않으면, 반복문이 무한히 실행된다.<br>전제 C : 반복문이 무한히 실행되면, 프로그램을 강제 종료한다.",
       "hint": "$p$: 정수형 선언 안 함, $q$: 조건에 따라 연산, $r$: 반복문 무한 실행, $s$: 프로그램 강제 종료",
       "modelAnswer": "A: $\\sim p \\land q$에서 $\\sim p$. B: $\\sim p \\to r$에서 $r$. C: $r \\to s$에서 $s$.<br>결론: <strong>프로그램을 강제 종료한다.</strong>"
     },
     {
       "id": "ch2-q117",
       "type": "proof",
-      "text": "<strong>[문제 24(b)]</strong> 다음과 같이 전제가 주어진 추론의 결론을 유도하라.<br><br>전제 A : 마트에서 장을 보거나 영화를 본다.<br>전제 B : 마트에서 장을 보면, 저녁에 스테이크를 먹는다.<br>전제 C : 영화를 보면, 저녁에 햄버거를 먹는다.<br>전제 D : 저녁에 햄버거를 먹지 않고 샐러드를 먹는다.",
+      "text": "<strong>[문제 24(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음과 같이 전제가 주어진 추론의 결론을 유도하라.<br><br>전제 A : 마트에서 장을 보거나 영화를 본다.<br>전제 B : 마트에서 장을 보면, 저녁에 스테이크를 먹는다.<br>전제 C : 영화를 보면, 저녁에 햄버거를 먹는다.<br>전제 D : 저녁에 햄버거를 먹지 않고 샐러드를 먹는다.",
       "hint": "$p$: 장봄, $q$: 영화, $r$: 스테이크, $s$: 햄버거, $t$: 샐러드",
       "modelAnswer": "D: $\\sim s \\land t$에서 $\\sim s$. C의 대우: $\\sim s \\to \\sim q$에서 $\\sim q$. A: $p \\lor q$와 $\\sim q$에서 $p$. B: $p \\to r$에서 $r$.<br>결론: <strong>마트에서 장을 보고, 저녁에 스테이크를 먹으며, 샐러드를 먹는다.</strong>"
     },
     {
       "id": "ch2-q118",
       "type": "proof",
-      "text": "<strong>[문제 24(c)]</strong> 다음과 같이 전제가 주어진 추론의 결론을 유도하라.<br><br>전제 A : 운동을 하고 떡볶이를 먹지 않으면, 몸무게가 줄어든다.<br>전제 B : 몸무게가 줄어들지 않고 배가 나온다.<br>전제 C : 떡볶이를 먹으면, 배가 나오지 않는다.<br>전제 D : 퇴근을 하면, 운동을 한다.<br>전제 E : 퇴근을 하지 않으면, 야근을 하고 떡볶이를 먹지 않는다.",
+      "text": "<strong>[문제 24(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음과 같이 전제가 주어진 추론의 결론을 유도하라.<br><br>전제 A : 운동을 하고 떡볶이를 먹지 않으면, 몸무게가 줄어든다.<br>전제 B : 몸무게가 줄어들지 않고 배가 나온다.<br>전제 C : 떡볶이를 먹으면, 배가 나오지 않는다.<br>전제 D : 퇴근을 하면, 운동을 한다.<br>전제 E : 퇴근을 하지 않으면, 야근을 하고 떡볶이를 먹지 않는다.",
       "hint": "$p$: 운동, $q$: 떡볶이, $r$: 몸무게↓, $s$: 배나옴, $t$: 퇴근, $u$: 야근",
       "modelAnswer": "B: $\\sim r \\land s$에서 $s$. C의 대우: $s \\to \\sim q$에서 $\\sim q$. A: $(p \\land \\sim q) \\to r$의 대우: $\\sim r \\to \\sim(p \\land \\sim q) = \\sim p \\lor q$. $\\sim r$이고 $\\sim q$이므로 $\\sim p$. D의 대우: $\\sim p \\to \\sim t$에서 $\\sim t$. E: $\\sim t \\to (u \\land \\sim q)$에서 $u$.<br>결론: <strong>퇴근을 하지 않고 야근을 하며, 떡볶이를 먹지 않고, 운동을 하지 않으며, 배가 나온다.</strong>"
     },
     {
       "id": "ch2-q119",
       "type": "proof",
-      "text": "<strong>[문제 24(d)]</strong> 다음과 같이 전제가 주어진 추론의 결론을 유도하라.<br><br>전제 A : 계속 직진을 하고 두 블록을 더 간다.<br>전제 B : 유턴을 하지 않으면, 두 블록을 더 가지 않거나 길을 잃는다.<br>전제 C : 유턴을 하면, 목적지에 도착한다.<br>전제 D : 목적지에 도착하면, 계속 직진하지 않는다.<br>전제 E : 목적지에 도착하지 않거나 두 블록을 더 간다.",
+      "text": "<strong>[문제 24(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다음과 같이 전제가 주어진 추론의 결론을 유도하라.<br><br>전제 A : 계속 직진을 하고 두 블록을 더 간다.<br>전제 B : 유턴을 하지 않으면, 두 블록을 더 가지 않거나 길을 잃는다.<br>전제 C : 유턴을 하면, 목적지에 도착한다.<br>전제 D : 목적지에 도착하면, 계속 직진하지 않는다.<br>전제 E : 목적지에 도착하지 않거나 두 블록을 더 간다.",
       "hint": "$p$: 직진, $q$: 두 블록 더감, $r$: 유턴, $s$: 목적지 도착, $t$: 길 잃음",
       "modelAnswer": "A: $p \\land q$에서 $q$. B: $\\sim r \\to (\\sim q \\lor t)$, 대우: $(q \\land \\sim t) \\to r$. C: $r \\to s$. D: $s \\to \\sim p$. A에서 $p$, D의 대우: $p \\to \\sim s$에서 $\\sim s$. E: $\\sim s \\lor q$, $\\sim s$이므로 성립. $\\sim s$와 C의 대우: $\\sim s \\to \\sim r$에서 $\\sim r$. B에서 $\\sim q \\lor t$. $q$이므로 $t$.<br>결론: <strong>유턴을 하지 않고 길을 잃는다.</strong>"
     },
     {
       "id": "ch2-q120",
       "type": "proof",
-      "text": "<strong>[문제 25(a)]</strong> 비상금은 어디에 있는가?<br><br>전제 A : 집이 단독주택이면, 비상금은 침실에 있지 않다.<br>전제 B : 거실에 난초가 있으면, 비상금은 침실에 있다.<br>전제 C : 집은 단독주택이다.<br>전제 D : 거실에 난초가 있거나 비상금이 주방에 있다.",
+      "text": "<strong>[문제 25(a)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 비상금은 어디에 있는가?<br><br>전제 A : 집이 단독주택이면, 비상금은 침실에 있지 않다.<br>전제 B : 거실에 난초가 있으면, 비상금은 침실에 있다.<br>전제 C : 집은 단독주택이다.<br>전제 D : 거실에 난초가 있거나 비상금이 주방에 있다.",
       "hint": "$p$: 단독주택, $q$: 비상금 침실, $r$: 난초, $s$: 비상금 주방",
       "modelAnswer": "C: $p$. A: $p \\to \\sim q$에서 $\\sim q$. B의 대우: $\\sim q \\to \\sim r$에서 $\\sim r$. D: $r \\lor s$와 $\\sim r$에서 $s$.<br>결론: <strong>비상금은 주방에 있다.</strong>"
     },
     {
       "id": "ch2-q121",
       "type": "proof",
-      "text": "<strong>[문제 25(b)]</strong> 선희가 해야 할 일은 무엇인가?<br><br>전제 A : 선희가 퇴근을 하지 않는다면, 영수와 저녁을 먹고 쇼핑은 하지 않는다.<br>전제 B : 영화 티켓을 영수에게 주면, 선희는 쇼핑을 한다.<br>전제 C : 선희가 회사 보고서를 작성해야 한다면, 선희는 퇴근을 하지 않는다.<br>전제 D : 영수는 운동하러 가지 않는다.<br>전제 E : 선희가 회사 보고서를 작성하거나 영수가 운동하러 간다.",
+      "text": "<strong>[문제 25(b)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 선희가 해야 할 일은 무엇인가?<br><br>전제 A : 선희가 퇴근을 하지 않는다면, 영수와 저녁을 먹고 쇼핑은 하지 않는다.<br>전제 B : 영화 티켓을 영수에게 주면, 선희는 쇼핑을 한다.<br>전제 C : 선희가 회사 보고서를 작성해야 한다면, 선희는 퇴근을 하지 않는다.<br>전제 D : 영수는 운동하러 가지 않는다.<br>전제 E : 선희가 회사 보고서를 작성하거나 영수가 운동하러 간다.",
       "hint": "$p$: 퇴근, $q$: 영수와 저녁, $r$: 쇼핑, $s$: 영화 티켓, $t$: 보고서, $u$: 영수 운동",
       "modelAnswer": "D: $\\sim u$. E: $t \\lor u$와 $\\sim u$에서 $t$. C: $t \\to \\sim p$에서 $\\sim p$. A: $\\sim p \\to (q \\land \\sim r)$에서 $q \\land \\sim r$. B의 대우: $\\sim r \\to \\sim s$에서 $\\sim s$.<br>결론: <strong>선희는 회사 보고서를 작성하고, 영수와 저녁을 먹으며, 쇼핑은 하지 않고, 영화 티켓을 영수에게 주지 않는다.</strong>"
     },
     {
       "id": "ch2-q122",
       "type": "proof",
-      "text": "<strong>[문제 25(c)]</strong> 시영이가 퇴근한 후에 하지 않을 일은 무엇인가?<br><br>전제 A : 방을 치우지 않으면, 설거지를 하고 책을 읽지 않는다.<br>전제 B : 설거지를 하지 않거나 음악을 듣지 않는다.<br>전제 C : 방을 치우거나 책을 읽으면, 그림을 그린다.<br>전제 D : 음악을 듣고 그림을 그리지 않는다.",
+      "text": "<strong>[문제 25(c)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 시영이가 퇴근한 후에 하지 않을 일은 무엇인가?<br><br>전제 A : 방을 치우지 않으면, 설거지를 하고 책을 읽지 않는다.<br>전제 B : 설거지를 하지 않거나 음악을 듣지 않는다.<br>전제 C : 방을 치우거나 책을 읽으면, 그림을 그린다.<br>전제 D : 음악을 듣고 그림을 그리지 않는다.",
       "hint": "$p$: 방 치움, $q$: 설거지, $r$: 책, $s$: 그림, $t$: 음악",
       "modelAnswer": "D에서 $t$와 $\\sim s$를 얻는다. B의 $\\sim q \\lor \\sim t$와 $t$로부터 $\\sim q$. A의 대우를 이용하면 $\\sim q$이면 $p$여야 한다. 그러면 C에서 $s$가 나오는데, D의 $\\sim s$와 모순이다. 따라서 전제들이 동시에 참이 될 수 없어 논리적으로 일관된 상황이 아니다.<br><strong>결론: 전제들이 모순이므로 '퇴근 후 하지 않을 일'을 유일하게 확정할 수 없다.</strong>"
     },
     {
       "id": "ch2-q123",
       "type": "proof",
-      "text": "<strong>[문제 25(d)]</strong> 다이어트를 위해 먹지 않는 것은 무엇인가?<br><br>전제 A : 양념치킨과 콜라를 모두 먹지 않으면, 샐러드를 먹지 않는다.<br>전제 B : 샐러드를 먹는다. 그리고 양념치킨을 먹으면, 고구마를 먹는다.<br>전제 C : 고구마를 먹는 조건 하에 빵을 먹으면, 콜라를 마시지 않는다.<br>전제 D : 콜라를 마시는 조건 하에 아이스크림을 먹으면, 고구마를 먹지 않는다.",
+      "text": "<strong>[문제 25(d)]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 다이어트를 위해 먹지 않는 것은 무엇인가?<br><br>전제 A : 양념치킨과 콜라를 모두 먹지 않으면, 샐러드를 먹지 않는다.<br>전제 B : 샐러드를 먹는다. 그리고 양념치킨을 먹으면, 고구마를 먹는다.<br>전제 C : 고구마를 먹는 조건 하에 빵을 먹으면, 콜라를 마시지 않는다.<br>전제 D : 콜라를 마시는 조건 하에 아이스크림을 먹으면, 고구마를 먹지 않는다.",
       "hint": "$p$: 양념치킨, $q$: 콜라, $r$: 샐러드, $s$: 고구마, $t$: 빵, $u$: 아이스크림",
       "modelAnswer": "B에서 $r$를 얻는다. A의 대우로부터 $r \\to (p \\lor q)$이므로 양념치킨 또는 콜라 중 하나는 먹는다. 다만 C와 D는 각각 추가 조건이 있을 때만 콜라/고구마에 제한을 주므로, 주어진 전제만으로 특정 음식 하나를 반드시 먹지 않는다고 단정할 수는 없다.<br><strong>결론: 현재 전제만으로는 '다이어트를 위해 반드시 먹지 않는 음식'을 유일하게 확정할 수 없다.</strong>"
     }

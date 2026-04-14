@@ -211,7 +211,7 @@ export async function saveMockRecord(record) {
     const wrongEntries = Array.isArray(record.wrongNotes) ? record.wrongNotes : [];
     for (const entry of wrongEntries) {
       if (entry?.systemGeneratedWrong) continue;
-      await saveWrongNoteFromMock({ ...entry, subjectId, sourceAttemptAt: record.date || new Date().toISOString() });
+      await saveWrongNoteFromAttempt({ ...entry, subjectId, sourceAttemptAt: record.date || new Date().toISOString() });
     }
   } catch (err) { console.warn('[db] saveMockRecord fail:', err); throw err; }
 }
@@ -231,6 +231,48 @@ export async function getMockRecent(subjectId) {
                durationMs:v.durationMs||0, details:v.details||[], chapterSelections:v.chapterSelections||[], generationSummary:v.generationSummary||[], date:v.date||null };
     });
   } catch (err) { console.warn('[db] getMockRecent fail:', err); return []; }
+}
+
+
+export async function saveAssignmentRecord(record) {
+  const uid = currentUid();
+  if (!uid || !db) { console.warn('[db] saveAssignmentRecord: 로그인 필요'); return; }
+  const { subjectId } = record;
+  if (!subjectId) return;
+  try {
+    await addDoc(collection(db, 'users', uid, 'subjects', subjectId, 'assignmentHistory'), {
+      score: record.score || 0, correct: record.correct || 0,
+      total: record.total || 0, durationMs: record.durationMs || 0,
+      details: Array.isArray(record.details) ? record.details : [],
+      chapterSelections: Array.isArray(record.chapterSelections) ? record.chapterSelections : [],
+      generationSummary: Array.isArray(record.generationSummary) ? record.generationSummary : [],
+      date: record.date || new Date().toISOString(),
+      createdAt: serverTimestamp()
+    });
+
+    const wrongEntries = Array.isArray(record.wrongNotes) ? record.wrongNotes : [];
+    for (const entry of wrongEntries) {
+      if (entry?.systemGeneratedWrong) continue;
+      await saveWrongNoteFromAttempt({ ...entry, subjectId, sourceAttemptAt: record.date || new Date().toISOString() });
+    }
+  } catch (err) { console.warn('[db] saveAssignmentRecord fail:', err); throw err; }
+}
+
+export async function getAssignmentRecent(subjectId) {
+  const uid = currentUid();
+  if (!uid || !db) return [];
+  try {
+    const q = query(
+      collection(db, 'users', uid, 'subjects', subjectId, 'assignmentHistory'),
+      orderBy('createdAt', 'desc'), limit(MOCK_KEEP)
+    );
+    const snap = await getDocs(q);
+    return snap.docs.map(d => {
+      const v = d.data();
+      return { score:v.score||0, correct:v.correct||0, total:v.total||0,
+               durationMs:v.durationMs||0, details:v.details||[], chapterSelections:v.chapterSelections||[], generationSummary:v.generationSummary||[], date:v.date||null };
+    });
+  } catch (err) { console.warn('[db] getAssignmentRecent fail:', err); return []; }
 }
 
 
@@ -300,7 +342,7 @@ function buildWrongNotePayload(subjectId, entry, existing = null) {
   };
 }
 
-async function saveWrongNoteFromMock(entry) {
+async function saveWrongNoteFromAttempt(entry) {
   const uid = currentUid();
   if (!uid || !db) return;
   const subjectId = entry?.subjectId;
@@ -400,7 +442,7 @@ if (typeof window !== 'undefined') {
     getAllUsers, setUserStatus, deleteUserProfile, isSuperAdmin,
     saveGeminiApiKey, getGeminiApiKey,
     savePracticeSession, getPracticeSession, getPracticeSessionsForSubject,
-    saveMockRecord, getMockRecent,
+    saveMockRecord, getMockRecent, saveAssignmentRecord, getAssignmentRecent,
     getWrongNotes, getWrongNoteSummary, updateWrongNoteReview, deleteWrongNote
   };
 }

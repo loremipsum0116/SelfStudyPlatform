@@ -29,6 +29,14 @@
     .mock-recent .row { display:flex; justify-content:space-between; padding:3px 0; }
     .mock-section .start { display:inline-block; margin-top:12px; padding:10px 16px; background:var(--accent); color:#fff; border-radius:4px; text-decoration:none; }
     .mock-section .history { display:inline-block; margin-left:8px; padding:10px 16px; border:1px solid var(--accent); color:var(--accent); border-radius:4px; text-decoration:none; }
+    .assignment-section {
+      border:1px solid #d9d9f0; border-radius:10px; padding:20px;
+      margin:24px 0 32px; background:#fff;
+    }
+    .assignment-section h2 { margin-top:0; }
+    .assignment-recent { font-size:14px; margin-top:12px; }
+    .assignment-recent .row { display:flex; justify-content:space-between; padding:3px 0; }
+    .assignment-section .start { display:inline-block; margin-top:12px; padding:10px 16px; background:#5b57d9; color:#fff; border-radius:4px; text-decoration:none; }
     .wrongnote-link { display:inline-flex; align-items:center; gap:10px; margin-left:8px; padding:10px 16px; border:1px solid #666; color:#444; border-radius:4px; text-decoration:none; background:#fff; }
     .badge-pair { display:inline-flex; gap:6px; margin-left:6px; }
     .mini-badge { min-width:22px; height:22px; border-radius:999px; display:inline-flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#fff; }
@@ -57,6 +65,12 @@
             <span class="mini-badge due" id="wrongnote-due">0</span>
           </span>
         </a>
+      </div>
+      <div class="assignment-section">
+        <h2>과제풀이</h2>
+        <p>챕터 구분 없이 과제로 출제된 문제만 한곳에 모아 풀 수 있습니다. 이 페이지에서 틀린 문제는 모의고사와 같은 방식으로 오답노트에 반영됩니다.</p>
+        <div class="assignment-recent" id="assignment-recent"><span style="color:#999">최근 기록 로딩 중...</span></div>
+        <a href="assignment/index.html" class="start">과제풀이 시작</a>
       </div>
     </div>
   </div>
@@ -115,8 +129,9 @@
       // 최근 모의고사
       const mockEl = document.getElementById('mock-recent');
       if (window.__db) {
-        const [mocks, wrongSummary] = await Promise.all([
+        const [mocks, assignments, wrongSummary] = await Promise.all([
           window.__db.getMockRecent(SUBJECT_ID),
+          window.__db.getAssignmentRecent ? window.__db.getAssignmentRecent(SUBJECT_ID) : Promise.resolve([]),
           window.__db.getWrongNoteSummary(SUBJECT_ID)
         ]);
         document.getElementById('wrongnote-waiting').textContent = wrongSummary.waiting || 0;
@@ -128,8 +143,21 @@
         } else {
           mockEl.innerHTML = '<span style="color:#999">아직 모의고사 기록이 없습니다.</span>';
         }
+
+        const assignmentEl = document.getElementById('assignment-recent');
+        if (assignmentEl) {
+          if (assignments && assignments.length) {
+            assignmentEl.innerHTML = '<strong>최근 과제풀이</strong>' + assignments.map(a =>
+              `<div class="row"><span>${fmtDate(a.date)}</span><span>${fmtPct(a.score)} (${a.correct}/${a.total}) · ${fmtDuration(a.durationMs)}</span></div>`
+            ).join('');
+          } else {
+            assignmentEl.innerHTML = '<span style="color:#999">아직 과제풀이 기록이 없습니다.</span>';
+          }
+        }
       } else {
         mockEl.innerHTML = '<span style="color:#999">DB 모듈 로드 실패</span>';
+        const assignmentEl = document.getElementById('assignment-recent');
+        if (assignmentEl) assignmentEl.innerHTML = '<span style="color:#999">DB 모듈 로드 실패</span>';
       }
     }
 

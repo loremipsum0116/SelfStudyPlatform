@@ -134,141 +134,6 @@ function gradeTruthTable(question, userAnswer) {
   };
 }
 
-
-function stripCodeFences(text) {
-  return String(text || "")
-    .replace(/^```json\s*/i, "")
-    .replace(/^```\s*/i, "")
-    .replace(/```\s*$/i, "")
-    .trim();
-}
-
-function escapeControlCharsInsideJsonStrings(text) {
-  const input = String(text || "");
-  let out = "";
-  let inString = false;
-  let escaping = false;
-
-  for (let i = 0; i < input.length; i += 1) {
-    const ch = input[i];
-
-    if (inString) {
-      if (escaping) {
-        out += ch;
-        escaping = false;
-        continue;
-      }
-      if (ch === "\\") {
-        out += ch;
-        escaping = true;
-        continue;
-      }
-      if (ch === '"') {
-        out += ch;
-        inString = false;
-        continue;
-      }
-      if (ch === "\n") {
-        out += "\\n";
-        continue;
-      }
-      if (ch === "\r") {
-        out += "\\r";
-        continue;
-      }
-      if (ch === "\t") {
-        out += "\\t";
-        continue;
-      }
-      out += ch;
-      continue;
-    }
-
-    out += ch;
-    if (ch === '"') inString = true;
-  }
-
-  return out;
-}
-
-function extractLikelyJsonObject(text) {
-  const input = String(text || "");
-  const start = input.indexOf("{");
-  const end = input.lastIndexOf("}");
-  if (start === -1 || end === -1 || end <= start) return "";
-  return input.slice(start, end + 1).trim();
-}
-
-function parseGeminiJsonResponse(text) {
-  const cleaned = stripCodeFences(text);
-  const candidates = [];
-  const jsonLike = extractLikelyJsonObject(cleaned);
-
-  if (cleaned) candidates.push(cleaned);
-  if (jsonLike && jsonLike !== cleaned) candidates.push(jsonLike);
-
-  const seen = new Set();
-  let lastError = null;
-
-  for (const candidate of candidates) {
-    if (!candidate || seen.has(candidate)) continue;
-    seen.add(candidate);
-
-    try {
-      return JSON.parse(candidate);
-    } catch (err) {
-      lastError = err;
-    }
-
-    const repaired = escapeControlCharsInsideJsonStrings(candidate)
-      .replace(/,\s*([}\]])/g, "$1")
-      .trim();
-
-    if (!repaired || seen.has(repaired)) continue;
-    seen.add(repaired);
-
-    try {
-      return JSON.parse(repaired);
-    } catch (err) {
-      lastError = err;
-    }
-  }
-
-  const preview = cleaned.slice(0, 300);
-  const detail = lastError && lastError.message ? lastError.message : "알 수 없는 파싱 오류";
-  throw new Error(`AI 응답을 파싱할 수 없습니다: ${detail} / 응답 일부: ${preview}`);
-}
-
-function buildShortAnswerFallbackResult(question, userAnswer) {
-  const local = gradeShortAnswer(question, userAnswer);
-  const correctAnswer = question.answer || "";
-  const explanation = question.explanation || "";
-
-  if (local.verdict === "correct") {
-    return {
-      verdict: "correct",
-      score: 1,
-      strengths: "제출한 답이 기준 정답과 일치합니다.",
-      issues: "",
-      suggestions: "",
-      correctAnswer,
-      modelAnswer: question.modelAnswer || "",
-      explanation
-    };
-  }
-
-  return {
-    verdict: "incorrect",
-    score: 0,
-    strengths: "",
-    issues: "제출한 답이 기준 정답과 일치하지 않습니다.",
-    suggestions: "시그마의 적용 범위, 항의 개수, 계산 과정을 다시 확인해 보세요.",
-    correctAnswer,
-    modelAnswer: question.modelAnswer || "",
-    explanation
-  };
-}
-
 // ---------- Proof grading via Gemini API ----------
 async function gradeProofWithGemini(question, userAnswer) {
   const apiKey = getApiKey();
@@ -375,7 +240,14 @@ ${userAnswer}
     throw new Error("Gemini가 빈 응답을 반환했습니다. 답안이 너무 짧거나 모델이 차단한 것일 수 있습니다.");
   }
 
-  const parsed = parseGeminiJsonResponse(text);
+  const cleaned = text.replace(/^```json\s*/i, "").replace(/^```\s*/, "").replace(/```\s*$/, "").trim();
+
+  let parsed;
+  try {
+    parsed = JSON.parse(cleaned);
+  } catch (e) {
+    throw new Error("AI 응답을 파싱할 수 없습니다: " + text.slice(0, 200));
+  }
 
   return {
     verdict: parsed.verdict || "incorrect",
@@ -477,13 +349,8 @@ ${userAnswer}
     throw new Error("Gemini가 빈 응답을 반환했습니다.");
   }
 
-  let parsed;
-  try {
-    parsed = parseGeminiJsonResponse(text);
-  } catch (err) {
-    console.warn("Gemini JSON 파싱 실패, 로컬 단답형 채점으로 대체합니다.", err);
-    return buildShortAnswerFallbackResult(question, userAnswer);
-  }
+  const cleaned = text.replace(/^```json\s*/i, "").replace(/^```\s*/, "").replace(/```\s*$/, "").trim();
+  const parsed = JSON.parse(cleaned);
 
   return {
     verdict: parsed.verdict || "incorrect",
@@ -822,13 +689,21 @@ function resetMathPreview(qid) {
 
 // ---------- Question rendering ----------
 function renderQuestion(q, index) {
-  const tagHtml = q.type === "proof"
+  const baseTagHtml = q.type === "proof"
     ? '<span class="tag proof">서술형 · AI 채점</span>'
     : q.type === "short-answer"
       ? '<span class="tag">단답형 · AI 채점</span>'
       : q.type === "truth-table"
         ? '<span class="tag">진리표 · 부분점수</span>'
         : '<span class="tag">객관식</span>';
+  const extraTags = [baseTagHtml];
+  if (q.__assignmentCollectionLabel) {
+    extraTags.push(`<span class="tag">${escapeHtml(q.__assignmentCollectionLabel)}</span>`);
+  }
+  if (q.__assignmentProblem) {
+    extraTags.push('<span class="tag assignment">과제 때 나온 문제</span>');
+  }
+  const tagHtml = extraTags.join(' ');
 
   let inputHtml = "";
   if (q.type === "multiple-choice") {
@@ -842,7 +717,7 @@ function renderQuestion(q, index) {
   } else if (q.type === "short-answer") {
     inputHtml = `${renderMathSymbolToolbox(q.id)}<textarea class="answer-input" data-qid="${q.id}" placeholder="답을 입력하세요... 수식은 $...$ 또는 $$...$$로 감쌀 수 있습니다."></textarea><div class="math-preview-box" id="math-preview-${String(q.id).replace(/[^a-zA-Z0-9_-]/g, '_')}"><div class="math-preview-empty">입력한 수식이 여기에서 미리보기로 표시됩니다.</div></div>`;
   } else if (q.type === "proof" || q.type === "essay") {
-    inputHtml = `${renderMathSymbolToolbox(q.id)}<textarea class="answer-input proof" data-qid="${q.id}" placeholder="증명을 단계별로 서술하세요. 수식은 $...$ 또는 $$...$$로 감쌀 수 있습니다."></textarea><div class="math-preview-box" id="math-preview-${String(q.id).replace(/[^a-zA-Z0-9_-]/g, '_')}"><div class="math-preview-empty">입력한 수식이 여기에서 미리보기로 표시됩니다.</div></div>`;
+    inputHtml = `${renderMathSymbolToolbox(q.id)}<textarea class="answer-input proof" data-qid="${q.id}" placeholder="정답과 풀이과정을 단계별로 서술하세요. 수식은 $...$ 또는 $$...$$로 감쌀 수 있습니다."></textarea><div class="math-preview-box" id="math-preview-${String(q.id).replace(/[^a-zA-Z0-9_-]/g, '_')}"><div class="math-preview-empty">입력한 수식이 여기에서 미리보기로 표시됩니다.</div></div>`;
   } else if (q.type === "truth-table") {
     const headers = Array.isArray(q.headers) ? q.headers : [];
     const rows = Array.isArray(q.data) ? q.data : [];
@@ -875,7 +750,7 @@ function renderQuestion(q, index) {
 
   return `
     <div class="question" id="q-${q.id}" data-qid="${q.id}" data-qtype="${q.type}">
-      <div class="q-num">Problem ${String(index + 1).padStart(2, "0")} ${tagHtml}</div>
+      <div class="q-num"><span class="display-num">Problem ${String(index + 1).padStart(2, "0")}</span> ${tagHtml}</div>
       <div class="q-text">${q.text}</div>
       ${inputHtml}
       <div class="q-actions">
@@ -998,10 +873,14 @@ function getUserAnswer(q) {
 }
 
 // ---------- Score tracking ----------
-function updateScoreDisplay(chapterId, totalQuestions) {
+function updateScoreDisplay(chapterId, totalQuestions, visibleQuestionIds) {
   const progress = loadProgress(chapterId);
-  const solved = Object.values(progress).filter(p => p.verdict === "correct" || p.verdict === "partial").length;
-  const correct = Object.values(progress).filter(p => p.verdict === "correct").length;
+  const idFilter = Array.isArray(visibleQuestionIds) && visibleQuestionIds.length
+    ? new Set(visibleQuestionIds)
+    : null;
+  const relevantEntries = Object.entries(progress).filter(([qid]) => !idFilter || idFilter.has(qid));
+  const solved = relevantEntries.filter(([, p]) => p.verdict === "correct" || p.verdict === "partial").length;
+  const correct = relevantEntries.filter(([, p]) => p.verdict === "correct").length;
   const el = document.getElementById("score-display");
   if (el) {
     el.innerHTML = `${correct} / ${totalQuestions} <small>맞춤 · ${solved} 시도</small>`;

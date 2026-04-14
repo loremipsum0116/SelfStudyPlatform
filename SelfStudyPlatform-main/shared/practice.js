@@ -1,13 +1,14 @@
 /* ============================================================
    Practice & Mock Exam page logic.
 
-   Two modes:
+   Three modes:
      - "practice": 문항별 즉시 채점, 종료 시 세션 요약(최근 일자/점수) 저장.
      - "mock": 타이머와 함께 일괄 풀이 → 제출 시 일괄 채점 → 최근 5개 기록 저장.
+     - "assignment": 과제로 출제된 문제만 전 챕터에서 모아 일괄 풀이 → 제출 시 기록 저장 + 오답노트 반영.
 
    호출 방법:
      initPractice(chapterId)                        // 레거시
-     initPractice(subjectId, chapterId, mode)       // 신규 (mode: "practice" | "mock")
+     initPractice(subjectId, chapterId, mode)       // 신규 (mode: "practice" | "mock" | "assignment")
 
    의존성(전역):
      - grader.js:  gradeQuestion, renderQuestion, renderFeedback,
@@ -15,13 +16,15 @@
                    updateScoreDisplay, getApiKey, setApiKey, clearApiKey,
                    escapeHtml
      - db.js   :   window.__db.{ savePracticeSession, saveMockRecord,
-                                   getPracticeSession, getMockRecent }
+                                 saveAssignmentRecord, getPracticeSession,
+                                 getMockRecent, getAssignmentRecent }
    ============================================================ */
 
 let currentQuestions = [];
 let currentSubjectId = "";
 let currentChapterId = "";
 let currentMode = "practice";
+const ASSIGNMENT_PAGE_ID = "assignment";
 
 // Practice 전용: 제출 확정된(잠긴) 문제 ID 세트
 const lockedQuestions = new Set();
@@ -34,6 +37,290 @@ let mockSubmitted = false;
 
 let mockChapterSelections = [];
 const mockQuestionBankCache = {};
+
+let practiceVisibleQuestionIds = [];
+let chapterExamFilterEnabled = false;
+
+const CH1_EXAM_FILTER_PREF_KEY = 'dm_ch1_exam_filter_enabled';
+const CH1_IMPLICIT_PART_KEY_MAPS = {
+  2: {
+    '\dfrac{36}{60}': 'b',
+    '\dfrac{5}{255}': 'c',
+    '\dfrac{78}{234}': 'd',
+    '\dfrac{112}{7}': 'e',
+    '\dfrac{45}{145}': 'f',
+    '\dfrac{34}{68}': 'g',
+    '\dfrac{52}{117}': 'h'
+  },
+  14: {
+    '72|6': 'a',
+    '90|8': 'b',
+    '124|4': 'c',
+    '211|10': 'd',
+    '9|2': 'e',
+    '142|6': 'f',
+    '198|18': 'g',
+    '294|6': 'h'
+  },
+  15: {
+    '-113|4': 'a',
+    '-86|43': 'b',
+    '-333|9': 'c',
+    '-712|11': 'd',
+    '-49|3': 'e',
+    '-529|88': 'f',
+    '-218|8': 'g',
+    '-1274|32': 'h'
+  },
+  18: {
+    '19.5': 'a',
+    '23.375': 'b',
+    '149.6875': 'c',
+    '311.65625': 'd',
+    '823.7265625': 'e',
+    '1377.34375': 'f'
+  },
+  19: {
+    '48.75': 'a',
+    '93.5625': 'b',
+    '157.40625': 'c',
+    '299.34375': 'd',
+    '516.515625': 'e',
+    '1001.625': 'f'
+  },
+  20: {
+    '10.01': 'a',
+    '101.1011': 'b',
+    '1110.111': 'c',
+    '10101.101': 'd',
+    '1011101.1101': 'e',
+    '11100111.101011': 'f'
+  },
+  21: {
+    '11.1111': 'a',
+    '1011.11011': 'b',
+    '11011.1001': 'c',
+    '101100.11': 'd',
+    '1110001.00101': 'e',
+    '1000110.0011': 'f'
+  },
+  22: {
+    '4.2': 'a',
+    '56.32': 'b',
+    '263.156': 'c',
+    '711.653': 'd',
+    '1020.75': 'e',
+    '2153.2667': 'f'
+  },
+  23: {
+    '22.56': 'a',
+    '146.73': 'b',
+    '376.14': 'c',
+    '1035.712': 'd',
+    '1433.103': 'e',
+    '3147.52': 'f'
+  },
+  24: {
+    '48.091': 'a',
+    '9D0.5C': 'b',
+    'FED.BCA': 'c',
+    '16.15': 'd',
+    'E9.4902': 'e',
+    '5CB.101': 'f'
+  },
+  25: {
+    '5A.39': 'a',
+    'BB.AC': 'b',
+    '15A.269': 'c',
+    '34D.E': 'd',
+    'D01.18': 'e',
+    '20AC.19E': 'f'
+  },
+  26: {
+    '11001.11': 'a',
+    '1001111.101011': 'b',
+    '11101111.11010111': 'c',
+    '101001110110.110000111': 'd',
+    '1100111010110.10111111001': 'e',
+    '101100100011110.0001010001011': 'f'
+  },
+  27: {
+    '101.11001': 'a',
+    '1011010.001101': 'b',
+    '11111110.001101111': 'c',
+    '1000001110.11111101': 'd',
+    '1010101100101.11101010111': 'e',
+    '1111110110001.10101011': 'f'
+  },
+  28: {
+    '15.36': 'a',
+    '67.1234': 'b',
+    '125.3623': 'c',
+    '713.5272': 'd',
+    '1623.7715': 'e',
+    '51623.1622': 'f'
+  },
+  29: {
+    '67.214': 'a',
+    '105.772': 'b',
+    '471.32511': 'c',
+    '2012.7054': 'd',
+    '5123.637': 'e',
+    '6410.7123': 'f'
+  },
+  30: {
+    '12.34': 'a',
+    '68.EE': 'b',
+    '9C.709B': 'c',
+    '1AC.053A': 'd',
+    '39E.8AD2': 'e',
+    'B0A.19D3': 'f'
+  },
+  31: {
+    '396.12': 'a',
+    'BB.AC': 'b',
+    'AE.FCD': 'c',
+    '4A79.C15': 'd',
+    'C04B.100F': 'e',
+    'FE13.ABCD': 'f'
+  },
+  32: {
+    '9': 'a',
+    '-13': 'b',
+    '-48': 'c',
+    '84': 'd',
+    '-97': 'e',
+    '-103': 'f',
+    '-118': 'g',
+    '125': 'h'
+  }
+};
+const CH1_ASSIGNMENT_PARTS = new Map([
+  [9, new Set(['a', 'b', 'c'])],
+  [18, new Set(['b', 'd', 'f'])],
+  [27, new Set(['f'])],
+  [28, new Set(['f'])],
+  [31, new Set(['f'])],
+  [36, new Set(['a', 'b', 'c', 'd'])]
+]);
+const CH1_CORE_FILTER_SPEC = {
+  wholeProblems: [],
+  parts: {
+    1: 'abcde',
+    2: 'abe',
+    3: 'abc',
+    4: 'abcdefgh',
+    5: 'abcd',
+    6: 'abcdef',
+    7: 'abcdef',
+    8: 'abcdef',
+    9: 'abcdef',
+    10: 'abcdef',
+    11: 'abcdef',
+    12: 'abcdefgh',
+    13: 'abcd',
+    14: 'ace',
+    15: 'abe',
+    16: 'abcdef',
+    17: 'ab',
+    18: 'bdf',
+    20: 'adf',
+    21: 'a',
+    22: 'acf',
+    24: 'ace',
+    25: 'f',
+    26: 'ad',
+    27: 'f',
+    28: 'af',
+    30: 'ae',
+    31: 'af',
+    32: 'abgh',
+    33: 'abcdef',
+    34: 'abcd',
+    36: 'abcd'
+  }
+};
+
+const CH2_EXAM_FILTER_PREF_KEY = 'dm_ch2_exam_filter_enabled';
+const CH3_EXAM_FILTER_PREF_KEY = 'dm_ch3_exam_filter_enabled';
+const CH4_EXAM_FILTER_PREF_KEY = 'dm_ch4_exam_filter_enabled';
+const CH5_EXAM_FILTER_PREF_KEY = 'dm_ch5_exam_filter_enabled';
+const CH2_ASSIGNMENT_PARTS = new Map([
+  [21, new Set(['a', 'd'])],
+  [22, new Set(['a', 'd'])],
+  [23, new Set(['a', 'd'])],
+  [24, new Set(['d'])]
+]);
+const CH2_CORE_FILTER_SPEC = {
+  1: 'abdeg',
+  2: 'bdfg',
+  3: 'abde',
+  4: 'acde',
+  5: 'abcd',
+  6: 'abcd',
+  7: 'abcd',
+  8: 'abcd',
+  9: 'ace',
+  10: 'abcde',
+  11: 'abde',
+  12: 'abd',
+  13: 'abd',
+  14: 'abd',
+  15: 'abcdefgh',
+  16: 'abcd',
+  17: 'abcde',
+  18: 'abcdef',
+  19: 'abcde',
+  20: 'abcde',
+  21: 'abcd',
+  22: 'abcd',
+  23: 'abcd',
+  24: 'abcd',
+  25: 'abcd'
+};
+
+const CH3_ASSIGNMENT_PARTS = new Map([
+  [11, new Set(['*'])],
+  [23, new Set(['*'])],
+  [48, new Set(['*'])]
+]);
+const CH3_CORE_FILTER_SPEC = {
+  wholeProblems: [
+    1, 2, 4, 6, 7, 9, 10, 11, 12, 13, 14, 15,
+    16, 17, 18, 19, 20, 21, 23, 24, 26, 27, 28, 29, 30, 31, 34,
+    35, 36, 37, 38, 39, 40, 41,
+    44, 45, 46, 48, 49, 50, 51, 52
+  ]
+};
+
+const CH4_ASSIGNMENT_PARTS = new Map([
+  [4, new Set(['*'])],
+  [5, new Set(['*'])],
+  [28, new Set(['*'])],
+  [29, new Set(['*'])],
+  [30, new Set(['*'])]
+]);
+const CH4_CORE_FILTER_SPEC = {
+  wholeProblems: [
+    1, 2, 4, 5, 6,
+    7, 8, 10, 11, 12,
+    13, 14, 16,
+    17, 18, 19,
+    20, 22, 23, 25, 26, 27,
+    28, 29, 30, 31
+  ]
+};
+
+const CH5_ASSIGNMENT_PARTS = new Map([
+  [13, new Set(['*'])]
+]);
+const CH5_CORE_FILTER_SPEC = {
+  wholeProblems: [
+    1, 2, 4, 5, 6, 7, 8,
+    10, 11, 12, 13, 15, 17
+  ]
+};
+
 
 const MOCK_CHAPTER_OPTIONS = [
   { id: 'ch1', title: 'Ch.1 수의 체계와 컴퓨터의 수 표현' },
@@ -101,16 +388,347 @@ function extractSourceProblemNumber(question) {
   return question.__sourceProblemNumber;
 }
 
-function buildNumberSet(spec) {
-  const nums = [];
-  (spec || []).forEach(entry => {
-    if (Array.isArray(entry) && entry.length === 2) {
-      for (let n = entry[0]; n <= entry[1]; n += 1) nums.push(n);
-    } else if (typeof entry === 'number') {
-      nums.push(entry);
-    }
+function buildPartPairSet(spec) {
+  const set = new Set();
+  Object.entries(spec || {}).forEach(([problemNumber, parts]) => {
+    String(parts || '').split('').forEach(part => {
+      if (part) set.add(`${parseInt(problemNumber, 10)}${part}`);
+    });
   });
-  return Array.from(new Set(nums)).sort((a, b) => a - b);
+  return set;
+}
+
+function buildWholeProblemSet(spec) {
+  return new Set((spec || []).filter(n => Number.isInteger(n)));
+}
+
+const CH1_CORE_FILTER_PAIR_SET = buildPartPairSet(CH1_CORE_FILTER_SPEC.parts);
+const CH1_CORE_FILTER_WHOLE_PROBLEM_SET = buildWholeProblemSet(CH1_CORE_FILTER_SPEC.wholeProblems);
+const CH2_CORE_FILTER_PAIR_SET = buildPartPairSet(CH2_CORE_FILTER_SPEC);
+const CH3_CORE_FILTER_WHOLE_PROBLEM_SET = buildWholeProblemSet(CH3_CORE_FILTER_SPEC.wholeProblems);
+const CH4_CORE_FILTER_WHOLE_PROBLEM_SET = buildWholeProblemSet(CH4_CORE_FILTER_SPEC.wholeProblems);
+const CH5_CORE_FILTER_WHOLE_PROBLEM_SET = buildWholeProblemSet(CH5_CORE_FILTER_SPEC.wholeProblems);
+
+const EXAM_FILTER_CONFIGS = {
+  ch1: {
+    prefKey: CH1_EXAM_FILTER_PREF_KEY,
+    implicitPartKeyMaps: CH1_IMPLICIT_PART_KEY_MAPS,
+    assignmentParts: CH1_ASSIGNMENT_PARTS,
+    corePairSet: CH1_CORE_FILTER_PAIR_SET,
+    coreWholeProblemSet: CH1_CORE_FILTER_WHOLE_PROBLEM_SET
+  },
+  ch2: {
+    prefKey: CH2_EXAM_FILTER_PREF_KEY,
+    inferredPartGroupSizes: {},
+    assignmentParts: CH2_ASSIGNMENT_PARTS,
+    corePairSet: CH2_CORE_FILTER_PAIR_SET
+  },
+  ch3: {
+    prefKey: CH3_EXAM_FILTER_PREF_KEY,
+    assignmentParts: CH3_ASSIGNMENT_PARTS,
+    coreWholeProblemSet: CH3_CORE_FILTER_WHOLE_PROBLEM_SET
+  },
+  ch4: {
+    prefKey: CH4_EXAM_FILTER_PREF_KEY,
+    assignmentParts: CH4_ASSIGNMENT_PARTS,
+    coreWholeProblemSet: CH4_CORE_FILTER_WHOLE_PROBLEM_SET
+  },
+  ch5: {
+    prefKey: CH5_EXAM_FILTER_PREF_KEY,
+    assignmentParts: CH5_ASSIGNMENT_PARTS,
+    coreWholeProblemSet: CH5_CORE_FILTER_WHOLE_PROBLEM_SET
+  }
+};
+
+function getExamFilterConfig(chapterId = currentChapterId) {
+  return EXAM_FILTER_CONFIGS[chapterId] || null;
+}
+
+function loadExamFilterPreference(chapterId = currentChapterId) {
+  const config = getExamFilterConfig(chapterId);
+  if (!config) return false;
+  try {
+    return localStorage.getItem(config.prefKey) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function saveExamFilterPreference(enabled, chapterId = currentChapterId) {
+  const config = getExamFilterConfig(chapterId);
+  if (!config) return;
+  try {
+    localStorage.setItem(config.prefKey, enabled ? '1' : '0');
+  } catch {
+    /* ignore */
+  }
+}
+
+function stripHtmlTags(text) {
+  return String(text || '').replace(/<[^>]+>/g, ' ');
+}
+
+function normalizeQuestionTextForMatching(text) {
+  return stripHtmlTags(text)
+    .replace(/\\;/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function extractImplicitPartKey(questionText, problemNumber) {
+  const text = normalizeQuestionTextForMatching(questionText);
+
+  if (problemNumber === 2) {
+    const match = text.match(/\$([^$]+)\$을 기약분수/);
+    return match ? match[1].trim() : null;
+  }
+
+  if (problemNumber === 14 || problemNumber === 15) {
+    const match = text.match(/\$n=([^,$]+),\s*d=([^$]+)\$/);
+    return match ? `${match[1].trim()}|${match[2].trim()}` : null;
+  }
+
+  if (problemNumber === 18 || problemNumber === 19) {
+    const match = text.match(/10\$진수\s*\$([^$]+)\$/);
+    return match ? match[1].trim() : null;
+  }
+
+  if (problemNumber === 20 || problemNumber === 21 || problemNumber === 26 || problemNumber === 27) {
+    const match = text.match(/2진수\s*\$([^$]+)_2\$/);
+    return match ? match[1].trim() : null;
+  }
+
+  if (problemNumber === 22 || problemNumber === 23 || problemNumber === 28 || problemNumber === 29) {
+    const match = text.match(/8진수\s*\$([^$]+)_8\$/);
+    return match ? match[1].trim() : null;
+  }
+
+  if (problemNumber === 24 || problemNumber === 25 || problemNumber === 30 || problemNumber === 31) {
+    const match = text.match(/16진수\s*\$\text\{([^}]+)\}_\{16\}\$/);
+    return match ? match[1].trim() : null;
+  }
+
+  if (problemNumber === 32) {
+    const match = text.match(/\$(-?\d+)_\{?10\}?\$/);
+    return match ? match[1].trim() : null;
+  }
+
+  return null;
+}
+
+function inferQuestionPart(question, problemNumber, explicitPart, config) {
+  if (explicitPart) return explicitPart;
+  const keyMap = config?.implicitPartKeyMaps?.[problemNumber];
+  if (!keyMap) return null;
+  const sourceKey = extractImplicitPartKey(question?.text || '', problemNumber);
+  return sourceKey ? keyMap[sourceKey] || null : null;
+}
+
+function annotateQuestionMetadata(questions, chapterId) {
+  const config = getExamFilterConfig(chapterId);
+  if (!Array.isArray(questions) || !config) return;
+  const marker = `__${chapterId}Annotated`;
+  if (questions[marker]) return;
+
+  const seenByProblem = {};
+
+  questions.forEach(q => {
+    const text = String(q?.text || '');
+    const match = text.match(/\[문제\s*0*(\d+)(?:\(([a-z])\))?\]/i);
+    const problemNumber = match ? parseInt(match[1], 10) : questionNumberFromId(q?.id);
+    const explicitPart = match ? (match[2] || null) : null;
+    const ordinal = seenByProblem[problemNumber] || 0;
+    seenByProblem[problemNumber] = ordinal + 1;
+
+    const inferredPart = inferQuestionPart(q, problemNumber, explicitPart, config);
+
+    q.__sourceProblemNumber = Number.isFinite(problemNumber) ? problemNumber : NaN;
+    q.__sourceProblemPart = inferredPart;
+    q.__sourcePartExplicit = Boolean(explicitPart);
+    q.__sourceProblemOrdinal = ordinal;
+
+    const assignmentParts = config.assignmentParts?.get(problemNumber);
+    q.__assignmentProblem = Boolean(
+      (assignmentParts && inferredPart && assignmentParts.has(inferredPart)) ||
+      (assignmentParts && !inferredPart && assignmentParts.has('*'))
+    );
+
+    const pairKey = inferredPart ? `${problemNumber}${inferredPart}` : null;
+    q.__examFilterCore = Boolean(
+      (Number.isFinite(problemNumber) && config.coreWholeProblemSet && config.coreWholeProblemSet.has(problemNumber) && !inferredPart) ||
+      (pairKey && config.corePairSet && config.corePairSet.has(pairKey)) ||
+      q.__assignmentProblem
+    );
+  });
+
+  questions[marker] = true;
+}
+
+function getPracticeVisibleQuestionIds() {
+  if (isBatchMode()) return currentQuestions.map(q => q.id);
+  const hasFilter = Boolean(getExamFilterConfig(currentChapterId));
+  if (hasFilter && Array.isArray(practiceVisibleQuestionIds) && practiceVisibleQuestionIds.length) {
+    return [...practiceVisibleQuestionIds];
+  }
+  return currentQuestions.map(q => q.id);
+}
+
+function getPracticeVisibleQuestionCount() {
+  return getPracticeVisibleQuestionIds().length;
+}
+
+function refreshVisibleQuestionNumbers() {
+  let visibleIndex = 0;
+  document.querySelectorAll('#questions-container .question[data-qid]').forEach(card => {
+    const numEl = card.querySelector('.display-num');
+    if (!numEl) return;
+    if (card.style.display === 'none') return;
+    visibleIndex += 1;
+    numEl.textContent = `Problem ${String(visibleIndex).padStart(2, '0')}`;
+  });
+}
+
+function refreshPracticeScoreDisplay() {
+  updateScoreDisplay(getStorageKey(), getPracticeVisibleQuestionCount(), getPracticeVisibleQuestionIds());
+}
+
+function updateExamFilterStatus() {
+  const countEl = document.getElementById('exam-filter-count');
+  const stateEl = document.getElementById('exam-filter-state');
+  const config = getExamFilterConfig(currentChapterId);
+  if (!countEl || !stateEl || !config || isBatchMode()) return;
+
+  const total = currentQuestions.length;
+  const visible = getPracticeVisibleQuestionCount();
+  const hidden = Math.max(total - visible, 0);
+  const chapterMatch = String(currentChapterId || '').match(/^ch(\d+)$/i);
+  const chapterLabel = chapterMatch ? `챕터 ${chapterMatch[1]}` : '해당 챕터';
+
+  countEl.textContent = chapterExamFilterEnabled
+    ? `핵심 ${visible}문항 표시 · 전체 ${total}문항 중 ${hidden}문항 숨김`
+    : `전체 ${total}문항 표시`;
+
+  stateEl.textContent = chapterExamFilterEnabled
+    ? '숫자만 바뀐 반복형을 최대한 덜어내고, 계산 로직이 달라지거나 헷갈리기 쉬운 문제와 과제 필수 문제만 남겨서 보여줍니다.'
+    : `체크를 끄면 ${chapterLabel}의 모든 연습문제가 다시 표시됩니다.`;
+}
+
+function renderPracticeFilterBar() {
+  const host = document.getElementById('practice-filter-host');
+  const config = getExamFilterConfig(currentChapterId);
+  if (!host) return;
+
+  if (!config || isBatchMode()) {
+    host.innerHTML = '';
+    host.style.display = 'none';
+    return;
+  }
+
+  host.style.display = '';
+  host.innerHTML = `
+    <div class="practice-filter-panel">
+      <label class="practice-filter-toggle">
+        <input type="checkbox" id="exam-filter-toggle" ${chapterExamFilterEnabled ? 'checked' : ''}>
+        <span>핵심 문제 필터</span>
+      </label>
+      <div class="practice-filter-copy">
+        <div class="practice-filter-count" id="exam-filter-count"></div>
+        <div class="practice-filter-help" id="exam-filter-state"></div>
+        <div class="practice-filter-help">※ 과제 때 나온 문제는 필터가 켜져 있어도 반드시 포함됩니다.</div>
+      </div>
+    </div>
+  `;
+
+  const toggle = document.getElementById('exam-filter-toggle');
+  if (toggle) {
+    toggle.addEventListener('change', e => {
+      chapterExamFilterEnabled = Boolean(e.target.checked);
+      saveExamFilterPreference(chapterExamFilterEnabled);
+      applyPracticeVisibility();
+    });
+  }
+
+  updateExamFilterStatus();
+}
+
+function applyPracticeVisibility() {
+  const questionCards = document.querySelectorAll('#questions-container .question[data-qid]');
+  if (!questionCards.length) return;
+
+  const config = getExamFilterConfig(currentChapterId);
+  let visibleIds;
+  if (config && !isBatchMode()) {
+    visibleIds = currentQuestions
+      .filter(q => !chapterExamFilterEnabled || q.__examFilterCore)
+      .map(q => q.id);
+  } else {
+    visibleIds = currentQuestions.map(q => q.id);
+  }
+
+  const visibleSet = new Set(visibleIds);
+  practiceVisibleQuestionIds = visibleIds;
+
+  questionCards.forEach(card => {
+    card.style.display = visibleSet.has(card.dataset.qid) ? '' : 'none';
+  });
+
+  refreshVisibleQuestionNumbers();
+  refreshPracticeScoreDisplay();
+  updateExamFilterStatus();
+}
+
+function buildWrongNoteQuestionSnapshot(question) {
+  const base = {
+    questionType: question?.type || '',
+    questionText: question?.text || '',
+    explanation: question?.explanation || '',
+    hint: question?.hint || '',
+    modelAnswer: question?.modelAnswer || ''
+  };
+
+  if (question?.type === 'multiple-choice') {
+    return {
+      ...base,
+      choices: Array.isArray(question.choices) ? question.choices : [],
+      answer: question.answer ?? null,
+      accepted: []
+    };
+  }
+
+  if (question?.type === 'short-answer') {
+    return {
+      ...base,
+      choices: [],
+      answer: question.answer ?? null,
+      accepted: Array.isArray(question.accepted) ? question.accepted : []
+    };
+  }
+
+  if (question?.type === 'truth-table') {
+    return {
+      ...base,
+      choices: [],
+      answer: null,
+      accepted: [],
+      headers: Array.isArray(question.headers) ? question.headers : [],
+      data: Array.isArray(question.data) ? question.data : [],
+      answers: Array.isArray(question.answers) ? question.answers : [],
+      classificationChoices: Array.isArray(question.classificationChoices) ? question.classificationChoices : [],
+      classificationAnswer: typeof question.classificationAnswer === 'number' ? question.classificationAnswer : null
+    };
+  }
+
+  return {
+    ...base,
+    choices: [],
+    answer: null,
+    accepted: [],
+    headers: [],
+    data: [],
+    answers: [],
+    classificationChoices: [],
+    classificationAnswer: null
+  };
 }
 
 function shuffle(arr) {
@@ -134,6 +752,7 @@ async function loadQuestionSet(chapterId) {
   const res = await fetch(questionPath);
   if (!res.ok) throw new Error(`${chapterId} 문제 파일 로드 실패`);
   const data = await res.json();
+  annotateQuestionMetadata(data.questions || [], chapterId);
   mockQuestionBankCache[chapterId] = data;
   return data;
 }
@@ -275,9 +894,102 @@ async function generateMockQuestionsFromSelections(selections) {
   return { questions: assembled, summary };
 }
 
+async function generateAssignmentQuestions() {
+  const assembled = [];
+  const summary = [];
+
+  for (const chapter of MOCK_CHAPTER_OPTIONS) {
+    const data = await loadQuestionSet(chapter.id);
+    const chapterQuestions = (data.questions || []).filter(q => q.__assignmentProblem);
+    if (!chapterQuestions.length) continue;
+
+    chapterQuestions.forEach(q => {
+      assembled.push({
+        ...q,
+        mockSourceChapterId: chapter.id,
+        mockSourceTopicKey: 'assignment',
+        mockSourceTopicTitle: '과제풀이',
+        __assignmentCollectionLabel: (() => {
+          const chapterLabelMatch = chapter.title.match(/^Ch\.\d+/);
+          return chapterLabelMatch ? chapterLabelMatch[0] : chapter.title;
+        })()
+      });
+    });
+
+    summary.push({
+      chapterId: chapter.id,
+      title: chapter.title,
+      questionCount: chapterQuestions.length
+    });
+  }
+
+  return { questions: assembled, summary };
+}
+
 function chapterSelectionLabel(chapterId) {
   const found = MOCK_CHAPTER_OPTIONS.find(ch => ch.id === chapterId);
   return found ? found.title : chapterId;
+}
+
+function getBatchModeTitle() {
+  return isAssignment() ? '과제풀이' : '모의고사';
+}
+
+function getBatchWrongNoteLink() {
+  return '../wrong-notes/index.html';
+}
+
+function getBatchCompletionLinks(wrongCount) {
+  if (isAssignment()) {
+    return wrongCount > 0
+      ? ` · <a href="${getBatchWrongNoteLink()}" style="color:var(--accent); text-decoration:none">오답노트 보기 →</a>`
+      : '';
+  }
+
+  return `<a href="history.html" style="color:var(--accent); text-decoration:none">최근 기록 보기 →</a>${wrongCount > 0 ? ` · <a href="${getBatchWrongNoteLink()}" style="color:var(--accent); text-decoration:none">오답노트 보기 →</a>` : ''}`;
+}
+
+function renderBatchSession(summaryHtml, summaryLabel = '출제 구성') {
+  const container = document.getElementById("questions-container");
+  mockStartedAt = Date.now();
+  mockEndedAt = null;
+  mockSubmitted = false;
+
+  container.innerHTML = `
+    <div class="quiz-header" style="position:sticky; top:0; z-index:5; background:var(--bg, #fff); padding:12px 0; border-bottom:1px solid #ddd">
+      <div>
+        <div class="meta">경과 시간</div>
+        <div class="score" id="mock-timer">00:00</div>
+      </div>
+      <div>
+        <button class="btn-submit" id="mock-submit-btn" style="padding:10px 20px">제출</button>
+      </div>
+    </div>
+    <div class="note" style="margin:14px 0">
+      <span class="lbl">${summaryLabel}</span>
+      ${summaryHtml}
+    </div>
+    <div id="mock-questions">
+      ${currentQuestions.map((q, i) => renderQuestion(q, i)).join("")}
+    </div>
+  `;
+
+  container.querySelectorAll(".q-actions").forEach(el => { el.style.display = "none"; });
+
+  if (typeof renderMathInElement === "function") {
+    renderMathInElement(container, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$", right: "$", display: false}
+      ],
+      throwOnError: false
+    });
+  }
+  if (typeof initMathAnswerAssists === "function") initMathAnswerAssists(container);
+
+  mockTimerInt = setInterval(updateMockTimer, 500);
+  updateMockTimer();
+  document.getElementById("mock-submit-btn").addEventListener("click", confirmAndSubmitMock);
 }
 
 function getStorageKey() {
@@ -285,6 +997,8 @@ function getStorageKey() {
 }
 
 function isMock() { return currentMode === "mock"; }
+function isAssignment() { return currentMode === "assignment"; }
+function isBatchMode() { return isMock() || isAssignment(); }
 
 function isBlankUserAnswer(q, userAnswer) {
   if (q.type === "truth-table") {
@@ -363,18 +1077,35 @@ async function initPractice(arg1, arg2, arg3) {
     return;
   }
 
-  let questionPath;
-  if (window.location.pathname.includes('/subjects/')) {
-    questionPath = `../questions/${currentChapterId}.json`;
-  } else {
-    questionPath = `questions/${currentChapterId}.json`;
+  if (isAssignment() && currentChapterId === ASSIGNMENT_PAGE_ID) {
+    try {
+      const generation = await generateAssignmentQuestions();
+      currentQuestions = generation.questions;
+      const titleEl = document.getElementById('quiz-title');
+      if (titleEl) titleEl.textContent = '이산수학 과제풀이';
+      window.__assignmentGenerationSummary = generation.summary;
+      window.__assignmentChapterSelections = generation.summary.map(item => item.chapterId);
+      renderBatchSession(
+        generation.summary.map(item => `${item.title} · ${item.questionCount}문항`).join('<br>') || '과제로 지정된 문제가 아직 없습니다.',
+        '과제 구성'
+      );
+      updateApiStatus();
+      return;
+    } catch (e) {
+      const container = document.getElementById("questions-container");
+      if (container) {
+        container.innerHTML = `<div class="note err"><span class="lbl">오류</span>과제 문제를 불러올 수 없습니다: ${e.message}</div>`;
+      }
+      return;
+    }
   }
 
   try {
-    const res = await fetch(questionPath);
-    if (!res.ok) throw new Error("문제 파일 로드 실패");
-    const data = await res.json();
-    currentQuestions = data.questions;
+    const data = await loadQuestionSet(currentChapterId);
+    currentQuestions = Array.isArray(data.questions) ? data.questions : [];
+    chapterExamFilterEnabled = getExamFilterConfig(currentChapterId) && !isBatchMode()
+      ? loadExamFilterPreference(currentChapterId)
+      : false;
     if (data.title && document.getElementById("quiz-title")) {
       document.getElementById("quiz-title").textContent = data.title;
     }
@@ -387,7 +1118,7 @@ async function initPractice(arg1, arg2, arg3) {
     return;
   }
 
-  if (!isMock()) {
+  if (!isBatchMode()) {
     const storageKey = getStorageKey();
     saveProgress(storageKey, {});
     lockedQuestions.clear();
@@ -396,6 +1127,7 @@ async function initPractice(arg1, arg2, arg3) {
   if (isMock()) {
     renderMockIntro();
   } else {
+    renderPracticeFilterBar();
     renderPracticeAll();
   }
   updateApiStatus();
@@ -430,7 +1162,7 @@ function renderPracticeAll() {
     });
   }
 
-  updateScoreDisplay(getStorageKey(), currentQuestions.length);
+  applyPracticeVisibility();
   renderLastSessionBadge();
 }
 
@@ -544,7 +1276,7 @@ async function handleSubmit(e) {
       timestamp: Date.now()
     };
     saveProgress(storageKey, progress);
-    updateScoreDisplay(storageKey, currentQuestions.length);
+    refreshPracticeScoreDisplay();
 
     if (q.type === "multiple-choice") {
       const labels = document.querySelectorAll(`.choices[data-qid="${qid}"] label`);
@@ -612,14 +1344,16 @@ function handleReset(e) {
   const progress = loadProgress(storageKey);
   delete progress[qid];
   saveProgress(storageKey, progress);
-  updateScoreDisplay(storageKey, currentQuestions.length);
+  refreshPracticeScoreDisplay();
 }
 
 async function handleEndSession() {
   const storageKey = getStorageKey();
   const progress = loadProgress(storageKey);
-  const total = currentQuestions.length;
-  const correct = Object.values(progress).filter(p => p.verdict === "correct").length;
+  const visibleIds = new Set(getPracticeVisibleQuestionIds());
+  const relevantProgress = Object.fromEntries(Object.entries(progress).filter(([qid]) => visibleIds.has(qid)));
+  const total = getPracticeVisibleQuestionCount();
+  const correct = Object.values(relevantProgress).filter(p => p.verdict === "correct").length;
   const score = total > 0 ? correct / total : 0;
 
   const msgEl = document.getElementById("session-save-msg");
@@ -745,45 +1479,7 @@ async function startMock() {
   currentQuestions = generation.questions;
   window.__mockChapterSelections = [...mockChapterSelections];
   window.__mockGenerationSummary = generation.summary;
-  mockStartedAt = Date.now();
-  mockEndedAt = null;
-  mockSubmitted = false;
-
-  container.innerHTML = `
-    <div class="quiz-header" style="position:sticky; top:0; z-index:5; background:var(--bg, #fff); padding:12px 0; border-bottom:1px solid #ddd">
-      <div>
-        <div class="meta">경과 시간</div>
-        <div class="score" id="mock-timer">00:00</div>
-      </div>
-      <div>
-        <button class="btn-submit" id="mock-submit-btn" style="padding:10px 20px">제출</button>
-      </div>
-    </div>
-    <div class="note" style="margin:14px 0">
-      <span class="lbl">출제 구성</span>
-      ${generation.summary.map(item => `${item.title} · ${item.questionCount}문항`).join('<br>')}
-    </div>
-    <div id="mock-questions">
-      ${currentQuestions.map((q, i) => renderQuestion(q, i)).join("")}
-    </div>
-  `;
-
-  container.querySelectorAll(".q-actions").forEach(el => { el.style.display = "none"; });
-
-  if (typeof renderMathInElement === "function") {
-    renderMathInElement(container, {
-      delimiters: [
-        {left: "$$", right: "$$", display: true},
-        {left: "$", right: "$", display: false}
-      ],
-      throwOnError: false
-    });
-  }
-  if (typeof initMathAnswerAssists === "function") initMathAnswerAssists(container);
-
-  mockTimerInt = setInterval(updateMockTimer, 500);
-  updateMockTimer();
-  document.getElementById("mock-submit-btn").addEventListener("click", confirmAndSubmitMock);
+  renderBatchSession(generation.summary.map(item => `${item.title} · ${item.questionCount}문항`).join('<br>'));
 }
 
 function updateMockTimer() {
@@ -878,7 +1574,7 @@ async function submitMock() {
       verdict: result.verdict,
       score: result.score || 0,
       chapterId: q.mockSourceChapterId || currentChapterId,
-      topicTitle: q.mockSourceTopicTitle || ''
+      topicTitle: q.mockSourceTopicTitle || getBatchModeTitle()
     });
 
     if (result.verdict !== "correct") {
@@ -886,19 +1582,11 @@ async function submitMock() {
         chapterId: q.mockSourceChapterId || currentChapterId,
         questionId: q.id,
         questionOrder: index + 1,
-        questionType: q.type,
-        questionText: q.text || '',
-        choices: Array.isArray(q.choices) ? q.choices : [],
-        answer: q.answer ?? null,
-        accepted: Array.isArray(q.accepted) ? q.accepted : [],
-        explanation: result.explanation || q.explanation || '',
-        hint: q.hint || '',
-        modelAnswer: result.modelAnswer || q.modelAnswer || '',
-        headers: Array.isArray(q.headers) ? q.headers : [],
-        data: Array.isArray(q.data) ? q.data : [],
-        answers: Array.isArray(q.answers) ? q.answers : [],
-        classificationChoices: Array.isArray(q.classificationChoices) ? q.classificationChoices : [],
-        classificationAnswer: typeof q.classificationAnswer === 'number' ? q.classificationAnswer : null,
+        ...buildWrongNoteQuestionSnapshot({
+          ...q,
+          explanation: result.explanation || q.explanation || '',
+          modelAnswer: result.modelAnswer || q.modelAnswer || ''
+        }),
         userAnswer,
         verdict: result.verdict,
         mockSourceTopicKey: q.mockSourceTopicKey || '',
@@ -913,18 +1601,23 @@ async function submitMock() {
   const durationMs = mockEndedAt - mockStartedAt;
 
   // 저장
-  if (window.__db && window.__db.saveMockRecord) {
+  const saveFn = isAssignment() ? window.__db?.saveAssignmentRecord : window.__db?.saveMockRecord;
+  if (saveFn) {
     try {
-      await window.__db.saveMockRecord({
+      await saveFn({
         subjectId: currentSubjectId,
         score, correct: correctCount, total,
         durationMs, details, wrongNotes,
-        chapterSelections: Array.isArray(window.__mockChapterSelections) ? window.__mockChapterSelections : [],
-        generationSummary: Array.isArray(window.__mockGenerationSummary) ? window.__mockGenerationSummary : [],
+        chapterSelections: isAssignment()
+          ? (Array.isArray(window.__assignmentChapterSelections) ? window.__assignmentChapterSelections : [])
+          : (Array.isArray(window.__mockChapterSelections) ? window.__mockChapterSelections : []),
+        generationSummary: isAssignment()
+          ? (Array.isArray(window.__assignmentGenerationSummary) ? window.__assignmentGenerationSummary : [])
+          : (Array.isArray(window.__mockGenerationSummary) ? window.__mockGenerationSummary : []),
         date: new Date().toISOString()
       });
     } catch (err) {
-      console.warn("모의고사 저장 실패:", err);
+      console.warn(`${getBatchModeTitle()} 저장 실패:`, err);
     }
   }
 
@@ -943,7 +1636,7 @@ async function submitMock() {
       점수 <strong>${pct}%</strong> (${correctCount} / ${total}) ·
       소요시간 <strong>${mm}:${ss}</strong> ·
       ${wrongCount > 0 ? `오답노트 ${wrongCount}문항 갱신 · ` : ''}
-      기록이 저장되었습니다. <a href="history.html" style="color:var(--accent); text-decoration:none">최근 기록 보기 →</a>${wrongCount > 0 ? ` · <a href="../wrong-notes/index.html" style="color:var(--accent); text-decoration:none">오답노트 보기 →</a>` : ''}`;
+      기록이 저장되었습니다. ${getBatchCompletionLinks(wrongCount)}`;
     header.parentNode.insertBefore(summary, header.nextSibling);
   }
 
