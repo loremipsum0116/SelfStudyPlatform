@@ -399,6 +399,32 @@ function buildWholeProblemSet(spec) {
   return new Set((spec || []).filter(n => Number.isInteger(n)));
 }
 
+function buildNumberSet(spec) {
+  const result = [];
+  (spec || []).forEach(entry => {
+    if (Number.isInteger(entry)) {
+      result.push(entry);
+      return;
+    }
+
+    if (Array.isArray(entry) && entry.length >= 2) {
+      const start = parseInt(entry[0], 10);
+      const end = parseInt(entry[1], 10);
+      if (!Number.isFinite(start) || !Number.isFinite(end)) return;
+
+      const step = start <= end ? 1 : -1;
+      for (let n = start; step > 0 ? n <= end : n >= end; n += step) {
+        result.push(n);
+      }
+      return;
+    }
+
+    const parsed = parseInt(entry, 10);
+    if (Number.isFinite(parsed)) result.push(parsed);
+  });
+  return result;
+}
+
 const CH1_CORE_FILTER_PAIR_SET = buildPartPairSet(CH1_CORE_FILTER_SPEC.parts);
 const CH1_CORE_FILTER_WHOLE_PROBLEM_SET = buildWholeProblemSet(CH1_CORE_FILTER_SPEC.wholeProblems);
 const CH2_CORE_FILTER_PAIR_SET = buildPartPairSet(CH2_CORE_FILTER_SPEC);
