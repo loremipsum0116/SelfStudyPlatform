@@ -286,10 +286,9 @@ const CH3_ASSIGNMENT_PARTS = new Map([
 ]);
 const CH3_CORE_FILTER_SPEC = {
   wholeProblems: [
-    1, 2, 4, 6, 7, 9, 10, 11, 12, 13, 14, 15,
-    16, 17, 18, 19, 20, 21, 23, 24, 26, 27, 28, 29, 30, 31, 34,
-    35, 36, 37, 38, 39, 40, 41,
-    44, 45, 46, 48, 49, 50, 51, 52
+    1, 9, 11, 12,
+    21, 24, 26, 35, 39,
+    44, 48, 49, 51
   ]
 };
 
@@ -302,12 +301,9 @@ const CH4_ASSIGNMENT_PARTS = new Map([
 ]);
 const CH4_CORE_FILTER_SPEC = {
   wholeProblems: [
-    1, 2, 4, 5, 6,
-    7, 8, 10, 11, 12,
-    13, 14, 16,
-    17, 18, 19,
-    20, 22, 23, 25, 26, 27,
-    28, 29, 30, 31
+    1, 4, 7, 10,
+    13, 14, 17, 19, 22,
+    28, 29, 30
   ]
 };
 
@@ -316,8 +312,9 @@ const CH5_ASSIGNMENT_PARTS = new Map([
 ]);
 const CH5_CORE_FILTER_SPEC = {
   wholeProblems: [
-    1, 2, 4, 5, 6, 7, 8,
-    10, 11, 12, 13, 15, 17
+    1, 2, 4, 8,
+    10, 12, 13,
+    15, 17
   ]
 };
 
@@ -609,12 +606,25 @@ function updateExamFilterStatus() {
     : `전체 ${total}문항 표시`;
 
   stateEl.textContent = chapterExamFilterEnabled
-    ? '숫자만 바뀐 반복형을 최대한 덜어내고, 계산 로직이 달라지거나 헷갈리기 쉬운 문제와 과제 필수 문제만 남겨서 보여줍니다.'
+    ? '시험 직전 회수율이 높은 대표 유형, 논증 구조가 다른 문제, 누적 과제 문제만 남기는 compact 모드입니다.'
     : `체크를 끄면 ${chapterLabel}의 모든 연습문제가 다시 표시됩니다.`;
 }
 
+function ensurePracticeFilterHost() {
+  let host = document.getElementById('practice-filter-host');
+  if (host) return host;
+
+  const questionsContainer = document.getElementById('questions-container');
+  if (!questionsContainer || !questionsContainer.parentNode) return null;
+
+  host = document.createElement('div');
+  host.id = 'practice-filter-host';
+  questionsContainer.parentNode.insertBefore(host, questionsContainer);
+  return host;
+}
+
 function renderPracticeFilterBar() {
-  const host = document.getElementById('practice-filter-host');
+  const host = ensurePracticeFilterHost();
   const config = getExamFilterConfig(currentChapterId);
   if (!host) return;
 
@@ -629,7 +639,7 @@ function renderPracticeFilterBar() {
     <div class="practice-filter-panel">
       <label class="practice-filter-toggle">
         <input type="checkbox" id="exam-filter-toggle" ${chapterExamFilterEnabled ? 'checked' : ''}>
-        <span>핵심 문제 필터</span>
+        <span>고득점 compact 필터</span>
       </label>
       <div class="practice-filter-copy">
         <div class="practice-filter-count" id="exam-filter-count"></div>
