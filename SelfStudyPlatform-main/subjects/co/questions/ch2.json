@@ -1,0 +1,231 @@
+{
+  "questions": [
+    {
+      "id": "co-ch2-q001",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 01]</strong> 다음 중 <em>MIPS 명령어 형식</em>에 대한 설명으로 가장 적절한 것은?",
+      "choices": [
+        "<code>addi</code>는 R-type이고, 결과는 항상 <code>rd</code>에 저장된다.",
+        "<code>lw</code>는 J-type이며 26비트 점프 주소를 사용한다.",
+        "<code>jal</code>은 J-type 계열이며, 복귀 주소를 <code>$ra</code>에 저장한다.",
+        "<code>sll</code>은 I-type이며 immediate 필드 16비트를 사용한다."
+      ],
+      "answer": 2,
+      "explanation": "<code>jal</code>은 점프 계열 명령으로 J-type 형식에 속하며, 복귀 주소를 <code>$ra</code>에 저장한다. <code>addi</code>와 <code>lw</code>는 I-type이고, <code>sll</code>은 R-type이다."
+    },
+    {
+      "id": "co-ch2-q002",
+      "type": "short-answer",
+      "text": "<strong>[문제 02]</strong> MIPS에서 레지스터 번호 필드가 <code>5비트</code>인 이유를 쓰시오.",
+      "answer": "32개 레지스터를 표현하기 위해서",
+      "accepted": [
+        "32개 레지스터를 표현하기 위해서",
+        "32개의 레지스터를 표현하기 위해서",
+        "2^5=32개 레지스터를 표현하기 위해서",
+        "2^5=32이기 때문에",
+        "레지스터가 32개라서",
+        "32 registers"
+      ],
+      "explanation": "레지스터가 32개이므로 이를 구분하려면 2^5 = 32가 되어 5비트가 필요하다.",
+      "hint": "2의 몇 제곱이 32인지 떠올리면 된다."
+    },
+    {
+      "id": "co-ch2-q003",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 03]</strong> 함수 호출 전후에도 값이 유지되어야 하는 변수 보관용 레지스터로 가장 적절한 것은?",
+      "choices": [
+        "<code>$t0</code>",
+        "<code>$a0</code>",
+        "<code>$s0</code>",
+        "<code>$v0</code>"
+      ],
+      "answer": 2,
+      "explanation": "<code>$s0~$s7</code>은 callee-saved 레지스터라서 함수가 사용했다면 원래 값을 보존해야 한다. <code>$t</code> 계열은 caller-saved이고, <code>$a</code>는 인자, <code>$v</code>는 반환값용이다."
+    },
+    {
+      "id": "co-ch2-q004",
+      "type": "essay",
+      "text": "<strong>[문제 04]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 정수 배열 <code>A</code>의 시작 주소가 <code>$s3</code>에 있고, 정수 변수 <code>h</code>가 <code>$s2</code>에 있다고 하자. C 문장 <code>A[8] = h + A[8];</code> 를 수행하는 MIPS 어셈블리 코드를 쓰시오. <em>(배열 원소는 32비트 정수, 최소한의 핵심 명령어를 사용)</em>",
+      "explanation": "배열 원소 주소 계산, <code>lw/sw</code>, 레지스터 산술을 함께 묻는 문제다.",
+      "hint": "정수 배열의 각 원소는 4바이트이므로 <code>A[8]</code>의 오프셋부터 구하라.",
+      "modelAnswer": "정수 배열이므로 A[8]의 주소는 base + 8×4 = 32 바이트 오프셋이다. 따라서 <code>lw $t0, 32($s3)</code>로 A[8]을 읽고, <code>add $t0, $s2, $t0</code>로 h와 더한 뒤, <code>sw $t0, 32($s3)</code>로 다시 저장하면 된다."
+    },
+    {
+      "id": "co-ch2-q005",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 05]</strong> 다음 중 <code>lw</code> 명령이 <em>word alignment</em>를 만족하며 바로 접근할 수 있는 주소는?",
+      "choices": [
+        "<code>0x10010002</code>",
+        "<code>0x10010003</code>",
+        "<code>0x10010004</code>",
+        "<code>0x10010006</code>"
+      ],
+      "answer": 2,
+      "explanation": "워드(4바이트) 정렬은 주소가 4의 배수여야 한다. 네 선택지 중 0x10010004만 하위 2비트가 00이다."
+    },
+    {
+      "id": "co-ch2-q006",
+      "type": "short-answer",
+      "text": "<strong>[문제 06]</strong> 값 <code>0x12345678</code>가 주소 0번지부터 <em>리틀 엔디안</em> 방식으로 저장될 때, <code>주소 0번지</code>에 들어가는 바이트 값을 쓰시오. <em>(16진수로)</em>",
+      "answer": "0x78",
+      "accepted": [
+        "0x78",
+        "78",
+        "0X78"
+      ],
+      "explanation": "리틀 엔디안은 최하위 바이트(LSB)를 가장 낮은 주소에 저장한다. 따라서 주소 0번지에는 <code>0x78</code>이 들어간다.",
+      "hint": "리틀 엔디안은 '작은 쪽 바이트가 낮은 주소'이다."
+    },
+    {
+      "id": "co-ch2-q007",
+      "type": "essay",
+      "text": "<strong>[문제 07]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 레지스터 <code>$t0</code>에 32비트 상수 <code>0x12345678</code>을 넣으려고 한다. <code>lui</code>와 <code>ori</code>를 사용하여 MIPS 어셈블리 코드를 쓰시오.",
+      "explanation": "16비트 immediate만으로는 32비트 상수를 한 번에 넣을 수 없으므로 상위/하위 16비트를 나눠 넣어야 한다.",
+      "hint": "먼저 상위 16비트를 넣고, 그 다음 하위 16비트를 합쳐라.",
+      "modelAnswer": "<code>lui $t0, 0x1234</code>로 상위 16비트를 넣고 하위를 0으로 만든 뒤, <code>ori $t0, $t0, 0x5678</code>로 하위 16비트를 채우면 최종적으로 <code>$t0 = 0x12345678</code>이 된다."
+    },
+    {
+      "id": "co-ch2-q008",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 08]</strong> 2의 보수로 표현된 <em>음수</em>를 오른쪽 시프트할 때 부호를 유지해야 한다면 어떤 명령어를 써야 하는가?",
+      "choices": [
+        "<code>sll</code>",
+        "<code>srl</code>",
+        "<code>sra</code>",
+        "<code>ori</code>"
+      ],
+      "answer": 2,
+      "explanation": "<code>sra</code>(shift right arithmetic)는 최상위 비트(MSB)를 유지하면서 오른쪽 시프트하므로 음수의 부호를 보존한다. <code>srl</code>은 0을 채워 넣어 부호를 깨뜨릴 수 있다."
+    },
+    {
+      "id": "co-ch2-q009",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 09]</strong> <code>$s0 = 0xFFFFFFFF</code>, <code>$s1 = 0x00000001</code>일 때 다음 비교 결과로 옳은 것은?<br><br><code>slt  $t0, $s0, $s1</code><br><code>sltu $t1, $s0, $s1</code>",
+      "choices": [
+        "<code>$t0 = 0</code>, <code>$t1 = 0</code>",
+        "<code>$t0 = 0</code>, <code>$t1 = 1</code>",
+        "<code>$t0 = 1</code>, <code>$t1 = 0</code>",
+        "<code>$t0 = 1</code>, <code>$t1 = 1</code>"
+      ],
+      "answer": 2,
+      "explanation": "Signed 해석에서는 <code>0xFFFFFFFF = -1</code> 이므로 <code>-1 &lt; 1</code>이 참이라 <code>slt</code> 결과는 1이다. Unsigned 해석에서는 <code>0xFFFFFFFF</code>가 매우 큰 양수이므로 <code>sltu</code> 결과는 0이다."
+    },
+    {
+      "id": "co-ch2-q010",
+      "type": "essay",
+      "text": "<strong>[문제 10]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 현재 <code>beq $t0, $t1, LABEL</code> 명령어의 주소가 <code>0x00400020</code>이고, 분기 immediate 값이 <code>3</code>이라고 하자. MIPS의 <em>PC-relative</em> 규칙에 따라 분기 목표 주소 <code>LABEL</code>을 구하시오.",
+      "explanation": "분기 주소 계산은 <code>PC + 4 + (immediate &lt;&lt; 2)</code>를 사용한다.",
+      "hint": "먼저 다음 명령어 주소인 <code>PC+4</code>를 구한 뒤, immediate를 워드 단위에서 바이트 단위로 바꿔 더하라.",
+      "modelAnswer": "<code>beq</code>는 <code>PC + 4 + (immediate &lt;&lt; 2)</code>로 목표 주소를 계산한다. 여기서 <code>PC + 4 = 0x00400024</code>이고, <code>3 &lt;&lt; 2 = 12 = 0xC</code>이다. 따라서 목표 주소는 <code>0x00400024 + 0x0000000C = 0x00400030</code>이다."
+    },
+    {
+      "id": "co-ch2-q011",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 11]</strong> 다음 중 <em>프로시저 호출</em>에 대한 설명으로 가장 적절한 것은?",
+      "choices": [
+        "<code>jal</code>은 단순히 점프만 하고 복귀 주소는 저장하지 않는다.",
+        "<code>jr $ra</code>는 저장된 복귀 주소로 돌아갈 때 사용한다.",
+        "첫 네 개의 인자는 항상 <code>$v0~$v3</code>에 넣는다.",
+        "MIPS 32비트에서 스택은 낮은 주소에서 높은 주소 방향으로 자란다."
+      ],
+      "answer": 1,
+      "explanation": "<code>jr $ra</code>는 <code>$ra</code>에 저장된 복귀 주소로 점프할 때 사용한다. <code>jal</code>은 복귀 주소를 <code>$ra</code>에 저장하고, 첫 네 개 인자는 <code>$a0~$a3</code>, 스택은 높은 주소에서 낮은 주소 방향으로 자란다."
+    },
+    {
+      "id": "co-ch2-q014",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 12]</strong> 다음 명령어를 수행한 뒤 <code>$t0</code>의 값으로 옳은 것은?<br><br><pre><code>addi $t0, $zero, 0xFFFF</code></pre>",
+      "choices": [
+        "<code>0x0000FFFF</code>",
+        "<code>0xFFFFFFFF</code>",
+        "<code>0x00000000</code>",
+        "<code>0x7FFFFFFF</code>"
+      ],
+      "answer": 1,
+      "explanation": "<code>addi</code>의 immediate는 sign extension된다. 따라서 <code>0xFFFF</code>는 32비트로 확장될 때 <code>0xFFFFFFFF</code>(= -1)로 해석된다. 그래서 결과는 <code>$t0 = 0xFFFFFFFF</code>이다.",
+      "hint": "같은 16비트 immediate라도 <code>addi</code>와 <code>ori</code>는 확장 방식이 다르다."
+    },
+    {
+      "id": "co-ch2-q015",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 13]</strong> 메모리 주소 <code>0x10010000</code>에 바이트 값 <code>0xFF</code>가 저장되어 있다고 하자. 다음 명령을 실행했을 때 결과로 옳은 것은?<br><br><code>lb  $t0, 0($s0)</code><br><code>lbu $t1, 0($s0)</code><br><em>(단, <code>$s0 = 0x10010000</code>)</em>",
+      "choices": [
+        "<code>$t0 = 0x000000FF</code>, <code>$t1 = 0xFFFFFFFF</code>",
+        "<code>$t0 = 0xFFFFFFFF</code>, <code>$t1 = 0x000000FF</code>",
+        "<code>$t0 = 0x000000FF</code>, <code>$t1 = 0x000000FF</code>",
+        "<code>$t0 = 0xFFFFFFFF</code>, <code>$t1 = 0xFFFFFFFF</code>"
+      ],
+      "answer": 1,
+      "explanation": "<code>lb</code>는 1바이트를 읽은 뒤 sign extension을 하고, <code>lbu</code>는 zero extension을 한다. 따라서 바이트 값 <code>0xFF</code>는 <code>lb</code>에서는 <code>0xFFFFFFFF</code>(= -1), <code>lbu</code>에서는 <code>0x000000FF</code>(= 255)로 들어간다.",
+      "hint": "핵심은 <code>signed load</code>인지 <code>unsigned load</code>인지다."
+    },
+    {
+      "id": "co-ch2-q016",
+      "type": "essay",
+      "text": "<strong>[문제 14]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 의사 명령어 <code>blt $t0, $t1, LABEL</code>를 실제 MIPS 명령어들로 풀어 쓰시오.",
+      "explanation": "<code>blt</code>는 실제 하드웨어 명령이 아니라 비교와 분기를 조합한 pseudo instruction이다.",
+      "hint": "먼저 <code>slt</code>로 비교 결과를 만든 뒤, 그 값을 보고 분기하면 된다.",
+      "modelAnswer": "<code>blt</code>는 실제 명령어가 아니므로 어셈블러가 보통 다음처럼 풀어 쓴다.<br><pre><code>slt $at, $t0, $t1\nbne $at, $zero, LABEL</code></pre><br>먼저 <code>slt</code>로 <code>$t0 &lt; $t1</code>이면 <code>$at = 1</code>, 아니면 0을 만든 뒤, <code>bne</code>로 그 결과가 0이 아닐 때 <code>LABEL</code>로 분기한다."
+    },
+    {
+      "id": "co-ch2-q017",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 15]</strong> 주소 <code>0x00400020</code>에 있는 명령어가 <code>jal Proc</code>라면, 실행 직후 <code>$ra</code>에 저장되는 값으로 옳은 것은?",
+      "choices": [
+        "<code>0x00400020</code>",
+        "<code>0x00400021</code>",
+        "<code>0x00400024</code>",
+        "<code>Proc</code>의 시작 주소"
+      ],
+      "answer": 2,
+      "explanation": "<code>jal</code>은 점프하면서 복귀 주소로 <code>PC + 4</code>를 <code>$ra</code>에 저장한다. 따라서 현재 명령어 주소가 <code>0x00400020</code>이면 <code>$ra = 0x00400024</code>이다.",
+      "hint": "<code>jal</code>의 핵심은 jump + link, 즉 점프와 복귀주소 저장이다."
+    },
+    {
+      "id": "co-ch2-q018",
+      "type": "essay",
+      "text": "<strong>[문제 16]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 어떤 <em>non-leaf procedure</em>가 <code>$s0</code>를 사용하고, 내부에서 다른 함수를 한 번 더 호출하려고 한다. 이때 호출 전후에 <code>$ra</code>와 <code>$s0</code>를 보존하기 위한 최소한의 핵심 <em>prologue/epilogue</em> 코드를 쓰시오. <em>(스택 사용)</em>",
+      "explanation": "non-leaf procedure는 자신도 또 다른 함수를 호출하므로 <code>$ra</code>를 반드시 보존해야 하고, 사용한 <code>$s</code> 레지스터도 복원해야 한다.",
+      "hint": "필요한 것은 스택 공간 확보 → 저장 → 복원 → 스택 정리의 흐름이다.",
+      "modelAnswer": "한 예는 다음과 같다.<br><pre><code>Proc:\n    addi $sp, $sp, -8\n    sw   $ra, 4($sp)\n    sw   $s0, 0($sp)\n    ...                    # 본문, 필요하면 jal로 다른 함수 호출\n    lw   $s0, 0($sp)\n    lw   $ra, 4($sp)\n    addi $sp, $sp, 8\n    jr   $ra</code></pre><br>이 함수는 다른 함수를 호출하는 non-leaf procedure이므로 <code>$ra</code>를 저장해야 한다. 또한 <code>$s0</code>는 callee-saved 레지스터이므로 사용했다면 원래 값을 복원해야 한다."
+    },
+    {
+      "id": "co-ch2-q019",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 17]</strong> 다음 명령어를 수행한 뒤 <code>$t0</code>의 값으로 옳은 것은?<br><br><pre><code>ori $t0, $zero, 0xFFFF</code></pre>",
+      "choices": [
+        "<code>0xFFFFFFFF</code>",
+        "<code>0x0000FFFF</code>",
+        "<code>0xFFFF0000</code>",
+        "<code>0x00000000</code>"
+      ],
+      "answer": 1,
+      "explanation": "<code>ori</code>의 immediate는 zero extension된다. 따라서 <code>0xFFFF</code>는 32비트로 확장될 때 <code>0x0000FFFF</code>가 되며, 여기에 <code>$zero</code>와 OR를 하면 결과도 그대로 <code>0x0000FFFF</code>이다.",
+      "hint": "<code>addi</code>와 달리 <code>ori</code>는 sign extension이 아니라 zero extension이다."
+    },
+    {
+      "id": "co-ch2-q012",
+      "type": "essay",
+      "text": "<strong>[과제 출제 문제 2.1]</strong> 다음 C 문장에 해당하는 MIPS 어셈블리 코드를 보여라. 변수 <code>f</code>, <code>g</code>, <code>h</code>, <code>i</code>는 32비트 정수이다. C 변수 <code>f</code>, <code>g</code>, <code>h</code>는 각각 레지스터 <code>$s0</code>, <code>$s1</code>, <code>$s2</code>에 있다고 가정한다. 최소한의 MIPS 어셈블리 명령어를 사용하라. C 문장: <code>f = g + (h - 5);</code>",
+      "explanation": "괄호 안의 <code>h - 5</code>를 먼저 계산한 뒤, 그 결과를 <code>g</code>와 더해야 한다.",
+      "hint": "MIPS에는 보통 <code>subi</code>가 없으므로 immediate에 음수를 넣는 방식을 떠올리면 된다.",
+      "modelAnswer": "가능한 정답의 한 예는 다음과 같다.<br><pre><code>addi $t0, $s2, -5\nadd  $s0, $s1, $t0</code></pre><br>먼저 <code>addi</code>로 <code>h - 5</code>를 구한 뒤, 그 결과를 <code>g</code>와 더해 <code>f</code>(<code>$s0</code>)에 저장한다. 같은 수의 명령어를 쓰는 등가 해답으로 <code>addi $s0, $s2, -5</code> 후 <code>add $s0, $s1, $s0</code>도 가능하다."
+    },
+    {
+      "id": "co-ch2-q013",
+      "type": "essay",
+      "text": "<strong>[과제 출제 문제 2.5]</strong> 값 <code>0xabcdef12</code>가 리틀 엔디안 컴퓨터와 빅 엔디안 컴퓨터에서 메모리에 어떻게 저장되는지 보여라. 단, 이 값은 주소 0번지에 저장되고 워드 크기는 4바이트라고 가정한다.",
+      "explanation": "32비트 값을 바이트 단위로 나누고, 낮은 주소부터 어느 순서로 놓이는지 비교하면 된다.",
+      "hint": "상위 바이트부터 먼저 잘라 본 뒤, big/little endian의 규칙을 각각 적용하라.",
+      "modelAnswer": "32비트 값 <code>0xabcdef12</code>를 바이트로 나누면 상위부터 <code>ab</code>, <code>cd</code>, <code>ef</code>, <code>12</code>이다. 빅 엔디안은 가장 중요한 바이트(MSB)를 가장 낮은 주소에 두므로 주소 0~3에 차례로 <code>ab, cd, ef, 12</code>가 저장된다. 리틀 엔디안은 가장 덜 중요한 바이트(LSB)를 가장 낮은 주소에 두므로 주소 0~3에 차례로 <code>12, ef, cd, ab</code>가 저장된다."
+    },
+    {
+      "id": "co-ch2-q020",
+      "type": "essay",
+      "text": "<strong>[과제 출제 문제 2.21]</strong> 레지스터 <code>$t0</code>가 <code>0x00101000</code> 값을 갖는다고 가정했을 때 다음 명령어 시퀀스를 수행한 후의 <code>$t2</code> 값은?<br><pre><code>slt  $t2, $0, $t0\nbne  $t2, $0, ELSE\nj    DONE\nELSE: addi $t2, $t2, 2\nDONE:</code></pre>",
+      "explanation": "<code>slt</code> 결과와 <code>bne</code> 분기 여부를 차례대로 추적하면 된다.",
+      "hint": "먼저 <code>0 &lt; $t0</code> 인지를 판단하라.",
+      "modelAnswer": "먼저 <code>slt $t2, $0, $t0</code>는 “<code>0 &lt; $t0</code> 이면 <code>$t2 = 1</code>, 아니면 0”이라는 뜻이다. 여기서 <code>$t0 = 0x00101000</code>은 양수이므로 첫 번째 명령 후 <code>$t2 = 1</code>이다. 다음 <code>bne $t2, $0, ELSE</code>는 <code>$t2</code>와 <code>$0</code>가 다르면 ELSE로 분기하라는 뜻인데, 현재 <code>$t2 = 1</code>이므로 분기 조건이 참이다. 따라서 <code>j DONE</code>은 실행되지 않고 ELSE의 <code>addi $t2, $t2, 2</code>가 수행된다. 결과적으로 <code>$t2 = 3</code>, 즉 <code>0x00000003</code>이다."
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+CH1 Revision Report
+===================
+
+Purpose
+-------
+Align Ch.1 so that the concept page contains only pure Chapter 1 material, and align the practice set to that scope.
+
+Files changed
+-------------
+1. subjects/co/concepts/ch1.html
+2. subjects/co/practice/ch1.html
+3. subjects/co/questions/ch1.json
+4. subjects/co/index.html
+
+Concept page changes
+--------------------
+- Removed mixed Chapter 2 content from Ch.1 concept page:
+  * "Chapter 2. 명령어 — 컴퓨터 언어"
+  * "Chapter 2 (이어서). 명령어 형식 & 레지스터"
+  * MIPS architecture section
+  * number representation section (unsigned, sign-magnitude, 1's complement, 2's complement, sign extension, bias)
+- Renamed the chapter title from "컴퓨터 추상화와 수 표현 기초" to "컴퓨터 추상화와 기술".
+- Rewrote the deck/classifier/TOC so Ch.1 explicitly represents only Chapter 1 topics.
+- Removed incidental MIPS-specific examples inside Chapter 1 text where they made the scope ambiguous.
+- Corrected the power formula label from "Dynamic Energy" to "Dynamic Power".
+- Added a supporting note for power-calculation problems: if leakage current is assumed constant, static power can be modeled as proportional to voltage.
+- Corrected the sample CPI text so Code2 CPI is shown as 1.5 instead of an ambiguous range.
+
+Practice changes
+----------------
+- Kept all assignment-labeled questions unchanged.
+- Replaced general questions 14-19 because they belonged to mixed Chapter 2 / number representation content.
+
+Question replacements
+---------------------
+- Q14: 8-bit two's-complement range  ->  server characteristics
+- Q15: two's-complement interpretation/sign extension  ->  SI vs IEC and 512GB display explanation
+- Q16: sign extension concept  ->  cloud vs cluster/supercomputer comparison
+- Q17: signed overflow rule  ->  big.LITTLE purpose
+- Q18: bias representation  ->  volatile vs non-volatile memory identification
+- Q19: MIPS architecture  ->  ILP vs TLP
+
+Rationale
+---------
+- The removed questions depended on content that was previously mixed into the Ch.1 page from later material.
+- The new questions broaden Ch.1 coverage so the practice set better reflects the full Chapter 1 concept page (system categories, units, cloud, SoC/power efficiency, memory type, parallelism).
+- Assignment-labeled questions were preserved exactly as requested.

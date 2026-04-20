@@ -1,0 +1,86 @@
+CH3 PRACTICE REPORT
+===================
+
+Purpose
+-------
+Create a Chapter 3 practice page that stays strictly inside the current Ch.3 concept scope of the project.
+Assignment problems were re-checked against the current Ch.1 / Ch.2 / Ch.3 split before selecting the final set.
+
+Files updated
+-------------
+1. subjects/co/practice/ch3.html
+2. subjects/co/questions/ch3.json
+3. subjects/co/index.html
+4. CH3_PRACTICE_REPORT.txt
+
+Question policy
+---------------
+- Total questions: 20
+- Original Ch.3 practice questions: 14
+- Assignment-derived questions included without scope conflict: 6
+
+Assignment review result
+------------------------
+Assignment 1 problems reviewed:
+- 1.5
+- 1.7
+- 1.9
+
+Assignment 2 problems reviewed:
+- 2.1
+- 2.5
+- 2.10.1 ~ 2.10.6
+- 2.21
+
+Included in Ch.3 practice
+-------------------------
+- 2.10.1
+- 2.10.2
+- 2.10.3
+- 2.10.4
+- 2.10.5
+- 2.10.6
+
+Excluded from Ch.3 practice
+---------------------------
+- Assignment 1 entire set (already belongs to Ch.1 scope)
+- 2.1
+- 2.5
+- 2.21
+
+Reason for exclusion
+--------------------
+- Assignment 1 is purely aligned with the current Ch.1 performance / power scope.
+- 2.1, 2.5, and 2.21 are already aligned with the current Ch.2 concept side and were previously reflected there.
+
+Replacement / composition policy
+--------------------------------
+The non-assignment portion was built only from topics already present on the current Ch.3 concept page:
+- signed / unsigned overflow rules
+- MIPS overflow behavior and arithmetic instruction distinction
+- exception vs interrupt
+- CP0 and TLB basics
+- multiplier hardware evolution and Hi / Lo usage
+- division result placement and divide-by-zero caution
+- IEEE 754 single precision format and special exponent meanings
+- decimal real number to IEEE 754 conversion
+
+Scope guard
+-----------
+The final Ch.3 practice set is restricted to topics explicitly covered on the current Ch.3 concept page:
+- integer add / subtract overflow
+- exception, interrupt, CP0, EPC / Cause / Status / BadVAddr, TLB basics
+- multiplication / division hardware and MIPS instructions
+- Hi / Lo registers
+- floating point normalization, IEEE 754, NaN / Infinity / denormal
+- decimal real to IEEE 754 conversion
+
+Notes
+-----
+- Assignment-derived problems are limited to the 2.10 series, which was previously excluded from Ch.2 because of signed overflow and exception semantics.
+- The 2.10 series is now included in Ch.3 with the core assignment problem stem preserved, while platform-specific note / hint text was added for study clarity, and labeled as assignment problems.
+- Ch.3 practice is now linked from the Computer Organization subject hub.
+
+Post-review refinement
+----------------------
+- Refined the model answers for 2.10.1 and 2.10.5 so that they explicitly separate the wrapped 32-bit bit pattern from the strict MIPS architectural meaning when signed overflow occurs.

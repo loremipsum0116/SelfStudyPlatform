@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script type="module" src="../../shared/auth-guard.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>컴퓨터구조 · 과목 허브</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../shared/styles.css" />
+
+  <style>
+    .md-body h2{
+      display:flex; align-items:baseline; gap:18px;
+      border-bottom:2px solid var(--ink); padding-bottom:10px; margin:52px 0 24px;
+      font-family:var(--serif); font-size:30px; font-weight:700; letter-spacing:-.01em;
+      scroll-margin-top:20px;
+    }
+    .md-body h2::before{
+      content:"§"; font-family:var(--mono); font-size:12px; color:var(--accent);
+      letter-spacing:.15em; padding-top:4px;
+    }
+    .md-body h3{ margin-top:28px; }
+    .md-body h4{ margin-top:18px; }
+    .md-body blockquote{
+      margin:16px 0; padding:16px 20px; border:1px solid var(--ink);
+      border-left:4px solid var(--warn); background:var(--warn-soft); font-size:14.5px;
+    }
+    .md-body blockquote p:first-child{ margin-top:0; }
+    .md-body blockquote p:last-child{ margin-bottom:0; }
+    .md-body pre{
+      margin:16px 0; padding:16px 18px; overflow:auto;
+      background:#171717; color:#f4f1ea; border:1px solid #171717;
+      font-family:var(--mono); font-size:13px; line-height:1.6;
+    }
+    .md-body pre code{
+      background:transparent; color:inherit; padding:0; border-radius:0; font-size:inherit;
+    }
+    .md-body hr{
+      border:none; border-top:1px dashed rgba(26,26,26,.28); margin:28px 0;
+    }
+    .md-body > *:first-child{ margin-top:0; }
+    .chapter-list{ list-style:none; padding:0; margin:0; }
+    .chapter-item{
+      border:1px solid #ddd; border-radius:8px; padding:16px; margin:12px 0;
+      display:flex; justify-content:space-between; align-items:center; gap:16px;
+      background:#fff;
+    }
+    .chapter-item .title{ font-weight:600; }
+    .chapter-item .summary{ font-size:13px; color:#666; margin-top:4px; }
+    .chapter-item .links a{
+      margin-left:12px; text-decoration:none; color:var(--accent); font-weight:600;
+    }
+    .subject-note{
+      border:1px solid #d9d9f0; border-radius:10px; padding:18px 20px; background:#fff; margin-top:28px;
+    }
+    .subject-note h2{ margin-top:0; font-size:22px; border:none; padding:0; font-family:var(--serif); }
+    @media (max-width: 720px){
+      .chapter-item{ align-items:flex-start; flex-direction:column; }
+      .chapter-item .links a{ margin-left:0; margin-right:12px; }
+    }
+  </style>
+
+</head>
+<body>
+  <div class="wrap">
+    <div class="subject-hub">
+      <div class="topbar">
+        <a href="../../dashboard.html">← 대시보드</a>
+        <div class="crumbs"><span>Computer Organization</span><span class="sep">/</span><span class="now">Concept Hub</span></div>
+        <span></span>
+      </div>
+
+      <header class="masthead">
+        <div class="kicker"><span>Computer Organization</span><span>Concepts &amp; Practice</span></div>
+        <h1 class="title">컴퓨터구조<br><em>과목 허브</em></h1>
+        <p class="deck">업로드한 중간고사 요약본을 바탕으로 개념 정리 페이지를 구성했고, Ch.1은 순수 챕터 1 범위만 남도록 다시 정리했습니다.</p>
+      </header>
+
+      <ul class="chapter-list">
+        <li class="chapter-item">
+          <div>
+            <div class="title">Ch.1 컴퓨터 추상화와 기술</div>
+            <div class="summary">트랜지스터·메모리·성능·전력 장벽까지의 순수 Ch.1 범위</div>
+          </div>
+          <div class="links">
+            <a href="concepts/ch1.html">개념</a>
+            <a href="practice/ch1.html">문제풀이</a>
+          </div>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="title">Ch.2 MIPS 명령어와 레지스터 · 제어 흐름</div>
+            <div class="summary">명령어 형식, 레지스터, load/store, 분기, 프로시저, 주소 계산</div>
+          </div>
+          <div class="links">
+            <a href="concepts/ch2.html">개념</a>
+            <a href="practice/ch2.html">문제풀이</a>
+          </div>
+        </li>
+        <li class="chapter-item">
+          <div>
+            <div class="title">Ch.3 컴퓨터 연산과 부동소수점</div>
+            <div class="summary">오버플로우, 예외·인터럽트, 곱셈·나눗셈, IEEE 754</div>
+          </div>
+          <div class="links">
+            <a href="concepts/ch3.html">개념</a>
+            <a href="practice/ch3.html">문제풀이</a>
+          </div>
+        </li>
+      </ul>
+
+      <div class="subject-note">
+        <h2>안내</h2>
+        <p>현재는 <strong>Ch.1~Ch.3 문제풀이</strong>까지 연결했습니다. 컴퓨터구조 모의고사와 오답노트는 아직 추가되지 않았습니다.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

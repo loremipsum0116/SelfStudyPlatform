@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script type="module" src="../../../shared/auth-guard.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ch.2 MIPS 명령어와 레지스터 · 제어 흐름 · 개념 정리</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+  <script defer src="../../../shared/katex-boot.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../shared/styles.css">
+
+  <style>
+    .md-body h2{
+      display:flex; align-items:baseline; gap:18px;
+      border-bottom:2px solid var(--ink); padding-bottom:10px; margin:52px 0 24px;
+      font-family:var(--serif); font-size:30px; font-weight:700; letter-spacing:-.01em;
+      scroll-margin-top:20px;
+    }
+    .md-body h2::before{
+      content:"§"; font-family:var(--mono); font-size:12px; color:var(--accent);
+      letter-spacing:.15em; padding-top:4px;
+    }
+    .md-body h3{ margin-top:28px; }
+    .md-body h4{ margin-top:18px; }
+    .md-body blockquote{
+      margin:16px 0; padding:16px 20px; border:1px solid var(--ink);
+      border-left:4px solid var(--warn); background:var(--warn-soft); font-size:14.5px;
+    }
+    .md-body blockquote p:first-child{ margin-top:0; }
+    .md-body blockquote p:last-child{ margin-bottom:0; }
+    .md-body pre{
+      margin:16px 0; padding:16px 18px; overflow:auto;
+      background:#171717; color:#f4f1ea; border:1px solid #171717;
+      font-family:var(--mono); font-size:13px; line-height:1.6;
+    }
+    .md-body pre code{
+      background:transparent; color:inherit; padding:0; border-radius:0; font-size:inherit;
+    }
+    .md-body hr{
+      border:none; border-top:1px dashed rgba(26,26,26,.28); margin:28px 0;
+    }
+    .md-body > *:first-child{ margin-top:0; }
+    .chapter-list{ list-style:none; padding:0; margin:0; }
+    .chapter-item{
+      border:1px solid #ddd; border-radius:8px; padding:16px; margin:12px 0;
+      display:flex; justify-content:space-between; align-items:center; gap:16px;
+      background:#fff;
+    }
+    .chapter-item .title{ font-weight:600; }
+    .chapter-item .summary{ font-size:13px; color:#666; margin-top:4px; }
+    .chapter-item .links a{
+      margin-left:12px; text-decoration:none; color:var(--accent); font-weight:600;
+    }
+    .subject-note{
+      border:1px solid #d9d9f0; border-radius:10px; padding:18px 20px; background:#fff; margin-top:28px;
+    }
+    .subject-note h2{ margin-top:0; font-size:22px; border:none; padding:0; font-family:var(--serif); }
+    @media (max-width: 720px){
+      .chapter-item{ align-items:flex-start; flex-direction:column; }
+      .chapter-item .links a{ margin-left:0; margin-right:12px; }
+    }
+  </style>
+
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a href="../index.html">← 허브</a>
+    <div class="crumbs"><span>Ch.02</span><span class="sep">/</span><span class="now">개념 정리</span></div>
+    <a href="ch3.html">다음 챕터 →</a>
+  </div>
+
+  <header class="masthead">
+    <div class="kicker"><span>Computer Organization · Chapter 02</span><span>Concepts</span></div>
+    <h1 class="title">MIPS 명령어와<br><em>레지스터 · 제어 흐름</em></h1>
+    <p class="deck">명령어 형식, 레지스터 규약, load/store, 분기, 프로시저 호출, 주소 계산과 인코딩까지 시험 포인트 중심으로 정리합니다.</p>
+  </header>
+
+  <div class="classifier">
+    <h2>이 문서의 분류 기준</h2>
+    <p style="margin:4px 0 12px;font-size:14.5px;color:var(--ink-soft)">2부는 <strong>명령어 형식 → 메모리/분기 → 프로시저와 주소 계산 → 인코딩</strong> 순서로 압축했습니다.</p>
+    <ul>
+          <li><b>§1</b>명령어 형식과 레지스터 — R/I/J 타입, MIPS 32개 레지스터, caller/callee 규약</li>
+          <li><b>§2</b>데이터 이동과 연산 — load/store, immediate, shift, bitwise 연산</li>
+          <li><b>§3</b>제어 흐름 — 분기, 점프, 의사 명령어, basic block</li>
+          <li><b>§4</b>프로시저와 주소 계산 — stack frame, addressing mode, PC-relative, pseudo-direct</li>
+          <li><b>§5</b>시험 대비 마무리 — 인코딩/디코딩, 함정 정리, 최종 체크리스트</li>
+    </ul>
+  </div>
+
+  <nav class="toc">
+    <span class="lbl">Contents</span>
+    <ol>
+      <li><a href="#h-1"><span class="n">01</span>2-4. MIPS 명령어 형식 🔥🔥</a></li>
+      <li><a href="#h-5"><span class="n">02</span>2-5. MIPS 레지스터 32개 🔥🔥🔥 반드시 암기</a></li>
+      <li><a href="#h-8"><span class="n">03</span>2-6. 메모리 피연산자 (Load/Store)</a></li>
+      <li><a href="#h-13"><span class="n">04</span>2-7. 상수/즉시값 피연산자</a></li>
+      <li><a href="#h-17"><span class="n">05</span>2-8. 논리 연산</a></li>
+      <li><a href="#h-24"><span class="n">06</span>2-9. 분기(Branch) 연산</a></li>
+      <li><a href="#h-30"><span class="n">07</span>2-10. 의사 명령어 (Pseudo Instructions) 🔥</a></li>
+      <li><a href="#h-32"><span class="n">08</span>2-11. 기본 블록 (Basic Block)</a></li>
+      <li><a href="#h-33"><span class="n">09</span>2-12. 프로시저 호출 (Procedure Call) 🔥🔥</a></li>
+      <li><a href="#h-40"><span class="n">10</span>2-13. 문자와 문자열</a></li>
+      <li><a href="#h-44"><span class="n">11</span>2-14. MIPS 주소 지정 방식 (Addressing Modes) 🔥🔥</a></li>
+      <li><a href="#h-45"><span class="n">12</span>2-15. 분기 주소 계산 🔥🔥🔥 시험 필출</a></li>
+      <li><a href="#h-51"><span class="n">13</span>2-16. 명령어 인코딩/디코딩 변환 🔥🔥 시험 필출</a></li>
+      <li><a href="#h-55"><span class="n">14</span>2-17. 마지막 체크 — 오류 &amp; 함정</a></li>
+      <li><a href="#h-56"><span class="n">15</span>🔥 시험 직전 최종 체크리스트</a></li>
+    </ol>
+  </nav>
+
+  <div class="md-body">
+<h2 id="h-1">2-4. MIPS 명령어 형식 🔥🔥</h2>
+<p>MIPS는 32비트 고정 길이. 3가지 포맷.</p>
+<h3 id="h-2">(1) R-Type (Register) — 산술/논리 연산</h3>
+<pre><code>| op (6) | rs (5) | rt (5) | rd (5) | shamt (5) | funct (6) |
+</code></pre>
+<ul>
+<li><strong>op</strong>: Operation code.</li>
+<li><strong>rs</strong>: 첫 번째 소스 레지스터.</li>
+<li><strong>rt</strong>: 두 번째 소스 레지스터.</li>
+<li><strong>rd</strong>: 목적지 레지스터 (결과 저장).</li>
+<li><strong>shamt</strong>: Shift Amount (시프트 연산용).</li>
+<li><strong>funct</strong>: op가 <code>0</code>일 때 실제 연산 종류 결정.</li>
+</ul>
+<p>예) <code>add $t0, $s1, $s2</code> → <code>$s1 + $s2 → $t0</code></p>
+<ul>
+<li>op=0, funct=32(add), funct=34(sub)</li>
+<li>shamt=0 (시프트 아님)</li>
+</ul>
+<p><strong>레지스터가 5비트인 이유</strong>: 2⁵ = 32개 레지스터를 표현하기 위함.</p>
+<h3 id="h-3">(2) I-Type (Immediate) — 즉시값 사용</h3>
+<pre><code>| op (6) | rs (5) | rt (5) | constant or address (16) |
+</code></pre>
+<ul>
+<li><strong>constant</strong>: <code>addi</code>의 경우 <strong>상수값</strong>으로 해석.</li>
+<li><strong>address</strong>: <code>lw</code>, <code>sw</code>의 경우 <strong>오프셋</strong>으로 해석.</li>
+<li><code>beq</code>, <code>bne</code>의 경우 분기 오프셋.</li>
+</ul>
+<p><strong>중요</strong>: 16비트뿐이므로 <strong>±2¹⁵ 범위의 값만 표현 가능</strong>. 큰 상수는 <code>lui</code> + <code>ori</code> 조합.</p>
+<p>예) <code>addi $t0, $t1, 4</code> → op=8, rs=$t1(9), rt=$t0(8), imm=4</p>
+<h3 id="h-4">(3) J-Type (Jump) — 무조건 분기</h3>
+<pre><code>| op (6) | address (26) |
+</code></pre>
+<ul>
+<li><code>j</code> 명령어. op=2.</li>
+<li><strong>26비트는 Word 단위 주소</strong> → 실제 바이트 주소 = 26비트 &lt;&lt; 2 (왼쪽 시프트 2 = ×4).</li>
+<li>총 28비트 + <strong>PC의 상위 4비트 그대로</strong> → 32비트 완성.</li>
+</ul>
+<h4 id="h-4a">레퍼런스 카드와 바로 연결해서 보기</h4>
+<table>
+<thead>
+<tr>
+  <th>형식</th>
+  <th>대표 명령어</th>
+  <th>결과/목적지</th>
+  <th>시험 포인트</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>R-Type</strong></td>
+  <td><code>add</code>, <code>sub</code>, <code>and</code>, <code>or</code>, <code>nor</code>, <code>slt</code>, <code>sll</code>, <code>srl</code>, <code>jr</code></td>
+  <td>보통 <code>rd</code></td>
+  <td><code>op=0</code>이고 실제 연산은 <code>funct</code>가 결정. 시프트는 <code>shamt</code>를 꼭 같이 본다.</td>
+</tr>
+<tr>
+  <td><strong>I-Type</strong></td>
+  <td><code>addi</code>, <code>andi</code>, <code>ori</code>, <code>slti</code>, <code>lw</code>, <code>sw</code>, <code>lb</code>, <code>lbu</code>, <code>lh</code>, <code>lhu</code>, <code>beq</code>, <code>bne</code>, <code>lui</code></td>
+  <td>보통 <code>rt</code> 또는 분기 오프셋</td>
+  <td>같은 16비트 immediate라도 <strong>sign extension</strong>/<strong>zero extension</strong>이 갈린다.</td>
+</tr>
+<tr>
+  <td><strong>J-Type</strong></td>
+  <td><code>j</code>, <code>jal</code></td>
+  <td>PC 갱신, <code>jal</code>은 <code>$ra</code>도 갱신</td>
+  <td>26비트 address에 하위 <code>00</code>이 붙고, 상위 4비트는 현재 PC에서 가져온다.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="h-5">2-5. MIPS 레지스터 32개 🔥🔥🔥 반드시 암기</h2>
+<table>
+<thead>
+<tr>
+  <th>번호</th>
+  <th>이름</th>
+  <th>용도</th>
+  <th>규칙</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>$0</strong></td>
+  <td><code>$zero</code></td>
+  <td>항상 <strong>0</strong> (read-only)</td>
+  <td>상수 0</td>
+</tr>
+<tr>
+  <td>$1</td>
+  <td><code>$at</code></td>
+  <td>어셈블러 예약</td>
+  <td>사용 금지</td>
+</tr>
+<tr>
+  <td><strong>$2~$3</strong></td>
+  <td><code>$v0, $v1</code></td>
+  <td>함수 <strong>return 값</strong></td>
+  <td></td>
+</tr>
+<tr>
+  <td><strong>$4~$7</strong></td>
+  <td><code>$a0~$a3</code></td>
+  <td>함수 <strong>인자</strong> (최대 4개)</td>
+  <td></td>
+</tr>
+<tr>
+  <td><strong>$8~$15</strong></td>
+  <td><code>$t0~$t7</code></td>
+  <td><strong>Temporary</strong> (임시)</td>
+  <td><strong>Caller-saved</strong></td>
+</tr>
+<tr>
+  <td><strong>$16~$23</strong></td>
+  <td><code>$s0~$s7</code></td>
+  <td><strong>Saved</strong> (변수)</td>
+  <td><strong>Callee-saved</strong></td>
+</tr>
+<tr>
+  <td>$24~$25</td>
+  <td><code>$t8, $t9</code></td>
+  <td>추가 Temporary</td>
+  <td>Caller-saved</td>
+</tr>
+<tr>
+  <td>$26~$27</td>
+  <td><code>$k0, $k1</code></td>
+  <td>OS/커널 예약</td>
+  <td></td>
+</tr>
+<tr>
+  <td><strong>$28</strong></td>
+  <td><code>$gp</code></td>
+  <td><strong>Global Pointer</strong> (전역변수 시작)</td>
+  <td></td>
+</tr>
+<tr>
+  <td><strong>$29</strong></td>
+  <td><code>$sp</code></td>
+  <td><strong>Stack Pointer</strong></td>
+  <td></td>
+</tr>
+<tr>
+  <td><strong>$30</strong></td>
+  <td><code>$fp</code></td>
+  <td><strong>Frame Pointer</strong></td>
+  <td></td>
+</tr>
+<tr>
+  <td><strong>$31</strong></td>
+  <td><code>$ra</code></td>
+  <td><strong>Return Address</strong></td>
+  <td><code>jal</code>이 여기에 PC+4 저장</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-6">숫자 ↔ 이름 빠른 외우기</h3>
+<ul>
+<li><code>$t0 = 8</code>, <code>$s0 = 16</code>, <code>$t8 = 24</code> — <strong>8, 16, 24</strong> 기준으로 +순번.</li>
+<li><code>$a0 = 4</code>, <code>$v0 = 2</code>.</li>
+</ul>
+<h3 id="h-7">Caller-saved vs Callee-saved 🔥</h3>
+<ul>
+<li><strong>$t 레지스터 (Caller-saved, &quot;호출하는 애가 저장&quot;)</strong><ul>
+<li>누구나 자유롭게 덮어씀. 함수 호출 전에 <strong>호출자가 직접 백업</strong>해야 함.</li>
+<li>호출된 함수는 $t를 맘대로 써도 됨.</li>
+</ul>
+</li>
+<li><strong>$s 레지스터 (Callee-saved, &quot;호출된 애가 저장&quot;)</strong><ul>
+<li>다른 애의 중요한 값이 들어있을 수 있으므로 <strong>호출된 함수가 사용 전 백업, 리턴 전 복원</strong>.</li>
+</ul>
+</li>
+</ul>
+<p>→ 이 규칙이 없으면 양쪽 다 매번 백업해서 메모리 접근 횟수 폭증(≈1000배 느림).</p>
+<hr />
+<h2 id="h-8">2-6. 메모리 피연산자 (Load/Store)</h2>
+<h3 id="h-9">Load/Store 명령어</h3>
+<ul>
+<li><code>lw $t0, offset($s1)</code> — 메모리[$s1 + offset]의 <strong>Word(4B)</strong> → $t0</li>
+<li><code>sw $t0, offset($s1)</code> — $t0 → 메모리[$s1 + offset]</li>
+<li><code>lb</code> / <code>lbu</code> — 1바이트 로드. <code>lb</code>는 <strong>sign extension</strong>, <code>lbu</code>는 <strong>zero extension</strong>.</li>
+<li><code>lh</code> / <code>lhu</code> — 2바이트(Halfword) 로드. <code>lh</code>는 sign extension, <code>lhu</code>는 zero extension.</li>
+<li><code>sb</code> / <code>sh</code> — 저장 시에는 각각 <strong>하위 8비트</strong>, <strong>하위 16비트</strong>만 메모리에 기록.</li>
+<li><code>ll</code> / <code>sc</code> — 레퍼런스 카드에 같이 실린 <strong>원자적(atomic) test-and-set pair</strong>. 병렬/동기화 개념을 배울 때 다시 등장한다.</li>
+</ul>
+<h4 id="h-9a">크기별로 한 번에 정리</h4>
+<table>
+<thead>
+<tr>
+  <th>크기</th>
+  <th>Load</th>
+  <th>Store</th>
+  <th>확장 규칙</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Byte (1B)</td>
+  <td><code>lb</code>, <code>lbu</code></td>
+  <td><code>sb</code></td>
+  <td><code>lb</code>=sign extension, <code>lbu</code>=zero extension</td>
+</tr>
+<tr>
+  <td>Halfword (2B)</td>
+  <td><code>lh</code>, <code>lhu</code></td>
+  <td><code>sh</code></td>
+  <td><code>lh</code>=sign extension, <code>lhu</code>=zero extension</td>
+</tr>
+<tr>
+  <td>Word (4B)</td>
+  <td><code>lw</code></td>
+  <td><code>sw</code></td>
+  <td>32비트 그대로</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-10">배열 접근 🔥</h3>
+<ul>
+<li>C: <code>int A[8]</code> → <code>A[8]</code> 접근 시</li>
+<li>MIPS: <strong>주소 계산 시 인덱스 × 4</strong> 필요 (int = 4B이므로).</li>
+</ul>
+<pre><code class="language-asm"># g = h + A[8];  에서 A는 $s3(베이스), h는 $s2
+lw   $t0, 32($s3)     # 32 = 8 * 4
+add  $s1, $s2, $t0    # $s1 = g
+</code></pre>
+<h3 id="h-11">Memory Alignment 🔥</h3>
+<ul>
+<li>MIPS는 <strong>Word Alignment</strong> 요구.</li>
+<li>Word 시작 주소는 항상 <strong>4의 배수</strong>.</li>
+<li>주소 하나당 <strong>1 Byte</strong> 저장. <code>lw</code>가 가리키는 주소는 반드시 <code>0x...00, 0x...04, 0x...08, ...</code> 식.</li>
+</ul>
+<h4 id="h-11a">레퍼런스 카드식 정렬 기준</h4>
+<table>
+<thead>
+<tr>
+  <th>데이터 크기</th>
+  <th>정렬 조건</th>
+  <th>주소 하위 비트 형태</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Byte</td>
+  <td>제한 없음</td>
+  <td><code>xxx</code></td>
+</tr>
+<tr>
+  <td>Halfword</td>
+  <td>2의 배수 주소</td>
+  <td><code>xx0</code></td>
+</tr>
+<tr>
+  <td>Word</td>
+  <td>4의 배수 주소</td>
+  <td><code>x00</code></td>
+</tr>
+<tr>
+  <td>Doubleword</td>
+  <td>8의 배수 주소</td>
+  <td><code>000</code></td>
+</tr>
+</tbody>
+</table>
+<p>즉 바이트 주소의 <strong>맨 아래 몇 비트가 0이어야 하느냐</strong>만 봐도 정렬 여부를 빠르게 판정할 수 있습니다.</p>
+<h3 id="h-12">Endian 🔥🔥</h3>
+<ul>
+<li><strong>MSB를 어디에 저장하느냐</strong>가 기준.</li>
+</ul>
+<table>
+<thead>
+<tr>
+  <th>방식</th>
+  <th>MSB 위치</th>
+  <th>예시 CPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Big Endian</strong></td>
+  <td>낮은 주소에 MSB</td>
+  <td><strong>MIPS</strong> (대표), 네트워크 프로토콜</td>
+</tr>
+<tr>
+  <td><strong>Little Endian</strong></td>
+  <td>낮은 주소에 LSB</td>
+  <td><strong>x86(Intel)</strong></td>
+</tr>
+<tr>
+  <td><strong>Bi-Endian</strong></td>
+  <td>설정 가능</td>
+  <td><strong>ARM</strong></td>
+</tr>
+</tbody>
+</table>
+<p>예) 레지스터 값 <code>0x12345678</code>을 주소 100에 저장:</p>
+<ul>
+<li><strong>Big Endian</strong>: 100:12, 101:34, 102:56, 103:78</li>
+<li><strong>Little Endian</strong>: 100:78, 101:56, 102:34, 103:12</li>
+</ul>
+<p>→ 좋고 나쁨의 문제 아님. <strong>통일만</strong> 되면 됨.</p>
+<hr />
+<h2 id="h-13">2-7. 상수/즉시값 피연산자</h2>
+<h3 id="h-14"><code>addi</code> — Immediate 값을 명령어에 박음 🔥</h3>
+<pre><code class="language-asm">addi  $s3, $s3, 4     # $s3 = $s3 + 4
+</code></pre>
+<ul>
+<li>상수를 매번 메모리에서 읽어오는 방식보다 <strong>≈1000배 빠름</strong>.</li>
+<li>벤치마크상 <strong>산술 연산의 50% 이상</strong>이 immediate 사용.</li>
+</ul>
+<h3 id="h-15"><code>$zero</code> 활용 트릭</h3>
+<pre><code class="language-asm">add  $t2, $s1, $zero    # == move $t2, $s1  (값 복사)
+</code></pre>
+<h3 id="h-16">32비트 상수 만들기 — <code>lui</code> + <code>ori</code> 🔥🔥</h3>
+<p>Immediate 필드는 16비트뿐이라 32비트 상수를 직접 못 담음.</p>
+<pre><code class="language-asm">lui  $t0, 0x1234      # 상위 16비트에 0x1234 로드. 하위는 0
+ori  $t0, $t0, 0x5678 # 하위 16비트에 0x5678 OR
+# 결과: $t0 = 0x12345678
+</code></pre>
+<ul>
+<li><strong><code>lui</code> (Load Upper Immediate)</strong>: immediate를 레지스터의 <strong>상위 16비트</strong>에 로드, 하위는 0.</li>
+</ul>
+<hr />
+<h2 id="h-17">2-8. 논리 연산</h2>
+<h3 id="h-18">Shift 연산 🔥🔥</h3>
+<table>
+<thead>
+<tr>
+  <th>명령어</th>
+  <th>의미</th>
+  <th>빈 자리 채우기</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>sll</code></td>
+  <td>Shift Left Logical</td>
+  <td>0으로</td>
+</tr>
+<tr>
+  <td><code>srl</code></td>
+  <td>Shift Right Logical</td>
+  <td><strong>0으로</strong> (부호 무시)</td>
+</tr>
+<tr>
+  <td><code>sra</code></td>
+  <td>Shift Right Arithmetic</td>
+  <td><strong>기존 MSB로</strong> (부호 유지)</td>
+</tr>
+<tr>
+  <td><code>sllv</code>/<code>srlv</code>/<code>srav</code></td>
+  <td>Variable 버전</td>
+  <td>시프트 양이 레지스터에</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Arithmetic Shift Left는 없음</strong> (<code>sll</code>로 충분. 왼쪽 시프트는 MSB 자리가 어차피 날아감).</li>
+<li>왼쪽 i비트 시프트 = × 2ⁱ</li>
+<li>오른쪽 i비트 시프트 = ÷ 2ⁱ (단, 음수는 반드시 <code>sra</code> 써야 함)</li>
+</ul>
+<h3 id="h-19">음수의 올바른 나눗셈 예시</h3>
+<ul>
+<li><code>1110</code> (= −2) 를 <code>srl</code>로 오른쪽 시프트 → <code>0111</code> (= +7) ❌ 엉뚱한 양수.</li>
+<li><code>sra</code>로 시프트 → <code>1111</code> (= −1) ✓ 정상.</li>
+</ul>
+<h3 id="h-20">Circular Shift (Rotate)</h3>
+<ul>
+<li><code>rol</code>/<code>ror</code>: 빠져나간 비트를 반대쪽에 채움.</li>
+</ul>
+<h3 id="h-21">Bitwise 논리 연산</h3>
+<ul>
+<li><code>and</code>, <code>or</code>, <code>xor</code>, <code>nor</code> (R-type)</li>
+<li><code>andi</code>, <code>ori</code>, <code>xori</code> (I-type)</li>
+</ul>
+<h4 id="h-22">연산별 용도 🔥</h4>
+<table>
+<thead>
+<tr>
+  <th>연산</th>
+  <th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>AND</strong></td>
+  <td><strong>특정 비트 유지/초기화</strong> (마스크). 0과 AND → 0 (초기화), 1과 AND → 원래 값 유지</td>
+</tr>
+<tr>
+  <td><strong>OR</strong></td>
+  <td><strong>특정 비트 세팅</strong>. 1과 OR → 1로 세팅</td>
+</tr>
+<tr>
+  <td><strong>NOT</strong></td>
+  <td>비트 반전. <strong>MIPS엔 NOT 명령어 없음</strong> → <code>nor</code>로 구현</td>
+</tr>
+</tbody>
+</table>
+<h4 id="h-23">NOT을 NOR로 구현 🔥</h4>
+<pre><code class="language-asm">nor  $t0, $t1, $zero   # $t0 = ~$t1
+# 이유: NOR(x, 0) = NOT(x OR 0) = NOT(x)
+</code></pre>
+<hr />
+<h2 id="h-24">2-9. 분기(Branch) 연산</h2>
+<h3 id="h-25">기본 분기 명령어 🔥</h3>
+<table>
+<thead>
+<tr>
+  <th>명령어</th>
+  <th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>beq rs, rt, L</code></td>
+  <td>$rs == $rt 이면 L로 분기</td>
+</tr>
+<tr>
+  <td><code>bne rs, rt, L</code></td>
+  <td>$rs != $rt 이면 L로 분기</td>
+</tr>
+<tr>
+  <td><code>j L</code></td>
+  <td>무조건 L로 점프</td>
+</tr>
+<tr>
+  <td><code>jr $ra</code></td>
+  <td>$ra의 값으로 PC 세팅 (return 등)</td>
+</tr>
+<tr>
+  <td><code>jal L</code></td>
+  <td>L로 점프하면서 <strong>PC+4 → $ra</strong> 저장 (함수 호출)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-26">if-else 컴파일 예시</h3>
+<pre><code class="language-c">if (i == j) f = g + h;
+else f = g - h;
+</code></pre>
+<pre><code class="language-asm">bne  $s3, $s4, Else   # i != j 면 Else로
+add  $s0, $s1, $s2    # f = g + h
+j    Exit
+Else: sub $s0, $s1, $s2
+Exit: ...
+</code></pre>
+<h3 id="h-27">Set-Less-Than 계열</h3>
+<ul>
+<li><code>slt rd, rs, rt</code>: $rs &lt; $rt 면 $rd=1, 아니면 0 (<strong>signed</strong>)</li>
+<li><code>sltu</code>: unsigned 비교</li>
+<li><code>slti</code>/<code>sltiu</code>: immediate 버전</li>
+</ul>
+<h3 id="h-28">Signed vs Unsigned 비교 🔥</h3>
+<ul>
+<li><strong><code>slt</code> (signed)</strong>: 산술 연산용. 음수 있는 값.</li>
+<li><strong><code>sltu</code> (unsigned)</strong>: 주소 계산, 논리적 크기 비교.</li>
+</ul>
+<p>예) $s0 = 0xFFFFFFFF, $s1 = 0x00000001</p>
+<ul>
+<li><code>slt  $t0, $s0, $s1</code> → $s0=−1 &lt; $s1=1 → <strong>$t0 = 1</strong></li>
+<li><code>sltu $t0, $s0, $s1</code> → $s0=거대수 &gt; $s1=1 → <strong>$t0 = 0</strong></li>
+</ul>
+<h3 id="h-29">빠른 경계 검사 (Fast Bound Check) 🔥</h3>
+<pre><code class="language-c">if (0 &lt;= i &lt; n) { ... }
+</code></pre>
+<p>를 <strong>한 번의 <code>sltu</code>로 해결</strong>:</p>
+<pre><code class="language-asm">sltu $t0, $s0, $t1   # $s0=i, $t1=n
+beq  $t0, $zero, Error
+</code></pre>
+<ul>
+<li>원리: i가 음수면 unsigned 해석 시 <strong>거대한 값</strong>이 되어 n보다 크게 됨 → 한 번에 검증 가능.</li>
+</ul>
+<hr />
+<h2 id="h-30">2-10. 의사 명령어 (Pseudo Instructions) 🔥</h2>
+<ul>
+<li>실제 하드웨어에 존재하지 않지만 어셈블러가 <strong>여러 실제 명령어로 풀어주는</strong> 가짜 명령어.</li>
+<li>프로그래밍 편의상 제공.</li>
+</ul>
+<table>
+<thead>
+<tr>
+  <th>의사 명령어</th>
+  <th>실제 동작</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>li $t0, 5</code></td>
+  <td><code>addi $t0, $zero, 5</code></td>
+</tr>
+<tr>
+  <td><code>move $t0, $t1</code></td>
+  <td><code>add $t0, $t1, $zero</code></td>
+</tr>
+<tr>
+  <td><code>blt $t0, $t1, L</code></td>
+  <td><code>slt $at, $t0, $t1</code> + <code>bne $at, $zero, L</code></td>
+</tr>
+<tr>
+  <td><code>la $t0, label</code></td>
+  <td><code>lui</code> + <code>ori</code> 조합</td>
+</tr>
+</tbody>
+</table>
+<p>레퍼런스 카드에는 특히 <code>blt</code>, <code>bgt</code>, <code>ble</code>, <code>bge</code>, <code>li</code>, <code>move</code>가 따로 정리되어 있습니다. 시험에서도 이 여섯 개는 <strong>&quot;실제 명령어가 아니라 어셈블러가 풀어쓴다&quot;</strong>는 점을 자주 확인합니다.</p>
+<h3 id="h-31">왜 실제 명령어로 안 만들었나? 🔥</h3>
+<ul>
+<li><code>blt</code>를 실제 명령어로 만들면 <strong>비교 + 분기</strong>가 한 명령어에 담겨 <strong>사이클이 길어짐</strong>.</li>
+<li>CPU는 <strong>최악의 명령어 기준으로 클럭 사이클</strong>이 정해지므로, 다른 명령어까지 느려짐.</li>
+<li>→ 짧은 명령어 2개가 <strong>전체 성능에 더 유리</strong>.</li>
+<li>※ 일부 어셈블러는 의사 명령어를 지원 안 할 수도 있으므로 실제 명령어로 쓰는 것도 필요.</li>
+</ul>
+<hr />
+<h2 id="h-32">2-11. 기본 블록 (Basic Block)</h2>
+<blockquote>
+<p>컴파일러 최적화의 기본 단위.</p>
+</blockquote>
+<p><strong>기본 블록의 정의</strong>:</p>
+<ol>
+<li>중간에 <strong>분기(branch/jump) 명령어가 없음</strong> (단, 맨 끝은 예외).</li>
+<li>중간에 <strong>분기 타겟(label) 이 없음</strong> (단, 맨 처음은 예외).</li>
+</ol>
+<p>→ 입구 1개, 출구 1개, 중간은 무조건 순차 실행. &quot;신호등 없는 직선 도로&quot;.</p>
+<hr />
+<h2 id="h-33">2-12. 프로시저 호출 (Procedure Call) 🔥🔥</h2>
+<h3 id="h-34">프로시저 호출 6단계</h3>
+<ol>
+<li><strong>매개변수를 레지스터(<code>$a0~$a3</code>)에 저장</strong> (4개 초과 시 스택 이용)</li>
+<li><strong>제어를 프로시저로 이동</strong> (PC ← procedure 주소)</li>
+<li><strong>로컬 변수용 저장 공간 확보</strong> (스택에)</li>
+<li><strong>프로시저 내부 작업 수행</strong></li>
+<li><strong>반환값을 <code>$v0, $v1</code>에 저장</strong></li>
+<li><strong>호출한 위치로 복귀</strong> (PC ← <code>$ra</code>)</li>
+</ol>
+<h3 id="h-35">관련 명령어</h3>
+<ul>
+<li><strong><code>jal ProcName</code></strong>: Jump and Link<ul>
+<li>PC + 4 → <code>$ra</code> (복귀 주소 저장)</li>
+<li>PC ← ProcName</li>
+</ul>
+</li>
+<li><strong><code>jr $ra</code></strong>: Jump Register. $ra → PC (복귀)</li>
+</ul>
+<h3 id="h-36">스택 메모리 구조 🔥</h3>
+<pre><code>High Address (0x7FFFFFFC)
+┌────────────────┐
+│  Stack         │  ← $sp (아래로 자람)
+│     ↓          │
+│                │
+│     ↑          │
+│  Heap          │  ← malloc 영역
+├────────────────┤
+│  Static Data   │  ← 전역 변수 ($gp가 가리킴)
+├────────────────┤
+│  Text (code)   │  ← 명령어. PC가 이 영역을 돌아다님
+├────────────────┤
+│  Reserved      │
+└────────────────┘
+Low Address (0x00000000)
+</code></pre>
+<ul>
+<li>MIPS 32비트: 스택은 <code>0x7FFFFFFC</code>에서 <strong>아래로</strong> 자람.</li>
+<li><strong>Stack Frame (Activation Record)</strong>: 함수 호출마다 쌓이는 블록.<ul>
+<li>포함 내용: Saved $ra, Saved Arguments, Saved $s Registers, 지역변수</li>
+</ul>
+</li>
+<li><strong>$fp</strong>: 현재 프레임의 베이스 (고정), <strong>$sp</strong>: 현재 프레임 최상단 (변동).</li>
+</ul>
+<h4 id="h-36a">레퍼런스 카드 그림 기준으로 본 전형적인 주소 배치</h4>
+<ul>
+<li><strong>Text</strong> 영역은 보통 <code>0x00400000</code> 근처에서 시작.</li>
+<li><strong>Static Data</strong>는 <code>0x10000000</code> 근처.</li>
+<li><strong>Heap(동적 데이터)</strong>는 그 위쪽, 예시 카드에선 <code>0x10008000</code> 근처부터 자라기 시작.</li>
+<li><strong>Stack</strong>은 위쪽 높은 주소에서 아래쪽으로 성장.</li>
+</ul>
+<pre><code>Higher addresses
+┌──────────────────────┐
+│ Argument 6, 5, ...   │
+├──────────────────────┤  ← $fp 근처
+│ Saved Registers      │
+├──────────────────────┤
+│ Local Variables      │
+├──────────────────────┤  ← $sp
+│   더 아래 주소 ...    │
+└──────────────────────┘
+Lower addresses
+</code></pre>
+<p>핵심은 <strong>$fp는 프레임 안의 기준점</strong>, <strong>$sp는 현재 쌓인 스택의 끝</strong>이라는 점입니다. 그래서 지역변수/저장 레지스터 오프셋 계산은 보통 <code>$fp</code> 기준으로 설명하면 더 안정적으로 이해됩니다.</p>
+<h3 id="h-37">Leaf Procedure 예제 (함수가 함수를 호출 안 함)</h3>
+<pre><code class="language-c">int leaf(int g, int h, int i, int j) {
+    int f = (g + h) - (i + j);
+    return f;
+}
+</code></pre>
+<pre><code class="language-asm">leaf:
+    addi $sp, $sp, -4         # 스택 4바이트 확보 (f용)
+    sw   $s0, 0($sp)          # 호출자의 $s0 백업
+    add  $t0, $a0, $a1        # g + h
+    add  $t1, $a2, $a3        # i + j
+    sub  $s0, $t0, $t1        # f
+    add  $v0, $s0, $zero      # return value → $v0
+    lw   $s0, 0($sp)          # $s0 복원
+    addi $sp, $sp, 4          # 스택 정리
+    jr   $ra                  # 복귀
+</code></pre>
+<h3 id="h-38">Non-Leaf (중첩) 프로시저 🔥</h3>
+<ul>
+<li>자신이 또 다른 프로시저를 호출 (재귀 포함).</li>
+<li><strong>호출 전</strong>: <code>$ra</code>, 사용 중인 <code>$a</code>, <code>$s</code>, 지역변수 모두 <strong>스택에 저장</strong> 필요.</li>
+<li><strong>호출 후</strong>: 스택에서 복원.</li>
+</ul>
+<h4 id="h-39">Factorial 예제 (재귀)</h4>
+<pre><code class="language-c">int fact(int n) {
+    if (n &lt; 1) return 1;
+    else return n * fact(n-1);
+}
+</code></pre>
+<p>핵심 흐름:</p>
+<ol>
+<li><code>$sp</code>를 8 감소 (Return Address + Argument 저장 공간).</li>
+<li><code>$ra</code>와 <code>$a0</code>(n)를 스택에 저장.</li>
+<li><code>n &lt; 1</code> 체크.</li>
+<li><code>$a0</code>를 1 감소시키고 <code>jal fact</code> → 재귀.</li>
+<li>복귀 후, 저장했던 <code>$ra</code>와 <code>n</code> 복원.</li>
+<li><code>n * fact(n-1)</code> 계산 → <code>$v0</code>.</li>
+<li><code>$sp</code> 복원, <code>jr $ra</code>.</li>
+</ol>
+<p>→ 스택에 프레임이 <strong>계속 쌓이다가 return 시 하나씩 정리</strong>.</p>
+<hr />
+<h2 id="h-40">2-13. 문자와 문자열</h2>
+<h3 id="h-41">문자 인코딩</h3>
+<ul>
+<li><strong>ASCII</strong>: 7비트. 128개 문자. <code>'A'=65, 'a'=97, '0'=48</code> 정도는 암기.</li>
+<li><strong>Latin-1</strong>: 8비트, 서유럽권.</li>
+<li><strong>Unicode / UTF-8</strong>: 전 세계 문자 (한글 깨짐은 여기서 발생).</li>
+</ul>
+<h4 id="h-41a">레퍼런스 카드 기준 ASCII 최소 암기 세트</h4>
+<table>
+<thead>
+<tr>
+  <th>문자</th>
+  <th>10진</th>
+  <th>16진</th>
+  <th>왜 자주 보나</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>NUL</code></td>
+  <td>0</td>
+  <td><code>0x00</code></td>
+  <td>C 문자열 종료 문자 <code>'\0'</code></td>
+</tr>
+<tr>
+  <td><code>LF</code></td>
+  <td>10</td>
+  <td><code>0x0A</code></td>
+  <td>줄바꿈</td>
+</tr>
+<tr>
+  <td><code>CR</code></td>
+  <td>13</td>
+  <td><code>0x0D</code></td>
+  <td>캐리지 리턴</td>
+</tr>
+<tr>
+  <td><code>Space</code></td>
+  <td>32</td>
+  <td><code>0x20</code></td>
+  <td>공백 문자</td>
+</tr>
+<tr>
+  <td><code>'0'</code> ~ <code>'9'</code></td>
+  <td>48 ~ 57</td>
+  <td><code>0x30</code> ~ <code>0x39</code></td>
+  <td>숫자 문자는 연속 배치</td>
+</tr>
+<tr>
+  <td><code>'A'</code> ~ <code>'Z'</code></td>
+  <td>65 ~ 90</td>
+  <td><code>0x41</code> ~ <code>0x5A</code></td>
+  <td>대문자 범위</td>
+</tr>
+<tr>
+  <td><code>'a'</code> ~ <code>'z'</code></td>
+  <td>97 ~ 122</td>
+  <td><code>0x61</code> ~ <code>0x7A</code></td>
+  <td>소문자 범위</td>
+</tr>
+</tbody>
+</table>
+<p>즉 <strong>문자와 숫자는 결국 비트 패턴</strong>이고, 바이트 로드/스토어 명령어가 필요한 이유도 바로 여기에 있습니다.</p>
+<h3 id="h-42">바이트 단위 처리 명령어 🔥</h3>
+<ul>
+<li>ASCII는 7비트라 워드로 다루면 낭비 → <strong>바이트 단위 접근 필요</strong>.</li>
+<li><strong><code>lb</code></strong> (Load Byte, signed ext), <strong><code>lbu</code></strong> (Load Byte Unsigned, zero ext)</li>
+<li><strong><code>sb</code></strong> (Store Byte)</li>
+<li><strong><code>lh</code>/<code>lhu</code>/<code>sh</code></strong>: Half-word 버전.</li>
+</ul>
+<h3 id="h-43">strcpy 예제</h3>
+<pre><code class="language-c">void strcpy(char x[], char y[]) {
+    int i = 0;
+    while ((x[i] = y[i]) != &#x27;\0&#x27;) i++;
+}
+</code></pre>
+<p>→ <code>lbu</code>로 <code>y[i]</code> 읽고 → <code>sb</code>로 <code>x[i]</code>에 저장 → null이면 종료.</p>
+<pre><code class="language-asm">strcpy:
+    addi $sp, $sp, -4
+    sw   $s0, 0($sp)
+    add  $s0, $zero, $zero   # i = 0
+L1: add  $t1, $s0, $a1       # y + i
+    lbu  $t2, 0($t1)         # y[i]
+    add  $t3, $s0, $a0       # x + i
+    sb   $t2, 0($t3)         # x[i] = y[i]
+    beq  $t2, $zero, L2      # null이면 종료
+    addi $s0, $s0, 1
+    j    L1
+L2: lw   $s0, 0($sp)
+    addi $sp, $sp, 4
+    jr   $ra
+</code></pre>
+<hr />
+<h2 id="h-44">2-14. MIPS 주소 지정 방식 (Addressing Modes) 🔥🔥</h2>
+<ol>
+<li><strong>Immediate Addressing</strong> — 상수 값 자체가 명령어에 포함 (<code>addi</code>).</li>
+<li><strong>Register Addressing</strong> — 피연산자가 레지스터 (<code>add</code>, <code>jr</code>).</li>
+<li><strong>Base/Displacement Addressing</strong> — 베이스 레지스터 + offset (<code>lw</code>, <code>sw</code>).</li>
+<li><strong>PC-Relative Addressing</strong> — 조건부 분기 (<code>beq</code>, <code>bne</code>).</li>
+<li><strong>Pseudo-Direct Addressing</strong> — 점프 명령어 (<code>j</code>).</li>
+</ol>
+<hr />
+<h2 id="h-45">2-15. 분기 주소 계산 🔥🔥🔥 시험 필출</h2>
+<h3 id="h-46">PC-Relative (beq, bne)</h3>
+<ul>
+<li>명령어 내 <strong>16비트 offset</strong>은 <strong>Word 단위</strong>.</li>
+<li>실제 분기 주소:<pre><code>Target = (PC + 4) + (offset × 4)
+</code></pre>
+</li>
+<li><strong>왜 PC + 4인가?</strong> CPU는 명령어 Fetch 단계에서 <strong>이미 PC를 +4 증가</strong>시켜 놓음.</li>
+<li>표현 범위: PC 기준 약 ±2¹⁷ 바이트.</li>
+</ul>
+<h3 id="h-47">Pseudo-Direct (j)</h3>
+<ul>
+<li>명령어 내 <strong>26비트 address</strong>도 <strong>Word 단위</strong>.</li>
+<li>실제 주소:<pre><code>Target = { PC[31:28] , address , 00 }
+</code></pre>
+<ul>
+<li>상위 4비트: <strong>현재 PC에서 그대로 복사</strong>.</li>
+<li>중간 26비트: 명령어의 address 필드.</li>
+<li>하위 2비트: <strong>00</strong> (Word 정렬이므로).</li>
+</ul>
+</li>
+</ul>
+<h3 id="h-48">예제 1. beq 분기 거리 계산</h3>
+<pre><code>80000: sll  ...
+80004: add  ...
+80008: lw   ...
+80012: bne  $t0, $s5, Exit   ← 여기서 bne
+80016: ...
+80020: ...
+80024: Exit: ...
+</code></pre>
+<ul>
+<li>Exit은 현재 명령어 기준 <strong>12바이트(3워드) 아래</strong>.</li>
+<li>실제 offset 값(명령어에 들어갈 값) = <strong>2</strong> (bne 자신 다음부터 셈).</li>
+<li>이유: bne 수행 시 PC는 이미 80016(=PC+4). Exit(80024)과의 차이 = 8 = 2 word.</li>
+</ul>
+<h3 id="h-49">예제 2. j 명령어 주소 필드</h3>
+<ul>
+<li>레이블 Loop가 메모리 주소 <strong>80000</strong>에 있으면</li>
+<li>j 명령어에 들어갈 값 = <strong>80000 / 4 = 20000</strong> (Word 주소).</li>
+</ul>
+<h3 id="h-50">먼 곳으로 분기 트릭 🔥</h3>
+<p><code>beq</code>는 ±2¹⁷ 바이트 범위만 가능. 더 멀리 가고 싶다면:</p>
+<pre><code class="language-asm"># beq $s0, $s1, FAR_LABEL  (불가)
+
+bne  $s0, $s1, L2   # 조건 뒤집기
+j    FAR_LABEL       # j는 32비트 근처까지 가능
+L2: ...
+</code></pre>
+<hr />
+<h2 id="h-51">2-16. 명령어 인코딩/디코딩 변환 🔥🔥 시험 필출</h2>
+<h3 id="h-52">변환 절차 (16진수 → assembly)</h3>
+<ol>
+<li><strong>16진수 → 2진수</strong> (4비트씩).</li>
+<li><strong>앞 6비트 (op)</strong> 로 타입 식별.</li>
+<li>타입별로 필드 분해.</li>
+<li>레지스터 번호를 이름으로 변환.</li>
+</ol>
+<h3 id="h-53">예제: <code>0x00A83020</code></h3>
+<pre><code>0x00A83020 = 0000 00|00 101|0 1000|0 0110|0 000|00 100000
+
+op = 000000 (=0) → R-Type
+rs = 00101  (=5)  → $a1
+rt = 01000  (=8)  → $t0
+rd = 00110  (=6)  → $a2
+shamt = 00000 (=0)
+funct = 100000 (=32) → add
+</code></pre>
+<p>→ <code>add $a2, $a1, $t0</code> — ※ 교재 예시에 따라 순서 혼동 주의.</p>
+<h3 id="h-54">주요 op/funct 값 암기 포인트 🔥</h3>
+<table>
+<thead>
+<tr>
+  <th>명령어</th>
+  <th>타입</th>
+  <th>op</th>
+  <th>funct</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>add</code>, <code>sub</code>, <code>and</code>, <code>or</code>, <code>sll</code>, <code>srl</code>, <code>sra</code></td>
+  <td>R</td>
+  <td>0</td>
+  <td>add=32, sub=34, sll=0, srl=2, sra=3</td>
+</tr>
+<tr>
+  <td><code>addi</code></td>
+  <td>I</td>
+  <td>8</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td><code>lw</code></td>
+  <td>I</td>
+  <td>35</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td><code>sw</code></td>
+  <td>I</td>
+  <td>43</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td><code>beq</code></td>
+  <td>I</td>
+  <td>4</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td><code>bne</code></td>
+  <td>I</td>
+  <td>5</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td><code>j</code></td>
+  <td>J</td>
+  <td>2</td>
+  <td>—</td>
+</tr>
+<tr>
+  <td><code>lui</code></td>
+  <td>I</td>
+  <td>15</td>
+  <td>—</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="h-55">2-17. 마지막 체크 — 오류 &amp; 함정</h2>
+<ol>
+<li><strong>&quot;강력한 명령어가 무조건 빠르다?&quot;</strong> ❌<ul>
+<li>복잡한 명령어는 사이클이 길어져 <strong>전체 클럭을 끌어내림</strong>.</li>
+</ul>
+</li>
+<li><strong>&quot;어셈블리로 직접 짜면 최고 성능?&quot;</strong> ❌<ul>
+<li>요즘 컴파일러는 매우 정교. 꼭 그렇지 않음.</li>
+</ul>
+</li>
+<li><strong>&quot;상업용 소프트웨어의 호환성 = 명령어 집합이 불변&quot;</strong> ❌<ul>
+<li>아키텍처는 계속 진화. 단, <strong>하위 호환성</strong>(backward compatibility)은 대부분 유지됨.</li>
+</ul>
+</li>
+<li><strong>분기 오프셋 단위 혼동</strong> 🔥<ul>
+<li>J 명령어의 26비트, 분기 명령어의 16비트 모두 <strong>Word 단위</strong>. 실제 바이트로는 ×4.</li>
+</ul>
+</li>
+<li><strong>PC-Relative 계산 시 PC+4 빼먹기 금지</strong> 🔥<ul>
+<li>이미 PC는 +4 되어 있다는 사실이 핵심.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="h-56">🔥 시험 직전 최종 체크리스트</h2>
+<h3 id="h-57">반드시 암기</h3>
+<ul>
+<li>[ ] 레지스터 번호 ↔ 이름 ($t0=8, $s0=16, $t8=24, $a0=4, $v0=2 기준)</li>
+<li>[ ] Caller-saved($t) vs Callee-saved($s) 차이</li>
+<li>[ ] <code>add</code> funct=32, <code>sub</code> funct=34</li>
+<li>[ ] <code>lw</code> op=35, <code>sw</code> op=43, <code>beq</code> op=4, <code>bne</code> op=5, <code>j</code> op=2, <code>addi</code> op=8</li>
+<li>[ ] MIPS는 <strong>Big Endian</strong>, x86은 Little Endian, ARM은 Bi-Endian</li>
+<li>[ ] 2의 보수 빠른 변환: LSB부터 첫 1까지 그대로, 앞은 반전</li>
+</ul>
+<h3 id="h-58">반드시 계산 가능</h3>
+<ul>
+<li>[ ] CPU Time = IC × CPI × Clock Cycle Time</li>
+<li>[ ] 평균 CPI = Σ(명령어 수 × CPI) / 총 명령어 수</li>
+<li>[ ] 암달의 법칙: T_new = T_unaffected + T_affected / N</li>
+<li>[ ] 동적 전력 ∝ C × V² × f</li>
+<li>[ ] 2의 보수 ↔ 10진수 변환 (32비트까지)</li>
+<li>[ ] Sign Extension 제대로 (4비트 → 8비트, 16비트 → 32비트)</li>
+<li>[ ] beq/bne offset 계산 (PC+4 고려!)</li>
+<li>[ ] j 명령어 주소 필드 계산 (÷ 4)</li>
+<li>[ ] 16진수 기계어 → MIPS 어셈블리 디코딩</li>
+</ul>
+<h3 id="h-59">반드시 이해</h3>
+<ul>
+<li>[ ] DRAM vs SRAM 차이 (트랜지스터 수, 속도, 전력, 리프레시)</li>
+<li>[ ] 메모리 계층과 Locality (temporal, spatial)</li>
+<li>[ ] Cloud vs Cluster/Supercomputer 차이 (물리적 분산도, 네트워크)</li>
+<li>[ ] SaaS / PaaS / IaaS 구분</li>
+<li>[ ] R-type / I-type / J-type 포맷 및 필드 의미</li>
+<li>[ ] Load-Store 아키텍처 철학</li>
+<li>[ ] Pseudo Instruction이 왜 필요한지, 어떻게 풀어쓰는지</li>
+<li>[ ] 재귀 프로시저의 스택 프레임 쌓임과 정리 과정</li>
+<li>[ ] Word Alignment와 Big/Little Endian</li>
+<li>[ ] <code>$zero</code> 활용법 (move, not 구현)</li>
+<li>[ ] <code>lui</code> + <code>ori</code>로 32비트 상수 만들기</li>
+</ul>
+<hr />
+<blockquote>
+<p><strong>팁</strong>: 이번 학기에는 바탕화면에 MIPS 명령어 요약 테이블(교재 앞 페이지 or 구글 &quot;MIPS instruction set pdf&quot;)을 깔아두고 수시로 보기. 레지스터 번호는 찌르면 바로 나올 정도로 외워두기.</p>
+</blockquote>
+
+  </div>
+</div>
+</body>
+</html>

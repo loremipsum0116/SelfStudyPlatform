@@ -64,6 +64,18 @@
           { id: 'ch2', title: 'Ch.2 공식과 점화식' },
           { id: 'ch3', title: 'Ch.3 조합론과 그래프' }
         ]
+      },
+      {
+        id: 'co',
+        title: '컴퓨터구조',
+        description: '컴퓨터 추상화, MIPS, 연산 하드웨어와 부동소수점 표현을 다룹니다.',
+        hubLink: 'subjects/co/index.html',
+        conceptOnly: true,
+        chapters: [
+          { id: 'ch1', title: 'Ch.1 컴퓨터 추상화와 수 표현 기초' },
+          { id: 'ch2', title: 'Ch.2 MIPS 명령어와 레지스터 · 제어 흐름' },
+          { id: 'ch3', title: 'Ch.3 컴퓨터 연산과 부동소수점' }
+        ]
       }
     ];
 
@@ -105,6 +117,16 @@
 
       const sumEl = card.querySelector('.summary');
       const parts = [];
+
+      if (sub.conceptOnly) {
+        parts.push('<strong>수록된 개념 정리</strong>');
+        for (const ch of sub.chapters) {
+          parts.push(`<div class="row"><span>${ch.title}</span><span>개념 정리 제공</span></div>`);
+        }
+        parts.push('<div style="margin-top:12px" class="muted">이번 섹션은 개념 페이지만 먼저 연결되어 있습니다.</div>');
+        sumEl.innerHTML = parts.join('');
+        return;
+      }
 
       if (window.__db) {
         try {

@@ -1,0 +1,232 @@
+{
+  "questions": [
+    {
+      "id": "co-ch3-q001",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 01]</strong> Signed 정수 덧셈에서 <em>overflow</em>가 발생하는 경우로 가장 적절한 것은?",
+      "choices": [
+        "부호가 다른 두 수를 더했는데 결과가 0이 되지 않은 경우",
+        "같은 부호의 두 수를 더했는데 결과의 부호가 뒤집힌 경우",
+        "덧셈 과정에서 어느 자리에서든 carry가 한 번이라도 발생한 경우",
+        "결과의 하위 16비트가 모두 1이 된 경우"
+      ],
+      "answer": 1,
+      "explanation": "Signed 덧셈의 overflow는 같은 부호의 두 수를 더했는데 결과 부호가 반대로 나올 때 발생한다. 양수+양수=음수, 음수+음수=양수가 대표적이다."
+    },
+    {
+      "id": "co-ch3-q002",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 02]</strong> Signed 정수 뺄셈 <code>A - B</code>에서 overflow 판정으로 옳은 것은?",
+      "choices": [
+        "<code>A</code>와 <code>B</code>의 부호가 같고, 결과의 부호가 <code>A</code>와 다르면 overflow이다.",
+        "<code>A</code>와 <code>B</code>의 부호가 다르고, 결과의 부호가 <code>A</code>와 다르면 overflow이다.",
+        "결과가 음수이면 항상 overflow이다.",
+        "뺄셈에서는 overflow가 발생하지 않는다."
+      ],
+      "answer": 1,
+      "explanation": "Signed 뺄셈에서는 부호가 다른 두 수를 뺄 때 overflow 가능성이 생기며, 결과 부호가 피감수 <code>A</code>의 부호와 달라지면 overflow로 본다."
+    },
+    {
+      "id": "co-ch3-q003",
+      "type": "short-answer",
+      "text": "<strong>[문제 03]</strong> Signed 덧셈/뺄셈에서 하드웨어가 overflow를 기계적으로 검출하는 핵심 규칙을 쓰시오.",
+      "answer": "MSB carry-in과 carry-out이 다르면 overflow",
+      "accepted": [
+        "MSB carry-in과 carry-out이 다르면 overflow",
+        "MSB로 들어오는 carry와 나가는 carry가 다르면 overflow",
+        "최상위 비트의 carry-in과 carry-out이 다르면 overflow",
+        "carry-in != carry-out",
+        "MSB carry in과 carry out이 다르면 overflow",
+        "MSB의 carry-in과 carry-out이 다르면 overflow"
+      ],
+      "explanation": "Signed overflow는 최상위 비트(MSB)로 들어오는 carry와 나가는 carry가 서로 다를 때 발생한다. 하드웨어에서는 XOR로 바로 검출할 수 있다.",
+      "hint": "부호 비트 자리의 carry 두 개를 비교하는 규칙이다."
+    },
+    {
+      "id": "co-ch3-q004",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 04]</strong> 다음 중 <em>unsigned overflow</em>와 <em>signed overflow</em>의 판정 기준을 바르게 짝지은 것은?",
+      "choices": [
+        "Unsigned: 결과 부호 반전 / Signed: MSB carry 발생",
+        "Unsigned: MSB carry 발생 / Signed: MSB carry-in과 carry-out이 다름",
+        "Unsigned: 두 피연산자 부호가 다름 / Signed: 결과가 0이 아님",
+        "Unsigned와 Signed 모두 결과의 MSB가 1이면 overflow"
+      ],
+      "answer": 1,
+      "explanation": "Unsigned에서는 최상위 비트에서 carry가 나가면 overflow로 보고, signed에서는 MSB의 carry-in과 carry-out이 다를 때 overflow로 판정한다."
+    },
+    {
+      "id": "co-ch3-q005",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 05]</strong> 다음 중 MIPS의 <em>overflow 처리</em>에 대한 설명으로 가장 적절한 것은?",
+      "choices": [
+        "<code>addu</code>는 signed overflow가 발생하면 예외를 일으킨다.",
+        "MIPS는 ARM처럼 NZCV 플래그를 항상 유지하고, 분기 명령이 이를 직접 읽는다.",
+        "<code>add</code>, <code>addi</code>, <code>sub</code>는 overflow를 예외로 다룰 수 있지만, <code>addu</code>, <code>addiu</code>, <code>subu</code>는 overflow 예외를 일으키지 않는다.",
+        "MIPS에서는 signed/unsigned 구분 없이 모든 덧셈 명령이 동일하게 예외를 일으킨다."
+      ],
+      "answer": 2,
+      "explanation": "Ch.3 개념 정리에 따르면 MIPS는 NZCV 플래그를 유지하는 구조가 아니며, <code>add/addi/sub</code>는 overflow를 예외로 다룰 수 있지만 <code>addu/addiu/subu</code>는 그렇지 않다."
+    },
+    {
+      "id": "co-ch3-q006",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 06]</strong> 다음 중 <em>예외(Exception)</em>와 <em>인터럽트(Interrupt)</em>의 차이에 대한 설명으로 옳은 것은?",
+      "choices": [
+        "예외는 항상 외부 장치가 만들고, 인터럽트는 항상 현재 명령어가 만든다.",
+        "예외는 주로 현재 실행 중인 명령/CPU 내부 사건과 관련되고, 인터럽트는 외부 장치나 비동기 사건에서 오는 경우가 많다.",
+        "인터럽트는 프로그램 카운터를 저장하지 않지만, 예외는 항상 저장한다.",
+        "예외는 복구가 불가능하고, 인터럽트는 반드시 복구 가능하다."
+      ],
+      "answer": 1,
+      "explanation": "예외는 overflow, 잘못된 메모리 접근처럼 현재 명령 실행과 직접 연결된 내부 사건인 경우가 많고, 인터럽트는 I/O 장치 등 외부에서 비동기적으로 들어오는 경우가 많다."
+    },
+    {
+      "id": "co-ch3-q007",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 07]</strong> 다음 중 CP0 레지스터의 역할 연결로 가장 적절한 것은?",
+      "choices": [
+        "<code>EPC</code>: 예외가 발생한 시점의 PC 저장 / <code>Cause</code>: 예외 원인 저장",
+        "<code>Status</code>: 곱셈 상위 32비트 저장 / <code>BadVAddr</code>: 나눗셈 나머지 저장",
+        "<code>Cause</code>: 함수 복귀 주소 저장 / <code>EPC</code>: 분기 목표 주소 저장",
+        "<code>BadVAddr</code>: 항상 현재 스택 포인터 값을 저장"
+      ],
+      "answer": 0,
+      "explanation": "<code>EPC</code>는 예외 시 복귀에 필요한 PC를 저장하고, <code>Cause</code>는 예외 원인을 담는다. <code>Status</code>는 인터럽트/예외 제어 비트, <code>BadVAddr</code>는 잘못된 주소 접근 정보를 담는다."
+    },
+    {
+      "id": "co-ch3-q008",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 08]</strong> TLB(Translation Lookaside Buffer)의 역할로 가장 적절한 것은?",
+      "choices": [
+        "부동소수점 지수(Bias)를 빠르게 계산하는 전용 버퍼",
+        "가상 주소를 물리 주소로 변환할 때 자주 쓰는 매핑을 캐시해 주소 변환을 빠르게 돕는 구조",
+        "곱셈기의 partial product를 임시 저장하는 버퍼",
+        "예외가 발생했을 때만 임시로 쓰는 인터럽트 전용 스택"
+      ],
+      "answer": 1,
+      "explanation": "TLB는 페이지 테이블 전체를 매번 뒤지는 대신, 자주 쓰는 가상→물리 주소 변환 결과를 캐시해 주소 변환 속도를 높인다."
+    },
+    {
+      "id": "co-ch3-q009",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 09]</strong> 곱셈 하드웨어 <em>Version 3</em>의 특징으로 가장 적절한 것은?",
+      "choices": [
+        "64비트 ALU를 유지하고, 64비트 multiplicand를 계속 왼쪽으로 민다.",
+        "Product의 하위 절반에 multiplier를 함께 저장하여 별도의 multiplier 레지스터를 없앤다.",
+        "복원 나눗셈의 복원 단계를 곱셈기에 그대로 추가한다.",
+        "Hidden bit를 이용해 소수점 이하만 저장한다."
+      ],
+      "answer": 1,
+      "explanation": "Version 3는 Product 64비트 레지스터의 하위 절반에 multiplier를 넣어 별도 multiplier 레지스터를 제거한 최종형이다. ALU도 32비트로 줄어 하드웨어가 더 간결해진다."
+    },
+    {
+      "id": "co-ch3-q010",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 10]</strong> MIPS에서 <code>mult $s2, $s3</code>를 실행한 뒤 결과를 읽는 방법으로 옳은 것은?",
+      "choices": [
+        "하위 32비트는 <code>mfhi</code>, 상위 32비트는 <code>mflo</code>로 읽는다.",
+        "64비트 결과 전체가 자동으로 <code>$v0:$v1</code>에 저장된다.",
+        "상위 32비트는 <code>Hi</code>, 하위 32비트는 <code>Lo</code>에 저장되며 각각 <code>mfhi</code>, <code>mflo</code>로 꺼낸다.",
+        "<code>mult</code>는 항상 하위 32비트만 계산하므로 <code>Hi</code>는 사용하지 않는다."
+      ],
+      "answer": 2,
+      "explanation": "32비트 × 32비트는 최대 64비트 결과가 필요하므로 MIPS는 이를 <code>Hi:Lo</code>에 저장한다. 상위는 <code>mfhi</code>, 하위는 <code>mflo</code>로 가져온다."
+    },
+    {
+      "id": "co-ch3-q011",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 11]</strong> MIPS 나눗셈에 대한 설명으로 가장 적절한 것은?",
+      "choices": [
+        "<code>div</code> 실행 후 몫은 <code>Hi</code>, 나머지는 <code>Lo</code>에 저장된다.",
+        "<code>div</code>와 <code>divu</code>는 divide by 0을 하드웨어가 자동으로 예외 처리하므로 프로그래머가 신경 쓸 필요가 없다.",
+        "<code>div</code> 실행 후 <code>Lo</code>에 몫, <code>Hi</code>에 나머지가 들어가며, divide by 0 여부는 프로그래머가 직접 확인해야 한다.",
+        "나눗셈 결과는 항상 일반 레지스터 두 개에 자동 저장된다."
+      ],
+      "answer": 2,
+      "explanation": "Ch.3 개념 정리 기준으로 MIPS의 <code>div/divu</code>는 <code>Lo</code>에 quotient, <code>Hi</code>에 remainder를 둔다. 또한 divide by 0은 자동으로 체크하지 않으므로 사전에 직접 확인해야 한다."
+    },
+    {
+      "id": "co-ch3-q012",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 12]</strong> IEEE 754 <em>single precision (32bit)</em> 포맷의 필드 구성으로 옳은 것은?",
+      "choices": [
+        "부호 1비트 / 지수 11비트 / 가수 20비트",
+        "부호 1비트 / 지수 8비트 / fraction 23비트",
+        "부호 8비트 / 지수 1비트 / fraction 23비트",
+        "부호 1비트 / 지수 5비트 / fraction 26비트"
+      ],
+      "answer": 1,
+      "explanation": "Single precision은 총 32비트이며, 부호 1비트 · 지수 8비트 · fraction 23비트로 구성된다. Bias는 127이다."
+    },
+    {
+      "id": "co-ch3-q013",
+      "type": "multiple-choice",
+      "text": "<strong>[문제 13]</strong> IEEE 754 single precision에서 <em>Exponent</em>와 <em>Fraction</em>의 특수 조합에 대한 설명으로 옳은 것은?",
+      "choices": [
+        "<code>Exponent = 255</code>, <code>Fraction = 0</code> 이면 NaN이다.",
+        "<code>Exponent = 0</code>, <code>Fraction ≠ 0</code> 이면 정규화 수이다.",
+        "<code>Exponent = 255</code>, <code>Fraction ≠ 0</code> 이면 NaN이고, <code>Exponent = 0</code>, <code>Fraction = 0</code> 이면 ±0이다.",
+        "<code>Exponent = 1~254</code> 이면 항상 Infinity이다."
+      ],
+      "answer": 2,
+      "explanation": "IEEE 754에서 <code>Exponent = 255</code>와 <code>Fraction ≠ 0</code>은 NaN, <code>Exponent = 255</code>와 <code>Fraction = 0</code>은 ±∞, <code>Exponent = 0</code>와 <code>Fraction = 0</code>은 ±0, <code>Exponent = 0</code>와 <code>Fraction ≠ 0</code>은 denormal이다."
+    },
+    {
+      "id": "co-ch3-q014",
+      "type": "essay",
+      "text": "<strong>[문제 14]</strong> <span class=\"prompt-emphasis\">(정답 및 풀이과정을 논리적으로 작성하세요.)</span> 10진 실수 <code>-0.75</code>를 IEEE 754 <em>single precision</em> 32비트로 변환하고, 최종 16진수 표현까지 쓰시오.",
+      "explanation": "Ch.3 개념 페이지의 대표 변환 절차 문제다. 2진수 변환 → 정규화 → 부호/지수/fraction 결정 순서로 풀면 된다.",
+      "hint": "<code>0.75 = 0.11₂</code>에서 출발하여 <code>1.1 × 2^-1</code> 형태로 정규화하라.",
+      "modelAnswer": "먼저 <code>0.75₁₀ = 0.11₂</code> 이다. 이를 정규화하면 <code>1.1 × 2^-1</code> 이다. 음수이므로 부호 비트 <code>S = 1</code>. 지수는 <code>-1 + 127 = 126</code> 이므로 exponent 필드는 <code>01111110</code> 이다. fraction은 hidden bit를 제외한 소수점 이하만 저장하므로 <code>10000000000000000000000</code> 이다. 따라서 최종 32비트는 <code>1 | 01111110 | 10000000000000000000000</code> 이고, 이를 16진수로 바꾸면 <code>1011 1111 0100 0000 0000 0000 0000 0000</code> = <code>0xBF400000</code> 이다."
+    },
+    {
+      "id": "co-ch3-q015",
+      "type": "essay",
+      "text": "<div class=\"note\"><span class=\"lbl\">기본 조건</span>레지스터 <code>$s0</code>와 <code>$s1</code>이 각각 <code>0x80000000</code>과 <code>0xD0000000</code>을 갖는다고 가정한다. 힌트: 레지스터의 값을 2의 보수로 해석(부호가 있는 형태로)하여 판단하라.</div><strong>[과제 출제 문제 2.10.1]</strong> 문제 다음 명령어를 수행한 후의 <code>$t0</code> 값은?<br><pre><code>add $t0, $s0, $s1</code></pre>",
+      "explanation": "문제 문구는 레지스터 값 자체를 묻지만, signed overflow가 발생하는 경우에는 비트 패턴 계산값과 실제 MIPS 실행 의미를 구분해서 답해야 한다.",
+      "hint": "<code>0x80000000</code>과 <code>0xD0000000</code>을 각각 signed 32비트 정수로 먼저 해석하라.",
+      "modelAnswer": "엄밀한 MIPS 실행 의미로는 첫 번째 정답은 <strong>signed overflow 예외가 발생한다</strong>이다. 즉 <code>add</code>는 정상적인 signed 결과를 <code>$t0</code>에 확정했다고 보기 어렵다. 다만 하위 32비트 래핑 결과만 기계적으로 계산하면 <code>0x50000000</code>이다. 먼저 2의 보수 해석을 적용하면 <code>$s0 = -2147483648</code>, <code>$s1 = -805306368</code>이다. 따라서 수학적 합은 <code>-2952790016</code>이고, 이는 signed 32비트 범위 밖이므로 overflow 조건을 만족한다. 비트 패턴만 보면 <code>0x80000000 + 0xD0000000 = 0x150000000</code>이며, 하위 32비트는 <code>0x50000000</code>이다. 정리하면: <strong>아키텍처 의미상 답은 overflow 예외</strong>, <strong>래핑된 32비트 비트패턴만 적으면 0x50000000</strong>이다."
+    },
+    {
+      "id": "co-ch3-q016",
+      "type": "essay",
+      "text": "<div class=\"note\"><span class=\"lbl\">기본 조건</span>레지스터 <code>$s0</code>와 <code>$s1</code>이 각각 <code>0x80000000</code>과 <code>0xD0000000</code>을 갖는다고 가정한다. 힌트: 레지스터의 값을 2의 보수로 해석(부호가 있는 형태로)하여 판단하라.</div><strong>[과제 출제 문제 2.10.2]</strong> 문제 2.10.1의 <code>$t0</code> 값이 원하던 값인가, 아니면 오버플로가 일어났는가?",
+      "explanation": "같은 부호의 signed 덧셈과 결과 부호를 연결해 overflow를 판단하는 문제다.",
+      "hint": "음수 + 음수인데 결과 비트 패턴이 양수처럼 보이는지 확인하라.",
+      "modelAnswer": "오버플로가 일어났다. 따라서 <code>0x50000000</code>은 원래의 signed 합을 정상적으로 표현한 값이 아니다. 두 피연산자 <code>$s0</code>와 <code>$s1</code>은 둘 다 음수인데, 결과 비트 패턴 <code>0x50000000</code>은 최상위 비트가 0이므로 양수 해석이 된다. 즉 같은 부호의 두 수를 더했는데 결과의 부호가 바뀌었으므로 overflow이다."
+    },
+    {
+      "id": "co-ch3-q017",
+      "type": "essay",
+      "text": "<div class=\"note\"><span class=\"lbl\">기본 조건</span>레지스터 <code>$s0</code>와 <code>$s1</code>이 각각 <code>0x80000000</code>과 <code>0xD0000000</code>을 갖는다고 가정한다. 힌트: 레지스터의 값을 2의 보수로 해석(부호가 있는 형태로)하여 판단하라.</div><strong>[과제 출제 문제 2.10.3]</strong> 문제 레지스터 <code>$s0</code>와 <code>$s1</code> 값이 위와 같을 때 다음 명령어를 수행한 후의 <code>$t0</code> 값은?<br><pre><code>sub $t0, $s0, $s1</code></pre>",
+      "explanation": "Signed 뺄셈을 2의 보수 덧셈으로 보고 결과 범위를 확인하는 문제다.",
+      "hint": "<code>$s0 - $s1</code>를 signed 값으로 먼저 계산한 뒤, 비트 패턴으로도 확인하라.",
+      "modelAnswer": "<code>0xB0000000</code>이다. Signed 해석으로는 <code>-2147483648 - (-805306368) = -1342177280</code>이다. 이 값은 signed 32비트 범위 안에 있으므로 정상적으로 표현 가능하다. 비트 패턴으로도 확인하면 <code>0xD0000000</code>의 2의 보수는 <code>0x30000000</code>이고, 따라서 <code>0x80000000 + 0x30000000 = 0xB0000000</code>이 된다."
+    },
+    {
+      "id": "co-ch3-q018",
+      "type": "essay",
+      "text": "<div class=\"note\"><span class=\"lbl\">기본 조건</span>레지스터 <code>$s0</code>와 <code>$s1</code>이 각각 <code>0x80000000</code>과 <code>0xD0000000</code>을 갖는다고 가정한다. 힌트: 레지스터의 값을 2의 보수로 해석(부호가 있는 형태로)하여 판단하라.</div><strong>[과제 출제 문제 2.10.4]</strong> 문제 2.10.3의 <code>$t0</code> 값이 원하던 값인가, 아니면 오버플로가 일어났는가?",
+      "explanation": "Signed 뺄셈에서 overflow가 생기는 경우와 생기지 않는 경우를 구분하는 문제다.",
+      "hint": "음수에서 음수를 빼는 연산이 실제로는 어떤 부호 조합의 덧셈과 같은지 생각하라.",
+      "modelAnswer": "오버플로는 일어나지 않았고, <code>$t0 = 0xB0000000</code>은 원하던 값을 올바르게 표현한다. Signed 관점에서 보면 <code>$s0 - $s1</code>은 음수에서 음수를 빼는 연산이며, 이는 곧 음수와 양수의 덧셈과 같다. 서로 부호가 다른 두 수를 더할 때는 signed overflow가 발생하지 않는다. 실제 계산값도 <code>-1342177280</code>으로 signed 32비트 범위 안에 있다."
+    },
+    {
+      "id": "co-ch3-q019",
+      "type": "essay",
+      "text": "<div class=\"note\"><span class=\"lbl\">기본 조건</span>레지스터 <code>$s0</code>와 <code>$s1</code>이 각각 <code>0x80000000</code>과 <code>0xD0000000</code>을 갖는다고 가정한다. 힌트: 레지스터의 값을 2의 보수로 해석(부호가 있는 형태로)하여 판단하라.</div><strong>[과제 출제 문제 2.10.5]</strong> 문제 레지스터 <code>$s0</code>와 <code>$s1</code> 값이 위와 같을 때 다음 어셈블리 코드를 수행한 후의 <code>$t0</code> 값은?<br><pre><code>add $t0, $s0, $s1\nadd $t0, $t0, $s0</code></pre>",
+      "explanation": "첫 번째 <code>add</code>에서 overflow 예외가 발생하면 그 뒤 명령까지 정상 완료된 것처럼 최종 레지스터 값을 확정할 수 없다는 점을 분명히 해야 한다.",
+      "hint": "먼저 첫 번째 <code>add</code>가 정상 signed 결과를 만드는지부터 확인하라.",
+      "modelAnswer": "엄밀한 MIPS 실행 의미로는 <strong>첫 번째 <code>add</code>에서 signed overflow 예외가 발생하므로, 시퀀스 전체를 정상 완료한 뒤의 최종 <code>$t0</code> 값을 확정 답으로 쓰면 안 된다</strong>. 즉 아키텍처 의미상 핵심 답은 “첫 번째 명령에서 예외 발생”이다. 다만 예외를 무시하고 하위 32비트 비트패턴만 연속 계산하면 첫 번째 결과는 <code>0x50000000</code>, 이어서 두 번째는 <code>0x50000000 + 0x80000000 = 0xD0000000</code>이므로 래핑 결과는 <code>0xD0000000</code>이다. 정리하면: <strong>실행 의미상 정답은 첫 번째 <code>add</code>에서 overflow 예외가 발생해 최종값을 정상 결과로 확정할 수 없다는 것</strong>, <strong>비트패턴 계산을 끝까지 밀면 0xD0000000</strong>이다."
+    },
+    {
+      "id": "co-ch3-q020",
+      "type": "essay",
+      "text": "<div class=\"note\"><span class=\"lbl\">기본 조건</span>레지스터 <code>$s0</code>와 <code>$s1</code>이 각각 <code>0x80000000</code>과 <code>0xD0000000</code>을 갖는다고 가정한다. 힌트: 레지스터의 값을 2의 보수로 해석(부호가 있는 형태로)하여 판단하라.</div><strong>[과제 출제 문제 2.10.6]</strong> 문제 2.10.5의 <code>$t0</code> 값이 원하던 값인가, 아니면 오버플로가 일어났는가?",
+      "explanation": "시퀀스 중간에 발생한 overflow 예외가 전체 결과 해석을 무너뜨린다는 점을 묻는 문제다.",
+      "hint": "2.10.5에서 어느 단계에서 overflow가 처음 발생하는지 명시하라.",
+      "modelAnswer": "첫 번째 <code>add</code>에서 이미 오버플로가 일어난다. 따라서 시퀀스 전체의 정상 결과로서 <code>$t0</code>가 원하던 값이라고 볼 수 없다. 첫 번째 명령은 음수 + 음수의 덧셈이며, 그 결과는 signed 32비트 범위를 벗어난다. 두 번째 명령까지 비트 패턴 계산을 기계적으로 이어 갈 수는 있지만, 엄밀한 MIPS 의미에서는 첫 번째 <code>add</code>에서 overflow 예외가 발생했으므로 전체 연산은 이미 정상적인 signed 결과를 잃었다고 봐야 한다."
+    }
+  ]
+}

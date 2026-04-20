@@ -1,0 +1,78 @@
+CH2 PRACTICE REPORT
+===================
+
+Purpose
+-------
+Revise the Chapter 2 practice page so that every included problem fits the current Ch.2 scope of the project.
+The assignment was re-checked against the current Ch.2 / Ch.3 concept split before finalizing the question set.
+
+Files updated
+-------------
+1. subjects/co/practice/ch2.html
+2. subjects/co/questions/ch2.json
+3. CH2_PRACTICE_REPORT.txt
+
+Question policy
+---------------
+- Total questions: 20
+- Original Ch.2 practice questions: 17
+- Assignment-derived questions included without scope conflict: 3
+
+Assignment review result
+------------------------
+Assignment 2 problems reviewed:
+- 2.1
+- 2.5
+- 2.10.1 ~ 2.10.6
+- 2.21
+
+Included in Ch.2 practice
+-------------------------
+- 2.1
+- 2.5
+- 2.21
+
+Excluded from Ch.2 practice
+---------------------------
+- 2.10.1
+- 2.10.2
+- 2.10.3
+- 2.10.4
+- 2.10.5
+- 2.10.6
+
+Reason for exclusion
+--------------------
+The 2.10 series depends on signed overflow judgment, and in 2.10.5 ~ 2.10.6 it also leans on overflow/exception-aware execution semantics.
+Under the current project structure, overflow is classified on the Ch.3 concept side rather than the Ch.2 side.
+Keeping 2.10 inside Ch.2 practice would therefore blur the chapter boundary.
+
+Replacement policy
+------------------
+The removed 2.10 series was replaced with new Ch.2-only practice problems covering topics already present on the current Ch.2 concept page:
+- sign extension vs zero extension
+- byte load (lb / lbu)
+- pseudo instructions (blt)
+- jal and return address
+- stack-based save / restore in a non-leaf procedure
+- immediate handling with addi / ori
+
+Scope guard
+-----------
+The final Ch.2 practice set is restricted to topics explicitly covered on the current Ch.2 concept page:
+- instruction formats
+- register roles and calling convention
+- load / store and array addressing
+- alignment and endianness
+- immediates, sign extension, zero extension, and constant construction
+- shifts and signed / unsigned comparison
+- branch / jump basics and PC-relative control flow
+- pseudo instructions
+- procedure call basics and stack save / restore
+- byte / string-related memory access
+
+Notes
+-----
+- Assignment-derived problems are now limited to items that stay cleanly inside Ch.2.
+- The final set no longer claims that every selected assignment problem was copied verbatim.
+- Chapter 1 assignment material was not copied into the Ch.2 practice set.

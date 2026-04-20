@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script type="module" src="../../../shared/auth-guard.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ch.1 컴퓨터 추상화와 기술 · 개념 정리</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+  <script defer src="../../../shared/katex-boot.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../shared/styles.css">
+
+  <style>
+    .md-body h2{
+      display:flex; align-items:baseline; gap:18px;
+      border-bottom:2px solid var(--ink); padding-bottom:10px; margin:52px 0 24px;
+      font-family:var(--serif); font-size:30px; font-weight:700; letter-spacing:-.01em;
+      scroll-margin-top:20px;
+    }
+    .md-body h2::before{
+      content:"§"; font-family:var(--mono); font-size:12px; color:var(--accent);
+      letter-spacing:.15em; padding-top:4px;
+    }
+    .md-body h3{ margin-top:28px; }
+    .md-body h4{ margin-top:18px; }
+    .md-body blockquote{
+      margin:16px 0; padding:16px 20px; border:1px solid var(--ink);
+      border-left:4px solid var(--warn); background:var(--warn-soft); font-size:14.5px;
+    }
+    .md-body blockquote p:first-child{ margin-top:0; }
+    .md-body blockquote p:last-child{ margin-bottom:0; }
+    .md-body pre{
+      margin:16px 0; padding:16px 18px; overflow:auto;
+      background:#171717; color:#f4f1ea; border:1px solid #171717;
+      font-family:var(--mono); font-size:13px; line-height:1.6;
+    }
+    .md-body pre code{
+      background:transparent; color:inherit; padding:0; border-radius:0; font-size:inherit;
+    }
+    .md-body hr{
+      border:none; border-top:1px dashed rgba(26,26,26,.28); margin:28px 0;
+    }
+    .md-body > *:first-child{ margin-top:0; }
+    .chapter-list{ list-style:none; padding:0; margin:0; }
+    .chapter-item{
+      border:1px solid #ddd; border-radius:8px; padding:16px; margin:12px 0;
+      display:flex; justify-content:space-between; align-items:center; gap:16px;
+      background:#fff;
+    }
+    .chapter-item .title{ font-weight:600; }
+    .chapter-item .summary{ font-size:13px; color:#666; margin-top:4px; }
+    .chapter-item .links a{
+      margin-left:12px; text-decoration:none; color:var(--accent); font-weight:600;
+    }
+    .subject-note{
+      border:1px solid #d9d9f0; border-radius:10px; padding:18px 20px; background:#fff; margin-top:28px;
+    }
+    .subject-note h2{ margin-top:0; font-size:22px; border:none; padding:0; font-family:var(--serif); }
+    @media (max-width: 720px){
+      .chapter-item{ align-items:flex-start; flex-direction:column; }
+      .chapter-item .links a{ margin-left:0; margin-right:12px; }
+    }
+  </style>
+
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a href="../index.html">← 허브</a>
+    <div class="crumbs"><span>Ch.01</span><span class="sep">/</span><span class="now">개념 정리</span></div>
+    <a href="../practice/ch1.html">문제풀이 →</a>
+  </div>
+
+  <header class="masthead">
+    <div class="kicker"><span>Computer Organization · Chapter 01</span><span>Concepts</span></div>
+    <h1 class="title">컴퓨터 추상화와<br><em>기술</em></h1>
+    <p class="deck">트랜지스터, 시스템 계층, 메모리 구조, 성능 지표와 전력 장벽까지 <strong>챕터 1 핵심만</strong> 한 흐름으로 정리합니다.</p>
+  </header>
+
+  <div class="classifier">
+    <h2>이 문서의 분류 기준</h2>
+    <p style="margin:4px 0 12px;font-size:14.5px;color:var(--ink-soft)">이 페이지는 <strong>순수 Ch.1 범위</strong>에 맞춰 컴퓨터 시스템의 큰 그림 → 메모리/반도체 → 성능/전력의 흐름으로 다시 정리했습니다.</p>
+    <ul>
+          <li><b>§1</b>컴퓨터 추상화와 기술 — 트랜지스터, 응용 분야, SW 계층, 5대 구성 요소</li>
+          <li><b>§2</b>메모리와 하드웨어 기반 — SoC, DRAM/SRAM, 메모리 계층, 반도체 기초</li>
+          <li><b>§3</b>성능과 전력 — 응답 시간, CPU Time, 클럭, CPI, Power Wall, Amdahl</li>
+    </ul>
+  </div>
+
+  <nav class="toc">
+    <span class="lbl">Contents</span>
+    <ol>
+      <li><a href="#h-1"><span class="n">01</span>컴퓨터 추상화와 기술</a></li>
+      <li><a href="#h-9"><span class="n">02</span>메모리와 반도체의 기초</a></li>
+      <li><a href="#h-14"><span class="n">03</span>성능과 전력</a></li>
+    </ol>
+  </nav>
+
+  <div class="md-body">
+<h2 id="h-1">Chapter 1. 컴퓨터 추상화와 기술</h2>
+<h3 id="h-2">1-1. 트랜지스터와 무어의 법칙</h3>
+<ul>
+<li><strong>트랜지스터 = 스위치</strong>. 전류를 흘리거나 끊거나. 단자 3개: <strong>게이트(Gate) / 소스(Source) / 드레인(Drain)</strong>.<ul>
+<li>게이트에 전압을 인가 → 소스-드레인 사이 전류량 조절.</li>
+<li>전압 세게 주면 채널이 두껍게 생겨 전류 많이 흐름, 작게 주면 적게 흐름 → 스위칭 가능.</li>
+</ul>
+</li>
+<li>트랜지스터 <strong>6개</strong>를 엮으면 <strong>1 bit 저장</strong> 가능 (SRAM 셀).</li>
+<li><strong>무어의 법칙</strong>: 단위 면적당 트랜지스터 수가 <strong>약 1.5~2년마다 2배</strong>로 증가.<ul>
+<li>단, <strong>2000년대 이후 사실상 깨졌음</strong>. 전력 문제 등 여러 물리적 제약 때문.</li>
+</ul>
+</li>
+</ul>
+<h3 id="h-3">1-2. 컴퓨터 응용 분야 (3대 분류) 🔥</h3>
+<table>
+<thead>
+<tr>
+  <th>구분</th>
+  <th>특징</th>
+  <th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>PC (개인용 컴퓨터)</strong></td>
+  <td><strong>범용성(general-purpose)</strong> 보유. 제3자 소프트웨어 설치/실행 가능</td>
+  <td>동영상 플레이어, 브라우저, 편집기 등 자유 설치</td>
+</tr>
+<tr>
+  <td><strong>서버 (Server)</strong></td>
+  <td>PC보다 성능 ↑. <strong>Dependability(신뢰도)</strong> 중요. &quot;24/7&quot; 운영</td>
+  <td>SSH/Telnet 원격 접속. 과거 메인프레임의 현대형. 카카오 서버 마비 사태 등이 dependability 사례</td>
+</tr>
+<tr>
+  <td><strong>임베디드 (Embedded)</strong></td>
+  <td>범용성 없음. <strong>HW/SW가 강하게 결합</strong>. 특정 기능만 수행. 전력·자원 엄격 제한</td>
+  <td>신호등, IoT 엣지 디바이스 등</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>슈퍼컴퓨터</strong> = 서버의 일종. 수십~수백 개 노드를 <strong>근거리 고속 네트워크(예: InfiniBand)</strong> 로 묶음.<ul>
+<li>2024 기준 1위: El Capitan (코어 약 <strong>1,100만 개</strong>), 2위 Frontier, 3위 Aurora.</li>
+<li>전체 컴퓨터 시장 점유율은 매우 작으나 최근 <strong>AI 기반 GPU 슈퍼컴퓨팅팜</strong>이 부상.</li>
+</ul>
+</li>
+</ul>
+<h3 id="h-4">1-3. SI 단위 vs IEC 이진 단위 🔥</h3>
+<table>
+<thead>
+<tr>
+  <th>체계</th>
+  <th>밑</th>
+  <th>단위 예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>SI (10진)</strong></td>
+  <td>10</td>
+  <td>K(10³), M(10⁶), G(10⁹), T(10¹²), P(10¹⁵), E(10¹⁸), Z(10²¹), <strong>Y(10²⁴)</strong>, R(10²⁷), <strong>Q(10³⁰)</strong></td>
+</tr>
+<tr>
+  <td><strong>IEC (2진)</strong></td>
+  <td>2</td>
+  <td>Ki(2¹⁰), Mi(2²⁰), Gi(2³⁰), Ti(2⁴⁰), Pi, Ei, Zi, <strong>Yi</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>외워야 하는 최소 범위: Y(요타)까지.</strong> Q(쾌카), R까지는 보너스.</li>
+<li><strong>왜 중요?</strong> SSD 512GB 샀는데 컴퓨터가 더 작게 인식하는 이유 → <strong>판매=SI(10진), 인식=IEC(2진)</strong> 이라서.</li>
+<li><strong>대문자 B = Byte(바이트, 8bit), 소문자 b = bit.</strong> 혼용 금지 (8배 차이).</li>
+<li>컴퓨터 내부 연산 단위는 <strong>항상 IEC(2진)</strong>.</li>
+</ul>
+<h3 id="h-5">1-4. 포스트 PC 시대와 클라우드</h3>
+<ul>
+<li><strong>PMD (Personal Mobile Device)</strong>: 배터리 동작, 이동 가능, 인터넷 연결 가능. 스마트폰, 태블릿, 스마트 안경 등.</li>
+<li><strong>클라우드 컴퓨팅 vs 슈퍼컴퓨터/클러스터</strong> 🔥<ul>
+<li><strong>클라우드</strong>: 노드들이 <strong>인터넷으로 연결</strong>. 물리적으로 <strong>원격에 분산</strong>(서울-부산-대구 등).</li>
+<li><strong>클러스터/슈퍼컴퓨터</strong>: 노드들이 <strong>근거리 고속 네트워크로 한 공간에 모여</strong> 있음.</li>
+<li>공통점: 대규모 병렬 처리.</li>
+</ul>
+</li>
+<li><strong>클라우드 서비스 3계층</strong> 🔥<ul>
+<li><strong>SaaS</strong> (Software as a Service): 소프트웨어 자체 제공. 예) Google Docs, Google Slides.</li>
+<li><strong>IaaS</strong> (Infrastructure as a Service): 가상 컴퓨터 인프라 제공. 예) AWS EC2, Azure.</li>
+<li><strong>PaaS</strong> (Platform as a Service): 플랫폼 제공. 예) 데이터 분석 플랫폼.</li>
+</ul>
+</li>
+</ul>
+<h3 id="h-6">1-5. 프로그램 빛의 세계 — SW 계층</h3>
+<pre><code>┌──────────────────────────────┐
+│  Application Software (응용)  │   ← 사용자 프로그램
+├──────────────────────────────┤
+│  System Software (OS/컴파일러)│   ← 추상화 제공
+├──────────────────────────────┤
+│  Hardware (CPU, Memory, I/O)  │   ← 실제 기계
+└──────────────────────────────┘
+</code></pre>
+<ul>
+<li><strong>OS는 두 얼굴</strong>: (HW 입장) 시스템 자원 관리자, (User 입장) HW 접근 인터페이스.</li>
+<li><strong>컴파일러</strong>: 하이레벨 언어(C/Java/Python…) → <strong>어셈블리 언어 → 기계어</strong>.</li>
+<li><strong>기계어</strong> = 0과 1로 표현되는 실제 명령 비트열이다.</li>
+<li><strong>어셈블리 ↔ 기계어 = 1:1 매핑</strong>. 어셈블리는 사람이 읽기 쉬운 형태(mnemonic).</li>
+</ul>
+<h3 id="h-7">1-6. 컴퓨터의 5대 구성 요소</h3>
+<ol>
+<li><strong>입력 (Input)</strong></li>
+<li><strong>출력 (Output)</strong></li>
+<li><strong>메모리 (Memory)</strong> — 명령어와 데이터 저장</li>
+<li><strong>데이터패스 (Datapath)</strong> — 데이터가 이동하는 경로 (ALU, 레지스터 연결 등)</li>
+<li><strong>제어 (Control Unit)</strong> — 명령어 해석 및 제어 신호 생성</li>
+</ol>
+<ul>
+<li><strong>ALU (Arithmetic Logic Unit)</strong>: 산술 연산(+−×÷) + 논리 연산(크기 비교 등) 담당.</li>
+<li><strong>Datapath</strong>: 한 번에 <strong>1 word</strong> 폭으로 병렬 전송한다. 패러럴은 근거리용, 시리얼은 원거리용(스큐/드리프트 때문)이라는 감각을 잡아두면 된다.</li>
+</ul>
+<h3 id="h-8">1-7. iPhone A12 SoC 해부</h3>
+<ul>
+<li><strong>SoC (System on Chip)</strong>: 칩 하나 안에 시스템 전체가 내장된 집적회로(Integrated Circuit).</li>
+<li>A12 내부: CPU 6개 코어(빅 2 + 리틀 4) + GPU + NPU(Neural Processing Unit) + 메모리 컨트롤러.</li>
+<li><strong>big.LITTLE 아키텍처</strong> 🔥<ul>
+<li><strong>Big Core</strong>: 고성능. 무거운 작업 담당.</li>
+<li><strong>Little Core</strong>: 저성능·저전력. 가벼운 백그라운드 작업.</li>
+<li><strong>목적 = 전력 소모 최소화</strong> (필요할 때만 Big Core 가동).</li>
+</ul>
+</li>
+<li><strong>PMIC</strong> (Power Management IC): 전원 관리 칩. 가전제품 전원 고장 시 십중팔구 PMIC 문제.</li>
+<li><strong>Fabless</strong>: 생산 공장 없이 <strong>설계만 파는 회사</strong> (예: ARM). 삼성 Exynos도 내부는 ARM 기반.</li>
+</ul>
+<h3 id="h-9">1-8. 메모리 종류: DRAM vs SRAM 🔥</h3>
+<table>
+<thead>
+<tr>
+  <th>항목</th>
+  <th>SRAM</th>
+  <th>DRAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>구성</td>
+  <td>트랜지스터 <strong>6개</strong> / bit</td>
+  <td>트랜지스터 <strong>1개 + 커패시터 1개</strong> / bit</td>
+</tr>
+<tr>
+  <td>속도</td>
+  <td><strong>빠름</strong></td>
+  <td>느림</td>
+</tr>
+<tr>
+  <td>전력</td>
+  <td>상시 공급 필요 (많음)</td>
+  <td><strong>주기적 Refresh만 필요</strong> (적음)</td>
+</tr>
+<tr>
+  <td>집적도</td>
+  <td>낮음</td>
+  <td><strong>높음</strong></td>
+</tr>
+<tr>
+  <td>가격</td>
+  <td>비쌈</td>
+  <td><strong>쌈</strong></td>
+</tr>
+<tr>
+  <td>용도</td>
+  <td><strong>캐시(L1/L2/L3)</strong></td>
+  <td><strong>메인 메모리</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Static/Dynamic은 속도가 아니라 &quot;저장 메커니즘&quot;을 뜻함</strong>. (Static=전기 계속 공급, Dynamic=커패시터+주기적 리프레시)</li>
+<li>DRAM 커패시터는 절연체로 감싸져 있지만 전하가 조금씩 누출 → <strong>Refresh 필요</strong>.</li>
+</ul>
+<h3 id="h-10">1-9. 메모리 계층 구조 🔥</h3>
+<pre><code>[빠름/작음/비쌈]
+    Register     수 KB        ← CPU 클럭 1사이클에 접근
+    L1 Cache     수십 KB
+    L2 Cache     수백 KB ~ MB
+    L3 Cache     수 MB
+    Main Memory (DRAM)  GB    ← ns 단위
+    SSD           수백 GB ~ TB ← μs 단위
+    HDD           TB           ← ms 단위 (SSD보다 약 1000배 느림)
+    Cloud/Network Storage     ← 이론상 무한
+[느림/큼/쌈]
+</code></pre>
+<ul>
+<li>각 계층은 약 <strong>1000배씩</strong> 속도/크기 차이.</li>
+<li><strong>잘 동작하는 이유 = Locality(지역성)</strong> 🔥<ul>
+<li><strong>Temporal Locality (시간 지역성)</strong>: for문처럼 같은 코드 반복 실행.</li>
+<li><strong>Spatial Locality (공간 지역성)</strong>: 배열 순차 접근처럼 인접 메모리 참조.</li>
+</ul>
+</li>
+<li>이상적 메모리(빠름+큼+쌈+저전력+비휘발성)는 <strong>존재할 수 없음</strong> → 절충안이 계층 구조.</li>
+</ul>
+<h3 id="h-11">1-10. 휘발성 vs 비휘발성 메모리</h3>
+<ul>
+<li><strong>Volatile (휘발성)</strong>: 전원 끄면 데이터 사라짐. Register, SRAM, DRAM.</li>
+<li><strong>Non-volatile (비휘발성) / Secondary Memory</strong>: 전원 꺼져도 유지. HDD, SSD(플래시), 광학 디스크.</li>
+<li>※ 비휘발성이라고 100% 안전한 건 아님 (SSD 컨트롤러 고장 등).</li>
+</ul>
+<h3 id="h-12">1-11. 반도체 칩 생산 공정</h3>
+<pre><code>실리콘 잉곳 → 슬라이서 → 웨이퍼 → 20~40단계 공정(도핑/에칭/메탈 등)
+    → 웨이퍼 테스트 → 다이싱(자르기) → 패키징 → 최종 테스트 → 출하
+</code></pre>
+<ul>
+<li><strong>웨이퍼</strong>: 보통 직경 300mm(12인치). 동그란 원판.</li>
+<li><strong>다이(Die)</strong>: 웨이퍼를 잘라낸 개별 칩 단위. 네모남.</li>
+<li><strong>Yield(수율)</strong> = 정상 다이 비율. 수율이 수익성 좌우.</li>
+<li><strong>공정(예: 10nm)</strong>: 소자를 제어할 수 있는 최소 단위 폭. 작을수록 집적도 ↑.</li>
+<li><strong>집적회로 발전</strong>: IC → LSI → VLSI → ULSI.</li>
+</ul>
+<h3 id="h-13">1-12. 반도체 기본 원리 (개념 수준만)</h3>
+<ul>
+<li>주성분은 <strong>규소(Si)</strong>. 외곽 전자 4개로 안정적 (기본적으로 절연).</li>
+<li><strong>도핑 (Doping)</strong>: 불순물을 섞어 전기 특성 부여.<ul>
+<li><strong>N형</strong>: 5가 원소(예: 인) 주입 → 자유 전자 남음 → <strong>(−) 성질</strong>.</li>
+<li><strong>P형</strong>: 3가 원소(예: 붕소) 주입 → <strong>정공(hole)</strong> 생김 → <strong>(+) 성질</strong>.</li>
+</ul>
+</li>
+<li><strong>P-N 접합 = 다이오드</strong> (전류 한 방향).</li>
+<li><strong>NPN / PNP 접합 = 트랜지스터</strong>. 게이트 전압으로 채널 두께(전류량) 조절.</li>
+<li><strong>CMOS</strong>: Complementary Metal-Oxide-Semiconductor. 현재 반도체 제조 기술의 표준.</li>
+</ul>
+<h3 id="h-14">1-13. 성능(Performance) — 기초</h3>
+<ul>
+<li><strong>&quot;성능이 좋다&quot;는 표현 금지.</strong> 어떤 지표(metric)냐가 중요.<ul>
+<li>비행기 비교 예시: 승객 수(A380 최고), 순항거리(777 최고), 속도(콩코드 최고), 승객 처리량(A380 최고) — 지표마다 정답 다름.</li>
+</ul>
+</li>
+<li><strong>응답 시간 (Response Time / Execution Time)</strong>: 작업 개시~종료. <strong>작을수록 좋음</strong>.</li>
+<li><strong>처리량 (Throughput / Bandwidth)</strong>: 단위시간당 처리하는 작업량. <strong>클수록 좋음</strong>.</li>
+</ul>
+<h3 id="h-15">1-14. Wall Clock Time vs CPU Time 🔥</h3>
+<ul>
+<li><strong>Wall Clock Time (경과 시간)</strong>: 실제 벽시계 시간. I/O, OS 오버헤드, 다른 프로세스 간섭 모두 포함.</li>
+<li><strong>CPU Time</strong>: 순수하게 이 프로그램이 CPU를 사용한 시간.<ul>
+<li>= <strong>User CPU Time + System CPU Time</strong></li>
+<li><strong>User Time</strong>: 응용 코드(예: for문) 실행 시간.</li>
+<li><strong>System Time</strong>: 시스템 콜(예: <code>fopen</code>→<code>create</code>) 때문에 OS 커널이 대신 수행한 시간.</li>
+</ul>
+</li>
+<li>컴퓨터 구조에서는 <strong>CPU Time만 관심 대상</strong>.</li>
+</ul>
+<h3 id="h-16">1-15. 클럭 (Clock) 🔥</h3>
+<ul>
+<li><strong>Clock Period (주기)</strong>: 한 클럭이 걸리는 시간. 예) 250 ps = 0.25 ns.</li>
+<li><strong>Clock Rate (Frequency)</strong>: 1초에 클럭 몇 번? 주기의 역수. 예) 0.25 ns의 역수 = <strong>4 GHz</strong>.</li>
+<li><strong>외워둘 것</strong>: 250 ps ↔ 4 GHz, 500 ps ↔ 2 GHz.</li>
+<li>클럭 신호는 <strong>방형파(구형파)</strong> 사용 (5V↔0V 급격 전환).</li>
+</ul>
+<h3 id="h-17">1-16. CPU 실행 시간 공식 🔥🔥</h3>
+<pre><code>CPU Time = (Instruction Count) × (CPI) × (Clock Cycle Time)
+         = (Instruction Count) × (CPI) / (Clock Rate)
+</code></pre>
+<ul>
+<li><strong>CPI (Cycles Per Instruction)</strong>: 명령어 하나 처리에 필요한 평균 클럭 사이클 수.</li>
+<li><strong>성능 향상 방법</strong> 🔥<ol>
+<li><strong>명령어 수(IC) 줄이기</strong> — 컴파일러/알고리즘 최적화.</li>
+<li><strong>CPI 줄이기</strong> — 아키텍처 개선.</li>
+<li><strong>Clock Rate 올리기</strong> — 단, 전력·발열 한계 있음.</li>
+</ol>
+</li>
+</ul>
+<h4 id="h-18">예제 1. 같은 프로그램, 다른 컴퓨터</h4>
+<ul>
+<li>컴퓨터 A: 2 GHz, 10초 걸림 → 총 사이클 = 2G × 10 = <strong>20G 사이클</strong></li>
+<li>컴퓨터 B: 6초 안에 끝내야 함. A보다 사이클 1.2배 소비 → 24G 사이클</li>
+<li>→ Clock Rate = 24G / 6 = <strong>4 GHz</strong> 필요</li>
+<li><strong>교훈</strong>: 성능 1.67배 개선에 클럭은 2배 올려야 함 (CPI 증가 때문).</li>
+</ul>
+<h4 id="h-19">예제 2. 평균 CPI 계산</h4>
+<table>
+<thead>
+<tr>
+  <th>명령어 타입</th>
+  <th>CPI</th>
+  <th>Code1 횟수</th>
+  <th>Code2 횟수</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>A</td>
+  <td>1</td>
+  <td>2</td>
+  <td>4</td>
+</tr>
+<tr>
+  <td>B</td>
+  <td>2</td>
+  <td>1</td>
+  <td>1</td>
+</tr>
+<tr>
+  <td>C</td>
+  <td>3</td>
+  <td>2</td>
+  <td>1</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Code1: 총 사이클 = 2×1 + 1×2 + 2×3 = <strong>10</strong>, 명령어 5개 → CPI = <strong>2.0</strong></li>
+<li>Code2: 총 사이클 = 4×1 + 1×2 + 1×3 = <strong>9</strong>, 명령어 6개 → CPI = <strong>1.5</strong></li>
+<li>명령어 개수가 많아도 <strong>총 사이클은 더 적을 수 있음</strong> → 단순히 명령어 수만 보면 안 됨.</li>
+</ul>
+<h3 id="h-20">1-17. 전력 장벽 (Power Wall) 🔥</h3>
+<h4 id="h-21">동적 전력 공식 🔥🔥</h4>
+<pre><code>Dynamic Power ∝ (1/2) × C × V² × f
+
+  C = Capacitive Load (용량성 부하, 공정 미세화로 감소)
+  V = Voltage (전압)
+  f = Switching Frequency (스위칭 빈도 = 클럭)
+</code></pre>
+<h4 id="h-22">계산 예제</h4>
+<ul>
+<li>새 CPU: C가 구형의 85%, V도 15% 감소, f도 15% 감소</li>
+<li>새 동전력 / 구 동전력 = 0.85 × 0.85² × 0.85 = <strong>0.85⁴ ≈ 0.52</strong></li>
+<li>즉 새 CPU는 절반 수준의 전력.</li>
+</ul>
+<h4 id="h-23">Power Wall</h4>
+<ul>
+<li>클럭을 계속 높이면 <strong>발열이 감당 불가</strong> → <strong>주파수 정체</strong> (최근 CPU ~ 5 GHz 근처에서 멈춤).</li>
+<li>역사: 82년 3.3W → 2018년 커피레이크 95W, 클럭 12.5 MHz → ~4 GHz (약 1000배).</li>
+</ul>
+<h4 id="h-24">해결책 = 멀티코어 + DVFS</h4>
+<ul>
+<li><strong>싱글 스레드 성능 증가 정체</strong> → <strong>코어 수 증가</strong> 방향으로 전환.</li>
+<li><strong>ILP → TLP</strong> 전환:<ul>
+<li><strong>ILP (Instruction-Level Parallelism)</strong>: 한 스레드 내 명령어 병렬. (Pipeline, Superscalar, Dynamic Scheduling)</li>
+<li><strong>TLP (Thread-Level Parallelism)</strong>: 여러 스레드 동시 실행(멀티코어).</li>
+</ul>
+</li>
+<li><strong>DVFS (Dynamic Voltage &amp; Frequency Scaling)</strong>: 부하 따라 전압·주파수 동적 조정.</li>
+<li><strong>정전력(static power)</strong>은 누설 전류가 일정하다고 보면 <code>P_static = V × I_leak</code> 꼴이므로 <strong>전압에 비례</strong>한다고 둘 수 있다. 이 가정은 전력 계산 문제에서 자주 사용된다.</li>
+</ul>
+<h3 id="h-25">1-18. ILP 기법 3가지 🔥</h3>
+<ol>
+<li><strong>Pipelining</strong>: 명령어 실행을 단계별로 겹쳐 처리하는 방식이다. 전형적인 <strong>5단계 예시</strong>로 <code>IF → ID → EX → MEM → WB</code> 같은 형태를 떠올리면 된다.</li>
+<li><strong>Superscalar</strong>: 한 사이클에 여러 명령어를 <strong>다중 파이프라인</strong>으로 동시 실행.</li>
+<li><strong>Dynamic Instruction Scheduling</strong>: 하드웨어가 런타임에 명령어 종속성 검사해 순서 재배치.</li>
+</ol>
+<h3 id="h-26">1-19. 7가지 위대한 아이디어 🔥</h3>
+<ol>
+<li><strong>Abstraction (추상화)</strong> — 설계 단순화</li>
+<li><strong>Common Case Fast</strong> — 자주 생기는 일을 빠르게</li>
+<li><strong>Parallelism (병렬성)</strong> — 성능 향상</li>
+<li><strong>Pipelining</strong> — 병렬성 특수 형태</li>
+<li><strong>Prediction (예측)</strong> — 분기 예측 등</li>
+<li><strong>Memory Hierarchy (메모리 계층)</strong></li>
+<li><strong>Redundancy via Dependability (여유분을 이용한 신용도 개선)</strong> — 백업, 중복 자원</li>
+</ol>
+<h3 id="h-27">1-20. 암달의 법칙 (Amdahl's Law) 🔥🔥 시험 필출</h3>
+<pre><code>T_improved = T_unaffected + (T_affected / Improvement)
+</code></pre>
+<ul>
+<li>특정 파트만 N배 개선해도 <strong>전체 성능은 N배 개선되지 않음</strong> (병렬 불가 부분 때문).</li>
+</ul>
+<h4 id="h-28">예제</h4>
+<ul>
+<li>전체 실행 시간 100초, 곱셈에 80초 소요. 전체를 4배 빠르게 (100→25초) 하려면?</li>
+<li><code>25 = (100 - 80) + 80 / x</code> → <code>5 = 80/x</code> → <strong>x = 16배</strong>. 곱셈을 16배 빠르게 해야 함.</li>
+<li>즉 곱셈을 80초 → 5초로 줄여야 전체가 4배 개선됨.</li>
+</ul>
+<h3 id="h-29">1-21. 흔한 오해들</h3>
+<ul>
+<li><strong>Low Utilization ≠ Low Power</strong><ul>
+<li>i7 CPU: 100% 부하 258W, 10% 부하에서도 <strong>121W</strong> (47% 소비).</li>
+<li><strong>정적 전력(static power)</strong> 때문. 안 쓰면 <strong>끄는 게 최선</strong>.</li>
+</ul>
+</li>
+<li><strong>MIPS (Millions of Instructions per Second)</strong> 지표 함정 🔥<pre><code>MIPS = Clock Rate / (CPI × 10⁶)
+</code></pre>
+<ul>
+<li>동일 CPU라도 <strong>컴파일러에 따라 CPI 달라져 MIPS 달라짐</strong> → 절대적 성능 지표로 부적합.</li>
+</ul>
+</li>
+</ul>
+
+
+  </div>
+
+  <footer class="page-footer">
+    <span>Ch.1 · 개념 정리</span>
+    <span><a href="../practice/ch1.html" style="color:var(--accent);text-decoration:none">문제풀이로 가기 →</a></span>
+  </footer>
+</div>
+</body>
+</html>

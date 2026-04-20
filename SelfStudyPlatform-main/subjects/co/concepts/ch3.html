@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <script type="module" src="../../../shared/auth-guard.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ch.3 컴퓨터 연산과 부동소수점 · 개념 정리</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+  <script defer src="../../../shared/katex-boot.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,800&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../../shared/styles.css">
+
+  <style>
+    .md-body h2{
+      display:flex; align-items:baseline; gap:18px;
+      border-bottom:2px solid var(--ink); padding-bottom:10px; margin:52px 0 24px;
+      font-family:var(--serif); font-size:30px; font-weight:700; letter-spacing:-.01em;
+      scroll-margin-top:20px;
+    }
+    .md-body h2::before{
+      content:"§"; font-family:var(--mono); font-size:12px; color:var(--accent);
+      letter-spacing:.15em; padding-top:4px;
+    }
+    .md-body h3{ margin-top:28px; }
+    .md-body h4{ margin-top:18px; }
+    .md-body blockquote{
+      margin:16px 0; padding:16px 20px; border:1px solid var(--ink);
+      border-left:4px solid var(--warn); background:var(--warn-soft); font-size:14.5px;
+    }
+    .md-body blockquote p:first-child{ margin-top:0; }
+    .md-body blockquote p:last-child{ margin-bottom:0; }
+    .md-body pre{
+      margin:16px 0; padding:16px 18px; overflow:auto;
+      background:#171717; color:#f4f1ea; border:1px solid #171717;
+      font-family:var(--mono); font-size:13px; line-height:1.6;
+    }
+    .md-body pre code{
+      background:transparent; color:inherit; padding:0; border-radius:0; font-size:inherit;
+    }
+    .md-body hr{
+      border:none; border-top:1px dashed rgba(26,26,26,.28); margin:28px 0;
+    }
+    .md-body > *:first-child{ margin-top:0; }
+    .chapter-list{ list-style:none; padding:0; margin:0; }
+    .chapter-item{
+      border:1px solid #ddd; border-radius:8px; padding:16px; margin:12px 0;
+      display:flex; justify-content:space-between; align-items:center; gap:16px;
+      background:#fff;
+    }
+    .chapter-item .title{ font-weight:600; }
+    .chapter-item .summary{ font-size:13px; color:#666; margin-top:4px; }
+    .chapter-item .links a{
+      margin-left:12px; text-decoration:none; color:var(--accent); font-weight:600;
+    }
+    .subject-note{
+      border:1px solid #d9d9f0; border-radius:10px; padding:18px 20px; background:#fff; margin-top:28px;
+    }
+    .subject-note h2{ margin-top:0; font-size:22px; border:none; padding:0; font-family:var(--serif); }
+    @media (max-width: 720px){
+      .chapter-item{ align-items:flex-start; flex-direction:column; }
+      .chapter-item .links a{ margin-left:0; margin-right:12px; }
+    }
+  </style>
+
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+    <a href="../index.html">← 허브</a>
+    <div class="crumbs"><span>Ch.03</span><span class="sep">/</span><span class="now">개념 정리</span></div>
+    <a href="../index.html">과목 허브 →</a>
+  </div>
+
+  <header class="masthead">
+    <div class="kicker"><span>Computer Organization · Chapter 03</span><span>Concepts</span></div>
+    <h1 class="title">컴퓨터 연산과<br><em>부동소수점 표현</em></h1>
+    <p class="deck">오버플로우, 예외·인터럽트, 곱셈·나눗셈 하드웨어, 그리고 IEEE 754 부동소수점까지 계산 중심으로 묶었습니다.</p>
+  </header>
+
+  <div class="classifier">
+    <h2>이 문서의 분류 기준</h2>
+    <p style="margin:4px 0 12px;font-size:14.5px;color:var(--ink-soft)">3부는 <strong>정수 연산 → 시스템 예외 처리 → 곱셈/나눗셈 HW → 부동소수점</strong> 흐름으로 정리했습니다.</p>
+    <ul>
+          <li><b>§1</b>정수 연산 — 덧셈·뺄셈, signed/unsigned overflow</li>
+          <li><b>§2</b>시스템 제어 — 예외, 인터럽트, CP0, EPC, TLB</li>
+          <li><b>§3</b>정수 곱셈/나눗셈 — 하드웨어 버전 진화, Hi/Lo, 복원/비복원 나눗셈</li>
+          <li><b>§4</b>부동소수점 — 정규화, IEEE 754, 변환 절차, 실수 포인트</li>
+          <li><b>§5</b>시험 대비 마무리 — 체크리스트와 교수님 강조 사항</li>
+    </ul>
+  </div>
+
+  <nav class="toc">
+    <span class="lbl">Contents</span>
+    <ol>
+      <li><a href="#h-1"><span class="n">01</span>3-0. Chapter 3에서 다루는 것 (로드맵)</a></li>
+      <li><a href="#h-2"><span class="n">02</span>3-1. 덧셈과 뺄셈 🔥</a></li>
+      <li><a href="#h-9"><span class="n">03</span>3-2. MIPS와 Overflow 처리 🔥</a></li>
+      <li><a href="#h-13"><span class="n">04</span>3-3. 예외(Exception) vs 인터럽트(Interrupt) 🔥🔥</a></li>
+      <li><a href="#h-16"><span class="n">05</span>3-4. 코프로세서 0 (CP0) 🔥</a></li>
+      <li><a href="#h-21"><span class="n">06</span>3-5. 곱셈 — 기본 원리 🔥</a></li>
+      <li><a href="#h-25"><span class="n">07</span>3-6. 곱셈 HW 3세대 진화 🔥🔥🔥 시험 필출</a></li>
+      <li><a href="#h-31"><span class="n">08</span>3-7. 부호 있는 곱셈 (Signed Multiplication) 🔥</a></li>
+      <li><a href="#h-33"><span class="n">09</span>3-8. 더 빠른 곱셈기 (Pipelined Multiplier) 🔥</a></li>
+      <li><a href="#h-34"><span class="n">10</span>3-9. MIPS 곱셈 명령어 🔥🔥</a></li>
+      <li><a href="#h-38"><span class="n">11</span>3-10. 나눗셈 — 기본 원리 🔥</a></li>
+      <li><a href="#h-46"><span class="n">12</span>3-11. MIPS 나눗셈 명령어 🔥</a></li>
+      <li><a href="#h-47"><span class="n">13</span>3-12. 곱셈 vs 나눗셈 속도 🔥</a></li>
+      <li><a href="#h-48"><span class="n">14</span>3-13. 부동소수점 (Floating Point) — 개념 🔥🔥</a></li>
+      <li><a href="#h-52"><span class="n">15</span>3-14. IEEE 754 포맷 🔥🔥🔥 시험 필출</a></li>
+      <li><a href="#h-61"><span class="n">16</span>3-15. IEEE 754 변환 실전 🔥🔥🔥 시험 필출</a></li>
+      <li><a href="#h-72"><span class="n">17</span>🔥 시험 직전 최종 체크리스트 (3부)</a></li>
+      <li><a href="#h-76"><span class="n">18</span>📌 교수님 강조 사항 (강의 중 반복 언급)</a></li>
+    </ol>
+  </nav>
+
+  <div class="md-body">
+<h2 id="h-1">3-0. Chapter 3에서 다루는 것 (로드맵)</h2>
+<ol>
+<li><strong>정수 덧셈/뺄셈</strong> + Overflow 처리</li>
+<li><strong>예외(Exception)와 인터럽트(Interrupt)</strong>, 코프로세서 0 (CP0)</li>
+<li><strong>정수 곱셈</strong> — Array Multiplier + HW 3세대 진화</li>
+<li><strong>정수 나눗셈</strong> — 복원/비복원 알고리즘</li>
+<li><strong>실수(부동소수점) 표현</strong> — IEEE 754</li>
+</ol>
+<blockquote>
+<p><strong>전제 사실</strong> 🔥</p>
+<ul>
+<li><strong>곱셈 &gt; 나눗셈</strong> (곱셈이 훨씬 빠름). 이유: 곱셈은 병렬화·파이프라이닝 가능, 나눗셈은 순차적.</li>
+<li><strong>2의 지수승 곱/나누기는 Shift로 처리</strong> → ALU 연산 불필요.</li>
+<li>해시 펑션 등 설계 시 <strong>곱셈 기반 &gt; 나눗셈 기반</strong>이 성능상 유리.</li>
+</ul>
+</blockquote>
+<hr />
+<h2 id="h-2">3-1. 덧셈과 뺄셈 🔥</h2>
+<h3 id="h-3">기본 원리</h3>
+<ul>
+<li><strong>2진수 덧셈은 10진수 덧셈과 동일</strong>. 단, 자리마다 합이 2가 되면 <strong>Carry(올림수)</strong> 발생.</li>
+<li><strong>뺄셈</strong>은 직접 회로로 만들지 않음 → <strong>2의 보수 취해서 덧셈으로 처리</strong>.<ul>
+<li>이유: 2의 보수는 <strong>NOT 게이트 + 1</strong>만으로 HW 구현 가능 → 매우 저렴.</li>
+</ul>
+</li>
+</ul>
+<h3 id="h-4">덧셈에서의 Overflow 🔥🔥</h3>
+<ul>
+<li><strong>부호가 다른 두 수를 더할 때는 Overflow 불가능.</strong> (양수+음수 → 범위 안)</li>
+<li><strong>Overflow 발생 케이스 2가지</strong>:</li>
+</ul>
+<table>
+<thead>
+<tr>
+  <th>케이스</th>
+  <th>결과</th>
+  <th>판정</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>양수 + 양수 = 음수</td>
+  <td>MSB가 0+0인데 1 → 부호 뒤집힘</td>
+  <td><strong>Overflow</strong></td>
+</tr>
+<tr>
+  <td>음수 + 음수 = 양수</td>
+  <td>MSB가 1+1인데 0 → 부호 뒤집힘</td>
+  <td><strong>Overflow</strong></td>
+</tr>
+<tr>
+  <td>양수 + 양수 = 양수</td>
+  <td>정상</td>
+  <td>OK</td>
+</tr>
+<tr>
+  <td>양수 + 음수</td>
+  <td>항상 범위 안</td>
+  <td>OK</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-5">뺄셈에서의 Overflow 🔥</h3>
+<ul>
+<li><strong>두 양수끼리, 두 음수끼리 뺄 때는 Overflow 불가능</strong>.</li>
+<li><strong>Overflow 발생 케이스 2가지</strong>:<ul>
+<li>양수 − 음수 = 음수 → <strong>Overflow</strong></li>
+<li>음수 − 양수 = 양수 → <strong>Overflow</strong></li>
+</ul>
+</li>
+<li><strong>요약 공식</strong>: <code>부호가 다른 두 수의 뺄셈에서, 결과의 부호가 피감수(A)와 다르면 Overflow</code>.</li>
+</ul>
+<h3 id="h-6">Overflow 기계적 검출법 🔥🔥🔥</h3>
+<blockquote>
+<p><strong>MSB로 들어오는 Carry ≠ MSB에서 나가는 Carry → Overflow</strong></p>
+</blockquote>
+<ul>
+<li>같으면 정상, 다르면 overflow.</li>
+<li>HW에서 두 신호를 XOR만 하면 overflow 비트 바로 검출됨.</li>
+</ul>
+<h4 id="h-7">예제: 4비트 체계</h4>
+<ul>
+<li><code>0111 (+7) + 0111 (+7)</code>:<ul>
+<li>계산: <code>1110</code> (= −2 로 해석됨)</li>
+<li>MSB 자리: 들어오는 carry=1, 나가는 carry=0 → 다름 → <strong>Overflow</strong> ✓</li>
+</ul>
+</li>
+<li><code>1011 (−5) + 1100 (−4)</code>:<ul>
+<li>계산: <code>(1)0111</code> = +7 로 해석됨</li>
+<li>MSB 자리: 들어오는 carry=0, 나가는 carry=1 → 다름 → <strong>Overflow</strong> ✓</li>
+</ul>
+</li>
+</ul>
+<h3 id="h-8">Unsigned Integer vs Signed Integer 🔥</h3>
+<table>
+<thead>
+<tr>
+  <th>타입</th>
+  <th>Overflow 판정 기준</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Unsigned</strong></td>
+  <td>MSB에서 <strong>Carry 발생</strong> 시 overflow</td>
+</tr>
+<tr>
+  <td><strong>Signed</strong></td>
+  <td>MSB의 <strong>carry-in ≠ carry-out</strong> 시 overflow</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="h-9">3-2. MIPS와 Overflow 처리 🔥</h2>
+<h3 id="h-10">핵심: MIPS는 <strong>NZCV 플래그 없음</strong> ⚠️ 정정사항</h3>
+<ul>
+<li>교수님이 ARM·x86과 헷갈려서 처음엔 NZCV가 있다고 설명했으나, <strong>MIPS는 NZCV 플래그 레지스터를 유지하지 않음</strong>.</li>
+<li>대신 <strong>연산 결과를 그때그때 즉시 확인</strong>하는 구조. (플래그 캐시 없음)</li>
+<li>참고: ARM/x86에는 있음.<ul>
+<li><strong>N</strong> (Negative): 결과가 음수 → 1</li>
+<li><strong>Z</strong> (Zero): 결과가 0 → 1</li>
+<li><strong>C</strong> (Carry): MSB에서 carry 발생 → 1</li>
+<li><strong>V</strong> (oVerflow): overflow 발생 → 1</li>
+</ul>
+</li>
+</ul>
+<h3 id="h-11">ARM / x86 분기 명령어 (참고용)</h3>
+<table>
+<thead>
+<tr>
+  <th>CPU</th>
+  <th>Overflow 있을 때 분기</th>
+  <th>Overflow 없을 때 분기</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>ARM</td>
+  <td><code>BVS</code> (Branch if oVerflow Set)</td>
+  <td><code>BVC</code> (Branch if oVerflow Clear)</td>
+</tr>
+<tr>
+  <td>x86</td>
+  <td><code>JO</code> (Jump if Overflow)</td>
+  <td><code>JNO</code> (Jump if No Overflow)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-12">MIPS의 산술 명령어 종류 🔥</h3>
+<table>
+<thead>
+<tr>
+  <th>명령어</th>
+  <th>Overflow 처리</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>add</code>, <code>addi</code>, <code>sub</code></td>
+  <td><strong>Overflow 시 예외 발생</strong></td>
+</tr>
+<tr>
+  <td><code>addu</code>, <code>addiu</code>, <code>subu</code></td>
+  <td><strong>Overflow 무시</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>왜 unsigned 버전은 overflow를 무시하나?</strong> 🔥<ul>
+<li>덧셈이 항상 <strong>산술 목적</strong>은 아님. <strong>주소 계산, 배열 인덱스, 스택 포인터 이동, 비트 패턴</strong> 등 overflow가 발생해도 상관없는 연산이 많음.</li>
+<li>→ 속도와 편의성을 위해 <code>addu</code> 계열은 예외 발생 안 함.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="h-13">3-3. 예외(Exception) vs 인터럽트(Interrupt) 🔥🔥</h2>
+<blockquote>
+<p>둘 다 &quot;CPU의 정상 흐름을 가로채는&quot; 이벤트지만 <strong>발생 원인이 다름</strong>.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+  <th>구분</th>
+  <th>예외 (Exception)</th>
+  <th>인터럽트 (Interrupt)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>발생 원인</strong></td>
+  <td><strong>현재 실행 중인 명령어 내부</strong> 문제</td>
+  <td><strong>외부 장치</strong>로부터의 신호</td>
+</tr>
+<tr>
+  <td><strong>예시</strong></td>
+  <td>Overflow, Divide by 0, Invalid opcode</td>
+  <td>키보드 입력, 네트워크 패킷 도착, 타이머</td>
+</tr>
+<tr>
+  <td><strong>동기성</strong></td>
+  <td>동기적 (명령어와 직접 연관)</td>
+  <td>비동기적</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-14">예외 처리 흐름 🔥</h3>
+<ol>
+<li>현재 실행 중 명령어의 <strong>PC 값을 <code>EPC</code> (Exception PC) 레지스터에 저장</strong> ← <strong>복귀용</strong></li>
+<li>미리 정의된 <strong>Exception Handler 주소로 점프</strong> (PC ← Handler 주소)</li>
+<li>예외 처리 루틴 수행</li>
+<li><strong><code>EPC</code> 값을 PC에 복원</strong> → 원래 흐름으로 복귀 (<code>eret</code> 명령어)</li>
+</ol>
+<h3 id="h-15">Interrupt 처리 핵심 포인트</h3>
+<ul>
+<li>CPU는 <strong>Fetch → Decode → Execute</strong>를 반복하는 <strong>&quot;멍청한 놈&quot;</strong>.</li>
+<li>Execute 후, <strong>다음 Fetch 전에 인터럽트 핀(pin)을 확인</strong>.</li>
+<li>인터럽트 발생 시 PC를 인터럽트 핸들러 주소로 바꿔치기.</li>
+<li><strong>우선순위(priority) &amp; 중첩(nested)</strong>: 처리 중 더 높은 우선순위의 인터럽트가 오면 중첩 처리 가능.</li>
+<li>인터럽트는 <strong>무시 불가</strong> (네트워크 패킷을 그냥 버릴 수는 없으니까).</li>
+</ul>
+<hr />
+<h2 id="h-16">3-4. 코프로세서 0 (CP0) 🔥</h2>
+<blockquote>
+<p>MIPS CPU에 <strong>보조적으로 붙어 있는 시스템 제어 전용 프로세서</strong>.</p>
+</blockquote>
+<h3 id="h-17">역할</h3>
+<ol>
+<li><strong>예외 / 인터럽트 처리 지원</strong> (예외 원인, 핸들러 분기 등)</li>
+<li><strong>CPU 상태 제어</strong> (인터럽트 Enable/Disable, 모드 전환)</li>
+<li><strong>TLB 관리</strong> (가상 메모리 변환 버퍼)</li>
+<li><strong>시스템 레지스터 제공</strong> — Status, Cause, <strong>EPC</strong> 등</li>
+</ol>
+<h3 id="h-18">CP0 주요 레지스터</h3>
+<table>
+<thead>
+<tr>
+  <th>번호</th>
+  <th>이름</th>
+  <th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>12</strong></td>
+  <td><strong>Status</strong></td>
+  <td>CPU 상태 / 인터럽트 Enable 플래그 등</td>
+</tr>
+<tr>
+  <td><strong>13</strong></td>
+  <td>Cause</td>
+  <td>예외 발생 원인</td>
+</tr>
+<tr>
+  <td><strong>14</strong></td>
+  <td><strong>EPC</strong></td>
+  <td>예외 발생 시점의 PC (복귀 주소)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="h-18a">레퍼런스 카드 기준 비트 필드까지 같이 보기</h4>
+<table>
+<thead>
+<tr>
+  <th>레지스터</th>
+  <th>중요 비트</th>
+  <th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Status</strong></td>
+  <td><code>15:8</code></td>
+  <td><strong>Interrupt Mask</strong> - 어떤 인터럽트를 허용할지 선택</td>
+</tr>
+<tr>
+  <td><strong>Status</strong></td>
+  <td><code>4</code>, <code>1</code>, <code>0</code></td>
+  <td><code>UM</code> (User Mode), <code>EL</code>/<code>EXL</code> (예외 레벨), <code>IE</code> (Interrupt Enable)</td>
+</tr>
+<tr>
+  <td><strong>Cause</strong></td>
+  <td><code>31</code></td>
+  <td><code>BD</code> - Branch Delay Slot에서 예외가 났는지 표시</td>
+</tr>
+<tr>
+  <td><strong>Cause</strong></td>
+  <td><code>15:8</code></td>
+  <td><strong>Pending Interrupt</strong> - 현재 걸려 있는 인터럽트</td>
+</tr>
+<tr>
+  <td><strong>Cause</strong></td>
+  <td><code>6:2</code></td>
+  <td><strong>Exception Code</strong> - 예외 종류 번호</td>
+</tr>
+</tbody>
+</table>
+<p>즉 시험에서 <strong>&quot;예외가 왜 났는지&quot;</strong>는 <code>Cause</code>, <strong>&quot;복귀할 주소가 어디인지&quot;</strong>는 <code>EPC</code>, <strong>&quot;인터럽트를 받을 수 있는 상태인지&quot;</strong>는 <code>Status</code>로 본다고 정리하면 됩니다.</p>
+<h3 id="h-19">CP0 전용 명령어 🔥</h3>
+<table>
+<thead>
+<tr>
+  <th>명령어</th>
+  <th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong><code>mfc0 $rt, $rd</code></strong></td>
+  <td><strong>M</strong>ove <strong>F</strong>rom <strong>C</strong>oprocessor <strong>0</strong>. CP0의 $rd → 일반 레지스터 $rt</td>
+</tr>
+<tr>
+  <td><strong><code>mtc0 $rt, $rd</code></strong></td>
+  <td><strong>M</strong>ove <strong>T</strong>o <strong>C</strong>oprocessor <strong>0</strong>. 일반 레지스터 $rt → CP0의 $rd</td>
+</tr>
+<tr>
+  <td><strong><code>eret</code></strong></td>
+  <td><strong>E</strong>xception <strong>RET</strong>urn. EPC → PC (복귀)</td>
+</tr>
+</tbody>
+</table>
+<p>예)</p>
+<pre><code class="language-asm">mfc0  $k0, $14        # EPC 값을 $k0로 가져오기
+mtc0  $t0, $12        # $t0 값을 Status 레지스터에 쓰기
+eret                  # 예외 처리 종료, 원래 위치로 복귀
+</code></pre>
+<h3 id="h-20">TLB (Translation Lookaside Buffer) 간단 정리 🔥</h3>
+<blockquote>
+<p><strong>가상 메모리 주소 → 물리 메모리 주소</strong> 변환 캐시.</p>
+</blockquote>
+<ul>
+<li>가상 메모리 문제: 프로그램 100GB인데 RAM은 32GB. 전부 올릴 수 없음 → 가상 메모리 사용.</li>
+<li>주소 변환에 <strong>페이지 매핑 테이블</strong> 필요 → DRAM에 있음 → 매번 읽으면 <strong>메모리 접근 2회</strong> (테이블 읽기 + 실제 데이터 읽기) 필요 → 너무 느림.</li>
+<li><strong>TLB</strong>: CPU 내부에 위치한 최근 변환 정보 캐시. 지역성 덕에 잘 동작.</li>
+<li><strong>Context Switch 시</strong>: 이전 프로세스의 TLB는 무효 → <strong>Flush(초기화)</strong> 필요.</li>
+</ul>
+<h4 id="h-20a">레퍼런스 카드에 나온 대표 Exception Code</h4>
+<table>
+<thead>
+<tr>
+  <th>번호</th>
+  <th>이름</th>
+  <th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>0</td>
+  <td><code>Int</code></td>
+  <td>하드웨어 인터럽트</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td><code>AdEL</code></td>
+  <td>주소 오류 (load 또는 instruction fetch)</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td><code>AdES</code></td>
+  <td>주소 오류 (store)</td>
+</tr>
+<tr>
+  <td>8</td>
+  <td><code>Sys</code></td>
+  <td><code>syscall</code> 예외</td>
+</tr>
+<tr>
+  <td>9</td>
+  <td><code>Bp</code></td>
+  <td>breakpoint</td>
+</tr>
+<tr>
+  <td>10</td>
+  <td><code>RI</code></td>
+  <td>예약/미정의 명령어</td>
+</tr>
+<tr>
+  <td>11</td>
+  <td><code>CpU</code></td>
+  <td>지원되지 않는 coprocessor 사용</td>
+</tr>
+<tr>
+  <td>12</td>
+  <td><code>Ov</code></td>
+  <td>산술 overflow</td>
+</tr>
+<tr>
+  <td>13</td>
+  <td><code>Tr</code></td>
+  <td>trap</td>
+</tr>
+<tr>
+  <td>15</td>
+  <td><code>FPE</code></td>
+  <td>Floating Point Exception</td>
+</tr>
+</tbody>
+</table>
+<p>전부 다 달달 외우라는 뜻은 아니고, <strong>주소 오류 / syscall / reserved instruction / overflow</strong> 정도는 바로 떠올라야 문제 풀이가 편합니다.</p>
+<hr />
+<h2 id="h-21">3-5. 곱셈 — 기본 원리 🔥</h2>
+<h3 id="h-22">용어</h3>
+<ul>
+<li><strong>Multiplicand (피승수)</strong>: 곱해지는 수 (예: 8 × 9 에서 8)</li>
+<li><strong>Multiplier (승수)</strong>: 곱하는 수 (예: 8 × 9 에서 9)</li>
+<li><strong>Product (곱, 결과)</strong></li>
+</ul>
+<h3 id="h-23">2진수 곱셈 규칙</h3>
+<blockquote>
+<p><strong>승수의 현재 자리가 1이면 피승수를 그 자리만큼 Shift해서 더함. 0이면 아무것도 안 함.</strong></p>
+</blockquote>
+<ul>
+<li><code>n비트 × n비트</code>는 <strong>최대 <code>2n비트</code></strong> 결과를 가짐.</li>
+<li>32비트 × 32비트 = <strong>64비트</strong> 필요.</li>
+</ul>
+<h3 id="h-24">Array Multiplier (병렬 곱셈기)</h3>
+<ul>
+<li><strong>AND 게이트</strong>로 각 비트별 부분곱(Partial Product) 동시 생성.</li>
+<li><strong>Full Adder</strong>로 각 열의 합 + Carry 처리.</li>
+<li>장점: <strong>HW로 구현 용이, 병렬 처리 가능</strong>.</li>
+<li>단점: 32비트 기준 <strong>AND 게이트 32×32=1024개</strong>, Adder도 산더미 → <strong>HW 복잡도 高</strong>.</li>
+</ul>
+<hr />
+<h2 id="h-25">3-6. 곱셈 HW 3세대 진화 🔥🔥🔥 시험 필출</h2>
+<h3 id="h-26">공통 동작 규칙</h3>
+<ul>
+<li>승수의 LSB가 1 → Product에 Multiplicand 더함</li>
+<li>승수의 LSB가 0 → 아무것도 안 함</li>
+<li>32회 반복 (32비트 기준)</li>
+</ul>
+<h3 id="h-27">Version 1 — 원시 버전</h3>
+<pre><code>┌───────────────────────────────┐
+│ Multiplicand (64-bit, shift L)│
+└───────┬───────────────────────┘
+        ↓
+      ┌───┐
+      │ALU│ 64-bit
+      └─┬─┘
+        ↓
+┌───────────────────────────────┐      ┌──────────────────┐
+│      Product (64-bit)         │ ←──  │ Multiplier       │
+└───────────────────────────────┘      │ (32-bit, shift R)│
+                                        └──────────────────┘
+</code></pre>
+<ul>
+<li><strong>Multiplicand</strong>: 64비트 레지스터 + <strong>왼쪽 Shift</strong> (자리수 이동용).</li>
+<li><strong>Multiplier</strong>: 32비트 레지스터 + <strong>오른쪽 Shift</strong> (LSB 확인용).</li>
+<li><strong>ALU</strong>: 64비트.</li>
+<li><strong>한 단계 = 3 서브 스텝</strong> (ALU + Multiplicand Shift + Multiplier Shift).</li>
+</ul>
+<h3 id="h-28">Version 2 — ALU 폭 축소 🔥</h3>
+<pre><code>┌─────────────────┐
+│ Multiplicand    │
+│    (32-bit,     │
+│     고정)       │
+└────┬────────────┘
+     ↓
+   ┌───┐
+   │ALU│ 32-bit
+   └─┬─┘
+     ↓ (상위 절반에만 더함)
+┌───────────────────────────────┐      ┌──────────────────┐
+│   Product (64-bit, shift R)   │      │ Multiplier       │
+└───────────────────────────────┘      │ (32-bit, shift R)│
+                                        └──────────────────┘
+</code></pre>
+<ul>
+<li><strong>Multiplicand 고정</strong> (Shift 안 함).</li>
+<li>대신 <strong>Product를 오른쪽으로 Shift</strong>. 자리수 맞추기는 Product 쪽에서.</li>
+<li>ALU도 <strong>32비트</strong>로 축소 → HW 간소화.</li>
+</ul>
+<h3 id="h-29">Version 3 — 최종판 🔥🔥</h3>
+<pre><code>┌─────────────────┐
+│ Multiplicand    │
+│   (32-bit)      │
+└────┬────────────┘
+     ↓
+   ┌───┐
+   │ALU│ 32-bit
+   └─┬─┘
+     ↓ (상위 절반에만 더함)
+┌───────────────────────────────┐
+│   Product (64-bit, shift R)   │
+│   [상위: 결과 누적]           │
+│   [하위: Multiplier 저장]     │ ← 별도 Multiplier 레지스터 불필요!
+└───────────────────────────────┘
+</code></pre>
+<ul>
+<li>핵심 통찰: Product는 초기에 하위 절반이 0으로 비어있음 → <strong>거기에 Multiplier를 넣자</strong>.</li>
+<li>Product를 오른쪽으로 Shift하면 <strong>하위 비트가 차례로 LSB로 이동</strong> → Multiplier의 각 비트를 순차 확인 가능.</li>
+<li><strong>별도 Multiplier 레지스터 제거</strong> → HW 추가 축소.</li>
+<li><strong>한 단계 = 2 서브 스텝</strong> (ALU + Product Shift R).</li>
+</ul>
+<h3 id="h-30">3세대 비교표</h3>
+<table>
+<thead>
+<tr>
+  <th>버전</th>
+  <th>Multiplicand</th>
+  <th>Product</th>
+  <th>Multiplier</th>
+  <th>ALU</th>
+  <th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>V1</td>
+  <td>64-bit, ShiftL</td>
+  <td>64-bit</td>
+  <td>32-bit, ShiftR</td>
+  <td>64-bit</td>
+  <td>가장 단순, HW 과다</td>
+</tr>
+<tr>
+  <td>V2</td>
+  <td>32-bit, 고정</td>
+  <td>64-bit, ShiftR</td>
+  <td>32-bit, ShiftR</td>
+  <td>32-bit</td>
+  <td>ALU 축소</td>
+</tr>
+<tr>
+  <td>V3</td>
+  <td>32-bit, 고정</td>
+  <td>64-bit, ShiftR (Multiplier 포함)</td>
+  <td><strong>없음</strong></td>
+  <td>32-bit</td>
+  <td>최종형</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>시험 시나리오</strong>: 블록 다이어그램 주고 &quot;중간 단계 값 채워라&quot;, &quot;어느 버전인지 식별해라&quot; 나올 수 있음.</p>
+</blockquote>
+<hr />
+<h2 id="h-31">3-7. 부호 있는 곱셈 (Signed Multiplication) 🔥</h2>
+<h3 id="h-32">처리 절차</h3>
+<ol>
+<li><strong>입력값의 부호 확인</strong> (MSB 확인).</li>
+<li>음수면 <strong>2의 보수 해제하여 절댓값(양수)로 변환</strong>.</li>
+<li><strong>양수끼리 곱셈 수행</strong> (앞의 Unsigned 알고리즘).</li>
+<li><strong>최종 부호 결정</strong>: 피승수 부호 ⊕ 승수 부호 (XOR)<ul>
+<li>(양, 양) → 양</li>
+<li>(양, 음) or (음, 양) → 음</li>
+<li>(음, 음) → 양</li>
+</ul>
+</li>
+<li>결과가 음수여야 하면 <strong>2의 보수 적용</strong>.</li>
+</ol>
+<hr />
+<h2 id="h-33">3-8. 더 빠른 곱셈기 (Pipelined Multiplier) 🔥</h2>
+<ul>
+<li>부분곱 생성 자체는 <strong>병렬화 가능</strong> (AND 게이트로 한 방에).</li>
+<li>Adder 계층(Reduction Tree)을 <strong>파이프라인 스테이지로 분할</strong>.</li>
+<li>N개 스테이지 → <strong>매 클럭마다 새로운 곱셈 시작 가능</strong> → 처리량(throughput) 극대화.</li>
+</ul>
+<blockquote>
+<p>&quot;곱셈 연산은 <strong>여러 개의 곱셈을 병렬로 수행하는 것도 가능</strong>&quot;</p>
+</blockquote>
+<hr />
+<h2 id="h-34">3-9. MIPS 곱셈 명령어 🔥🔥</h2>
+<h3 id="h-35">Hi / Lo 레지스터</h3>
+<ul>
+<li>64비트 결과를 <strong>Hi(상위 32비트) + Lo(하위 32비트)</strong> 에 저장.</li>
+<li><strong>일반 레지스터(R0~R31)와 별개</strong>.</li>
+<li>직접 접근 불가 → <strong><code>mfhi</code>, <code>mflo</code></strong>로 가져와야 함.</li>
+</ul>
+<h3 id="h-36">명령어</h3>
+<table>
+<thead>
+<tr>
+  <th>명령어</th>
+  <th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>mult $s2, $s3</code></td>
+  <td><code>Hi:Lo ← $s2 × $s3</code> (signed)</td>
+</tr>
+<tr>
+  <td><code>multu $s2, $s3</code></td>
+  <td>Unsigned 곱셈</td>
+</tr>
+<tr>
+  <td><code>mfhi $t0</code></td>
+  <td><code>$t0 ← Hi</code></td>
+</tr>
+<tr>
+  <td><code>mflo $t0</code></td>
+  <td><code>$t0 ← Lo</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-37">의사 명령어 <code>mul</code></h3>
+<pre><code class="language-asm">mul  $t0, $s2, $s3
+# == mult $s2, $s3 + mflo $t0
+</code></pre>
+<ul>
+<li><strong>하위 32비트만</strong> 가져옴. 결과가 32비트 초과하면 <strong>상위 비트 손실</strong> → 주의!</li>
+</ul>
+<hr />
+<h2 id="h-38">3-10. 나눗셈 — 기본 원리 🔥</h2>
+<h3 id="h-39">용어</h3>
+<ul>
+<li><strong>Dividend (피제수)</strong>: 나누어지는 수</li>
+<li><strong>Divisor (제수)</strong>: 나누는 수</li>
+<li><strong>Quotient (몫)</strong></li>
+<li><strong>Remainder (나머지)</strong></li>
+</ul>
+<h3 id="h-40">공식</h3>
+<pre><code>Dividend = Divisor × Quotient + Remainder
+</code></pre>
+<h3 id="h-41">복원 나눗셈 (Restoring Division) — 기본형</h3>
+<ol>
+<li>Remainder 레지스터에 Dividend 초기 세팅.</li>
+<li>Remainder를 <strong>왼쪽으로 1비트 Shift</strong>.</li>
+<li>Remainder에서 Divisor를 <strong>뺀다</strong>.</li>
+<li>결과가 <strong>음수면</strong>: <strong>Divisor를 다시 더해 복원</strong>, 현재 몫 비트를 <strong>0</strong>.</li>
+<li>결과가 <strong>양수(또는 0)면</strong>: 그대로 두고, 현재 몫 비트를 <strong>1</strong>.</li>
+<li>n번 반복 (n비트 기준).</li>
+</ol>
+<blockquote>
+<p><strong>핵심 문제</strong>: 음수 나올 때마다 <strong>복원 연산(더하기)</strong> 이 추가됨 → 비효율.</p>
+</blockquote>
+<h3 id="h-42">비복원 나눗셈 (Non-Restoring Division) 🔥🔥</h3>
+<blockquote>
+<p><strong>논리적 치환</strong>: 복원하고 다음에 빼느니, 복원 안 하고 다음에 <strong>더하자</strong>.</p>
+</blockquote>
+<h4 id="h-43">증명 (식 전개)</h4>
+<ul>
+<li>복원 + Shift + 뺄셈:
+<code>2 × (R + D) − D = 2R + 2D − D = 2R + D</code></li>
+<li>비복원 + Shift + 덧셈:
+<code>2R + D</code></li>
+<li>→ <strong>완전히 동일</strong>.</li>
+</ul>
+<h4 id="h-44">알고리즘</h4>
+<ol>
+<li>Remainder Shift Left.</li>
+<li><strong>이전 단계 Remainder가 음수였으면</strong> → Divisor <strong>더함</strong>.
+<strong>이전 단계 Remainder가 양수였으면</strong> → Divisor <strong>뺌</strong>.</li>
+<li>결과가 <strong>0 이상</strong> → 몫 비트 <strong>1</strong>.
+결과가 <strong>음수</strong> → 몫 비트 <strong>0</strong>. (복원 X)</li>
+<li>n번 반복.</li>
+</ol>
+<ul>
+<li><strong>장점</strong>: 복원 단계 제거 → 속도 향상.</li>
+</ul>
+<h3 id="h-45">나눗셈 블록 다이어그램 개념</h3>
+<pre><code>┌──────────────────────┐
+│ Remainder (2n-bit)   │ ← shift L
+│ [상위: 실제 나머지]  │
+│ [하위: 몫 저장]      │
+└──────┬───────────────┘
+       ↓ (상위 절반)
+     ┌───┐
+     │ALU│ (뺄셈 또는 덧셈)
+     └─┬─┘
+       ↑
+┌──────────────┐
+│ Divisor      │
+└──────────────┘
+</code></pre>
+<blockquote>
+<p>곱셈 V3와 비슷: <strong>Remainder 하위 절반에 몫(Quotient)이 순차 채워짐</strong>.</p>
+</blockquote>
+<hr />
+<h2 id="h-46">3-11. MIPS 나눗셈 명령어 🔥</h2>
+<table>
+<thead>
+<tr>
+  <th>명령어</th>
+  <th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>div $s2, $s3</code></td>
+  <td>Hi ← Remainder, Lo ← Quotient (signed)</td>
+</tr>
+<tr>
+  <td><code>divu $s2, $s3</code></td>
+  <td>Unsigned 나눗셈</td>
+</tr>
+<tr>
+  <td><code>mfhi $t0</code></td>
+  <td>나머지 꺼내기</td>
+</tr>
+<tr>
+  <td><code>mflo $t0</code></td>
+  <td>몫 꺼내기</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Divide by 0 <strong>체크 안 함</strong> → 프로그래머가 직접 확인해야 함.</li>
+</ul>
+<hr />
+<h2 id="h-47">3-12. 곱셈 vs 나눗셈 속도 🔥</h2>
+<table>
+<thead>
+<tr>
+  <th>연산</th>
+  <th>사이클 수</th>
+  <th>비고</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Add / Shift</td>
+  <td><strong>1 사이클</strong></td>
+  <td>가장 빠름</td>
+</tr>
+<tr>
+  <td>곱셈</td>
+  <td><strong>수 사이클</strong></td>
+  <td>파이프라인으로 throughput ↑</td>
+</tr>
+<tr>
+  <td>나눗셈</td>
+  <td><strong>수십 사이클</strong></td>
+  <td>순차적, 병렬화 어려움</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>특정 아키텍처의 문제가 아니라 <strong>연산 구조 자체의 차이</strong>.</li>
+<li><strong>암달의 법칙</strong>: 나눗셈이 느려도 <strong>빈도가 적으면</strong> 전체 성능에 큰 영향 없음.</li>
+</ul>
+<hr />
+<h2 id="h-48">3-13. 부동소수점 (Floating Point) — 개념 🔥🔥</h2>
+<h3 id="h-49">왜 필요한가?</h3>
+<ul>
+<li>정수만으론 부족. <code>float</code>, <code>double</code> 타입이 이것.</li>
+<li><strong>한계</strong>: 모든 실수를 정확히 저장 불가. 예) <code>0.1</code>조차 2진수로는 무한소수.</li>
+</ul>
+<h3 id="h-50">과학적 표기법 (Scientific Notation) vs 정규화된 표현 (Normalized)</h3>
+<table>
+<thead>
+<tr>
+  <th>표기법</th>
+  <th>조건</th>
+  <th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>과학적 표기법</strong></td>
+  <td><code>a × Bᵉ</code> 꼴</td>
+  <td><code>31.5576 × 10⁸</code>, <code>0.315576 × 10¹⁰</code></td>
+</tr>
+<tr>
+  <td><strong>정규화된 표현</strong></td>
+  <td>위 + <strong>맨 앞자리 ≠ 0</strong>. 10진수는 1 ≤ |a| &lt; 10</td>
+  <td><code>3.15576 × 10⁹</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>왜 정규화?</strong> → 표기 <strong>유일성</strong> 보장 + <strong>계산이 쉬워짐</strong> (곱셈 시 <code>a₁×a₂</code>, <code>e₁+e₂</code>로 분리 가능).</p>
+</blockquote>
+<h3 id="h-51">2진수 정규화 특수성 🔥</h3>
+<ul>
+<li>2진수 정규화 → <strong>맨 앞은 항상 <code>1</code></strong>. (0이 아니어야 하므로)</li>
+<li>→ 맨 앞의 <code>1</code>은 <strong>저장 안 함</strong> (<strong>Hidden Bit</strong>, 암묵적 1).</li>
+<li>실제 저장은 소수점 이하만.</li>
+</ul>
+<hr />
+<h3 id="h-51a">MIPS 부동소수점 명령어 패밀리 (레퍼런스 카드 보강)</h3>
+<table>
+<thead>
+<tr>
+  <th>분류</th>
+  <th>대표 명령어</th>
+  <th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>산술</strong></td>
+  <td><code>add.s</code>, <code>sub.s</code>, <code>mul.s</code>, <code>div.s</code><br><code>add.d</code>, <code>sub.d</code>, <code>mul.d</code>, <code>div.d</code></td>
+  <td><code>.s</code>=single precision, <code>.d</code>=double precision</td>
+</tr>
+<tr>
+  <td><strong>비교</strong></td>
+  <td><code>c.eq.s</code>, <code>c.lt.s</code>, <code>c.le.s</code><br><code>c.eq.d</code>, <code>c.lt.d</code>, <code>c.le.d</code></td>
+  <td>비교 결과는 일반 레지스터가 아니라 <strong>FP condition</strong>에 반영</td>
+</tr>
+<tr>
+  <td><strong>분기</strong></td>
+  <td><code>bc1t</code>, <code>bc1f</code></td>
+  <td>FP condition이 참/거짓일 때 분기</td>
+</tr>
+<tr>
+  <td><strong>메모리</strong></td>
+  <td><code>lwc1</code>, <code>swc1</code>, <code>ldc1</code>, <code>sdc1</code></td>
+  <td>부동소수점 레지스터와 메모리 사이 이동</td>
+</tr>
+</tbody>
+</table>
+<p>레퍼런스 카드에는 부동소수점 전용 형식도 따로 실려 있습니다. 단정도/배정도 연산은 <strong>일반 정수 R-type과 비슷해 보여도 필드 이름이 다르다</strong>는 점이 중요합니다.</p>
+<pre><code>FR format : opcode | fmt | ft | fs | fd | funct
+FI format : opcode | fmt | ft | immediate
+</code></pre>
+<h2 id="h-52">3-14. IEEE 754 포맷 🔥🔥🔥 시험 필출</h2>
+<h3 id="h-52a">정규화된 IEEE 754 값 해석 공식</h3>
+<pre><code>(-1)^S × (1 + Fraction) × 2^(Exponent - Bias)
+</code></pre>
+<ul>
+<li><strong>Single Precision</strong>의 Bias는 <strong>127</strong>, <strong>Double Precision</strong>의 Bias는 <strong>1023</strong>.</li>
+<li>여기서 <code>1 + Fraction</code>의 맨 앞 <code>1</code>은 <strong>hidden bit</strong>. 정규화된 수에서는 저장하지 않지만 존재한다고 가정한다.</li>
+<li>단, <strong>비정규화 수(denormal)</strong>는 이 공식을 그대로 쓰지 않고 숨은 1이 <strong>0.xxxxx</strong> 형태로 바뀐다.</li>
+</ul>
+<h3 id="h-53">단일 정밀도 (Single Precision, 32bit) — 반드시 암기</h3>
+<pre><code>┌────┬────────────────────┬────────────────────────────────────────────┐
+│ S  │    Exponent        │              Fraction                      │
+│1bit│      8 bit         │              23 bit                        │
+└────┴────────────────────┴────────────────────────────────────────────┘
+ 31    30              23 22                                         0
+</code></pre>
+<ul>
+<li><strong>S (Sign)</strong>: 1bit. 0=양수, 1=음수.</li>
+<li><strong>Exponent</strong>: 8bit. <strong>Bias = 127</strong> 적용.</li>
+<li><strong>Fraction</strong>: 23bit. 소수점 이하 저장 (Hidden Bit 제외).</li>
+</ul>
+<h3 id="h-54">정밀도별 정리</h3>
+<table>
+<thead>
+<tr>
+  <th>정밀도</th>
+  <th>총 비트</th>
+  <th>지수</th>
+  <th>소수</th>
+  <th>Bias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><strong>Half</strong></td>
+  <td>16</td>
+  <td>5</td>
+  <td>10</td>
+  <td>15</td>
+</tr>
+<tr>
+  <td><strong>Single</strong></td>
+  <td><strong>32</strong></td>
+  <td><strong>8</strong></td>
+  <td><strong>23</strong></td>
+  <td><strong>127</strong></td>
+</tr>
+<tr>
+  <td><strong>Double</strong></td>
+  <td>64</td>
+  <td>11</td>
+  <td>52</td>
+  <td>1023</td>
+</tr>
+<tr>
+  <td><strong>Quadruple</strong></td>
+  <td>128</td>
+  <td>15</td>
+  <td>112</td>
+  <td>16383</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-55">Bias 표현 왜 쓰나? 🔥</h3>
+<ul>
+<li><strong>Exponent 자리에 2의 보수를 쓰면 대소 비교가 꼬임</strong> (음수가 더 크게 보임).</li>
+<li>→ 단순 비교기(comparator)로 실수 대소 비교하기 위해 <strong>Bias</strong> 도입.</li>
+<li><strong>Single Precision Bias = 127</strong> → 실제 지수 <code>e</code> 저장값 = <code>e + 127</code>.<ul>
+<li>실제 지수 <code>−126</code> → 저장값 <code>1</code></li>
+<li>실제 지수 <code>+127</code> → 저장값 <code>254</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="h-56">대소 비교 최적화 설계 🔥</h3>
+<ul>
+<li>포맷 순서 <code>S | Exp | Frac</code> 는 우연이 아님.</li>
+<li>비교 순서: ① 부호 → ② 지수 → ③ 소수.</li>
+<li>지수를 소수 앞에 둔 이유: 지수만 크면 더 큰 값이므로.</li>
+</ul>
+<h3 id="h-57">Exponent 값의 특수 의미 🔥🔥</h3>
+<table>
+<thead>
+<tr>
+  <th>Exponent</th>
+  <th>Fraction</th>
+  <th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>0</code></td>
+  <td><code>0</code></td>
+  <td><strong>0.0</strong> (양수/음수 부호 따로)</td>
+</tr>
+<tr>
+  <td><code>0</code></td>
+  <td><code>≠ 0</code></td>
+  <td><strong>비정규화 수 (denormalized)</strong></td>
+</tr>
+<tr>
+  <td><code>1</code> ~ <code>254</code></td>
+  <td>임의</td>
+  <td><strong>정규화된 실수</strong></td>
+</tr>
+<tr>
+  <td><code>255</code></td>
+  <td><code>0</code></td>
+  <td><strong>±∞ (Infinity)</strong></td>
+</tr>
+<tr>
+  <td><code>255</code></td>
+  <td><code>≠ 0</code></td>
+  <td><strong>NaN (Not a Number)</strong></td>
+</tr>
+</tbody>
+</table>
+<h4 id="h-57a">레퍼런스 카드 표로 다시 요약</h4>
+<ul>
+<li><code>Exponent = 0</code>, <code>Fraction = 0</code> → <strong>±0</strong></li>
+<li><code>Exponent = 0</code>, <code>Fraction ≠ 0</code> → <strong>±Denorm</strong></li>
+<li><code>Exponent = 1 ~ MAX-1</code> → <strong>정규화 수</strong></li>
+<li><code>Exponent = MAX</code>, <code>Fraction = 0</code> → <strong>±∞</strong></li>
+<li><code>Exponent = MAX</code>, <code>Fraction ≠ 0</code> → <strong>NaN</strong></li>
+</ul>
+<p>여기서 <strong>MAX</strong>는 single에서 <code>255</code>, double에서 <code>2047</code>입니다.</p>
+<h3 id="h-58">NaN (Not a Number) 🔥</h3>
+<ul>
+<li>수학적으로 정의되지 않는 연산의 결과.</li>
+<li>예) <code>0/0</code>, <code>∞−∞</code>, <code>log(−1)</code>, <code>NaN + 2</code>, <code>NaN × 2</code> — 모두 NaN.</li>
+<li>C언어: <code>float x = NAN;</code>, <code>printf(&quot;%f&quot;, x)</code> → <code>nan</code> 출력.</li>
+<li>Python: <code>float('nan')</code>.</li>
+</ul>
+<h3 id="h-59">Overflow / Underflow in Floating Point 🔥</h3>
+<ul>
+<li><strong>Overflow</strong>: 표현 가능한 <strong>최댓값 초과</strong>. 양/음 방향 모두 가능.</li>
+<li><strong>Underflow</strong>: 값이 <strong>0에 너무 가까워</strong> 표현 불가.</li>
+</ul>
+<h4 id="h-60">MIPS Single Precision 표현 범위</h4>
+<pre><code>음수 Overflow   표현가능 음수   Underflow   표현가능 양수   양수 Overflow
+    │                │          │   0   │         │                │
+─────┤────────────────┤──────────┤───────┤─────────┤────────────────├─────
+  −∞ │  −2×10³⁸       │ −2×10⁻³⁸ │       │ 2×10⁻³⁸ │     2×10³⁸     │ +∞
+</code></pre>
+<ul>
+<li>대략 <strong>±2 × 10³⁸</strong> 범위. 숫자 <strong>2, 38</strong> 기억.</li>
+</ul>
+<hr />
+<h2 id="h-61">3-15. IEEE 754 변환 실전 🔥🔥🔥 시험 필출</h2>
+<h3 id="h-62">10진 소수 → 2진 소수 변환</h3>
+<blockquote>
+<p><strong>소수 파트에 2를 계속 곱하면서 정수부를 기록</strong>.</p>
+</blockquote>
+<p>예) <code>0.625</code> → ?</p>
+<table>
+<thead>
+<tr>
+  <th>단계</th>
+  <th>계산</th>
+  <th>정수부</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>1</td>
+  <td>0.625 × 2 = 1.25</td>
+  <td><strong>1</strong></td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>0.25 × 2 = 0.5</td>
+  <td><strong>0</strong></td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>0.5 × 2 = 1.0</td>
+  <td><strong>1</strong></td>
+</tr>
+</tbody>
+</table>
+<p>→ <code>0.625₁₀ = 0.101₂</code> (= ½ + ⅛)</p>
+<h3 id="h-63">0.1은 2진수로 무한소수 🔥</h3>
+<ul>
+<li><code>0.1 → 0.2 → 0.4 → 0.8 → 1.6 → 1.2 → 0.4 → ...</code> 패턴 반복.</li>
+<li>10진 <code>0.1</code> = 2진 <code>0.0001100110011...</code> (무한)</li>
+<li>→ <strong>Floating Point로 0.1은 정확 저장 불가. 항상 근사값.</strong></li>
+</ul>
+<h3 id="h-64">10진 실수 → IEEE 754 Single Precision 변환 절차 🔥</h3>
+<p><strong>예제</strong>: <code>−0.75</code> → IEEE 754 32bit</p>
+<h4 id="h-65">Step 1. 2진수로 변환</h4>
+<ul>
+<li><code>0.75₁₀ = 0.11₂</code> (½ + ¼)</li>
+</ul>
+<h4 id="h-66">Step 2. 정규화</h4>
+<ul>
+<li><code>0.11₂ = 1.1 × 2⁻¹</code></li>
+</ul>
+<h4 id="h-67">Step 3. 각 필드 결정</h4>
+<table>
+<thead>
+<tr>
+  <th>필드</th>
+  <th>값</th>
+  <th>비트</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>S (부호)</td>
+  <td>음수</td>
+  <td><code>1</code></td>
+</tr>
+<tr>
+  <td>Exponent</td>
+  <td><code>−1 + 127 = 126</code></td>
+  <td><code>01111110</code></td>
+</tr>
+<tr>
+  <td>Fraction</td>
+  <td>소수점 이하만 (Hidden Bit 제외) → <code>1</code> + 22개의 0</td>
+  <td><code>10000000000000000000000</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="h-68">Step 4. 완성된 32bit</h4>
+<pre><code>1 | 01111110 | 10000000000000000000000
+</code></pre>
+<h4 id="h-69">Step 5. 16진수 변환</h4>
+<p>비트를 4개씩 묶어서:</p>
+<pre><code>1011 1111 0100 0000 0000 0000 0000 0000
+  B    F    4    0    0    0    0    0
+</code></pre>
+<p>→ <strong><code>0xBF400000</code></strong></p>
+<h3 id="h-70">역변환: 16진수 → 10진 실수도 가능해야 함 🔥</h3>
+<ul>
+<li>주어진 32비트를 S / Exp / Frac로 쪼갬.</li>
+<li><code>(−1)^S × 1.Fraction × 2^(Exp − 127)</code> 계산.</li>
+</ul>
+<h3 id="h-71">실수자 포인트 🔥⚠️</h3>
+<ul>
+<li><strong>Hidden Bit를 Fraction에 또 쓰는 실수 금지</strong>. 소수점 왼쪽의 <code>1</code>은 저장 안 함.</li>
+<li><strong>Bias 잊지 말기</strong>. <code>−126</code>을 저장하려면 Exponent 필드에 <code>1</code> 이 들어감 (<code>−126 + 127 = 1</code>).</li>
+<li>2의 보수 형태가 <strong>아님</strong> — Exponent는 Biased.</li>
+</ul>
+<hr />
+<h2 id="h-72">🔥 시험 직전 최종 체크리스트 (3부)</h2>
+<h3 id="h-73">반드시 암기</h3>
+<ul>
+<li>[ ] Overflow 기계적 검출: <strong>MSB carry-in ≠ carry-out</strong></li>
+<li>[ ] Overflow 발생 케이스: 양+양=음, 음+음=양, 양−음=음, 음−양=양</li>
+<li>[ ] MIPS는 <strong>NZCV 없음</strong>. <code>add/sub</code> = 예외 발생, <code>addu/subu</code> = 무시.</li>
+<li>[ ] CP0 레지스터: <strong>Status(12), Cause(13), EPC(14)</strong></li>
+<li>[ ] CP0 명령어: <code>mfc0</code>, <code>mtc0</code>, <code>eret</code></li>
+<li>[ ] 곱셈 Hi/Lo, <code>mult/multu/mfhi/mflo</code></li>
+<li>[ ] 나눗셈 <code>div/divu</code>, 결과도 Hi(나머지)/Lo(몫)</li>
+<li>[ ] IEEE 754 Single: <strong>1 / 8 / 23 bit</strong>, <strong>Bias 127</strong></li>
+<li>[ ] Double: <strong>1 / 11 / 52 bit</strong>, Bias 1023</li>
+<li>[ ] Exp=0 &amp; Frac=0 → 0.0 / Exp=255 &amp; Frac=0 → ∞ / Exp=255 &amp; Frac≠0 → NaN</li>
+</ul>
+<h3 id="h-74">반드시 계산 가능</h3>
+<ul>
+<li>[ ] 두 정수의 덧셈 → Overflow 판정</li>
+<li>[ ] 두 정수의 뺄셈 → Overflow 판정</li>
+<li>[ ] 곱셈 HW V1/V2/V3 단계별 레지스터 값 채우기 (블록 다이어그램 문제)</li>
+<li>[ ] 복원 / 비복원 나눗셈 단계별 시뮬레이션</li>
+<li>[ ] 10진 소수 → 2진 소수 변환 (2 곱하기 방법)</li>
+<li>[ ] 10진 실수 → IEEE 754 Single Precision 32bit 변환</li>
+<li>[ ] IEEE 754 32bit → 10진 실수 역변환</li>
+<li>[ ] 32bit 비트열을 4비트씩 묶어 <strong>16진수로 변환</strong></li>
+</ul>
+<h3 id="h-75">반드시 이해</h3>
+<ul>
+<li>[ ] 예외 vs 인터럽트의 본질적 차이</li>
+<li>[ ] 예외 처리 흐름 (EPC 저장 → Handler → EPC 복원)</li>
+<li>[ ] TLB 존재 이유 (가상→물리 변환 캐시)</li>
+<li>[ ] 왜 곱셈이 나눗셈보다 빠른지 (병렬화 가능성)</li>
+<li>[ ] Array Multiplier 원리 (AND + Full Adder)</li>
+<li>[ ] 곱셈 V1 → V2 → V3 진화 이유 (HW 간소화)</li>
+<li>[ ] 비복원 나눗셈이 복원 나눗셈보다 빠른 이유 (식 치환)</li>
+<li>[ ] 정규화된 표현을 쓰는 이유 (유일성 + 계산 용이)</li>
+<li>[ ] Hidden Bit 개념</li>
+<li>[ ] Bias 표현을 쓰는 이유 (대소 비교 최적화)</li>
+<li>[ ] <code>0.1</code>이 정확히 표현 안 되는 이유</li>
+</ul>
+<hr />
+<h2 id="h-76">📌 교수님 강조 사항 (강의 중 반복 언급)</h2>
+<ol>
+<li><strong>계산 문제가 초반에 실수하면 쭉 망함</strong> → 연습문제 많이 풀기.</li>
+<li><strong>시험 4/23 (수)</strong>. 홀수/짝수 나눠서 두 강의실 사용.</li>
+<li><strong>블록 다이어그램 주고 단계 채우는 문제</strong>는 낼 가능성 높음.</li>
+<li><strong>IEEE 754 32비트 변환은 16진수 변환까지</strong> 출제 가능.</li>
+<li><code>unsigned</code> 변환은 8비트 정도까지만 낼 예정 (양심상).</li>
+<li>시험 범위: <strong>3장 부동소수점 표현까지</strong> (연산은 제외).</li>
+</ol>
+<hr />
+<blockquote>
+<p><strong>최종 팁</strong>: 2의 보수 변환, Bias 계산, Hidden Bit 처리 — 이 셋만 실수 없이 처리하면 Chapter 3 계산 문제는 전부 풀린다. 손으로 직접 몇 번 더 그려보고 들어가기.</p>
+</blockquote>
+
+  </div>
+</div>
+</body>
+</html>
